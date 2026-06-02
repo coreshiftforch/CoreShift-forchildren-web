@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreShift for children — プロジェクト詳細</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="child.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+  </header>
+
+  <nav id="side-nav">
+    <a href="#challenge">課題</a>
+    <span class="nav-sep"></span>
+    <a href="#purpose">目的</a>
+    <span class="nav-sep"></span>
+    <a href="#vision">理念</a>
+    <span class="nav-sep"></span>
+    <a href="#event-info">イベント</a>
+  </nav>
+
+  <!-- Hero: 空に浮かぶネームプレート -->
+  <section class="hero-sky">
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <div class="cloud cloud--4"></div>
+
+    <div class="nameplate-wrap">
+      <div class="nameplate-rope"></div>
+      <div class="nameplate">
+        <span class="nameplate-label">PROJECT</span>
+        <h1 class="nameplate-title">CoreShift<br>for children</h1>
+        <span class="nameplate-tagline">体験から始まる次世代教育</span>
+      </div>
+    </div>
+
+    <span class="hero-hint">Scroll ↓</span>
+  </section>
+
+  <!-- 01 課題 -->
+  <section id="challenge" class="child-section child-section--coral">
+    <div class="child-num">01</div>
+    <div class="child-body">
+      <h2 class="reveal">課題</h2>
+      <div class="child-text">
+        <p class="reveal">現代の子どもたちはAI・プログラミング・3Dプリンターといった技術が身近にある時代を生きています。しかし、それらを「使いこなす」体験を学校教育の中で十分に得られている子どもはまだごくわずかです。</p>
+        <p class="reveal">知識を覚えることが中心の学習では、技術が「手段」として機能しません。実際に手を動かし、試行錯誤しながら学ぶ場が、今の教育には不足しています。</p>
+        <p class="reveal">私自身も高校・中学・小学校の頃に、そういった体験型の学びを受けたかったという思いがあります。その経験がこの活動を始めるきっかけになりました。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 目的 -->
+  <section id="purpose" class="child-section child-section--mint">
+    <div class="child-num">02</div>
+    <div class="child-body">
+      <h2 class="reveal">目的</h2>
+      <div class="child-text">
+        <p class="reveal">CoreShift for childrenは、子どもたちが現代技術を「手段」として自在に使いこなし、自ら考え、挑戦し、未来を切り拓く力を育てることを目的としています。</p>
+        <p class="reveal">単なるプログラミング教室ではなく、AIや3Dプリンターといったテクノロジーを組み合わせながら、自分のアイデアを形にするまでの一連のプロセスを体験してもらうことを重視しています。</p>
+      </div>
+      <div class="child-card child-card--mint reveal">
+        <div class="child-card-label">TARGET</div>
+        <h3>目指す状態</h3>
+        <p>子どもたちが「技術を使って何かを作る・解決する」という経験を通じて、これからの時代に必要な思考力・創造力を自然に身につけている状態。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 理念 -->
+  <section id="vision" class="child-section child-section--lavender">
+    <div class="child-num">03</div>
+    <div class="child-body">
+      <h2 class="reveal">理念</h2>
+      <div class="child-text">
+        <p class="reveal">私たちが大切にしているのは、「体験から始まる学び」です。答えを教えるのではなく、試して、失敗して、また試す——その繰り返しの中に本当の学びがあると考えています。</p>
+        <p class="reveal">テクノロジーは怖いものでも難しいものでもなく、自分の可能性を広げるための道具です。そのことをできるだけ早い段階で子どもたちに知ってほしいと思っています。</p>
+        <p class="reveal">私たち自身も18歳の学生として、まだ学びながら活動しています。完璧ではないからこそ、子どもたちと一緒に考え、一緒に挑戦できると信じています。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 イベント -->
+  <section id="event-info" class="child-section child-section--peach">
+    <canvas id="nameplate-canvas"></canvas>
+    <div class="child-num">04</div>
+    <div class="child-body">
+      <h2 class="reveal">イベント</h2>
+      <div class="event-grid">
+        <div class="event-card reveal">
+          <div class="event-status">Coming Soon</div>
+          <h3>イベント</h3>
+          <p class="event-date">2025年7月 予定</p>
+          <p>詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
+        </div>
+        <div class="event-card reveal">
+          <div class="event-status">Coming Soon</div>
+          <h3>夏休みイベント</h3>
+          <p class="event-date">2025年夏休み 予定</p>
+          <p>詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">CoreShift</span>
+    <span>&copy; 2025 CoreShift. All rights reserved.</span>
+  </footer>
+
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script type="module" src="../main.js"></script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    const canvas = document.getElementById('nameplate-canvas');
+    if (canvas) {
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x000000, 0);
+
+      const scene  = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 0, 5);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+      const key = new THREE.DirectionalLight(0xffffff, 2.0);
+      key.position.set(3, 4, 5); scene.add(key);
+      const warm = new THREE.PointLight(0xFFD580, 3, 12);
+      warm.position.set(-2, 1, 3); scene.add(warm);
+
+      // 3/4位置を管理するpivotグループ
+      const pivot = new THREE.Group();
+      scene.add(pivot);
+
+      function update3Q() {
+        const halfW = Math.tan((40 / 2) * Math.PI / 180) * 5 * camera.aspect;
+        pivot.position.x = halfW * 0.5; // 中心から右に0.5halfW = 3/4位置
+      }
+
+      function resize() {
+        const section = canvas.parentElement;
+        const w = section.clientWidth;
+        const h = section.clientHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        update3Q();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const loader = new GLTFLoader();
+      loader.load('../models/ネームプレート.glb', gltf => {
+        const model = gltf.scene;
+        const box    = new THREE.Box3().setFromObject(model);
+        const size   = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        const scale  = 2.8 / Math.max(size.x, size.y, size.z);
+        model.scale.setScalar(scale);
+        const sc = center.multiplyScalar(scale);
+        model.position.set(-sc.x, -sc.y, -sc.z);
+        model.rotation.x = Math.PI / 2; // X軸90度回転
+        pivot.add(model);
+        update3Q();
+
+        (function animate() {
+          requestAnimationFrame(animate);
+          model.rotation.y += 0.004;
+          renderer.render(scene, camera);
+        })();
+      });
+    }
+  </script>
+</body>
+</html>

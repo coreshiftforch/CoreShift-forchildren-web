@@ -33,7 +33,19 @@ if (ptOverlay) {
   // 前ページからのストリップ遷移 → リビール
   if (sessionStorage.getItem('ptStrip') === '1') {
     sessionStorage.removeItem('ptStrip');
-    // data-pt-init は CSS で既にカバー状態を確保済み → 属性を外してリビール開始
+
+    // ストリップが開く前に対象セクションへ瞬時スクロール
+    const scrollTarget = sessionStorage.getItem('ptScrollTo');
+    if (scrollTarget) {
+      sessionStorage.removeItem('ptScrollTo');
+      const el = document.getElementById(scrollTarget);
+      if (el) {
+        document.documentElement.style.scrollBehavior = 'auto';
+        el.scrollIntoView();
+        document.documentElement.style.scrollBehavior = '';
+      }
+    }
+
     document.documentElement.removeAttribute('data-pt-init');
     strips.forEach(s => s.classList.add('pt-init'));
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -53,9 +65,13 @@ if (ptOverlay) {
           || href.startsWith('mailto') || link.target === '_blank'
           || link.hasAttribute('data-home-scroll')) return;
       e.preventDefault();
+      // ハッシュがあれば別途保存し、遷移先でスクロールする
+      if (href.includes('#')) {
+        sessionStorage.setItem('ptScrollTo', href.split('#')[1]);
+      }
       sessionStorage.setItem('ptStrip', '1');
       strips.forEach(s => s.classList.add('pt-cover'));
-      setTimeout(() => { window.location.href = href; }, 820);
+      setTimeout(() => { window.location.href = href.split('#')[0]; }, 820);
     });
   });
 }
@@ -181,7 +197,12 @@ function updateNavTheme() {
   });
 }
 
+let lastScrollY = window.scrollY;
+let scrollDir = 1; // 1 = down, -1 = up
+
 window.addEventListener('scroll', () => {
+  scrollDir = window.scrollY > lastScrollY ? 1 : -1;
+  lastScrollY = window.scrollY;
   header.classList.toggle('scrolled', window.scrollY > 60);
   updateNavTheme();
 }, { passive: true });
@@ -213,20 +234,46 @@ function updateWhiteReveal() {
 const scrollRevealGroups = [
   {
     sec: document.getElementById('events'),
+    els: [document.querySelector('#events h2')].filter(Boolean),
+    start: 0.2, end: 0.72, stagger: 0, translateY: 60, fade: true,
+  },
+  {
+    sec: document.getElementById('events'),
+    els: [document.querySelector('#events .sec-num')].filter(Boolean),
+    start: 0.45, end: 0.92, stagger: 0, translateY: 100, fade: true,
+    preserveCenter: true,
+  },
+  {
+    sec: document.getElementById('events'),
     els: Array.from(document.querySelectorAll('#events .event-card')),
-    start: 0.15, end: 0.65, stagger: 0.12,
+    start: 0.15, end: 0.65, stagger: 0.12, translateY: 36, fade: true,
+    mobileStart: 0.7, mobileEnd: 0.97, mobileStagger: 0.08,
   },
 ];
 
 function updateScrollReveal() {
   const vh = window.innerHeight;
-  scrollRevealGroups.forEach(({ sec, els, start, end, stagger }) => {
+  scrollRevealGroups.forEach(({ sec, els, start, end, stagger, translateY = 36, fade = true, scrollUpInstant = false, preserveCenter = false, mobileStart, mobileEnd, mobileStagger }) => {
     if (!sec) return;
-    const p = Math.min(Math.max(1 - sec.getBoundingClientRect().top / vh, 0), 1);
+    const isMobileView = window.innerWidth <= 768;
+    const effectiveStart   = isMobileView && mobileStart   != null ? mobileStart   : start;
+    const effectiveEnd     = isMobileView && mobileEnd     != null ? mobileEnd     : end;
+    const effectiveStagger = isMobileView && mobileStagger != null ? mobileStagger : stagger;
+    const rawP = 1 - sec.getBoundingClientRect().top / vh;
+    const p = Math.min(Math.max(rawP, 0), 1);
     els.forEach((el, i) => {
-      const ep = Math.min(Math.max((p - start - i * stagger) / (end - start), 0), 1);
-      el.style.opacity = ep;
-      el.style.transform = `translateY(${(1 - ep) * 36}px)`;
+      let ep;
+      if (scrollUpInstant && scrollDir < 0 && rawP >= effectiveStart) {
+        ep = 1;
+      } else {
+        ep = Math.min(Math.max((p - effectiveStart - i * effectiveStagger) / (effectiveEnd - effectiveStart), 0), 1);
+      }
+      if (fade) el.style.opacity = ep;
+      if (preserveCenter && window.innerWidth > 1300) {
+        el.style.transform = `translateX(-50%) translateY(calc(-50% + ${(1 - ep) * translateY}px))`;
+      } else {
+        el.style.transform = `translateY(${(1 - ep) * translateY}px)`;
+      }
     });
   });
 }
@@ -329,6 +376,10 @@ if (document.querySelector('.tool-detail') && !document.getElementById('printer-
   }, { passive: true });
 }
 
+// ===== 3Dプリンタースワイプ共有変数 =====
+let _printerSwipeTarget = 0;
+let _printerSwipeX      = 0;
+
 // ===== 3Dプリンターページ：最上部で上スクロール → ホームへ =====
 if (document.getElementById('printer-scroll')) {
   const HOME = '../index.html';
@@ -341,14 +392,37 @@ if (document.getElementById('printer-scroll')) {
     navigateWithStrip(HOME);
   }, { passive: true });
 
-  // タッチスワイプ
-  let touchStartY = 0;
-  window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  // タッチスワイプ（上スワイプ or 右スワイプ → ホームへ）
+  let touchStartX = 0, touchStartY = 0;
+  window.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('touchmove', e => {
+    if (navigating) return;
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    if (dx > 0 && Math.abs(dx) > Math.abs(dy)) {
+      _printerSwipeTarget = Math.min(dx / window.innerWidth, 1);
+    } else {
+      _printerSwipeTarget = 0;
+    }
+  }, { passive: true });
   window.addEventListener('touchend', e => {
-    if (navigating || window.scrollY > 0) return;
-    if (e.changedTouches[0].clientY - touchStartY > 60) {
+    if (navigating) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    const rightSwipe = dx > 60 && dx > Math.abs(dy);
+    const upSwipe    = dy > 60 && dy > Math.abs(dx) && window.scrollY === 0;
+    if (rightSwipe) {
+      navigating = true;
+      _printerSwipeTarget = 2;
+      setTimeout(() => navigateWithStrip(HOME), 250);
+    } else if (upSwipe) {
       navigating = true;
       navigateWithStrip(HOME);
+    } else {
+      _printerSwipeTarget = 0;
     }
   }, { passive: true });
 }
@@ -382,7 +456,7 @@ async function initPrinterViewer() {
   rimLight.position.set(-4, -2, -3); scene.add(rimLight);
   scene.add(new THREE.AmbientLight(0xffffff, 1.0));
 
-  let mixer = null, action = null, model = null;
+  let mixer = null, action = null, model = null, baseModelX = 0;
 
   const scrollSection = document.getElementById('printer-scroll');
   const scrollHint    = document.querySelector('.printer-scroll-hint');
@@ -404,6 +478,7 @@ async function initPrinterViewer() {
     const sc = center.multiplyScalar(scale);
     model.position.set(-sc.x, -sc.y - 0.1, -sc.z);
     model.rotation.y = -Math.PI / 2; // 正面向き
+    baseModelX = -sc.x;
     scene.add(model);
 
     if (gltf.animations.length > 0) {
@@ -485,6 +560,10 @@ async function initPrinterViewer() {
       if (textbox) {
         textbox.style.opacity = String(clamp01((p - 0.7) / 0.35));
       }
+
+      // 右スワイプでモデルが右へ流れる
+      _printerSwipeX = lerp(_printerSwipeX, _printerSwipeTarget, 0.1);
+      model.position.x = baseModelX + _printerSwipeX * 5;
 
       // ブルーライト周回
       const t = Date.now() * 0.0008;

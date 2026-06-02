@@ -1,0 +1,304 @@
+/* ============================================================
+   CoreShift for children — Child-friendly styles
+============================================================ */
+
+body {
+  background: #E5F3FC;
+  color: #3A3A4A;
+  cursor: auto;
+}
+
+#cursor { display: none !important; }
+
+/* ============================================================
+   Hero: Sky + Floating Nameplate
+============================================================ */
+.hero-sky {
+  min-height: 100vh;
+  background: linear-gradient(180deg,
+    #68B4D8 0%,
+    #96CEE8 28%,
+    #C2E6F5 60%,
+    #E2F4FD 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-top: none;
+  padding: 80px 40px 60px;
+}
+
+/* Clouds */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 100px;
+  pointer-events: none;
+}
+.cloud::before, .cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+}
+
+.cloud--1 { width: 240px; height: 64px; top: 22%; left: -280px; animation: cloudDrift 26s linear infinite; }
+.cloud--1::before { width: 110px; height: 110px; top: -64px; left: 18px; }
+.cloud--1::after  { width: 82px;  height: 82px;  top: -46px; left: 118px; }
+
+.cloud--2 { width: 170px; height: 50px; top: 56%; right: -220px; animation: cloudDrift 38s linear infinite reverse; animation-delay: -14s; opacity: 0.68; }
+.cloud--2::before { width: 82px; height: 82px; top: -48px; left: 12px; }
+.cloud--2::after  { width: 62px; height: 62px; top: -34px; left: 88px; }
+
+.cloud--3 { width: 140px; height: 40px; top: 38%; left: -180px; animation: cloudDrift 44s linear infinite; animation-delay: -22s; opacity: 0.52; }
+.cloud--3::before { width: 60px; height: 60px; top: -36px; left: 10px; }
+.cloud--3::after  { width: 48px; height: 48px; top: -24px; left: 64px; }
+
+.cloud--4 { width: 110px; height: 32px; top: 74%; right: -160px; animation: cloudDrift 32s linear infinite reverse; animation-delay: -6s; opacity: 0.45; }
+.cloud--4::before { width: 50px; height: 50px; top: -30px; left: 8px; }
+.cloud--4::after  { width: 38px; height: 38px; top: -18px; left: 52px; }
+
+@keyframes cloudDrift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(120vw); }
+}
+
+/* Nameplate */
+.nameplate-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: floatSign 5.5s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes floatSign {
+  0%, 100% { transform: translateY(0px)   rotate(-0.5deg); }
+  50%       { transform: translateY(-22px) rotate(0.5deg);  }
+}
+
+.nameplate-rope {
+  width: 4px;
+  height: 60px;
+  background: linear-gradient(180deg, #6A4E10 0%, #9A7030 100%);
+  border-radius: 2px;
+}
+
+.nameplate {
+  background: linear-gradient(155deg, #FFFEF8 0%, #FFF8E8 100%);
+  border: 4px solid #C0922E;
+  border-radius: 14px;
+  padding: 48px 68px;
+  text-align: center;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.18),
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+  position: relative;
+  min-width: 320px;
+}
+
+.nameplate::before, .nameplate::after {
+  content: '✦';
+  position: absolute;
+  color: #C0922E;
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+.nameplate::before { top: 14px; left: 18px; }
+.nameplate::after  { top: 14px; right: 18px; }
+
+.nameplate-label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C0922E;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.nameplate-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #252535;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.nameplate-tagline {
+  display: block;
+  font-size: 0.82rem;
+  color: #7A7A90;
+  letter-spacing: 0.06em;
+}
+
+.hero-hint {
+  position: absolute;
+  bottom: 32px;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  animation: hintFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes hintFloat {
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
+  50%       { opacity: 1;   transform: translateY(-6px); }
+}
+
+/* ============================================================
+   Child Sections
+============================================================ */
+.child-section {
+  padding: 100px 56px;
+  border-top: none !important;
+  position: relative;
+  z-index: 1;
+}
+
+.child-section--coral    { background: linear-gradient(155deg, #FFF2EE 0%, #FFE9E3 100%); }
+.child-section--mint     { background: linear-gradient(155deg, #EDFAF3 0%, #E4F8EE 100%); }
+.child-section--lavender { background: linear-gradient(155deg, #EDE8FC 0%, #E6E0FF 100%); }
+.child-section--peach    { background: linear-gradient(155deg, #FFF6E0 0%, #FFF0CC 100%); }
+
+.child-num {
+  position: absolute;
+  top: 36px;
+  right: 56px;
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #000;
+  opacity: 0.05;
+  pointer-events: none;
+  letter-spacing: 0.1em;
+}
+
+.child-body { max-width: 800px; }
+
+.child-section h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 900;
+  color: #252535 !important;
+  margin-bottom: 36px;
+  letter-spacing: -0.02em;
+}
+
+.child-text p {
+  color: #4A4A5C;
+  font-size: 0.95rem;
+  line-height: 1.95;
+  margin-bottom: 20px;
+}
+
+/* Inner card */
+.child-card {
+  margin-top: 44px;
+  padding: 36px 40px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 16px;
+  border-left: 4px solid;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  backdrop-filter: blur(8px);
+}
+
+.child-card--coral    { border-color: #EE9080; }
+.child-card--mint     { border-color: #60C090; }
+.child-card--lavender { border-color: #9878D0; }
+
+.child-card-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.child-card--coral    .child-card-label { color: #D06050; }
+.child-card--mint     .child-card-label { color: #38A070; }
+.child-card--lavender .child-card-label { color: #7858C0; }
+
+.child-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #252535;
+  margin-bottom: 12px;
+}
+
+.child-card p {
+  color: #5A5A6C;
+  font-size: 0.92rem;
+  line-height: 1.85;
+}
+
+/* ============================================================
+   Nameplate canvas background (event section)
+============================================================ */
+#nameplate-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+/* ============================================================
+   Event cards (child style)
+============================================================ */
+.child-section .event-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.child-section .event-card {
+  background: rgba(255,255,255,0.65);
+  border: 2px solid rgba(180,200,230,0.45);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.child-section .event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.10);
+  border-color: rgba(130,170,220,0.6);
+}
+.child-section .event-card h3  { color: #252535; }
+.child-section .event-status   { border-color: #78A8D8; color: #4880B8; }
+.child-section .event-date     { color: #6898C8; }
+.child-section .event-card > p { color: #5A5A6C; }
+
+/* ============================================================
+   Footer
+============================================================ */
+footer {
+  background: #CBE8F8 !important;
+  border-top: 1px solid rgba(0,0,0,0.07) !important;
+  color: #5A5A6A !important;
+}
+.footer-logo { color: #252535 !important; }
+
+/* ============================================================
+   Responsive
+============================================================ */
+@media (max-width: 1300px) {
+  .child-num { font-size: 5rem; right: 40px; }
+}
+
+@media (max-width: 768px) {
+  .hero-sky { padding: 90px 20px 60px; }
+  .nameplate { padding: 36px 28px; min-width: unset; }
+  .nameplate-title { font-size: 1.7rem; }
+
+  .child-section { padding: 160px 20px 64px; }
+  .child-num { font-size: 4.5rem; right: 10px; top: 120px; }
+
+  .child-section .event-grid { grid-template-columns: 1fr; }
+}

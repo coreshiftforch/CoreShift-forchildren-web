@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI — CoreShift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+  </header>
+
+  <nav id="side-nav">
+    <a href="../index.html#about">About</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#events">Event</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#support">Support Us</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#sns">SNS</a>
+  </nav>
+
+  <section class="tool-detail white-section visible">
+    <div class="tool-detail-body">
+      <div class="tool-detail-label">TECHNOLOGY 02</div>
+      <h2>AI</h2>
+      <p>AIは「難しい技術」ではなく、自分のアイデアを実現するための道具。プロンプトの書き方や活用方法を学び、AIを使いこなす力を養います。</p>
+    </div>
+    <div class="tool-detail-canvas-wrap tool-ai-visual">
+      <svg class="ai-anim-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="72" y="72" width="56" height="56" rx="6" stroke="#3b82f6" stroke-width="1.5"/>
+        <line x1="72" y1="84" x2="30" y2="84" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="100" x2="30" y2="100" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="116" x2="30" y2="116" stroke="#3b82f6" stroke-width="1"/>
+        <line x1="128" y1="84" x2="170" y2="84" stroke="#3b82f6" stroke-width="1"/><line x1="128" y1="100" x2="170" y2="100" stroke="#3b82f6" stroke-width="1"/><line x1="128" y1="116" x2="170" y2="116" stroke="#3b82f6" stroke-width="1"/>
+        <line x1="84" y1="72" x2="84" y2="30" stroke="#3b82f6" stroke-width="1"/><line x1="100" y1="72" x2="100" y2="30" stroke="#3b82f6" stroke-width="1"/><line x1="116" y1="72" x2="116" y2="30" stroke="#3b82f6" stroke-width="1"/>
+        <line x1="84" y1="128" x2="84" y2="170" stroke="#3b82f6" stroke-width="1"/><line x1="100" y1="128" x2="100" y2="170" stroke="#3b82f6" stroke-width="1"/><line x1="116" y1="128" x2="116" y2="170" stroke="#3b82f6" stroke-width="1"/>
+        <circle class="ai-node" cx="30" cy="84" r="5" fill="#3b82f6"/><circle class="ai-node" cx="30" cy="100" r="5" fill="#3b82f6"/><circle class="ai-node" cx="30" cy="116" r="5" fill="#3b82f6"/>
+        <circle class="ai-node" cx="170" cy="84" r="5" fill="#3b82f6"/><circle class="ai-node" cx="170" cy="100" r="5" fill="#3b82f6"/><circle class="ai-node" cx="170" cy="116" r="5" fill="#3b82f6"/>
+        <circle class="ai-node" cx="84" cy="30" r="5" fill="#93c5fd"/><circle class="ai-node" cx="100" cy="30" r="5" fill="#93c5fd"/><circle class="ai-node" cx="116" cy="30" r="5" fill="#93c5fd"/>
+        <circle class="ai-node" cx="84" cy="170" r="5" fill="#93c5fd"/><circle class="ai-node" cx="100" cy="170" r="5" fill="#93c5fd"/><circle class="ai-node" cx="116" cy="170" r="5" fill="#93c5fd"/>
+        <text x="100" y="106" text-anchor="middle" font-size="16" font-weight="700" font-family="monospace" fill="#3b82f6">AI</text>
+      </svg>
+    </div>
+  </section>
+
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script type="module" src="../main.js"></script>
+</body>
+</html>

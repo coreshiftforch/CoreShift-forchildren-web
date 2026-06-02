@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3Dプリンター — CoreShift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+  </header>
+
+  <nav id="side-nav">
+    <a href="../index.html#about">About</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#events">Event</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#support">Support Us</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#sns">SNS</a>
+  </nav>
+
+  <!-- スクロール連動アニメーション領域（280vh） -->
+  <div id="printer-scroll">
+    <div class="printer-sticky">
+      <canvas id="printer-canvas" data-model="../models/3Dプリンター.glb"></canvas>
+      <div class="printer-scroll-hint">SCROLL</div>
+
+      <!-- スクロール中：フルテキスト -->
+      <div class="printer-text-overlay">
+        <div class="tool-detail-label">TECHNOLOGY 01</div>
+        <h2>3Dプリンター</h2>
+        <p>アイデアを立体的な形に変える「3Dプリンター」。<br>子どもたちはデジタルで設計し、実際に触れる物を作る体験を通して、<br>ものづくりの楽しさと創造力を育てます。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- スクロール進捗 p=0.7 から表示される固定テキストボックス -->
+  <div class="printer-textbox">
+    <p>3Dプリンターは、デジタルデータから立体物を層状に積み重ねて造形する技術です。医療・建築・航空宇宙など幅広い産業で活用され、金属・樹脂・木材など多様な素材に対応しています。従来の製造方法では難しかった複雑な形状も再現でき、実際に機器を操作しながら設計の基礎を学ぶことで、現代のものづくりに欠かせないテクノロジーを「使いこなす力」を育てます。</p>
+  </div>
+
+  <!-- スクロール高さ確保用スペーサー -->
+  <section class="printer-bg-section"></section>
+
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script type="module" src="../main.js"></script>
+</body>
+</html>
