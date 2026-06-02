@@ -170,7 +170,7 @@ body {
 
 .printer-text-overlay p {
   color: rgba(255,255,255,0.6);
-  font-size: 0.92rem;
+  font-size: 1.17rem;
   line-height: 1.9;
   font-weight: 300;
 }
@@ -239,7 +239,7 @@ body {
 
 .printer-textbox p {
   color: rgba(255,255,255,0.65);
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.9;
   font-weight: 300;
 }
@@ -291,6 +291,42 @@ body:not(:hover) #cursor { opacity: 0; }
   letter-spacing: 0.06em;
   text-decoration: none;
   transition: color 0.3s;
+}
+
+/* ============================================================
+   Language Switch
+============================================================ */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.44rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-left: auto;
+}
+
+.lang-btn {
+  cursor: pointer;
+  color: #fff;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+  user-select: none;
+  padding: 2px 4px;
+}
+
+.lang-btn:hover    { opacity: 0.7; }
+.lang-btn.lang-active { opacity: 1; }
+
+.lang-sep-v {
+  color: #fff;
+  opacity: 0.2;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .lang-switch { font-size: 1.3rem; }
+  .lang-btn, .lang-sep-v { color: #fff !important; }
 }
 
 /* ============================================================
@@ -466,7 +502,7 @@ section h2 {
 ============================================================ */
 .sec-text p {
   color: #999;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   margin-bottom: 20px;
   line-height: 1.9;
 }
@@ -528,7 +564,7 @@ a.about-card:hover .about-card-arrow {
 
 .about-card p {
   color: #888;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.8;
 }
 
@@ -654,7 +690,7 @@ a.about-card:hover .about-card-arrow {
 
 .tool-detail p {
   color: #999;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.9;
 }
 
@@ -775,7 +811,7 @@ a.about-card:hover .about-card-arrow {
 
 .event-card p {
   color: #777;
-  font-size: 0.88rem;
+  font-size: 1.13rem;
   line-height: 1.8;
 }
 
@@ -784,7 +820,7 @@ a.about-card:hover .about-card-arrow {
 ============================================================ */
 .support-lead {
   color: #888;
-  font-size: 1rem;
+  font-size: 1.25rem;
   line-height: 2;
   margin-bottom: 40px;
 }

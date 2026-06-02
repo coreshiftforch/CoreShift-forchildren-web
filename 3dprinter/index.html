@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="../icon/アイコン.png" type="image/png">
+  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
   <link rel="stylesheet" href="../style.css">
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
@@ -19,6 +19,11 @@
 
   <header id="header">
     <a class="logo" href="../index.html">CoreShift</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
   </header>
 
   <nav id="side-nav">
@@ -40,15 +45,15 @@
       <!-- スクロール中：フルテキスト -->
       <div class="printer-text-overlay">
         <div class="tool-detail-label">TECHNOLOGY 01</div>
-        <h2>3Dプリンター</h2>
-        <p>アイデアを立体的な形に変える「3Dプリンター」。<br>子どもたちはデジタルで設計し、実際に触れる物を作る体験を通して、<br>ものづくりの楽しさと創造力を育てます。</p>
+        <h2 data-i18n="printer-page-title">3Dプリンター</h2>
+        <p data-i18n-html="printer-overlay-p">アイデアを立体的な形に変える「3Dプリンター」。<br>子どもたちはデジタルで設計し、実際に触れる物を作る体験を通してものづくりの楽しさと創造力を育てます。</p>
       </div>
     </div>
   </div>
 
   <!-- スクロール進捗 p=0.7 から表示される固定テキストボックス -->
   <div class="printer-textbox">
-    <p>3Dプリンターは、デジタルデータから立体物を層状に積み重ねて造形する技術です。医療・建築・航空宇宙など幅広い産業で活用され、金属・樹脂・木材など多様な素材に対応しています。従来の製造方法では難しかった複雑な形状も再現でき、実際に機器を操作しながら設計の基礎を学ぶことで、現代のものづくりに欠かせないテクノロジーを「使いこなす力」を育てます。</p>
+    <p data-i18n="printer-textbox-p">3Dプリンターは、デジタルデータから立体物を層状に積み重ねて造形する技術です。医療・建築・航空宇宙など幅広い産業で活用され、金属・樹脂・木材など多様な素材に対応しています。従来の製造方法では難しかった複雑な形状も再現でき、実際に機器を操作しながら設計の基礎を学ぶことで、現代のものづくりに欠かせないテクノロジーを「使いこなす力」を育てます。</p>
   </div>
 
   <!-- スクロール高さ確保用スペーサー -->
@@ -63,6 +68,7 @@
       document.documentElement.setAttribute('data-pt-init', '');
     }
   </script>
+  <script src="../i18n.js"></script>
   <script type="module" src="../main.js"></script>
 </body>
 </html>

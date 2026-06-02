@@ -109,9 +109,11 @@ if (printerCard) {
     printerCard.style.zIndex   = '8001';
     document.body.appendChild(printerCard);
 
-    // 画面中央への移動量
+    // 画面中央への移動量（キャンバス部分の中心を基準にする）
+    const imgEl = printerCard.querySelector('.tool-card-img');
+    const imgRect = imgEl ? imgEl.getBoundingClientRect() : rect;
     const tx = window.innerWidth  / 2 - (rect.left + rect.width  / 2);
-    const ty = window.innerHeight / 2 - (rect.top  + rect.height / 2);
+    const ty = window.innerHeight / 2 - (imgRect.top + imgRect.height / 2);
 
     // ── Step 2: 少し間を置いてから座標移動開始 ──
     const ease = 'cubic-bezier(.86,0,.07,1)';
@@ -194,6 +196,14 @@ function updateNavTheme() {
   });
   document.querySelectorAll('.nav-sep').forEach(sep => {
     sep.style.background = blendColor(whiteRatio(sep.getBoundingClientRect()));
+  });
+
+  // 言語切り替え：ロゴと同じルールで色を切り替え
+  const langColor = window.scrollY > 60
+    ? '#fff'
+    : blendColor(whiteRatio(document.querySelector('.lang-switch')?.getBoundingClientRect() ?? {}));
+  document.querySelectorAll('.lang-btn, .lang-sep-v').forEach(el => {
+    el.style.color = langColor;
   });
 }
 

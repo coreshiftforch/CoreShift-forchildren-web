@@ -11,6 +11,20 @@ body {
 #cursor { display: none !important; }
 
 /* ============================================================
+   Side nav override
+============================================================ */
+#side-nav a {
+  color: #111 !important;
+}
+#side-nav a:hover,
+#side-nav a.nav-active {
+  color: #000 !important;
+}
+.nav-sep {
+  background: #555 !important;
+}
+
+/* ============================================================
    Hero: Sky + Floating Nameplate
 ============================================================ */
 .hero-sky {
@@ -74,6 +88,7 @@ body {
   animation: floatSign 5.5s ease-in-out infinite;
   z-index: 2;
   position: relative;
+  margin-top: 40px;
 }
 
 @keyframes floatSign {
@@ -157,7 +172,7 @@ body {
    Child Sections
 ============================================================ */
 .child-section {
-  padding: 100px 56px;
+  padding: 100px 110px 100px 56px;
   border-top: none !important;
   position: relative;
   z-index: 1;
@@ -171,7 +186,7 @@ body {
 .child-num {
   position: absolute;
   top: 36px;
-  right: 56px;
+  right: 110px;
   font-size: 7rem;
   font-weight: 900;
   line-height: 1;
@@ -193,7 +208,7 @@ body {
 
 .child-text p {
   color: #4A4A5C;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   line-height: 1.95;
   margin-bottom: 20px;
 }
@@ -233,7 +248,7 @@ body {
 
 .child-card p {
   color: #5A5A6C;
-  font-size: 0.92rem;
+  font-size: 1.17rem;
   line-height: 1.85;
 }
 

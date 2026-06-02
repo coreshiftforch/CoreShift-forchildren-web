@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="../icon/アイコン.png" type="image/png">
+  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="child.css">
   <script type="importmap">
@@ -20,16 +20,21 @@
 
   <header id="header">
     <a class="logo" href="../index.html">CoreShift</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
   </header>
 
   <nav id="side-nav">
-    <a href="#challenge">課題</a>
+    <a href="#challenge" data-i18n="child-nav-challenge">課題</a>
     <span class="nav-sep"></span>
-    <a href="#purpose">目的</a>
+    <a href="#purpose" data-i18n="child-nav-purpose">目的</a>
     <span class="nav-sep"></span>
-    <a href="#vision">理念</a>
+    <a href="#vision" data-i18n="child-nav-vision">理念</a>
     <span class="nav-sep"></span>
-    <a href="#event-info">イベント</a>
+    <a href="#event-info" data-i18n="child-nav-events">イベント</a>
   </nav>
 
   <!-- Hero: 空に浮かぶネームプレート -->
@@ -44,7 +49,7 @@
       <div class="nameplate">
         <span class="nameplate-label">PROJECT</span>
         <h1 class="nameplate-title">CoreShift<br>for children</h1>
-        <span class="nameplate-tagline">体験から始まる次世代教育</span>
+        <span class="nameplate-tagline" data-i18n="child-tagline">体験から始まる次世代教育</span>
       </div>
     </div>
 
@@ -55,11 +60,11 @@
   <section id="challenge" class="child-section child-section--coral">
     <div class="child-num">01</div>
     <div class="child-body">
-      <h2 class="reveal">課題</h2>
+      <h2 class="reveal" data-i18n="child-challenge-h">課題</h2>
       <div class="child-text">
-        <p class="reveal">現代の子どもたちはAI・プログラミング・3Dプリンターといった技術が身近にある時代を生きています。しかし、それらを「使いこなす」体験を学校教育の中で十分に得られている子どもはまだごくわずかです。</p>
-        <p class="reveal">知識を覚えることが中心の学習では、技術が「手段」として機能しません。実際に手を動かし、試行錯誤しながら学ぶ場が、今の教育には不足しています。</p>
-        <p class="reveal">私自身も高校・中学・小学校の頃に、そういった体験型の学びを受けたかったという思いがあります。その経験がこの活動を始めるきっかけになりました。</p>
+        <p class="reveal" data-i18n="child-challenge-p1">現代の子どもたちはAI・プログラミング・3Dプリンターといった技術が身近にある時代を生きています。しかし、それらを「使いこなす」体験を学校教育の中で十分に得られている子どもはまだごくわずかです。</p>
+        <p class="reveal" data-i18n="child-challenge-p2">知識を覚えることが中心の学習では、技術が「手段」として機能しません。実際に手を動かし、試行錯誤しながら学ぶ場が、今の教育には不足しています。</p>
+        <p class="reveal" data-i18n="child-challenge-p3">私自身も高校・中学・小学校の頃に、そういった体験型の学びを受けたかったという思いがあります。その経験がこの活動を始めるきっかけになりました。</p>
       </div>
     </div>
   </section>
@@ -68,15 +73,15 @@
   <section id="purpose" class="child-section child-section--mint">
     <div class="child-num">02</div>
     <div class="child-body">
-      <h2 class="reveal">目的</h2>
+      <h2 class="reveal" data-i18n="child-purpose-h">目的</h2>
       <div class="child-text">
-        <p class="reveal">CoreShift for childrenは、子どもたちが現代技術を「手段」として自在に使いこなし、自ら考え、挑戦し、未来を切り拓く力を育てることを目的としています。</p>
-        <p class="reveal">単なるプログラミング教室ではなく、AIや3Dプリンターといったテクノロジーを組み合わせながら、自分のアイデアを形にするまでの一連のプロセスを体験してもらうことを重視しています。</p>
+        <p class="reveal" data-i18n="child-purpose-p1">CoreShift for childrenは、子どもたちが現代技術を「手段」として自在に使いこなし、自ら考え、挑戦し、未来を切り拓く力を育てることを目的としています。</p>
+        <p class="reveal" data-i18n="child-purpose-p2">単なるプログラミング教室ではなく、AIや3Dプリンターといったテクノロジーを組み合わせながら、自分のアイデアを形にするまでの一連のプロセスを体験してもらうことを重視しています。</p>
       </div>
       <div class="child-card child-card--mint reveal">
         <div class="child-card-label">TARGET</div>
-        <h3>目指す状態</h3>
-        <p>子どもたちが「技術を使って何かを作る・解決する」という経験を通じて、これからの時代に必要な思考力・創造力を自然に身につけている状態。</p>
+        <h3 data-i18n="child-target-h">目指す状態</h3>
+        <p data-i18n="child-target-p">子どもたちが「技術を使って何かを作る・解決する」という経験を通じて、これからの時代に必要な思考力・創造力を自然に身につけている状態。</p>
       </div>
     </div>
   </section>
@@ -85,11 +90,11 @@
   <section id="vision" class="child-section child-section--lavender">
     <div class="child-num">03</div>
     <div class="child-body">
-      <h2 class="reveal">理念</h2>
+      <h2 class="reveal" data-i18n="child-vision-h">理念</h2>
       <div class="child-text">
-        <p class="reveal">私たちが大切にしているのは、「体験から始まる学び」です。答えを教えるのではなく、試して、失敗して、また試す——その繰り返しの中に本当の学びがあると考えています。</p>
-        <p class="reveal">テクノロジーは怖いものでも難しいものでもなく、自分の可能性を広げるための道具です。そのことをできるだけ早い段階で子どもたちに知ってほしいと思っています。</p>
-        <p class="reveal">私たち自身も18歳の学生として、まだ学びながら活動しています。完璧ではないからこそ、子どもたちと一緒に考え、一緒に挑戦できると信じています。</p>
+        <p class="reveal" data-i18n="child-vision-p1">私たちが大切にしているのは、「体験から始まる学び」です。答えを教えるのではなく、試して、失敗して、また試す——その繰り返しの中に本当の学びがあると考えています。</p>
+        <p class="reveal" data-i18n="child-vision-p2">テクノロジーは怖いものでも難しいものでもなく、自分の可能性を広げるための道具です。そのことをできるだけ早い段階で子どもたちに知ってほしいと思っています。</p>
+        <p class="reveal" data-i18n="child-vision-p3">私たち自身も18歳の学生として、まだ学びながら活動しています。完璧ではないからこそ、子どもたちと一緒に考え、一緒に挑戦できると信じています。</p>
       </div>
     </div>
   </section>
@@ -99,19 +104,19 @@
     <canvas id="nameplate-canvas"></canvas>
     <div class="child-num">04</div>
     <div class="child-body">
-      <h2 class="reveal">イベント</h2>
+      <h2 class="reveal" data-i18n="child-events-h">イベント</h2>
       <div class="event-grid">
         <div class="event-card reveal">
           <div class="event-status">Coming Soon</div>
-          <h3>イベント</h3>
-          <p class="event-date">2025年7月 予定</p>
-          <p>詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
+          <h3 data-i18n="event1-title">イベント</h3>
+          <p class="event-date" data-i18n="event1-date">2025年7月 予定</p>
+          <p data-i18n="event1-desc">詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
         </div>
         <div class="event-card reveal">
           <div class="event-status">Coming Soon</div>
-          <h3>夏休みイベント</h3>
-          <p class="event-date">2025年夏休み 予定</p>
-          <p>詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
+          <h3 data-i18n="event2-title">夏休みイベント</h3>
+          <p class="event-date" data-i18n="event2-date">2025年夏休み 予定</p>
+          <p data-i18n="event2-desc">詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
         </div>
       </div>
     </div>
@@ -131,6 +136,7 @@
       document.documentElement.setAttribute('data-pt-init', '');
     }
   </script>
+  <script src="../i18n.js"></script>
   <script type="module" src="../main.js"></script>
   <script type="module">
     import * as THREE from 'three';
