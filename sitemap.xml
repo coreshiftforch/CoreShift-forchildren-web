@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://coreshiftforch.github.io/CoreShift-forchildren-web/</loc>
+    <loc>https://core-shift.jp/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://coreshiftforch.github.io/CoreShift-forchildren-web/CoreShift%20for%20children/</loc>
+    <loc>https://core-shift.jp/CoreShift%20for%20children/</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://coreshiftforch.github.io/CoreShift-forchildren-web/3dprinter/</loc>
+    <loc>https://core-shift.jp/3dprinter/</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://coreshiftforch.github.io/CoreShift-forchildren-web/ai/</loc>
+    <loc>https://core-shift.jp/ai/</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://coreshiftforch.github.io/CoreShift-forchildren-web/programming/</loc>
+    <loc>https://core-shift.jp/programming/</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
