@@ -11,17 +11,19 @@ body {
 #cursor { display: none !important; }
 
 /* ============================================================
-   Side nav override
+   Side nav override — PC のみ（モバイルでは黒背景に黒文字になるため除外）
 ============================================================ */
-#side-nav a {
-  color: #111 !important;
-}
-#side-nav a:hover,
-#side-nav a.nav-active {
-  color: #000 !important;
-}
-.nav-sep {
-  background: #555 !important;
+@media (min-width: 769px) {
+  #side-nav a {
+    color: #111 !important;
+  }
+  #side-nav a:hover,
+  #side-nav a.nav-active {
+    color: #000 !important;
+  }
+  .nav-sep {
+    background: #555 !important;
+  }
 }
 
 /* ============================================================
@@ -304,16 +306,17 @@ footer {
    Responsive
 ============================================================ */
 @media (max-width: 1300px) {
-  .child-num { font-size: 5rem; right: 40px; }
+  .child-num { font-size: 5rem; right: 90px; }
+  .nameplate-title { font-size: 4rem; }
 }
 
 @media (max-width: 768px) {
   .hero-sky { padding: 90px 20px 60px; }
   .nameplate { padding: 36px 28px; min-width: unset; }
-  .nameplate-title { font-size: 1.7rem; }
+  .nameplate-title { font-size: 2.8rem; }
 
   .child-section { padding: 160px 20px 64px; }
-  .child-num { font-size: 4.5rem; right: 10px; top: 120px; }
+  .child-num { font-size: 3rem; right: 10px; top: 150px; }
 
   .child-section .event-grid { grid-template-columns: 1fr; }
 }

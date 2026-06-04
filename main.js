@@ -53,6 +53,10 @@ if (ptOverlay) {
         s.classList.remove('pt-init');
         s.classList.add('pt-reveal');
       });
+      // アニメーション完了後にクラスを除去（残像バグ対策）
+      setTimeout(() => {
+        strips.forEach(s => s.classList.remove('pt-reveal'));
+      }, 900);
     }));
   }
 
@@ -112,8 +116,8 @@ if (printerCard) {
     // 画面中央への移動量（キャンバス部分の中心を基準にする）
     const imgEl = printerCard.querySelector('.tool-card-img');
     const imgRect = imgEl ? imgEl.getBoundingClientRect() : rect;
-    const tx = window.innerWidth  / 2 - (rect.left + rect.width  / 2);
-    const ty = window.innerHeight / 2 - (imgRect.top + imgRect.height / 2);
+    const tx = window.innerWidth  / 2 - (imgRect.left + imgRect.width  / 2);
+    const ty = window.innerHeight / 2 - (imgRect.top  + imgRect.height / 2);
 
     // ── Step 2: 少し間を置いてから座標移動開始 ──
     const ease = 'cubic-bezier(.86,0,.07,1)';

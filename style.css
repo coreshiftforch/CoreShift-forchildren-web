@@ -919,6 +919,29 @@ footer {
     flex-direction: column;
     justify-content: flex-start;
   }
+
+  /* 3Dプリンター：オーバーレイを上部に移動、テキストボックスを縮小 */
+  .printer-text-overlay {
+    top: 200px;
+    bottom: auto;
+  }
+
+  .printer-textbox {
+    left: 24px;
+    right: 24px;
+    max-width: none;
+    padding: 32px 36px;
+  }
+
+  .printer-textbox h2 {
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    margin-bottom: 16px;
+  }
+
+  .printer-textbox p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
 }
 
 /* ============================================================
@@ -1025,6 +1048,33 @@ footer {
   .tool-detail { grid-template-columns: 1fr; }
   .tool-detail-canvas-wrap { min-height: 300px; }
   .tool-detail-body { padding: 48px 20px; }
+
+  .printer-textbox {
+    right: 16px;
+    left: 16px;
+    bottom: 100px;
+    max-width: none;
+    padding: 20px;
+  }
+
+  .printer-textbox h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .printer-textbox p {
+    font-size: 0.93rem;
+    line-height: 1.7;
+  }
+
+  .printer-text-overlay {
+    top: 210px;
+    bottom: auto;
+    left: 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .printer-scroll-hint { left: 20px; }
 
   .event-grid { grid-template-columns: 1fr; }
 
