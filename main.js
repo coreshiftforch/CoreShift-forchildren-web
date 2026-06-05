@@ -24,6 +24,17 @@ function navigateWithStrip(href) {
   }
 }
 
+// ===== BFCache 復元時にストリップをリセット =====
+window.addEventListener('pageshow', (e) => {
+  if (!e.persisted) return;
+  const strips = Array.from(document.querySelectorAll('.pt-strip'));
+  strips.forEach(s => s.classList.remove('pt-cover', 'pt-init'));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    strips.forEach(s => s.classList.add('pt-reveal'));
+    setTimeout(() => strips.forEach(s => s.classList.remove('pt-reveal')), 900);
+  }));
+});
+
 // ===== ページ遷移：白ストリップ（AI / プログラミング） =====
 const ptOverlay = document.getElementById('page-transition');
 
