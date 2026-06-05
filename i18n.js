@@ -11,10 +11,10 @@
       'tool-prog': 'プログラミング',
       /* ── Events (shared) ── */
       'event1-title': 'イベント',
-      'event1-date': '2025年7月 予定',
+      'event1-date': '2026年7月 予定',
       'event1-desc': '詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。',
       'event2-title': '夏休みイベント',
-      'event2-date': '2025年夏休み 予定',
+      'event2-date': '2026年夏休み 予定',
       'event2-desc': '詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。',
       /* ── Main: Support ── */
       'support-lead': 'CoreShiftの活動を応援していただける方を募集しています。<br>クラウドファンディングの詳細は近日公開予定です。',
@@ -73,10 +73,10 @@
       'tool-prog': 'Programming',
       /* ── Events (shared) ── */
       'event1-title': 'Event',
-      'event1-date': 'Scheduled: July 2025',
+      'event1-date': 'Scheduled: July 2026',
       'event1-desc': 'Details will be announced once confirmed. Follow us on Instagram for updates.',
       'event2-title': 'Summer Break Event',
-      'event2-date': 'Scheduled: Summer 2025',
+      'event2-date': 'Scheduled: Summer 2026',
       'event2-desc': 'Details will be announced once confirmed. Follow us on Instagram for updates.',
       /* ── Main: Support ── */
       'support-lead': 'We are looking for people to support the CoreShift initiative.<br>Crowdfunding details will be released soon.',
