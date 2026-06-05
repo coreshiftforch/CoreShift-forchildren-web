@@ -305,7 +305,7 @@ footer {
 /* ============================================================
    SNS / Links section (child style)
 ============================================================ */
-.child-section--sky { background: linear-gradient(155deg, #E6F4FB 0%, #D8EEF8 100%); }
+.child-section--sky { background: #fff; }
 
 .child-link-item {
   color: #252535 !important;
