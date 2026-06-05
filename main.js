@@ -52,8 +52,9 @@ window.addEventListener('pagehide', () => {
     });
     const label = printerCard.querySelector('.tool-card-name');
     if (label) label.style.removeProperty('display');
-    _printerCardOrigParent.appendChild(printerCard);
+    _printerCardOrigParent.insertBefore(printerCard, _printerCardNextSibling);
     _printerCardOrigParent = null;
+    _printerCardNextSibling = null;
   }
 });
 
@@ -116,6 +117,7 @@ if (ptOverlay) {
 // ===== ページ遷移：カードズーム（3Dプリンター専用）=====
 let _printerBg = null;
 let _printerCardOrigParent = null;
+let _printerCardNextSibling = null;
 
 const printerCard = document.querySelector('[data-zoom-card]');
 if (printerCard) {
@@ -139,6 +141,7 @@ if (printerCard) {
     });
     _printerBg = bg;
     _printerCardOrigParent = printerCard.parentElement;
+    _printerCardNextSibling = printerCard.nextSibling;
     document.body.appendChild(bg);
 
     // カードを body 直下に移動（section の stacking context を脱出）
