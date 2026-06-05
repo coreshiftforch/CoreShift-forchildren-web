@@ -887,7 +887,7 @@ a.about-card:hover .about-card-arrow {
 .link-email {
   font-size: 1rem;
   font-weight: 400;
-  color: var(--muted);
+  color: #bbb;
   letter-spacing: 0.02em;
   user-select: all;
 }
