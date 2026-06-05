@@ -303,6 +303,27 @@ footer {
 .footer-logo { color: #252535 !important; }
 
 /* ============================================================
+   SNS / Links section (child style)
+============================================================ */
+.child-section--sky { background: linear-gradient(155deg, #E6F4FB 0%, #D8EEF8 100%); }
+
+.child-link-item {
+  color: #252535 !important;
+  border-bottom-color: rgba(0,0,0,0.1) !important;
+}
+.child-link-item:first-child { border-top-color: rgba(0,0,0,0.1) !important; }
+.child-link-item:hover { color: #4880B8 !important; }
+
+.child-link-email {
+  color: #6A7A8C !important;
+}
+
+.child-contact-note {
+  color: #4A5A6C !important;
+  border-left-color: #78A8D8 !important;
+}
+
+/* ============================================================
    Responsive
 ============================================================ */
 @media (max-width: 1300px) {
