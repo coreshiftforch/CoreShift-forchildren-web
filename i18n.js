@@ -51,6 +51,7 @@
       'child-events-h': 'イベント',
       /* ── Contact ── */
       'contact-link': 'お問い合わせ',
+      'contact-note': 'やってほしいイベントのご要望や、ご協力いただける個人・団体・企業の方は、お気軽にお問い合わせください。イベントの感想などは各SNSのDMからお願いします。',
       'contact-title': 'お問い合わせ',
       'contact-subject': '件名',
       'contact-subject-ph': '件名を入力してください',
@@ -112,6 +113,7 @@
       'child-events-h': 'Events',
       /* ── Contact ── */
       'contact-link': 'Contact Form',
+      'contact-note': 'If you have an event request or are an individual, organization, or company interested in supporting us, please feel free to get in touch. For event feedback, please reach out via DM on each SNS.',
       'contact-title': 'Contact',
       'contact-subject': 'Subject',
       'contact-subject-ph': 'Enter subject',

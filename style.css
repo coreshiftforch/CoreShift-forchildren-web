@@ -864,6 +864,16 @@ a.about-card:hover .about-card-arrow {
 
 .link-item:hover .link-arrow { opacity: 1; }
 
+.contact-note {
+  margin-top: 36px;
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 560px;
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+}
+
 .link-item--text {
   cursor: default;
 }
