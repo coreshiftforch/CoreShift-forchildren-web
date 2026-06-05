@@ -24,16 +24,19 @@ function navigateWithStrip(href) {
   }
 }
 
-// ===== 戻るボタン対策：ストリップが残っていたら即座にリセット =====
-window.addEventListener('pageshow', () => {
+// ===== 戻るボタン対策：ページを離れる前にオーバーレイをリセット =====
+// pagehide で BFCache に保存される前にリセットすることで、
+// 戻ったときにストリップ・ワイプが残らないようにする
+window.addEventListener('pagehide', () => {
   const strips = Array.from(document.querySelectorAll('.pt-strip'));
-  // pt-cover が残っている かつ 通常の遷移でない（ptStrip が null）場合にリセット
-  if (strips.some(s => s.classList.contains('pt-cover')) && !sessionStorage.getItem('ptStrip')) {
-    strips.forEach(s => {
-      s.style.transition = 'none';
-      s.classList.remove('pt-cover', 'pt-init', 'pt-reveal');
-    });
-    requestAnimationFrame(() => strips.forEach(s => { s.style.transition = ''; }));
+  strips.forEach(s => {
+    s.style.transition = 'none';
+    s.classList.remove('pt-cover', 'pt-init', 'pt-reveal');
+  });
+  const wipe = document.getElementById('printer-wipe');
+  if (wipe) {
+    wipe.style.transition = 'none';
+    wipe.classList.remove('pw-cover');
   }
 });
 
