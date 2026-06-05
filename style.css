@@ -864,6 +864,23 @@ a.about-card:hover .about-card-arrow {
 
 .link-item:hover .link-arrow { opacity: 1; }
 
+.link-item--text {
+  cursor: default;
+}
+
+.link-item--text:hover {
+  color: #fff;
+  padding-left: 0;
+}
+
+.link-email {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  user-select: all;
+}
+
 /* ============================================================
    Contact Page — 白背景・通常カーソル
 ============================================================ */
