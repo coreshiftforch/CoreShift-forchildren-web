@@ -865,6 +865,60 @@ a.about-card:hover .about-card-arrow {
 .link-item:hover .link-arrow { opacity: 1; }
 
 /* ============================================================
+   Contact Page — 白背景・通常カーソル
+============================================================ */
+body.contact-page {
+  background: #fff;
+  cursor: auto;
+}
+
+body.contact-page #cursor { display: none; }
+
+body.contact-page #header {
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid #e5e5e5;
+}
+
+body.contact-page #header.scrolled {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+}
+
+body.contact-page #header .logo { color: #111; }
+
+body.contact-page #side-nav a { color: #111; }
+body.contact-page .nav-sep { background: #111; }
+
+body.contact-page section h2 { color: #111; }
+
+body.contact-page .contact-section { background: #fff; }
+
+body.contact-page .form-group input,
+body.contact-page .form-group textarea {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-bottom: 1px solid rgba(59,130,246,0.4);
+  color: #111;
+}
+
+body.contact-page .form-group input::placeholder,
+body.contact-page .form-group textarea::placeholder { color: #aaa; }
+
+body.contact-page .form-group input:focus,
+body.contact-page .form-group textarea:focus {
+  background: #fff;
+  border-color: var(--accent);
+}
+
+body.contact-page footer {
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  color: #888;
+}
+
+body.contact-page .footer-logo { color: #111; }
+
+/* ============================================================
    Contact Form
 ============================================================ */
 .contact-section {
