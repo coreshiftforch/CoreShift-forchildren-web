@@ -1216,6 +1216,7 @@ footer {
   .tool-detail { grid-template-columns: 1fr; }
   .tool-detail-canvas-wrap { min-height: 300px; }
   .tool-detail-body { padding: 48px 20px; }
+  .tool-code-visual { padding-top: 110px; }
 
   .printer-textbox {
     right: 16px;
