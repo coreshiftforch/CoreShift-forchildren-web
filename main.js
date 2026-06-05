@@ -25,18 +25,35 @@ function navigateWithStrip(href) {
 }
 
 // ===== 戻るボタン対策：ページを離れる前にオーバーレイをリセット =====
-// pagehide で BFCache に保存される前にリセットすることで、
-// 戻ったときにストリップ・ワイプが残らないようにする
 window.addEventListener('pagehide', () => {
+  // 白ストリップをリセット
   const strips = Array.from(document.querySelectorAll('.pt-strip'));
   strips.forEach(s => {
     s.style.transition = 'none';
     s.classList.remove('pt-cover', 'pt-init', 'pt-reveal');
   });
+
+  // 対角ワイプをリセット
   const wipe = document.getElementById('printer-wipe');
   if (wipe) {
     wipe.style.transition = 'none';
     wipe.classList.remove('pw-cover');
+  }
+
+  // 3Dプリンターカードのズームアニメをリセット
+  if (_printerBg) {
+    _printerBg.remove();
+    _printerBg = null;
+  }
+  if (_printerCardOrigParent && printerCard) {
+    ['position','top','left','width','height','margin','zIndex',
+     'background','border','outline','transition','transform'].forEach(p => {
+      printerCard.style.removeProperty(p);
+    });
+    const label = printerCard.querySelector('.tool-card-name');
+    if (label) label.style.removeProperty('display');
+    _printerCardOrigParent.appendChild(printerCard);
+    _printerCardOrigParent = null;
   }
 });
 
@@ -97,6 +114,9 @@ if (ptOverlay) {
 }
 
 // ===== ページ遷移：カードズーム（3Dプリンター専用）=====
+let _printerBg = null;
+let _printerCardOrigParent = null;
+
 const printerCard = document.querySelector('[data-zoom-card]');
 if (printerCard) {
   printerCard.addEventListener('click', () => {
@@ -109,7 +129,7 @@ if (printerCard) {
     printerCard.style.border     = 'none';
     printerCard.style.outline    = 'none';
 
-    // 全画面黒背景
+    // 全画面黒背景（pagehide でリセットできるよう参照を保存）
     const bg = document.createElement('div');
     Object.assign(bg.style, {
       position   : 'fixed',
@@ -117,6 +137,8 @@ if (printerCard) {
       background : '#060606',
       zIndex     : '8000',
     });
+    _printerBg = bg;
+    _printerCardOrigParent = printerCard.parentElement;
     document.body.appendChild(bg);
 
     // カードを body 直下に移動（section の stacking context を脱出）
