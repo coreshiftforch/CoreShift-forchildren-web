@@ -24,17 +24,17 @@ function navigateWithStrip(href) {
   }
 }
 
-// ===== BFCache 復元時にストリップを即座に非表示 =====
-window.addEventListener('pageshow', (e) => {
-  if (!e.persisted) return;
+// ===== 戻るボタン対策：ストリップが残っていたら即座にリセット =====
+window.addEventListener('pageshow', () => {
   const strips = Array.from(document.querySelectorAll('.pt-strip'));
-  strips.forEach(s => {
-    s.style.transition = 'none';
-    s.classList.remove('pt-cover', 'pt-init', 'pt-reveal');
-  });
-  requestAnimationFrame(() => {
-    strips.forEach(s => { s.style.transition = ''; });
-  });
+  // pt-cover が残っている かつ 通常の遷移でない（ptStrip が null）場合にリセット
+  if (strips.some(s => s.classList.contains('pt-cover')) && !sessionStorage.getItem('ptStrip')) {
+    strips.forEach(s => {
+      s.style.transition = 'none';
+      s.classList.remove('pt-cover', 'pt-init', 'pt-reveal');
+    });
+    requestAnimationFrame(() => strips.forEach(s => { s.style.transition = ''; }));
+  }
 });
 
 // ===== ページ遷移：白ストリップ（AI / プログラミング） =====
