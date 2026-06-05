@@ -49,6 +49,16 @@
       'child-vision-p2': 'テクノロジーは怖いものでも難しいものでもなく、自分の可能性を広げるための道具です。そのことをできるだけ早い段階で子どもたちに知ってほしいと思っています。',
       'child-vision-p3': '私たち自身も18歳の学生として、まだ学びながら活動しています。完璧ではないからこそ、子どもたちと一緒に考え、一緒に挑戦できると信じています。',
       'child-events-h': 'イベント',
+      /* ── Contact ── */
+      'contact-title': 'お問い合わせ',
+      'contact-subject': '件名',
+      'contact-subject-ph': '件名を入力してください',
+      'contact-email': '返信用メールアドレス',
+      'contact-message': '内容',
+      'contact-message-ph': 'お問い合わせ内容を入力してください',
+      'contact-send': '送信',
+      'contact-success': 'お問い合わせありがとうございます。返信までしばらくお待ちください。',
+      'contact-error': '送信に失敗しました。しばらく後にもう一度お試しください。',
     },
     en: {
       /* ── Main: About ── */
@@ -99,6 +109,16 @@
       'child-vision-p2': 'Technology is not something scary or difficult — it\'s a tool to expand your possibilities. We want children to discover this as early as possible.',
       'child-vision-p3': 'We ourselves are 18-year-old students still learning as we go. Precisely because we are not perfect, we believe we can think and challenge ourselves together with the children.',
       'child-events-h': 'Events',
+      /* ── Contact ── */
+      'contact-title': 'Contact',
+      'contact-subject': 'Subject',
+      'contact-subject-ph': 'Enter subject',
+      'contact-email': 'Reply-to Email',
+      'contact-message': 'Message',
+      'contact-message-ph': 'Enter your message here',
+      'contact-send': 'Send',
+      'contact-success': 'Thank you for your message. We will get back to you shortly.',
+      'contact-error': 'Failed to send. Please try again later.',
     },
   };
 

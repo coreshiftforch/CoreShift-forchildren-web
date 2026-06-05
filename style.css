@@ -865,6 +865,92 @@ a.about-card:hover .about-card-arrow {
 .link-item:hover .link-arrow { opacity: 1; }
 
 /* ============================================================
+   Contact Form
+============================================================ */
+.contact-section {
+  min-height: 100vh;
+  padding-top: 160px;
+  background: var(--bg);
+}
+
+.form-group {
+  margin-bottom: 32px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-bottom: 1px solid rgba(59,130,246,0.25);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.1rem;
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+  background: rgba(59,130,246,0.04);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 200px;
+  line-height: 1.7;
+}
+
+.contact-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 18px 48px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s, gap 0.2s;
+}
+
+.contact-submit-btn:hover { background: #2563eb; gap: 18px; }
+.contact-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.form-notice {
+  margin-top: 32px;
+  padding: 24px 28px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.form-success-msg {
+  border: 1px solid var(--accent);
+  border-left: 3px solid var(--accent);
+  color: var(--accent2);
+}
+
+.form-error-msg {
+  border: 1px solid #ef4444;
+  border-left: 3px solid #ef4444;
+  color: #fca5a5;
+}
+
+/* ============================================================
    Footer
 ============================================================ */
 footer {

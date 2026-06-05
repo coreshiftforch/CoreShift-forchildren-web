@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — CoreShift</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
+  </header>
+
+  <nav id="side-nav">
+    <a href="../index.html#about">About</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#events">Event</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#support">Support Us</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html#sns">SNS</a>
+  </nav>
+
+  <section class="contact-section">
+    <div class="sec-body">
+      <div class="tool-detail-label">CONTACT</div>
+      <h2 data-i18n="contact-title">お問い合わせ</h2>
+
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="subject" data-i18n="contact-subject">件名</label>
+          <input type="text" id="subject" name="subject" required placeholder="件名を入力してください" data-i18n-placeholder="contact-subject-ph">
+        </div>
+        <div class="form-group">
+          <label for="email" data-i18n="contact-email">返信用メールアドレス</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="message" data-i18n="contact-message">内容</label>
+          <textarea id="message" name="message" required rows="8" placeholder="お問い合わせ内容を入力してください" data-i18n-placeholder="contact-message-ph"></textarea>
+        </div>
+        <button type="submit" class="contact-submit-btn">
+          <span class="btn-text" data-i18n="contact-send">送信</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <div id="form-success" class="form-notice form-success-msg" style="display:none">
+        <p data-i18n="contact-success">お問い合わせありがとうございます。返信までしばらくお待ちください。</p>
+      </div>
+      <div id="form-error" class="form-notice form-error-msg" style="display:none">
+        <p data-i18n="contact-error">送信に失敗しました。しばらく後にもう一度お試しください。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">CoreShift</span>
+    <span>&copy; 2025 CoreShift. All rights reserved.</span>
+  </footer>
+
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script src="../i18n.js"></script>
+  <script type="module" src="../main.js"></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = this.querySelector('.contact-submit-btn');
+      btn.disabled = true;
+
+      const data = new FormData(this);
+      try {
+        const res = await fetch('https://formspree.io/f/xeewoyew', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          this.style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        } else {
+          document.getElementById('form-error').style.display = 'block';
+          btn.disabled = false;
+        }
+      } catch {
+        document.getElementById('form-error').style.display = 'block';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
