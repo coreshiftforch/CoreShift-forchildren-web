@@ -50,6 +50,7 @@
       'child-vision-p3': '私たち自身も18歳の学生として、まだ学びながら活動しています。完璧ではないからこそ、子どもたちと一緒に考え、一緒に挑戦できると信じています。',
       'child-events-h': 'イベント',
       /* ── Contact ── */
+      'contact-link': 'お問い合わせ',
       'contact-title': 'お問い合わせ',
       'contact-subject': '件名',
       'contact-subject-ph': '件名を入力してください',
@@ -110,6 +111,7 @@
       'child-vision-p3': 'We ourselves are 18-year-old students still learning as we go. Precisely because we are not perfect, we believe we can think and challenge ourselves together with the children.',
       'child-events-h': 'Events',
       /* ── Contact ── */
+      'contact-link': 'Contact Form',
       'contact-title': 'Contact',
       'contact-subject': 'Subject',
       'contact-subject-ph': 'Enter subject',
