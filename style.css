@@ -876,6 +876,7 @@ a.about-card:hover .about-card-arrow {
 
 .link-item--text {
   cursor: default;
+  transition: none;
 }
 
 .link-item--text:hover {
