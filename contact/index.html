@@ -9,10 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="../icon/アイコン03.png" type="image/png">
   <link rel="stylesheet" href="../style.css">
+  <style>
+    html, body { background: #fff !important; cursor: auto !important; }
+    #cursor { display: none !important; }
+    #header { background: rgba(255,255,255,0.95) !important; border-bottom: 1px solid #e5e5e5; }
+    #header.scrolled { background: rgba(255,255,255,0.95) !important; backdrop-filter: blur(12px); }
+    #header .logo { color: #111 !important; }
+    #side-nav a { color: #444 !important; }
+    .nav-sep { background: #444 !important; }
+    footer { background: #fff !important; border-top: 1px solid #e5e5e5; color: #888 !important; }
+    .footer-logo { color: #111 !important; }
+  </style>
 </head>
 <body class="contact-page">
-
-  <div id="cursor"></div>
 
   <header id="header">
     <a class="logo" href="../index.html">CoreShift</a>
@@ -71,18 +80,14 @@
     <span>&copy; 2025 CoreShift. All rights reserved.</span>
   </footer>
 
-  <div id="page-transition">
-    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
-    <div class="pt-strip"></div><div class="pt-strip"></div>
-  </div>
-  <script>
-    if (sessionStorage.getItem('ptStrip') === '1') {
-      document.documentElement.setAttribute('data-pt-init', '');
-    }
-  </script>
   <script src="../i18n.js"></script>
-  <script type="module" src="../main.js"></script>
   <script>
+    // ヘッダースクロール
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // フォーム送信
     document.getElementById('contact-form').addEventListener('submit', async function (e) {
       e.preventDefault();
       const btn = this.querySelector('.contact-submit-btn');
