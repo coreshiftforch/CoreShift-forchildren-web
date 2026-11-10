@@ -124,11 +124,11 @@
     </div>
   </section>
 
-  <!-- 02 今行っている活動 -->
+  <!-- 02 現在行っている活動 -->
   <section id="activities" class="child-section child-section--mint">
     <div class="child-num">02</div>
     <div class="child-body">
-      <h2 class="reveal">今行っている活動</h2>
+      <h2 class="reveal">現在行っている活動</h2>
       <div class="child-text">
         <p class="reveal">気軽に参加できる体験型ワークショップから、より深く学ぶ探究型プログラム、家庭で取り組める教材開発まで、子どもたちがテクノロジーを使いこなす力を段階的に育んでいます。</p>
       </div>
@@ -367,8 +367,6 @@
 
     // ===== セクション単位のなめらかスクロール（遷移中は入力をブロック）=====
     (() => {
-      if (window.matchMedia('(max-width: 768px)').matches) return;
-
       const sections = Array.from(document.querySelectorAll('.hero-sky, .child-section, footer'));
       let isAnimating = false;
       let animRafId = null;
@@ -434,6 +432,7 @@
       }
 
       window.addEventListener('wheel', e => {
+        if (window.matchMedia('(max-width: 768px)').matches) return;
         e.preventDefault();
         if (isAnimating) return;
         if (Math.abs(e.deltaY) < 2) return; // 軽いスクロールでも即座に反応
@@ -445,6 +444,7 @@
 
       // キーボードの上下キー・PageUp/Down対応
       window.addEventListener('keydown', e => {
+        if (window.matchMedia('(max-width: 768px)').matches) return;
         if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
           e.preventDefault();
           if (isAnimating) return;

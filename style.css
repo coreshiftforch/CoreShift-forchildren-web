@@ -2244,16 +2244,67 @@ a.home-project-box:hover .about-card-arrow {
   .home-page #tools.home-sec {
     padding: 124px 18px 56px !important;
   }
+  .home-tools-grid .tool-card {
+    min-height: 140px;
+    height: 140px;
+  }
   .home-tools-grid .tool-card-img {
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+    height: 100%;
     aspect-ratio: auto;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .home-tools-grid .tool-card-img svg {
+    max-width: 90px;
+    max-height: 90px;
+    width: auto;
+    height: auto;
+  }
+  .home-tools-grid .tool-card-img--canvas {
+    padding: 0;
+  }
+  .home-tools-grid .tool-card-name {
+    font-size: 1.15rem;
+    padding: 0 18px;
+    height: 100%;
+    flex: 1;
   }
   .home-project-box {
-    padding: 22px 20px;
+    padding: 16px 18px;
+  }
+  .home-project-box .about-card-label {
+    margin-bottom: 8px;
+    font-size: 0.6rem;
   }
   .home-project-box .about-card-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
     gap: 8px;
+  }
+  .home-project-box h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0;
+  }
+  .home-project-box p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+  .home-project-cta {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .home-box-grid {
+    gap: 12px;
+    margin-top: 16px;
   }
   .home-row-head {
     padding: 16px 20px;

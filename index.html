@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=28">
+  <link rel="stylesheet" href="style.css?v=30">
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
   </script>
@@ -129,7 +129,7 @@
             <h3>企業協賛・継続連携のご案内</h3>
             <span class="home-project-cta">詳細を見る <span class="about-card-arrow">→</span></span>
           </div>
-          <p>活動資金のご協賛や、3Dプリンター機材・資材のご提供、継続的な教育連携をご検討いただける企業・団体様向けの案内ページです。</p>
+          <p>活動資金のご協賛、3Dプリンター機材・資材のご提供、教育連携をご検討いただける方向けのご案内です。</p>
         </a>
 
         <div class="about-card home-project-box home-project-box--soon reveal" style="margin-top:0;">
@@ -138,7 +138,7 @@
             <h3>クラウドファンディング</h3>
             <span class="home-project-cta home-project-cta--muted">近日公開予定</span>
           </div>
-          <p>より多くの子どもたちに安価で体験機会を届けるためのクラウドファンディングを現在準備しています。公開時は当サイトおよび各SNSでお知らせします。</p>
+          <p>多くの子どもたちに安価で体験を届けるためのクラファンを準備中です。公開時はサイト・SNSで告知します。</p>
         </div>
       </div>
     </div>
@@ -196,8 +196,6 @@
   <script>
     // ===== セクション単位のなめらかスクロール（for children と同じ仕様）=====
     (() => {
-      if (window.matchMedia('(max-width: 768px)').matches) return;
-
       const sections = Array.from(document.querySelectorAll('.home-sec, .home-sec-tools, footer'));
       let isAnimating = false;
       let animRafId = null;
@@ -260,6 +258,7 @@
       }
 
       window.addEventListener('wheel', e => {
+        if (window.matchMedia('(max-width: 768px)').matches) return;
         e.preventDefault();
         if (isAnimating) return;
         if (Math.abs(e.deltaY) < 2) return;
@@ -270,6 +269,7 @@
       }, { passive: false });
 
       window.addEventListener('keydown', e => {
+        if (window.matchMedia('(max-width: 768px)').matches) return;
         if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
           e.preventDefault();
           if (isAnimating) return;

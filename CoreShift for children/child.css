@@ -1535,6 +1535,59 @@ body {
   animation: accSlideDown 0.25s ease-out;
 }
 
+/* STEP + 画像の縦並び・横並びペアスタイル */
+.act-step-pairs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.act-step-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.act-step-pair .act-compact-card {
+  margin: 0;
+  flex: 1;
+}
+
+.act-step-figure {
+  margin: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.act-step-figure img {
+  width: 100%;
+  height: 120px !important;
+  object-fit: cover;
+  display: block;
+}
+
+.act-step-figure figcaption {
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  color: #4A5568;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .act-step-pairs {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .act-step-figure img {
+    height: 160px !important;
+  }
+}
+
 .act-compact-grid {
   gap: 14px;
 }
