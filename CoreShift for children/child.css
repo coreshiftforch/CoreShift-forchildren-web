@@ -1993,3 +1993,16 @@ footer {
     padding: 28px 18px;
   }
 }
+
+/* Report/sub pages: JP / EN switch placed before the back button */
+.report-page #header .lang-switch {
+  margin-left: auto;
+  margin-right: 16px;
+  font-size: 1rem;
+}
+@media (max-width: 768px) {
+  .report-page #header .lang-switch {
+    font-size: 0.8rem;
+    margin-right: 8px;
+  }
+}

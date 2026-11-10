@@ -11,13 +11,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="../../icon/アイコン03.png" type="image/png">
   <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="../child.css?v=36">
+  <link rel="stylesheet" href="../child.css?v=37">
 </head>
 <body class="report-page">
 
   <header id="header" class="scrolled">
     <a class="logo" href="../index.html">CoreShift</a>
-    <a href="../index.html#activities" class="report-back-btn">← プロジェクトページへ戻る</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
+    <a href="../index.html#activities" class="report-back-btn" data-i18n="fa-001">← プロジェクトページへ戻る</a>
   </header>
 
   <!-- ヒーローヘッダー -->
@@ -26,20 +31,20 @@
       <div class="rp-breadcrumb">
         <a href="../index.html">CoreShift for children</a>
         <span>/</span>
-        <a href="../index.html#activities">現在行っている活動</a>
+        <a href="../index.html#activities" data-i18n="fa-002">現在行っている活動</a>
         <span>/</span>
-        <span>活動内容の詳細</span>
+        <span data-i18n="fa-003">活動内容の詳細</span>
       </div>
       <div class="rp-meta">
         <span class="rp-badge rp-badge--mint">OUR ACTIVITIES</span>
       </div>
-      <h1 class="rp-title">CoreShift for children の活動内容</h1>
-      <p class="rp-subtitle">〜 「はじめての体験」から「深い探究」、そして「家庭での学び」へ 〜</p>
+      <h1 class="rp-title" data-i18n="fa-004">CoreShift for children の活動内容</h1>
+      <p class="rp-subtitle" data-i18n="fa-005">〜 「はじめての体験」から「深い探究」、そして「家庭での学び」へ 〜</p>
 
       <div class="rp-tags">
-        <a href="#workshop" class="rp-tag-link">01. 体験型ワークショップ ↓</a>
-        <a href="#program" class="rp-tag-link">02. 探究型プログラム ↓</a>
-        <a href="#kit" class="rp-tag-link">03. 自由研究・教材キット開発 ↓</a>
+        <a href="#workshop" class="rp-tag-link" data-i18n="fa-006">01. 体験型ワークショップ ↓</a>
+        <a href="#program" class="rp-tag-link" data-i18n="fa-007">02. 探究型プログラム ↓</a>
+        <a href="#kit" class="rp-tag-link" data-i18n="fa-008">03. 自由研究・教材キット開発 ↓</a>
       </div>
     </div>
   </section>
@@ -48,9 +53,9 @@
 
     <!-- 全体像の導入カード -->
     <section class="rp-overview-card">
-      <span class="rp-ov-label" style="color:#15803D;">LEARNING DESIGN ／ 3つの活動のつながり</span>
-      <h3 style="font-size:1.4rem; font-weight:800; color:#1E2432; margin-bottom:12px;">きっかけづくりで終わらせず、自ら創り出す力へつなげる</h3>
-      <p style="font-size:0.98rem; line-height:1.85; color:#4A5568; margin:0;">
+      <span class="rp-ov-label" style="color:#15803D;" data-i18n="fa-009">LEARNING DESIGN ／ 3つの活動のつながり</span>
+      <h3 style="font-size:1.4rem; font-weight:800; color:#1E2432; margin-bottom:12px;" data-i18n="fa-010">きっかけづくりで終わらせず、自ら創り出す力へつなげる</h3>
+      <p style="font-size:0.98rem; line-height:1.85; color:#4A5568; margin:0;" data-i18n-html="fa-011">
         CoreShift for childrenでは、まずテクノロジーの楽しさに触れる「<strong>体験型ワークショップ</strong>」、そこから一歩踏み込んで知識と技能を身につけながら自分のアイデアを形にする「<strong>探究型プログラム</strong>」、さらに場所を選ばず家庭でも取り組める「<strong>自由研究・教材キット開発</strong>」の3つの柱で活動を展開しています。
       </p>
     </section>
@@ -62,8 +67,8 @@
           <span class="rp-step-num" style="background:linear-gradient(135deg,#10B981,#059669);">ACTIVITY 01</span>
           <div>
             <span class="act-sub-en">HANDS-ON WORKSHOP</span>
-            <h3>体験型ワークショップ</h3>
-            <p>地域の公民館・学校・イベント会場などに3Dプリンターやデジタル機材を持ち込み、子どもたちが「自分でデザインしたものが目の前で形になる」感動を体験する単発型のワークショップです。下の各プログラムを押すと詳細が開きます。</p>
+            <h3 data-i18n="fa-012">体験型ワークショップ</h3>
+            <p data-i18n="fa-013">地域の公民館・学校・イベント会場などに3Dプリンターやデジタル機材を持ち込み、子どもたちが「自分でデザインしたものが目の前で形になる」感動を体験する単発型のワークショップです。下の各プログラムを押すと詳細が開きます。</p>
           </div>
         </div>
 
@@ -72,12 +77,12 @@
           <details class="act-acc act-acc--mint">
             <summary class="act-acc-summary">
               <div class="act-acc-title-wrap">
-                <span class="act-concrete-badge">WORKSHOP MENU 01 ／ 代表的なプログラム</span>
-                <h4>専用Webアプリ×3Dプリンター「オリジナルネームプレート制作」</h4>
-                <p>小学生が自分の手で3Dデータをつくり、その場で立体物として出力されるプロセスを一貫して体験できるワークショップ</p>
+                <span class="act-concrete-badge" data-i18n="fa-014">WORKSHOP MENU 01 ／ 代表的なプログラム</span>
+                <h4 data-i18n="fa-015">専用Webアプリ×3Dプリンター「オリジナルネームプレート制作」</h4>
+                <p data-i18n="fa-016">小学生が自分の手で3Dデータをつくり、その場で立体物として出力されるプロセスを一貫して体験できるワークショップ</p>
               </div>
               <span class="act-acc-toggle">
-                <span class="act-acc-toggle-label">詳細</span>
+                <span class="act-acc-toggle-label" data-i18n="fa-017">詳細</span>
                 <span class="act-acc-arrow">▼</span>
               </span>
             </summary>
@@ -86,51 +91,51 @@
                 <!-- STEP 1 -->
                 <div class="act-step-pair">
                   <div class="rp-bp-card act-compact-card">
-                    <div class="rp-bp-badge">STEP 1 ／ スマホ・タブレットで設計</div>
-                    <h4 class="act-box-title">独自Webアプリで直感デザイン</h4>
-                    <p>子ども向けWebアプリを使い、文字やプレートの形・サイズを画面上で調整して自分の3Dデータを完成させます。</p>
+                    <div class="rp-bp-badge" data-i18n="fa-018">STEP 1 ／ スマホ・タブレットで設計</div>
+                    <h4 class="act-box-title" data-i18n="fa-019">独自Webアプリで直感デザイン</h4>
+                    <p data-i18n="fa-020">子ども向けWebアプリを使い、文字やプレートの形・サイズを画面上で調整して自分の3Dデータを完成させます。</p>
                   </div>
                   <figure class="rp-figure act-step-figure">
-                    <img src="../photos/event01_takamiya/S__2965521_0.jpg" alt="専用Webアプリでネームプレートをデザインする様子" loading="lazy">
-                    <figcaption>スマホから専用Webアプリで3Dデザイン</figcaption>
+                    <img src="../photos/event01_takamiya/S__2965521_0.jpg" data-i18n-alt="fa-077" alt="専用Webアプリでネームプレートをデザインする様子" loading="lazy">
+                    <figcaption data-i18n="fa-021">スマホから専用Webアプリで3Dデザイン</figcaption>
                   </figure>
                 </div>
 
                 <!-- STEP 2 -->
                 <div class="act-step-pair">
                   <div class="rp-bp-card act-compact-card">
-                    <div class="rp-bp-badge">STEP 2 ／ 3Dプリンターで出力</div>
-                    <h4 class="act-box-title">1層ずつ形になる様子を観察</h4>
-                    <p>溶けた樹脂が0.2mm単位で積み重なり、画面の中のデータが目の前で実物に変わる瞬間を間近で観察します。</p>
+                    <div class="rp-bp-badge" data-i18n="fa-022">STEP 2 ／ 3Dプリンターで出力</div>
+                    <h4 class="act-box-title" data-i18n="fa-023">1層ずつ形になる様子を観察</h4>
+                    <p data-i18n="fa-024">溶けた樹脂が0.2mm単位で積み重なり、画面の中のデータが目の前で実物に変わる瞬間を間近で観察します。</p>
                   </div>
                   <figure class="rp-figure act-step-figure">
-                    <img src="../photos/event01_takamiya/S__2965518_0.jpg" alt="3Dプリンターの造形を観察する子どもたち" loading="lazy">
-                    <figcaption>3Dプリンターが積層していく様子を間近で観察</figcaption>
+                    <img src="../photos/event01_takamiya/S__2965518_0.jpg" data-i18n-alt="fa-078" alt="3Dプリンターの造形を観察する子どもたち" loading="lazy">
+                    <figcaption data-i18n="fa-025">3Dプリンターが積層していく様子を間近で観察</figcaption>
                   </figure>
                 </div>
 
                 <!-- STEP 3 -->
                 <div class="act-step-pair">
                   <div class="rp-bp-card act-compact-card">
-                    <div class="rp-bp-badge">STEP 3 ／ 仕上げ・持ち帰り</div>
-                    <h4 class="act-box-title">世界に一つだけのプレートが完成</h4>
-                    <p>出力された自分のプレートを手に取り、積層ピッチの質感や立体構造を確かめて、キーホルダー等として持ち帰ります。</p>
+                    <div class="rp-bp-badge" data-i18n="fa-026">STEP 3 ／ 仕上げ・持ち帰り</div>
+                    <h4 class="act-box-title" data-i18n="fa-027">世界に一つだけのプレートが完成</h4>
+                    <p data-i18n="fa-028">出力された自分のプレートを手に取り、積層ピッチの質感や立体構造を確かめて、キーホルダー等として持ち帰ります。</p>
                   </div>
                   <figure class="rp-figure act-step-figure">
-                    <img src="../photos/event01_takamiya/S__2965527_0.jpg" alt="出力されたオリジナルネームプレート" loading="lazy">
-                    <figcaption>自分でデザインし出力されたネームプレート</figcaption>
+                    <img src="../photos/event01_takamiya/S__2965527_0.jpg" data-i18n-alt="fa-079" alt="出力されたオリジナルネームプレート" loading="lazy">
+                    <figcaption data-i18n="fa-029">自分でデザインし出力されたネームプレート</figcaption>
                   </figure>
                 </div>
               </div>
 
               <div class="act-demo-cta">
                 <div>
-                  <strong>🪪 Web上で「なまえプレート」の3Dデザインを体験できます！</strong>
-                  <span>インストール不要で自由にデザインできる「Web体験デモ」と、ワークショップ当日用の「会場参加モード（要あいことば）」があります</span>
+                  <strong data-i18n="fa-030">🪪 Web上で「なまえプレート」の3Dデザインを体験できます！</strong>
+                  <span data-i18n="fa-031">インストール不要で自由にデザインできる「Web体験デモ」と、ワークショップ当日用の「会場参加モード（要あいことば）」があります</span>
                 </div>
                 <div class="act-demo-btns">
-                  <a href="../nameplate-demo/" class="ach-btn ach-btn--mint">Web体験デモを触ってみる →</a>
-                  <a href="../nameplate-demo/?mode=event" class="ach-btn ach-btn--event">🔒 イベント会場用（あいことば）</a>
+                  <a href="../nameplate-demo/" class="ach-btn ach-btn--mint" data-i18n="fa-032">Web体験デモを触ってみる →</a>
+                  <a href="../nameplate-demo/?mode=event" class="ach-btn ach-btn--event" data-i18n="fa-033">🔒 イベント会場用（あいことば）</a>
                 </div>
               </div>
             </div>
@@ -140,26 +145,26 @@
           <details class="act-acc act-acc--mint">
             <summary class="act-acc-summary">
               <div class="act-acc-title-wrap">
-                <span class="act-concrete-badge">WORKSHOP MENU 02 ／ 季節・イベント企画</span>
-                <h4>季節に合わせたオリジナル小物づくり（クリスマスツリーの飾りなど）</h4>
-                <p>クリスマスオーナメントやハロウィン、新学期のアイテムなど、季節のイベントに合わせた立体小物を3Dプリンターでつくるワークショップ</p>
+                <span class="act-concrete-badge" data-i18n="fa-034">WORKSHOP MENU 02 ／ 季節・イベント企画</span>
+                <h4 data-i18n="fa-035">季節に合わせたオリジナル小物づくり（クリスマスツリーの飾りなど）</h4>
+                <p data-i18n="fa-036">クリスマスオーナメントやハロウィン、新学期のアイテムなど、季節のイベントに合わせた立体小物を3Dプリンターでつくるワークショップ</p>
               </div>
               <span class="act-acc-toggle">
-                <span class="act-acc-toggle-label">詳細</span>
+                <span class="act-acc-toggle-label" data-i18n="fa-017">詳細</span>
                 <span class="act-acc-arrow">▼</span>
               </span>
             </summary>
             <div class="act-acc-body">
               <div class="rp-blueprint-grid act-compact-grid">
                 <div class="rp-bp-card act-compact-card">
-                  <div class="rp-bp-badge">POINT 01 ／ 季節のモチーフを3Dでデザイン</div>
-                  <h4 class="act-box-title">ツリー飾りや季節のモチーフを自分好みに</h4>
-                  <p>雪の結晶や星、クリスマスツリーのオーナメントなど、季節ごとのテーマに合わせて形や模様、文字を組み合わせ、自分だけの小物をデザインします。</p>
+                  <div class="rp-bp-badge" data-i18n="fa-037">POINT 01 ／ 季節のモチーフを3Dでデザイン</div>
+                  <h4 class="act-box-title" data-i18n="fa-038">ツリー飾りや季節のモチーフを自分好みに</h4>
+                  <p data-i18n="fa-039">雪の結晶や星、クリスマスツリーのオーナメントなど、季節ごとのテーマに合わせて形や模様、文字を組み合わせ、自分だけの小物をデザインします。</p>
                 </div>
                 <div class="rp-bp-card act-compact-card">
-                  <div class="rp-bp-badge">POINT 02 ／ デジタル造形×デコレーション</div>
-                  <h4 class="act-box-title">色塗りや飾りつけで世界に一つの作品へ</h4>
-                  <p>3Dプリンターで出力した立体パーツにペンで色を塗ったり、リボンや紐を通したりして仕上げ、家に持ち帰ってすぐに飾れる作品をつくります。</p>
+                  <div class="rp-bp-badge" data-i18n="fa-040">POINT 02 ／ デジタル造形×デコレーション</div>
+                  <h4 class="act-box-title" data-i18n="fa-041">色塗りや飾りつけで世界に一つの作品へ</h4>
+                  <p data-i18n="fa-042">3Dプリンターで出力した立体パーツにペンで色を塗ったり、リボンや紐を通したりして仕上げ、家に持ち帰ってすぐに飾れる作品をつくります。</p>
                 </div>
               </div>
             </div>
@@ -168,10 +173,10 @@
 
         <div class="act-example-bar">
           <div>
-            <strong>開催実績：高宮公民館「3Dプリンター体験会」</strong>
-            <span>小学生と保護者を対象に、オリジナルネームプレート制作ワークショップを実施しました</span>
+            <strong data-i18n="fa-043">開催実績：高宮公民館「3Dプリンター体験会」</strong>
+            <span data-i18n="fa-044">小学生と保護者を対象に、オリジナルネームプレート制作ワークショップを実施しました</span>
           </div>
-          <a href="../event01_takamiya/" class="ach-btn" style="padding:8px 18px; font-size:0.84rem;">体験会レポートを見る →</a>
+          <a href="../event01_takamiya/" class="ach-btn" style="padding:8px 18px; font-size:0.84rem;" data-i18n="fa-045">体験会レポートを見る →</a>
         </div>
       </div>
     </section>
@@ -183,26 +188,26 @@
           <span class="rp-step-num" style="background:linear-gradient(135deg,#3B82F6,#2563EB);">ACTIVITY 02</span>
           <div>
             <span class="act-sub-en">INQUIRY-BASED PROGRAM</span>
-            <h3>探究型プログラム</h3>
-            <p>1回きりの体験にとどまらず、AI・プログラミング・3Dモデリングなどの基礎的な知識や技能を段階的に学びながら、自らテーマや課題を設定し、試行錯誤して作品を創り上げるプログラムです。</p>
+            <h3 data-i18n="fa-046">探究型プログラム</h3>
+            <p data-i18n="fa-047">1回きりの体験にとどまらず、AI・プログラミング・3Dモデリングなどの基礎的な知識や技能を段階的に学びながら、自らテーマや課題を設定し、試行錯誤して作品を創り上げるプログラムです。</p>
           </div>
         </div>
 
         <div class="sp-ways-grid act-compact-grid">
           <div class="rp-bp-card act-compact-card">
-            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;">SKILL 01 ／ 3Dモデリング</div>
-            <h4 class="act-box-title">立体を設計し形にする力</h4>
-            <p>頭の中のイメージを立体データとして設計し、3Dプリンターで出力して検証。うまく動かない原因を観察し、形を改良するサイクルを学びます。</p>
+            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;" data-i18n="fa-048">SKILL 01 ／ 3Dモデリング</div>
+            <h4 class="act-box-title" data-i18n="fa-049">立体を設計し形にする力</h4>
+            <p data-i18n="fa-050">頭の中のイメージを立体データとして設計し、3Dプリンターで出力して検証。うまく動かない原因を観察し、形を改良するサイクルを学びます。</p>
           </div>
           <div class="rp-bp-card act-compact-card">
-            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;">SKILL 02 ／ AI活用</div>
-            <h4 class="act-box-title">AIを「相棒」として使いこなす</h4>
-            <p>AIをただ答えを聞く道具にするのではなく、アイデアを広げたり分からないことを調べたりするための「思考のパートナー」として活用する方法を学びます。</p>
+            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;" data-i18n="fa-051">SKILL 02 ／ AI活用</div>
+            <h4 class="act-box-title" data-i18n="fa-052">AIを「相棒」として使いこなす</h4>
+            <p data-i18n="fa-053">AIをただ答えを聞く道具にするのではなく、アイデアを広げたり分からないことを調べたりするための「思考のパートナー」として活用する方法を学びます。</p>
           </div>
           <div class="rp-bp-card act-compact-card">
-            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;">SKILL 03 ／ プログラミング</div>
-            <h4 class="act-box-title">論理的に組み立てて動かす</h4>
-            <p>「どうすれば思い通りに動くか」を筋道立てて考え、コードやブロックとして表現し、エラーを直しながら完成させる問題解決力を養います。</p>
+            <div class="rp-bp-badge" style="background:#DBEAFE; color:#1D4ED8;" data-i18n="fa-054">SKILL 03 ／ プログラミング</div>
+            <h4 class="act-box-title" data-i18n="fa-055">論理的に組み立てて動かす</h4>
+            <p data-i18n="fa-056">「どうすれば思い通りに動くか」を筋道立てて考え、コードやブロックとして表現し、エラーを直しながら完成させる問題解決力を養います。</p>
           </div>
         </div>
       </div>
@@ -214,9 +219,9 @@
         <div class="rp-step-head">
           <span class="rp-step-num" style="background:linear-gradient(135deg,#F59E0B,#D97706);">ACTIVITY 03</span>
           <div>
-            <span class="act-sub-en" style="color:#B45309;">IN DEVELOPMENT ／ 現在開発中</span>
-            <h3>自由研究・教材キット開発</h3>
-            <p>ワークショップ会場に足を運べない子どもたちも自宅で体験型学習に取り組めるよう、「解説動画」「3Dプリント組み立てキット」「まとめ方のワークシート」をセットにした自由研究教材を現在開発しています。</p>
+            <span class="act-sub-en" style="color:#B45309;" data-i18n="fa-057">IN DEVELOPMENT ／ 現在開発中</span>
+            <h3 data-i18n="fa-058">自由研究・教材キット開発</h3>
+            <p data-i18n="fa-059">ワークショップ会場に足を運べない子どもたちも自宅で体験型学習に取り組めるよう、「解説動画」「3Dプリント組み立てキット」「まとめ方のワークシート」をセットにした自由研究教材を現在開発しています。</p>
           </div>
         </div>
 
@@ -225,50 +230,50 @@
           <details class="act-acc act-acc--amber">
             <summary class="act-acc-summary">
               <div class="act-acc-title-wrap">
-                <span class="act-concrete-badge act-concrete-badge--amber">KIT THEME 01 ／ 開発中の教材キット</span>
-                <h4>3Dプリントで動く仕組みを実験する「からくりおもちゃ」キット</h4>
-                <p>ハンドルを回すと離れた部品が回ったり上下したりする「からくり機構（歯車・カム・クランク）」を組み立てて確かめる自由研究キット</p>
+                <span class="act-concrete-badge act-concrete-badge--amber" data-i18n="fa-060">KIT THEME 01 ／ 開発中の教材キット</span>
+                <h4 data-i18n="fa-061">3Dプリントで動く仕組みを実験する「からくりおもちゃ」キット</h4>
+                <p data-i18n="fa-062">ハンドルを回すと離れた部品が回ったり上下したりする「からくり機構（歯車・カム・クランク）」を組み立てて確かめる自由研究キット</p>
               </div>
               <span class="act-acc-toggle act-acc-toggle--amber">
-                <span class="act-acc-toggle-label">詳細</span>
+                <span class="act-acc-toggle-label" data-i18n="fa-017">詳細</span>
                 <span class="act-acc-arrow">▼</span>
               </span>
             </summary>
             <div class="act-acc-body">
               <div class="sp-ways-grid act-compact-grid">
                 <div class="rp-bp-card act-compact-card">
-                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;">STEP 1 ／ 動画で予想する</div>
-                  <h4 class="act-box-title">仕組みを知り、動きを予想</h4>
-                  <p>歯数比やカム・クランクの仕組みを解説動画で確認し、「ハンドル1回転で先の部品は何回まわるか？」を組み立て前に予想します。</p>
+                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;" data-i18n="fa-063">STEP 1 ／ 動画で予想する</div>
+                  <h4 class="act-box-title" data-i18n="fa-064">仕組みを知り、動きを予想</h4>
+                  <p data-i18n="fa-065">歯数比やカム・クランクの仕組みを解説動画で確認し、「ハンドル1回転で先の部品は何回まわるか？」を組み立て前に予想します。</p>
                 </div>
                 <div class="rp-bp-card act-compact-card">
-                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;">STEP 2 ／ 組み立てて実験</div>
-                  <h4 class="act-box-title">3Dプリントパーツで検証・彩色</h4>
-                  <p>観覧車・メリーゴーランド・お魚などのパーツを組み立てて回転の向きや速さを実験し、ペンで自由に色塗りして仕上げます。</p>
+                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;" data-i18n="fa-066">STEP 2 ／ 組み立てて実験</div>
+                  <h4 class="act-box-title" data-i18n="fa-067">3Dプリントパーツで検証・彩色</h4>
+                  <p data-i18n="fa-068">観覧車・メリーゴーランド・お魚などのパーツを組み立てて回転の向きや速さを実験し、ペンで自由に色塗りして仕上げます。</p>
                 </div>
                 <div class="rp-bp-card act-compact-card">
-                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;">STEP 3 ／ 自由研究にまとめる</div>
-                  <h4 class="act-box-title">「予想→実験→発見」を記録</h4>
-                  <p>「きっかけ・予想・実験結果・わかったこと」を整理できるガイドに沿って、学校の自由研究として提出できるレポートにまとめます。</p>
+                  <div class="rp-bp-badge" style="background:#FEF3C7; color:#B45309;" data-i18n="fa-069">STEP 3 ／ 自由研究にまとめる</div>
+                  <h4 class="act-box-title" data-i18n="fa-070">「予想→実験→発見」を記録</h4>
+                  <p data-i18n="fa-071">「きっかけ・予想・実験結果・わかったこと」を整理できるガイドに沿って、学校の自由研究として提出できるレポートにまとめます。</p>
                 </div>
               </div>
 
               <div class="rp-photo-grid rp-photo-grid--4 act-compact-photos">
                 <figure class="rp-figure rp-figure--contain">
-                  <img src="../photos/event01_takamiya/S__2965510_0.jpg" alt="観覧車のからくりモデル" loading="lazy">
-                  <figcaption>MODEL A：観覧車（歯車の噛み合わせ）</figcaption>
+                  <img src="../photos/event01_takamiya/S__2965510_0.jpg" data-i18n-alt="fa-080" alt="観覧車のからくりモデル" loading="lazy">
+                  <figcaption data-i18n="fa-072">MODEL A：観覧車（歯車の噛み合わせ）</figcaption>
                 </figure>
                 <figure class="rp-figure rp-figure--contain">
-                  <img src="../photos/event01_takamiya/S__2965512_0.jpg" alt="メリーゴーランドのからくりモデル" loading="lazy">
-                  <figcaption>MODEL B：メリーゴーランド（縦横の回転変換）</figcaption>
+                  <img src="../photos/event01_takamiya/S__2965512_0.jpg" data-i18n-alt="fa-081" alt="メリーゴーランドのからくりモデル" loading="lazy">
+                  <figcaption data-i18n="fa-073">MODEL B：メリーゴーランド（縦横の回転変換）</figcaption>
                 </figure>
                 <figure class="rp-figure rp-figure--contain">
-                  <img src="../photos/event01_takamiya/S__2965507_0.jpg" alt="歯車と鳥のからくりモデル" loading="lazy">
-                  <figcaption>MODEL C：歯車と鳥（大小ギアの速度比）</figcaption>
+                  <img src="../photos/event01_takamiya/S__2965507_0.jpg" data-i18n-alt="fa-082" alt="歯車と鳥のからくりモデル" loading="lazy">
+                  <figcaption data-i18n="fa-074">MODEL C：歯車と鳥（大小ギアの速度比）</figcaption>
                 </figure>
                 <figure class="rp-figure rp-figure--contain">
-                  <img src="../photos/event01_takamiya/S__2965511_0.jpg" alt="お魚のクランク機構モデル" loading="lazy">
-                  <figcaption>MODEL D：お魚（クランクと往復運動）</figcaption>
+                  <img src="../photos/event01_takamiya/S__2965511_0.jpg" data-i18n-alt="fa-083" alt="お魚のクランク機構モデル" loading="lazy">
+                  <figcaption data-i18n="fa-075">MODEL D：お魚（クランクと往復運動）</figcaption>
                 </figure>
               </div>
             </div>
@@ -278,7 +283,7 @@
     </section>
 
     <div class="report-footer-nav" style="margin-top:48px;">
-      <a href="../index.html#activities" class="report-btn-back">← CoreShift for children ページへ戻る</a>
+      <a href="../index.html#activities" class="report-btn-back" data-i18n="fa-076">← CoreShift for children ページへ戻る</a>
     </div>
 
   </main>
@@ -324,5 +329,6 @@
       }
     })();
   </script>
+  <script src="../../i18n.js?v=2"></script>
 </body>
 </html>
