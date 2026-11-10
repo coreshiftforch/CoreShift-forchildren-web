@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>からくりおもちゃ — つくる自由研究 | CoreShift</title>
+  <meta name="description" content="歯車・カム・クランクで動くからくりおもちゃを組み立てて、動きの仕組みを調べる自由研究。3Dプリンターで作ったパーツのキットと解説動画で、小学生から取り組めます。">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="からくりおもちゃ — つくる自由研究 | CoreShift">
+  <meta property="og:description" content="回すと動く。その理由を、自分の手で確かめる自由研究。">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="res-page">
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
+  </header>
+
+  <nav id="side-nav">
+    <a href="#kr-how">Mechanism</a>
+    <span class="nav-sep"></span>
+    <a href="#kr-make">Make</a>
+    <span class="nav-sep"></span>
+    <a href="#kr-report">Report</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html">Home</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="res-hero res-hero--sub">
+    <div class="res-hero-gears" aria-hidden="true">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <g class="gear gear--a">
+          <circle cx="0" cy="0" r="74" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <circle cx="0" cy="0" r="18" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <g stroke="#3b82f6" stroke-width="2">
+            <path d="M0 -74 L0 -90"/><path d="M37 -64 L45 -78"/><path d="M64 -37 L78 -45"/>
+            <path d="M74 0 L90 0"/><path d="M64 37 L78 45"/><path d="M37 64 L45 78"/>
+            <path d="M0 74 L0 90"/><path d="M-37 64 L-45 78"/><path d="M-64 37 L-78 45"/>
+            <path d="M-74 0 L-90 0"/><path d="M-64 -37 L-78 -45"/><path d="M-37 -64 L-45 -78"/>
+          </g>
+        </g>
+        <g class="gear gear--b">
+          <circle cx="0" cy="0" r="48" fill="none" stroke="#93c5fd" stroke-width="2"/>
+          <circle cx="0" cy="0" r="12" fill="none" stroke="#93c5fd" stroke-width="2"/>
+          <g stroke="#93c5fd" stroke-width="2">
+            <path d="M0 -48 L0 -61"/><path d="M34 -34 L43 -43"/><path d="M48 0 L61 0"/>
+            <path d="M34 34 L43 43"/><path d="M0 48 L0 61"/><path d="M-34 34 L-43 43"/>
+            <path d="M-48 0 L-61 0"/><path d="M-34 -34 L-43 -43"/>
+          </g>
+        </g>
+        <g class="gear gear--c">
+          <circle cx="0" cy="0" r="30" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <circle cx="0" cy="0" r="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <g stroke="#3b82f6" stroke-width="2">
+            <path d="M0 -30 L0 -41"/><path d="M21 -21 L29 -29"/><path d="M30 0 L41 0"/>
+            <path d="M21 21 L29 29"/><path d="M0 30 L0 41"/><path d="M-21 21 L-29 29"/>
+            <path d="M-30 0 L-41 0"/><path d="M-21 -21 L-29 -29"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="res-hero-body">
+      <div class="res-hero-label" data-i18n="kr-label">THEME 01 ／ からくりおもちゃ</div>
+      <h1 class="res-hero-title" data-i18n-html="kr-title">回すと動く。<br>その理由を調べる。</h1>
+      <p class="res-hero-lead" data-i18n-html="kr-lead">ハンドルを回すと、離れたところの部品が上下したり、回ったりする。<br>その「伝わり方」を、組み立てながら確かめる自由研究です。</p>
+    </div>
+
+    <span class="res-hero-hint">Scroll ↓</span>
+  </section>
+
+  <!-- ============ 01 しくみ ============ -->
+  <section id="kr-how" class="white-section">
+    <div class="sec-num">01</div>
+    <div class="sec-body res-wide">
+      <h2 class="reveal" data-i18n="kr-how-h">しくみ</h2>
+      <p class="res-sec-lead reveal" data-i18n="kr-how-lead">からくりおもちゃの動きは、たいてい次の3つの部品の組み合わせでできています。どれも身のまわりの機械に使われているものです。</p>
+
+      <div class="res-steps">
+        <div class="res-step reveal">
+          <div class="res-step-num" data-i18n="kr-part1-label">歯車（ギア）</div>
+          <h3 data-i18n="kr-part1-h">速さと向きを変える</h3>
+          <p data-i18n="kr-part1-p">かみ合った歯車は、たがいに逆向きに回ります。歯の数が違うと回る速さも変わります。大きい歯車から小さい歯車へ伝えると速く、逆にすると遅く、そのかわり力が強くなります。</p>
+        </div>
+        <div class="res-step reveal">
+          <div class="res-step-num" data-i18n="kr-part2-label">カム</div>
+          <h3 data-i18n="kr-part2-h">回転を上下に変える</h3>
+          <p data-i18n="kr-part2-p">軸に取り付けた丸くない部品がカムです。回転すると、その上にのった棒が押し上げられたり下がったりします。回り続ける動きを、くり返す上下の動きに変える部品です。</p>
+        </div>
+        <div class="res-step reveal">
+          <div class="res-step-num" data-i18n="kr-part3-label">クランク</div>
+          <h3 data-i18n="kr-part3-h">回転を往復に変える</h3>
+          <p data-i18n="kr-part3-p">軸から少しずらした場所に棒をつなぐと、回転が行ったり来たりの往復運動になります。自転車のペダルや電車の車輪と同じ考え方です。</p>
+        </div>
+      </div>
+
+      <div class="kr-note reveal">
+        <div class="kr-note-label" data-i18n="kr-note-label">調べるポイント</div>
+        <ul>
+          <li data-i18n="kr-note-1">歯の数を数えて、ハンドルを1回まわすと先の部品が何回まわるか予想してから、実際に数えてみる。</li>
+          <li data-i18n="kr-note-2">動きが重いとき・止まるときは、どこが当たっているのかを観察する。</li>
+          <li data-i18n="kr-note-3">同じ仕組みが使われているものを、家の中や街の中から探してみる。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 つくる ============ -->
+  <section id="kr-make">
+    <div class="sec-num">02</div>
+    <div class="sec-body res-wide">
+      <h2 data-i18n="kr-make-h">つくる</h2>
+      <p class="res-sec-lead" data-i18n="kr-make-lead">3Dプリンターで出力したパーツを組み立てて、実際に動かします。動画とキットは順次公開します。</p>
+
+      <div class="res-grid">
+        <div class="res-card res-card--soon reveal">
+          <div class="res-card-body">
+            <div class="res-card-badge res-card-badge--muted" data-i18n="kr-video-badge">公開準備中</div>
+            <h3 data-i18n="kr-video-h">解説動画</h3>
+            <p data-i18n="kr-video-p">組み立ての手順と、動きの仕組みを説明する動画を準備しています。公開したらこのページとSNSでお知らせします。</p>
+          </div>
+        </div>
+        <div class="res-card res-card--soon reveal">
+          <div class="res-card-body">
+            <div class="res-card-badge res-card-badge--muted" data-i18n="kr-kit-badge">販売準備中</div>
+            <h3 data-i18n="kr-kit-h">組み立てキット</h3>
+            <p data-i18n="kr-kit-p">必要なパーツをそろえたキットを準備中です。販売はCoreShiftのBASEショップで行う予定です。</p>
+            <a href="https://coreshift.base.shop/" target="_blank" rel="noopener" class="res-card-link">BASE Shop ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 まとめる ============ -->
+  <section id="kr-report" class="white-section">
+    <div class="sec-num">03</div>
+    <div class="sec-body res-wide">
+      <h2 class="reveal" data-i18n="kr-report-h">まとめる</h2>
+      <p class="res-sec-lead reveal" data-i18n="kr-report-lead">自由研究として提出するときは、この順番で書くとまとまります。写真をはさむと、それだけで読みやすくなります。</p>
+
+      <ol class="kr-steps reveal">
+        <li><strong data-i18n="kr-r1-h">きっかけ・調べたいこと</strong><span data-i18n="kr-r1-p">「回すとどうして動くのか知りたかった」など、はじめの疑問を書きます。</span></li>
+        <li><strong data-i18n="kr-r2-h">予想</strong><span data-i18n="kr-r2-p">組み立てる前に、どう動くと思ったかを書いておきます。外れていても大丈夫です。</span></li>
+        <li><strong data-i18n="kr-r3-h">やったこと</strong><span data-i18n="kr-r3-p">組み立ての手順、歯の数、測った回数などを記録します。</span></li>
+        <li><strong data-i18n="kr-r4-h">わかったこと</strong><span data-i18n="kr-r4-p">予想と比べてどうだったか。うまくいかなかったことも立派な結果です。</span></li>
+        <li><strong data-i18n="kr-r5-h">もっと調べたいこと</strong><span data-i18n="kr-r5-p">次にためしてみたいことを書いて終わります。</span></li>
+      </ol>
+
+      <a href="../contact/" class="cta-btn cta-blue reveal"><span data-i18n="kr-contact-cta">キット・体験会のお問い合わせ</span> <span>→</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">CoreShift</span>
+    <span>&copy; 2026 CoreShift</span>
+  </footer>
+
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script src="../i18n.js"></script>
+  <script type="module" src="../main.js"></script>
+</body>
+</html>

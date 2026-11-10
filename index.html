@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoreShift</title>
+  <title>CoreShift — 体験から始まる次世代教育</title>
   <meta name="description" content="18歳の学生グループによる教育DXプロジェクト。AIやプログラミング、3Dプリンターを活用した体験型学習で、子どもたちの未来を切り拓く力を育てます。">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="CoreShift">
+  <meta property="og:title" content="CoreShift — 体験から始まる次世代教育">
   <meta property="og:description" content="体験から始まる次世代教育。AIやプログラミング、3Dプリンターを使いこなす力を子どもたちに。">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="DxiwSUlddvfgO7YuV0GhDAcWRFCEQJUEOp6-UvYx_lk" />
@@ -14,12 +14,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=28">
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
   </script>
 </head>
-<body>
+<body class="home-page">
 
   <div id="cursor"></div>
 
@@ -33,124 +33,137 @@
   </header>
 
   <nav id="side-nav">
+    <a href="#about" class="nav-top-arrow" aria-label="ページ最上部へ戻る">↑</a>
+    <span class="nav-sep"></span>
     <a href="#about">About</a>
     <span class="nav-sep"></span>
-    <a href="#events">Event</a>
+    <a href="#tools">Tools</a>
     <span class="nav-sep"></span>
-    <a href="#support">Support Us</a>
+    <a href="#others">Others</a>
     <span class="nav-sep"></span>
     <a href="#sns">SNS</a>
   </nav>
 
-  <section id="about" class="white-section">
+  <!-- ============ 01 ABOUT ＋ PROJECT (旧版の構成＋洗練レイアウト) ============ -->
+  <section id="about" class="home-sec white-section">
     <div class="sec-num">01</div>
     <div class="sec-body">
       <h2 class="reveal">About</h2>
       <div class="sec-text">
-        <p class="reveal" data-i18n="about-p1">はじめまして。私たちは18歳の学生を中心とした学生グループです。</p>
+        <p class="reveal" data-i18n="about-p1">はじめまして。私たちは18歳の学生を中心とした学生団体です。</p>
         <p class="reveal" data-i18n="about-p2">私たちは、これからの時代を生きる子どもたちに必要なのは、知識を覚えることだけではなく、「現代にある技術を手段として使いこなせる考え方」だと考えています。</p>
         <p class="reveal" data-i18n="about-p3">私自身も、小学校・中学校・高校の頃に、AIやプログラミング、3Dプリンターなどを実際に活用しながら学ぶ教育を受けたかったという思いがあります。その経験が、この活動を始めるきっかけになりました。</p>
       </div>
-      <a href="CoreShift for children/" class="about-card reveal">
+
+      <a href="CoreShift for children/" class="about-card home-project-box reveal">
         <div class="about-card-label">PROJECT</div>
         <div class="about-card-header">
           <h3>CoreShift for children</h3>
-          <span class="about-card-arrow">→</span>
+          <span class="home-project-cta">詳しく見る <span class="about-card-arrow">→</span></span>
         </div>
         <p data-i18n="about-card-desc">子どもたちが現代にある技術を手段として使い、自ら考え、挑戦し、未来を切り拓く力を育てる教育DXプロジェクトです。</p>
       </a>
     </div>
   </section>
 
-  <section id="tools">
-    <div class="tool-card reveal" data-zoom-card="3dprinter/" style="cursor:pointer">
-      <div class="tool-card-img tool-card-img--canvas">
-        <canvas class="card-3d-canvas" data-model="models/3Dプリンター.glb"></canvas>
-      </div>
-      <div class="tool-card-name" data-i18n="tool-3d">3Dプリンター</div>
-    </div>
-    <a href="ai/" class="tool-card reveal">
-      <div class="tool-card-img">
-        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="42" y="42" width="36" height="36" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
-          <line x1="42" y1="52" x2="25" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="62" x2="25" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="72" x2="25" y2="72" stroke="#3b82f6" stroke-width="1"/>
-          <line x1="78" y1="52" x2="95" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="62" x2="95" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="72" x2="95" y2="72" stroke="#3b82f6" stroke-width="1"/>
-          <line x1="52" y1="42" x2="52" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="42" x2="62" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="42" x2="72" y2="25" stroke="#3b82f6" stroke-width="1"/>
-          <line x1="52" y1="78" x2="52" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="78" x2="62" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="78" x2="72" y2="95" stroke="#3b82f6" stroke-width="1"/>
-          <circle cx="25" cy="52" r="3" fill="#3b82f6"/><circle cx="25" cy="62" r="3" fill="#3b82f6"/><circle cx="25" cy="72" r="3" fill="#3b82f6"/>
-          <circle cx="95" cy="52" r="3" fill="#3b82f6"/><circle cx="95" cy="62" r="3" fill="#3b82f6"/><circle cx="95" cy="72" r="3" fill="#3b82f6"/>
-          <circle cx="52" cy="25" r="3" fill="#93c5fd"/><circle cx="62" cy="25" r="3" fill="#93c5fd"/><circle cx="72" cy="25" r="3" fill="#93c5fd"/>
-          <circle cx="52" cy="95" r="3" fill="#93c5fd"/><circle cx="62" cy="95" r="3" fill="#93c5fd"/><circle cx="72" cy="95" r="3" fill="#93c5fd"/>
-          <text x="60" y="66" text-anchor="middle" font-size="13" font-weight="700" font-family="monospace" fill="#3b82f6">AI</text>
-        </svg>
-      </div>
-      <div class="tool-card-name">AI</div>
-    </a>
-    <a href="programming/" class="tool-card reveal">
-      <div class="tool-card-img">
-        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="15" y="20" width="90" height="72" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
-          <line x1="15" y1="35" x2="105" y2="35" stroke="#3b82f6" stroke-width="1"/>
-          <circle cx="27" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-          <circle cx="38" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-          <circle cx="49" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-          <text x="28" y="57" font-size="18" font-family="monospace" fill="#3b82f6" font-weight="700">&lt;/&gt;</text>
-          <line x1="27" y1="67" x2="80" y2="67" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-          <line x1="27" y1="76" x2="65" y2="76" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-          <line x1="27" y1="85" x2="73" y2="85" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-        </svg>
-      </div>
-      <div class="tool-card-name" data-i18n="tool-prog">プログラミング</div>
-    </a>
-  </section>
-
-  <section id="events">
+  <!-- ============ 02 TOOLS (3Dプリンター / AI / プログラミング) ============ -->
+  <section id="tools" class="home-sec">
     <div class="sec-num">02</div>
-    <div class="sec-body">
-      <h2>Events</h2>
-      <div class="event-grid">
-        <a href="CoreShift for children/#event-info" class="event-card reveal">
-          <div class="event-status">Coming Soon</div>
-          <h3 data-i18n="event1-title">イベント</h3>
-          <p class="event-date" data-i18n="event1-date">2025年7月 予定</p>
-          <p data-i18n="event1-desc">詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
-        </a>
-        <a href="CoreShift for children/#event-info" class="event-card reveal">
-          <div class="event-status">Coming Soon</div>
-          <h3 data-i18n="event2-title">夏休みイベント</h3>
-          <p class="event-date" data-i18n="event2-date">2025年夏休み 予定</p>
-          <p data-i18n="event2-desc">詳細は決まり次第お知らせします。Instagramをフォローしてお待ちください。</p>
-        </a>
+    <h2 class="reveal">Tools</h2>
+    <div class="home-tools-grid">
+      <div class="tool-card reveal" data-zoom-card="3dprinter/" style="cursor:pointer">
+        <div class="tool-card-img tool-card-img--canvas">
+          <canvas class="card-3d-canvas" data-model="models/3Dプリンター.glb"></canvas>
+        </div>
+        <div class="tool-card-name" data-i18n="tool-3d">3Dプリンター</div>
       </div>
+      <a href="ai/" class="tool-card reveal">
+        <div class="tool-card-img">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="42" y="42" width="36" height="36" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="42" y1="52" x2="25" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="62" x2="25" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="72" x2="25" y2="72" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="78" y1="52" x2="95" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="62" x2="95" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="72" x2="95" y2="72" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="52" y1="42" x2="52" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="42" x2="62" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="42" x2="72" y2="25" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="52" y1="78" x2="52" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="78" x2="62" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="78" x2="72" y2="95" stroke="#3b82f6" stroke-width="1"/>
+            <circle cx="25" cy="52" r="3" fill="#3b82f6"/><circle cx="25" cy="62" r="3" fill="#3b82f6"/><circle cx="25" cy="72" r="3" fill="#3b82f6"/>
+            <circle cx="95" cy="52" r="3" fill="#3b82f6"/><circle cx="95" cy="62" r="3" fill="#3b82f6"/><circle cx="95" cy="72" r="3" fill="#3b82f6"/>
+            <circle cx="52" cy="25" r="3" fill="#93c5fd"/><circle cx="62" cy="25" r="3" fill="#93c5fd"/><circle cx="72" cy="25" r="3" fill="#93c5fd"/>
+            <circle cx="52" cy="95" r="3" fill="#93c5fd"/><circle cx="62" cy="95" r="3" fill="#93c5fd"/><circle cx="72" cy="95" r="3" fill="#93c5fd"/>
+            <text x="60" y="66" text-anchor="middle" font-size="13" font-weight="700" font-family="monospace" fill="#3b82f6">AI</text>
+          </svg>
+        </div>
+        <div class="tool-card-name">AI</div>
+      </a>
+      <a href="programming/" class="tool-card reveal">
+        <div class="tool-card-img">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="20" width="90" height="72" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="15" y1="35" x2="105" y2="35" stroke="#3b82f6" stroke-width="1"/>
+            <circle cx="27" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+            <circle cx="38" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+            <circle cx="49" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+            <text x="28" y="57" font-size="18" font-family="monospace" fill="#3b82f6" font-weight="700">&lt;/&gt;</text>
+            <line x1="27" y1="67" x2="80" y2="67" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="27" y1="76" x2="65" y2="76" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+            <line x1="27" y1="85" x2="73" y2="85" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="tool-card-name" data-i18n="tool-prog">プログラミング</div>
+      </a>
     </div>
   </section>
 
-  <section id="support" class="white-section">
+  <!-- ============ 03 OTHERS (その他の取り組み・ご支援) ============ -->
+  <section id="others" class="home-sec white-section">
     <div class="sec-num">03</div>
     <div class="sec-body">
-      <h2 class="reveal">Support Us</h2>
-      <p class="support-lead reveal" data-i18n-html="support-lead">CoreShiftの活動を応援していただける方を募集しています。<br>クラウドファンディングの詳細は近日公開予定です。</p>
-      <a href="#" class="cta-btn cta-blue reveal"><span data-i18n="support-cta">準備中</span> <span>→</span></a>
+      <h2 class="reveal">Others</h2>
+      <div class="sec-text">
+        <p class="reveal">学生団体CoreShiftの活動を応援・連携していただける企業・団体・個人の皆さまへのご案内です。</p>
+      </div>
+
+      <div class="home-box-grid">
+        <a href="CoreShift for children/support/" class="about-card home-project-box reveal" style="margin-top:0;">
+          <div class="about-card-label">SPONSORSHIP ／ 企業・団体様</div>
+          <div class="about-card-header">
+            <h3>企業協賛・継続連携のご案内</h3>
+            <span class="home-project-cta">詳細を見る <span class="about-card-arrow">→</span></span>
+          </div>
+          <p>活動資金のご協賛や、3Dプリンター機材・資材のご提供、継続的な教育連携をご検討いただける企業・団体様向けの案内ページです。</p>
+        </a>
+
+        <div class="about-card home-project-box home-project-box--soon reveal" style="margin-top:0;">
+          <div class="about-card-label" style="color:#64748b;">CROWDFUNDING ／ 個人・支援者様</div>
+          <div class="about-card-header">
+            <h3>クラウドファンディング</h3>
+            <span class="home-project-cta home-project-cta--muted">近日公開予定</span>
+          </div>
+          <p>より多くの子どもたちに安価で体験機会を届けるためのクラウドファンディングを現在準備しています。公開時は当サイトおよび各SNSでお知らせします。</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="sns" class="reveal">
+  <!-- ============ 04 SNS / Links ============ -->
+  <section id="sns" class="home-sec">
     <div class="sec-num">04</div>
     <div class="sec-body">
-      <h2>SNS / Links</h2>
-      <div class="link-row">
+      <h2 class="reveal">SNS / Links</h2>
+      <div class="link-row reveal">
         <a href="https://www.instagram.com/coreshift.for_children?igsh=dGFhYnpsdGNyeHht" target="_blank" rel="noopener" class="link-item">
           Instagram <span class="link-arrow">↗</span>
         </a>
         <a href="https://www.facebook.com/share/1BXkFu2nxp/" target="_blank" rel="noopener" class="link-item">
           Facebook <span class="link-arrow">↗</span>
         </a>
+        <!-- 一旦非表示: なまえプレート / BASE Shop
         <a href="https://coreshiftforch.github.io/nameplate-maker/" target="_blank" rel="noopener" class="link-item">
           🪪 <span data-i18n="app-link">なまえプレート</span> <span class="link-arrow">↗</span>
         </a>
         <a href="https://coreshift.base.shop/" target="_blank" rel="noopener" class="link-item">
           🛒 BASE Shop <span class="link-arrow">↗</span>
         </a>
+        -->
         <div class="link-item link-item--text">
           <span>Email</span>
           <span class="link-email">coreshift.forch@gmail.com</span>
@@ -165,7 +178,7 @@
 
   <footer>
     <span class="footer-logo">CoreShift</span>
-    <span>&copy; 2025 CoreShift. All rights reserved.</span>
+    <span>&copy; 2026 CoreShift</span>
   </footer>
 
   <div id="printer-wipe"></div>
@@ -180,5 +193,153 @@
   </script>
   <script src="i18n.js"></script>
   <script type="module" src="main.js"></script>
+  <script>
+    // ===== セクション単位のなめらかスクロール（for children と同じ仕様）=====
+    (() => {
+      if (window.matchMedia('(max-width: 768px)').matches) return;
+
+      const sections = Array.from(document.querySelectorAll('.home-sec, .home-sec-tools, footer'));
+      let isAnimating = false;
+      let animRafId = null;
+      let unlockTimerId = null;
+      const DURATION = 700;
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function getCurrentSectionIndex() {
+        const scrollMid = window.scrollY + window.innerHeight * 0.35;
+        let idx = 0;
+        sections.forEach((sec, i) => {
+          if (sec.offsetTop <= scrollMid) idx = i;
+        });
+        return idx;
+      }
+
+      function scrollToSection(index, forceInterrupt = false) {
+        if (index < 0 || index >= sections.length) return;
+        if (isAnimating && !forceInterrupt) return;
+
+        if (animRafId) cancelAnimationFrame(animRafId);
+        if (unlockTimerId) clearTimeout(unlockTimerId);
+
+        isAnimating = true;
+
+        const startY = window.scrollY;
+        const targetEl = sections[index];
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const targetY = Math.min(targetEl.offsetTop, maxScroll);
+        const diff = targetY - startY;
+
+        if (Math.abs(diff) < 2) {
+          isAnimating = false;
+          return;
+        }
+
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / DURATION, 1);
+          const eased = easeOutQuart(progress);
+          window.scrollTo(0, startY + diff * eased);
+
+          if (progress < 1) {
+            animRafId = requestAnimationFrame(step);
+          } else {
+            animRafId = null;
+            unlockTimerId = setTimeout(() => {
+              isAnimating = false;
+              unlockTimerId = null;
+            }, 180);
+          }
+        }
+
+        animRafId = requestAnimationFrame(step);
+      }
+
+      window.addEventListener('wheel', e => {
+        e.preventDefault();
+        if (isAnimating) return;
+        if (Math.abs(e.deltaY) < 2) return;
+
+        const current = getCurrentSectionIndex();
+        const dir = e.deltaY > 0 ? 1 : -1;
+        scrollToSection(current + dir);
+      }, { passive: false });
+
+      window.addEventListener('keydown', e => {
+        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
+          e.preventDefault();
+          if (isAnimating) return;
+          scrollToSection(getCurrentSectionIndex() + 1);
+        } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
+          e.preventDefault();
+          if (isAnimating) return;
+          scrollToSection(getCurrentSectionIndex() - 1);
+        }
+      });
+
+      document.querySelectorAll('#side-nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').slice(1);
+          const targetIdx = sections.findIndex(sec => sec.id === targetId);
+          if (targetIdx !== -1) scrollToSection(targetIdx, true);
+        });
+      });
+    })();
+
+    // ===== 下スクロール時は上から順に出現 ／ 上スクロール時は去るセクションがフェードアウト =====
+    (() => {
+      const homeSections = Array.from(document.querySelectorAll('.home-sec, .home-sec-tools'));
+
+      homeSections.forEach(sec => {
+        const reveals = Array.from(sec.querySelectorAll('.reveal'));
+        const total = reveals.length;
+        reveals.forEach((el, idx) => {
+          el.style.setProperty('--stagger', `${idx * 0.11}s`);
+          el.style.setProperty('--out-stagger', `${(total - 1 - idx) * 0.06}s`);
+        });
+      });
+
+      let lastY = window.scrollY;
+
+      function updateSectionVisibility() {
+        const y = window.scrollY;
+        const vh = window.innerHeight;
+        const goingUp = y < lastY;
+        lastY = y;
+
+        homeSections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          const reveals = sec.querySelectorAll('.reveal');
+
+          if (rect.top <= vh * 0.75 && rect.bottom > 0) {
+            reveals.forEach(el => {
+              el.classList.remove('fading-out');
+              el.classList.add('visible');
+            });
+          } else if (rect.top <= 0) {
+            reveals.forEach(el => {
+              el.classList.remove('fading-out');
+              el.classList.add('visible');
+            });
+          } else if (rect.top > vh * 0.35 && goingUp) {
+            reveals.forEach(el => {
+              if (el.classList.contains('visible')) {
+                el.classList.remove('visible');
+                el.classList.add('fading-out');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateSectionVisibility, { passive: true });
+      updateSectionVisibility();
+    })();
+  </script>
 </body>
 </html>

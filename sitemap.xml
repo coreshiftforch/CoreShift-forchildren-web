@@ -5,8 +5,16 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://core-shift.jp/CoreShift%20for%20children/</loc>
+    <loc>https://core-shift.jp/karakuri/</loc>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://core-shift.jp/about/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://core-shift.jp/CoreShift%20for%20children/</loc>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://core-shift.jp/3dprinter/</loc>
@@ -19,5 +27,9 @@
   <url>
     <loc>https://core-shift.jp/programming/</loc>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://core-shift.jp/contact/</loc>
+    <priority>0.5</priority>
   </url>
 </urlset>

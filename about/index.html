@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — CoreShift</title>
+  <meta name="description" content="CoreShiftは18歳の学生を中心とした学生グループです。AI・プログラミング・3Dプリンターを活用した体験型学習で、子どもたちが技術を手段として使いこなす力を育てます。">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="About — CoreShift">
+  <meta property="og:description" content="体験から始まる次世代教育。AIやプログラミング、3Dプリンターを使いこなす力を子どもたちに。">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <a class="logo" href="../index.html">CoreShift</a>
+    <div class="lang-switch">
+      <span class="lang-btn lang-active">JP</span>
+      <span class="lang-sep-v">/</span>
+      <span class="lang-btn">EN</span>
+    </div>
+  </header>
+
+  <nav id="side-nav">
+    <a href="#about">About</a>
+    <span class="nav-sep"></span>
+    <a href="#events">Event</a>
+    <span class="nav-sep"></span>
+    <a href="#support">Support Us</a>
+    <span class="nav-sep"></span>
+    <a href="../index.html">Home</a>
+  </nav>
+
+  <section id="about" class="white-section">
+    <div class="sec-num">01</div>
+    <div class="sec-body">
+      <h2 class="reveal">About</h2>
+      <div class="sec-text">
+        <p class="reveal" data-i18n="about-p1">はじめまして。私たちは18歳の学生を中心とした学生グループです。</p>
+        <p class="reveal" data-i18n="about-p2">私たちは、これからの時代を生きる子どもたちに必要なのは、知識を覚えることだけではなく、「現代にある技術を手段として使いこなせる考え方」だと考えています。</p>
+        <p class="reveal" data-i18n="about-p3">私自身も、小学校・中学校・高校の頃に、AIやプログラミング、3Dプリンターなどを実際に活用しながら学ぶ教育を受けたかったという思いがあります。その経験が、この活動を始めるきっかけになりました。</p>
+      </div>
+      <a href="../CoreShift for children/" class="about-card reveal">
+        <div class="about-card-label">PROJECT</div>
+        <div class="about-card-header">
+          <h3>CoreShift for children</h3>
+          <span class="about-card-arrow">→</span>
+        </div>
+        <p data-i18n="about-card-desc">子どもたちが現代にある技術を手段として使い、自ら考え、挑戦し、未来を切り拓く力を育てる教育DXプロジェクトです。</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="tool-card reveal" data-zoom-card="../3dprinter/" style="cursor:pointer">
+      <div class="tool-card-img tool-card-img--canvas">
+        <canvas class="card-3d-canvas" data-model="../models/3Dプリンター.glb"></canvas>
+      </div>
+      <div class="tool-card-name" data-i18n="tool-3d">3Dプリンター</div>
+    </div>
+    <a href="../ai/" class="tool-card reveal">
+      <div class="tool-card-img">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="42" y="42" width="36" height="36" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="42" y1="52" x2="25" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="62" x2="25" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="72" x2="25" y2="72" stroke="#3b82f6" stroke-width="1"/>
+          <line x1="78" y1="52" x2="95" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="62" x2="95" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="72" x2="95" y2="72" stroke="#3b82f6" stroke-width="1"/>
+          <line x1="52" y1="42" x2="52" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="42" x2="62" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="42" x2="72" y2="25" stroke="#3b82f6" stroke-width="1"/>
+          <line x1="52" y1="78" x2="52" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="78" x2="62" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="78" x2="72" y2="95" stroke="#3b82f6" stroke-width="1"/>
+          <circle cx="25" cy="52" r="3" fill="#3b82f6"/><circle cx="25" cy="62" r="3" fill="#3b82f6"/><circle cx="25" cy="72" r="3" fill="#3b82f6"/>
+          <circle cx="95" cy="52" r="3" fill="#3b82f6"/><circle cx="95" cy="62" r="3" fill="#3b82f6"/><circle cx="95" cy="72" r="3" fill="#3b82f6"/>
+          <circle cx="52" cy="25" r="3" fill="#93c5fd"/><circle cx="62" cy="25" r="3" fill="#93c5fd"/><circle cx="72" cy="25" r="3" fill="#93c5fd"/>
+          <circle cx="52" cy="95" r="3" fill="#93c5fd"/><circle cx="62" cy="95" r="3" fill="#93c5fd"/><circle cx="72" cy="95" r="3" fill="#93c5fd"/>
+          <text x="60" y="66" text-anchor="middle" font-size="13" font-weight="700" font-family="monospace" fill="#3b82f6">AI</text>
+        </svg>
+      </div>
+      <div class="tool-card-name">AI</div>
+    </a>
+    <a href="../programming/" class="tool-card reveal">
+      <div class="tool-card-img">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="15" y="20" width="90" height="72" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
+          <line x1="15" y1="35" x2="105" y2="35" stroke="#3b82f6" stroke-width="1"/>
+          <circle cx="27" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+          <circle cx="38" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+          <circle cx="49" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
+          <text x="28" y="57" font-size="18" font-family="monospace" fill="#3b82f6" font-weight="700">&lt;/&gt;</text>
+          <line x1="27" y1="67" x2="80" y2="67" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+          <line x1="27" y1="76" x2="65" y2="76" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+          <line x1="27" y1="85" x2="73" y2="85" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="tool-card-name" data-i18n="tool-prog">プログラミング</div>
+    </a>
+  </section>
+
+  <section id="events">
+    <div class="sec-num">02</div>
+    <div class="sec-body">
+      <h2>Events</h2>
+      <div class="event-grid">
+        <a href="../CoreShift for children/#event-info" class="event-card reveal">
+          <div class="event-status" data-i18n="event1-status">終了しました</div>
+          <h3 data-i18n="event1-title">3Dプリンター体験会（高宮公民館）</h3>
+          <p class="event-date" data-i18n="event1-date">2026年8月9日（日）／ 高宮公民館 講堂</p>
+          <p data-i18n="event1-desc">高宮公民館の特別企画として、CoreShiftが講師をつとめる3Dプリンター体験会です。webアプリで名前をデザインし、3Dプリンターでオリジナルのネームプレートを作ります。</p>
+        </a>
+        <a href="../CoreShift for children/#event-info" class="event-card reveal">
+          <div class="event-status">Coming Soon</div>
+          <h3 data-i18n="event2-title">次回イベント</h3>
+          <p class="event-date" data-i18n="event2-date">準備中</p>
+          <p data-i18n="event2-desc">次のイベントを企画中です。最新情報はSNS（Instagram・Facebook）でお知らせします。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="support" class="white-section">
+    <div class="sec-num">03</div>
+    <div class="sec-body">
+      <h2 class="reveal">Support Us</h2>
+      <p class="support-lead reveal" data-i18n-html="support-lead">CoreShiftの活動を応援していただける方を募集しています。<br>クラウドファンディングの詳細は近日公開予定です。</p>
+      <a href="../contact/" class="cta-btn cta-blue reveal"><span data-i18n="support-cta">準備中</span> <span>→</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">CoreShift</span>
+    <span>&copy; 2026 CoreShift</span>
+  </footer>
+
+  <div id="printer-wipe"></div>
+  <div id="page-transition">
+    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
+    <div class="pt-strip"></div><div class="pt-strip"></div>
+  </div>
+  <script>
+    if (sessionStorage.getItem('ptStrip') === '1') {
+      document.documentElement.setAttribute('data-pt-init', '');
+    }
+  </script>
+  <script src="../i18n.js"></script>
+  <script type="module" src="../main.js"></script>
+</body>
+</html>
