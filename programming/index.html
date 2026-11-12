@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プログラミング — CoreShift</title>
+  <meta name="description" content="micro:bit GO を使ったプログラミング体験。ブロックから JavaScript・Python へ、3Dプリンターと組み合わせた作品づくりも。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="../icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css?v=33">
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
   </script>
@@ -38,19 +39,87 @@
 
   <section class="tool-detail">
     <div class="tool-detail-canvas-wrap tool-code-visual">
-      <pre class="code-block"><code><span class="c-kw">function</span> <span class="c-fn">createFuture</span>() {
-  <span class="c-kw">const</span> tools = [<span class="c-str">"3Dプリンター"</span>, <span class="c-str">"AI"</span>];
-  <span class="c-kw">return</span> tools.<span class="c-fn">map</span>(tool =&gt; {
-    <span class="c-kw">return</span> <span class="c-fn">learnWithKids</span>(tool);
-  });
-}</code></pre>
+      <pre class="code-block"><code><span class="c-cm">// Shake dice — micro:bit / MakeCode</span>
+input.<span class="c-fn">onGesture</span>(Gesture.Shake, <span class="c-kw">function</span> () {
+  basic.<span class="c-fn">showNumber</span>(<span class="c-fn">randint</span>(1, 6))
+})
+input.<span class="c-fn">onButtonPressed</span>(Button.A, <span class="c-kw">function</span> () {
+  basic.<span class="c-fn">showString</span>(<span class="c-str">"CoreShift"</span>)
+})</code></pre>
     </div>
     <div class="tool-detail-body">
       <div class="tool-detail-label">TECHNOLOGY 03</div>
       <h2 data-i18n="prog-page-title">プログラミング</h2>
-      <p data-i18n="prog-desc">コードを書くことで、コンピューターに自分の意図を伝える力を学びます。論理的思考とクリエイティビティを組み合わせ、自分だけのプログラムを作ります。</p>
+      <p data-i18n="prog-desc">micro:bit GO を使って、自分で書いたプログラムでモノを動かす体験をします。ブロックから始めて、慣れたら JavaScript や Python へ。小学生から中高生まで、同じ教材で段階的に学べます。</p>
     </div>
   </section>
+
+  <!-- ============ できること／ならでは／自作ツール／次の予定 ============ -->
+  <main class="tp-content">
+    <section class="tp-sec">
+      <div class="tp-label">CAN DO</div>
+      <h2 data-i18n="pg-can-title">できること</h2>
+      <p class="tp-lead" data-i18n="pg-can-lead">教材は micro:bit GO。手のひらサイズのコンピューターで、LED・ボタン・傾きセンサーなどを使ったプログラムを作ります。</p>
+      <ul class="tp-cards">
+          <li class="tp-card">
+            <h3 data-i18n="pg-can-1-t">ブロックから始める</h3>
+            <p data-i18n="pg-can-1-d">MakeCode のブロックを並べるだけで、すぐに動くプログラムが作れます。</p>
+          </li>
+          <li class="tp-card">
+            <h3 data-i18n="pg-can-2-t">JavaScript・Python へ</h3>
+            <p data-i18n="pg-can-2-d">慣れてきたら、同じプログラムを文字のコードで書いてみます。</p>
+          </li>
+          <li class="tp-card">
+            <h3 data-i18n="pg-can-3-t">学年に合わせて段階的に</h3>
+            <p data-i18n="pg-can-3-d">小学生から中高生まで、同じ教材でレベルを上げていけます。</p>
+          </li>
+        </ul>
+    </section>
+
+    <section class="tp-sec">
+      <div class="tp-label">WITH 3D PRINTING</div>
+      <h2 data-i18n="pg-uniq-title">3Dプリンターと組み合わせる</h2>
+      <p class="tp-lead" data-i18n="pg-uniq-lead">CoreShiftならではの取り組みとして、自分で設計したケースや部品と micro:bit を組み合わせた作品づくりを準備しています。</p>
+      <ul class="tp-cards">
+          <li class="tp-card">
+            <h3 data-i18n="pg-uniq-1-t">LEDで名前が流れる名札</h3>
+            <p data-i18n="pg-uniq-1-d">自分で設計したケースに入れて、名前を表示します。</p>
+          </li>
+          <li class="tp-card">
+            <h3 data-i18n="pg-uniq-2-t">傾けると表情が変わる置物</h3>
+            <p data-i18n="pg-uniq-2-d">傾きセンサーを使って、LEDの顔を切り替えます。</p>
+          </li>
+          <li class="tp-card">
+            <h3 data-i18n="pg-uniq-3-t">振ると数が出るサイコロ</h3>
+            <p data-i18n="pg-uniq-3-d">振ったことを検知して、1〜6の数を表示します。</p>
+          </li>
+        </ul>
+    </section>
+
+    <section class="tp-sec">
+      <div class="tp-label">TOOLS</div>
+      <h2 data-i18n="pg-tool-title">自作ツール</h2>
+      <div class="tp-card tp-card--wide">
+        <h3 data-i18n="pg-tool-t">Easy 3D CAD</h3>
+        <p data-i18n="pg-tool-d">スマホで3Dプリンター用のモデルを作れるWebアプリ。CoreShiftのメンバーが開発し、体験会でも使っています。</p>
+        <a href="https://coreshiftforch.github.io/easy3dcad/" target="_blank" rel="noopener" class="tp-link" data-i18n-html="pg-tool-link">アプリを開く <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="tp-sec">
+      <div class="tp-label">NEXT</div>
+      <h2 data-i18n="pg-next-title">次の予定</h2>
+      <p class="tp-lead" data-i18n="pg-next-d">micro:bit を使った体験会を準備中です。開催が決まりしだい、SNSでお知らせします。</p>
+      <a href="https://www.instagram.com/coreshift.for_children?igsh=dGFhYnpsdGNyeHht" target="_blank" rel="noopener" class="tp-link" data-i18n-html="tp-sns">Instagram を見る <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="tp-sec tp-cta">
+      <div class="tp-label" data-i18n="tp-cta-label">施設・団体の方へ</div>
+      <h2 data-i18n="tp-cta-t">出張体験会のご相談はこちら</h2>
+      <p class="tp-lead" data-i18n="tp-cta-d">公民館・児童館・学校・居場所施設などへ、機材を持って伺います。内容・人数・時間はご相談ください。</p>
+      <a href="../contact/" class="tp-btn" data-i18n-html="tp-cta-btn">お問い合わせ <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
 
   <div id="page-transition">
     <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
@@ -61,7 +130,7 @@
       document.documentElement.setAttribute('data-pt-init', '');
     }
   </script>
-  <script src="../i18n.js?v=2"></script>
-  <script type="module" src="../main.js"></script>
+  <script src="../i18n.js?v=4"></script>
+  <script type="module" src="../main.js?v=2"></script>
 </body>
 </html>

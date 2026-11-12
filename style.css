@@ -2502,3 +2502,84 @@ html.lite-mode .printer-bg-section { display: none; }
 @media (max-width: 768px) {
   .home-works-list li { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* ============================================================
+   ツールページ共通：できること／やったこと／次の予定（tp-*）
+============================================================ */
+.tp-content {
+  position: relative;
+  z-index: 6;               /* 3Dプリンターページの固定テキストボックスより前面 */
+  background: var(--bg);
+  padding: 40px 56px 120px;
+}
+.tp-sec {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 72px 0;
+  border-top: 1px solid var(--border);
+}
+.tp-sec:first-child { border-top: none; }
+.tp-label {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em;
+  color: var(--accent); margin-bottom: 14px;
+}
+.tp-sec h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900;
+  color: #fff; margin: 0 0 20px; letter-spacing: -0.01em;
+}
+.tp-lead { color: rgba(255,255,255,0.75); font-size: 1.1rem; line-height: 1.9; margin: 0 0 28px; max-width: 46em; }
+.tp-note { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.9; margin: 24px 0 0; }
+.tp-cards {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+}
+.tp-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  padding: 28px 24px;
+}
+.tp-card h3 { color: #fff; font-size: 1.1rem; font-weight: 700; margin: 0 0 10px; }
+.tp-card p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.8; margin: 0; }
+.tp-card--wide { max-width: 640px; }
+.tp-card--wide .tp-link { margin-top: 16px; }
+.tp-event {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 36px; align-items: center;
+}
+.tp-event img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; display: block; }
+.tp-event-date { color: var(--accent2); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.06em; margin-bottom: 8px; }
+.tp-event h3 { color: #fff; font-size: 1.4rem; font-weight: 900; margin: 0 0 14px; }
+.tp-event p { color: rgba(255,255,255,0.7); line-height: 1.9; margin: 0 0 18px; }
+.tp-link {
+  display: inline-flex; gap: 8px; align-items: center;
+  color: var(--accent2); font-weight: 700; text-decoration: none;
+}
+.tp-link:hover { color: #fff; }
+.tp-cta {
+  text-align: center;
+  background: linear-gradient(180deg, rgba(59,130,246,0.12), rgba(59,130,246,0.04));
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 16px;
+  padding: 64px 32px;
+  margin-top: 40px;
+}
+.tp-cta .tp-lead { margin-left: auto; margin-right: auto; }
+.tp-btn {
+  display: inline-flex; gap: 10px; align-items: center;
+  padding: 16px 32px; border-radius: 999px;
+  background: var(--accent); color: #fff; font-weight: 700; text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.tp-btn:hover { background: #2563eb; transform: translateY(-2px); }
+.c-cm { color: #64748b; }
+@media (max-width: 1300px) {
+  .tp-content { padding: 32px 88px 96px 40px; }
+}
+@media (max-width: 768px) {
+  .tp-content { padding: 16px 16px 80px; }
+  .tp-sec { padding: 48px 0; }
+  .tp-cards { grid-template-columns: 1fr; gap: 14px; }
+  .tp-event { grid-template-columns: 1fr; gap: 20px; }
+  .tp-cta { padding: 44px 20px; }
+  .tp-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+}
