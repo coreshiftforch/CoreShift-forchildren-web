@@ -2630,3 +2630,19 @@ html.lite-mode .printer-bg-section { display: none; }
     background: linear-gradient(180deg, rgba(6,6,6,0) 0%, rgba(6,6,6,0.3) 28%, rgba(6,6,6,0.88) 48%, #060606 75%);
   }
 }
+
+/* ============================================================
+   トップ：団体概要（About内）
+============================================================ */
+.home-org { margin-top: 40px; }
+.org-list { margin: 0; border-top: 1px solid rgba(0,0,0,0.12); }
+.org-row {
+  display: grid; grid-template-columns: 150px 1fr; gap: 24px;
+  padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.org-row dt { font-weight: 700; color: #64748b; font-size: 0.95rem; }
+.org-row dd { margin: 0; color: #222; font-size: 0.95rem; line-height: 1.8; }
+.org-row dd a { color: var(--accent); }
+@media (max-width: 768px) {
+  .org-row { grid-template-columns: 1fr; gap: 2px; }
+}
