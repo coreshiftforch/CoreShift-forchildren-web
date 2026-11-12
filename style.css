@@ -2481,3 +2481,24 @@ html.lite-mode .printer-bg-section { display: none; }
   html.lite-mode .printer-still { order: -1; width: 80%; }
   html.lite-mode .printer-textbox { margin: 0 16px 64px; }
 }
+
+/* ============================================================
+   トップ：活動実績（About内）
+============================================================ */
+.home-works { margin-top: 40px; }
+.home-works-label {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--accent); margin-bottom: 12px;
+}
+.home-works-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(0,0,0,0.12); }
+.home-works-list li {
+  display: grid; grid-template-columns: 150px 1fr; gap: 24px;
+  padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.home-works-date { font-weight: 700; color: #64748b; font-size: 0.95rem; letter-spacing: 0.04em; padding-top: 2px; }
+.home-works-title { font-weight: 700; color: #111; text-decoration: none; font-size: 1.05rem; }
+.home-works-title:hover { color: var(--accent); }
+.home-works-list p { margin: 6px 0 0; color: #555; font-size: 0.95rem; line-height: 1.8; }
+@media (max-width: 768px) {
+  .home-works-list li { grid-template-columns: 1fr; gap: 4px; }
+}
