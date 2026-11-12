@@ -63,6 +63,10 @@
       'kr-r5-p': '次にためしてみたいことを書いて終わります。',
       'kr-contact-cta': 'キット・体験会のお問い合わせ',
       /* ── Main: About ── */
+      'hero-title': '体験から始まる<br>次世代教育',
+      'hero-lead': '3Dプリンターやプログラミングを「実際に使ってみる」体験を、福岡の子どもたちに届けています。',
+      'hero-cta': 'CoreShift for children を見る <span aria-hidden="true">→</span>',
+      'hero-photo-alt': '体験会で子どもたちが3Dプリンターで作ったネームプレートとからくりおもちゃ',
       'about-p1': 'はじめまして。私たちは18歳の学生を中心とした学生グループです。',
       'about-p2': '私たちは、これからの時代を生きる子どもたちに必要なのは、知識を覚えることだけではなく、「現代にある技術を手段として使いこなせる考え方」だと考えています。',
       'about-p3': '私自身も、小学校・中学校・高校の頃に、AIやプログラミング、3Dプリンターなどを実際に活用しながら学ぶ教育を受けたかったという思いがあります。その経験が、この活動を始めるきっかけになりました。',
@@ -450,6 +454,10 @@
       'kr-r5-p': 'Finish by writing down what you would like to investigate next.',
       'kr-contact-cta': 'Ask about kits and workshops',
       /* ── Main: About ── */
+      'hero-title': 'Learning that starts<br>with hands-on experience',
+      'hero-lead': 'We bring hands-on experiences with 3D printers and programming to children in Fukuoka.',
+      'hero-cta': 'See CoreShift for children <span aria-hidden="true">→</span>',
+      'hero-photo-alt': 'Name plates and a gear toy that children made with a 3D printer at our workshop',
       'about-p1': 'Hello! We are a student group centered around 18-year-old students.',
       'about-p2': 'We believe that what children growing up today need is not just memorizing knowledge, but developing the mindset to use modern technology as a tool.',
       'about-p3': 'I personally wished I had been able to learn by actually using AI, programming, and 3D printers during my school years. That experience is what inspired me to start this project.',

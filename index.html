@@ -14,7 +14,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=30">
+  <link rel="stylesheet" href="style.css?v=31">
+  <script>
+    // 3Dの軽量モード判定（保存設定 → 視差効果を減らす → WebGL非対応 の順）
+    (function () {
+      var s = null; try { s = localStorage.getItem('coreshift-lite'); } catch (e) {}
+      var lite = s === '1' || (s === null && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (!lite) { try { var c = document.createElement('canvas'); lite = !(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { lite = true; } }
+      if (lite) document.documentElement.classList.add('lite-mode');
+    })();
+  </script>
   <script type="importmap">
     { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
   </script>
@@ -25,6 +34,7 @@
 
   <header id="header">
     <a class="logo" href="index.html" data-home-scroll>CoreShift</a>
+    <button type="button" class="lite-toggle" aria-pressed="false" title="3D表示の切り替え（軽量モード）">3D</button>
     <div class="lang-switch">
       <span class="lang-btn lang-active">JP</span>
       <span class="lang-sep-v">/</span>
@@ -33,7 +43,7 @@
   </header>
 
   <nav id="side-nav">
-    <a href="#about" class="nav-top-arrow" aria-label="ページ最上部へ戻る">↑</a>
+    <a href="#hero" class="nav-top-arrow" aria-label="ページ最上部へ戻る">↑</a>
     <span class="nav-sep"></span>
     <a href="#about">About</a>
     <span class="nav-sep"></span>
@@ -43,6 +53,21 @@
     <span class="nav-sep"></span>
     <a href="#sns">SNS</a>
   </nav>
+
+  <!-- ============ HERO（ファーストビュー） ============ -->
+  <section id="hero" class="home-hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-label">PROJECT CoreShift for children</p>
+        <h1 class="hero-title" data-i18n-html="hero-title">体験から始まる<br>次世代教育</h1>
+        <p class="hero-lead" data-i18n="hero-lead">3Dプリンターやプログラミングを「実際に使ってみる」体験を、福岡の子どもたちに届けています。</p>
+        <a href="coreshift-for-children/" class="hero-cta" data-i18n-html="hero-cta">CoreShift for children を見る <span aria-hidden="true">→</span></a>
+      </div>
+      <figure class="hero-photo">
+        <img src="coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" fetchpriority="high" data-i18n-alt="hero-photo-alt" alt="体験会で子どもたちが3Dプリンターで作ったネームプレートとからくりおもちゃ">
+      </figure>
+    </div>
+  </section>
 
   <!-- ============ 01 ABOUT ＋ PROJECT (旧版の構成＋洗練レイアウト) ============ -->
   <section id="about" class="home-sec white-section">
@@ -74,6 +99,7 @@
       <div class="tool-card reveal" data-zoom-card="3dprinter/" style="cursor:pointer">
         <div class="tool-card-img tool-card-img--canvas">
           <canvas class="card-3d-canvas" data-model="models/3Dプリンター.glb"></canvas>
+          <img class="lite-still card-still" src="images/printer-still.png" alt="3Dプリンター" loading="lazy">
         </div>
         <div class="tool-card-name" data-i18n="tool-3d">3Dプリンター</div>
       </div>
@@ -191,12 +217,12 @@
       document.documentElement.setAttribute('data-pt-init', '');
     }
   </script>
-  <script src="i18n.js?v=2"></script>
-  <script type="module" src="main.js"></script>
+  <script src="i18n.js?v=3"></script>
+  <script type="module" src="main.js?v=2"></script>
   <script>
     // ===== セクション単位のなめらかスクロール（for children と同じ仕様）=====
     (() => {
-      const sections = Array.from(document.querySelectorAll('.home-sec, .home-sec-tools, footer'));
+      const sections = Array.from(document.querySelectorAll('.home-hero, .home-sec, .home-sec-tools, footer'));
       let isAnimating = false;
       let animRafId = null;
       let unlockTimerId = null;

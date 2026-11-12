@@ -341,8 +341,48 @@ function updateAllScrollAnimations() {
 window.addEventListener('scroll', updateAllScrollAnimations, { passive: true });
 updateAllScrollAnimations();
 
+// ===== 3D軽量モード（静止画表示）=====
+// 判定は各ページ<head>のインラインスクリプトで html.lite-mode を付与済み
+const isLite = () => document.documentElement.classList.contains('lite-mode');
+function fallbackToStill(err) {
+  if (err) console.warn('[CoreShift] 3D表示に失敗したため静止画に切り替えます', err);
+  document.documentElement.classList.add('lite-mode');
+  syncLiteToggle();
+}
+function syncLiteToggle() {
+  document.querySelectorAll('.lite-toggle').forEach(btn => {
+    const lite = isLite();
+    btn.textContent = lite ? '3D OFF' : '3D ON';
+    btn.setAttribute('aria-pressed', String(lite));
+  });
+}
+document.querySelectorAll('.lite-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    try { localStorage.setItem('coreshift-lite', isLite() ? '0' : '1'); } catch (e) {}
+    location.reload();
+  });
+});
+syncLiteToggle();
+
+// ページ本体の表示を優先し、3Dは後から読み込む
+function whenIdle(fn) {
+  const run = () => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+  if (document.readyState === 'complete') run();
+  else window.addEventListener('load', run, { once: true });
+}
+
 // ===== ホームページ カードビューアー（3Dモデル in カード）=====
-initCardViewer();
+// カードが画面に近づいてから読み込む
+(() => {
+  const canvas = document.querySelector('.card-3d-canvas');
+  if (!canvas || isLite()) return;
+  const start = () => whenIdle(() => initCardViewer().catch(fallbackToStill));
+  if (!('IntersectionObserver' in window)) return start();
+  const io = new IntersectionObserver(entries => {
+    if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); }
+  }, { rootMargin: '600px 0px' });
+  io.observe(canvas);
+})();
 
 async function initCardViewer() {
   const canvas = document.querySelector('.card-3d-canvas');
@@ -385,6 +425,7 @@ async function initCardViewer() {
   const modelPath = canvas.dataset.model || 'models/3Dプリンター.glb';
 
   loader.load(modelPath, gltf => {
+    if (isLite()) return;
     const model  = gltf.scene;
     const box    = new THREE.Box3().setFromObject(model);
     const size   = box.getSize(new THREE.Vector3());
@@ -406,7 +447,7 @@ async function initCardViewer() {
       renderer.render(scene, camera);
     }
     animate();
-  });
+  }, undefined, fallbackToStill);
 }
 
 // ===== AI / プログラミングページ：最上部で上スクロール → ホームへ =====
@@ -483,7 +524,7 @@ if (document.getElementById('printer-scroll')) {
 }
 
 // ===== 3Dプリンター スクロールビューアー =====
-initPrinterViewer();
+if (!isLite()) whenIdle(() => initPrinterViewer().catch(fallbackToStill));
 
 async function initPrinterViewer() {
   const canvas = document.getElementById('printer-canvas');
@@ -544,7 +585,7 @@ async function initPrinterViewer() {
       action.play();
       action.paused = true;
     }
-  });
+  }, undefined, fallbackToStill);
 
   // ユーティリティ
   const lerp      = (a, b, t) => a + (b - a) * t;

@@ -2321,3 +2321,163 @@ a.home-project-box:hover .about-card-arrow {
     align-self: flex-end;
   }
 }
+
+/* ============================================================
+   トップ：ファーストビュー（HERO）
+============================================================ */
+.home-hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 110px 64px 56px;
+  box-sizing: border-box;
+}
+.hero-inner {
+  width: var(--hb-width, 1240px);
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+.hero-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 3.6vw, 3.8rem);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 24px;
+}
+.hero-lead {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 36px;
+  max-width: 34em;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-cta:hover { background: #2563eb; transform: translateY(-2px); }
+.hero-cta span { transition: transform 0.2s; }
+.hero-cta:hover span { transform: translateX(4px); }
+.hero-photo { margin: 0; }
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+@media (max-width: 1300px) {
+  .home-hero { padding: 120px 88px 56px 40px; }
+  .hero-inner { gap: 40px; }
+}
+@media (max-width: 768px) {
+  .home-hero { padding: 96px 16px 48px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .hero-photo { order: -1; }
+  .hero-title { font-size: 2.3rem; }
+  .hero-lead { font-size: 1rem; margin-bottom: 28px; }
+  .hero-cta { width: 100%; justify-content: center; box-sizing: border-box; }
+}
+
+/* ============================================================
+   3D 軽量モード（静止画表示）
+============================================================ */
+.lite-toggle {
+  margin-left: auto;
+  margin-right: 20px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font: 700 0.8rem/1 var(--font);
+  letter-spacing: 0.1em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.lite-toggle:hover { opacity: 1; border-color: #fff; }
+#header .lite-toggle + .lang-switch { margin-left: 0; }
+@media (max-width: 768px) {
+  .lite-toggle { margin-right: 12px; padding: 6px 10px; font-size: 0.7rem; }
+}
+
+.lite-still { display: none; }
+html.lite-mode .lite-still { display: block; }
+html.lite-mode .card-3d-canvas,
+html.lite-mode #printer-canvas { display: none !important; }
+
+.card-still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8%;
+  box-sizing: border-box;
+}
+
+/* 3Dプリンターページ：スクロール演出をやめて静的に並べる */
+html.lite-mode #printer-scroll { height: auto; }
+html.lite-mode .printer-sticky {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 120px 72px 64px;
+  box-sizing: border-box;
+}
+html.lite-mode .printer-still {
+  order: 2;
+  width: min(42vw, 520px);
+  height: auto;
+  flex-shrink: 0;
+}
+html.lite-mode .printer-text-overlay {
+  position: static;
+  opacity: 1;
+  max-width: 560px;
+}
+html.lite-mode .printer-scroll-hint { display: none; }
+html.lite-mode .printer-textbox {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  opacity: 1;
+  pointer-events: auto;
+  margin: 0 auto 96px;
+}
+html.lite-mode .printer-bg-section { display: none; }
+@media (max-width: 768px) {
+  html.lite-mode .printer-sticky { flex-direction: column; padding: 96px 16px 40px; gap: 24px; }
+  html.lite-mode .printer-still { order: -1; width: 80%; }
+  html.lite-mode .printer-textbox { margin: 0 16px 64px; }
+}
