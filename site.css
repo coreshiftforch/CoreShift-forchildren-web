@@ -419,3 +419,21 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   .gallery { grid-template-columns: minmax(0, 1fr); }
   .models { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ============================================================
+   日本語の折り返し
+   見出し・ボタンは <wbr> を入れた言葉の切れ目だけで折り返す（Safari でも効く）。
+   本文は対応ブラウザ（Chrome・Edge）で言葉のまとまりごとに折り返す。
+   見出しを足すときは、言葉の切れ目に <wbr> を入れる。
+============================================================ */
+body { line-break: strict; }
+h1, h2, h3, .btn, .next-body strong, .project-name, .door h3 {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+.nw { white-space: nowrap; }
