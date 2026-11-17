@@ -3,442 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoreShift — 体験から始まる次世代教育</title>
-  <meta name="description" content="ZEN大学の学生が運営する福岡の学生団体CoreShift。3Dプリンターやプログラミングを「実際に使ってみる」体験を子どもたちに届けています。">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="CoreShift — 体験から始まる次世代教育">
-  <meta property="og:description" content="体験から始まる次世代教育。AIやプログラミング、3Dプリンターを使いこなす力を子どもたちに。">
+  <title>CoreShift — 福岡の子どもたちに、新しい技術を「使ってみる」体験を</title>
+  <meta name="description" content="福岡の学生団体CoreShift。3Dプリンターなどの新しい技術を、子どもたちが「使ってみる」体験会を開いています。">
+  <meta property="og:title" content="CoreShift — 福岡の子どもたちに、新しい技術を「使ってみる」体験を">
+  <meta property="og:description" content="福岡の学生団体CoreShift。3Dプリンターなどの新しい技術を、子どもたちが「使ってみる」体験会を開いています。">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="DxiwSUlddvfgO7YuV0GhDAcWRFCEQJUEOp6-UvYx_lk" />
+  <link rel="icon" href="/icon/アイコン03.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="style.css?v=39">
-  <script>
-    // 3Dの軽量モード判定（保存設定 → 視差効果を減らす → WebGL非対応 の順）
-    (function () {
-      var s = null; try { s = localStorage.getItem('coreshift-lite'); } catch (e) {}
-      var lite = s === '1' || (s === null && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-      if (!lite) { try { var c = document.createElement('canvas'); lite = !(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { lite = true; } }
-      if (lite) document.documentElement.classList.add('lite-mode');
-    })();
-  </script>
-  <script type="importmap">
-    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=1">
 </head>
-<body class="home-page">
+<body>
+<div style="font-family: 'Noto Sans JP', system-ui, sans-serif; color: #111827; background: #FFFFFF; ">
 
-  <div id="cursor"></div>
-
-  <header id="header">
-    <a class="logo" href="index.html" data-home-scroll>CoreShift</a>
-    <button type="button" class="lite-toggle" aria-pressed="false" title="3D表示の切り替え（軽量モード）">3D</button>
-    <div class="lang-switch">
-      <span class="lang-btn lang-active">JP</span>
-      <span class="lang-sep-v">/</span>
-      <span class="lang-btn">EN</span>
-    </div>
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 40px; border-bottom: 1px solid #E5E7EB">
+    <a href="/" style="font-weight: 900; font-size: 24px; color: #111827; text-decoration: none">CoreShift</a>
+    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; font-weight: 700">
+      <a href="/for-organizations/" style="text-decoration: none">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/" style="text-decoration: none">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/" style="text-decoration: none">企業・個人の方へ</a>
+      <a href="/contact/" style="text-decoration: none">お問い合わせ</a>
+    </nav>
   </header>
 
-  <nav id="side-nav">
-    <a href="#hero" class="nav-top-arrow" aria-label="ページ最上部へ戻る">↑</a>
-    <span class="nav-sep"></span>
-    <a href="#about">About</a>
-    <span class="nav-sep"></span>
-    <a href="#tools">Tools</a>
-    <span class="nav-sep"></span>
-    <a href="#others">Others</a>
-    <span class="nav-sep"></span>
-    <a href="#sns">SNS</a>
-  </nav>
-
-  <!-- ============ HERO（ファーストビュー） ============ -->
-  <section id="hero" class="home-hero home-hero--bg">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="hero-label">PROJECT CoreShift for children</p>
-        <h1 class="hero-title" data-i18n-html="hero-title">体験から始まる<br>次世代教育</h1>
-        <p class="hero-lead" data-i18n="hero-lead">3Dプリンターやプログラミングを「実際に使ってみる」体験を、福岡の子どもたちに届けています。</p>
-        <a href="coreshift-for-children/" class="hero-cta" data-i18n-html="hero-cta">CoreShift for children を見る <span aria-hidden="true">→</span></a>
+  <section style="padding: 72px 40px; background: #F3F4F6">
+    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <h1 style="margin: 0; font-size: 42px; line-height: 1.3; font-weight: 900">福岡の子どもたちに、<br>3Dプリンターなどの新しい技術を「使ってみる」体験を</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 1.9; color: #374151">子どもがスマホでデザインした形を、3Dプリンターで実際の形にします。アプリも教材も自分たちで作りました。代表が18歳で立ち上げた学生団体です。</p>
       </div>
-      <figure class="hero-photo">
-        <img src="coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" fetchpriority="high" data-i18n-alt="hero-photo-alt" alt="体験会で子どもたちが3Dプリンターで作ったネームプレートとからくりおもちゃ">
-      </figure>
+      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" alt="子どもたちが作ったネームプレートとからくりおもちゃ" style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px; display: block">
+    </div>
+    <div style="max-width: 1120px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+      <a href="/for-organizations/" style="display: flex; flex-direction: column; gap: 6px; padding: 24px; background: #FFFFFF; border: 2px solid #1D4ED8; border-radius: 12px; text-decoration: none; color: #111827"><span style="font-size: 18px; font-weight: 900">施設・学校の方へ →</span><span style="font-size: 14px; color: #4B5563">体験会の開催をご相談</span></a>
+      <a href="/coreshift-for-children/support/" style="display: flex; flex-direction: column; gap: 6px; padding: 24px; background: #FFFFFF; border: 2px solid #1D4ED8; border-radius: 12px; text-decoration: none; color: #111827"><span style="font-size: 18px; font-weight: 900">企業・個人の方へ →</span><span style="font-size: 14px; color: #4B5563">活動を応援する</span></a>
+    </div>
+    <a href="/coreshift-for-children/" style="max-width: 1120px; margin: 16px auto 0; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 28px 32px; background: #FFFFFF; border: 1px solid #D1D5DB; border-left: 6px solid #1D4ED8; border-radius: 12px; text-decoration: none; color: #111827">
+      <span style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #1D4ED8">PROJECT</span>
+        <span style="font-size: 24px; font-weight: 900">CoreShift for children</span>
+        <span style="font-size: 15px; line-height: 1.8; color: #374151">子どもたちが新しい技術を道具として使い、自分で考え、形にする力を育てるプロジェクトです。</span>
+        <span style="font-size: 15px; line-height: 1.8; font-weight: 700; color: #111827">保護者の方へ：体験会の内容と、次回のお知らせはこちらから。</span>
+      </span>
+      <span style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 28px; background: #1D4ED8; color: #FFFFFF; font-weight: 700; border-radius: 999px">詳しく見る →</span>
+    </a>
+  </section>
+
+  <section style="padding: 72px 40px">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+      <h2 style="margin: 0; font-size: 28px; font-weight: 900">CoreShiftの体験会の特長</h2>
+      <ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+        <li style="padding: 24px; border: 1px solid #D1D5DB; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #374151"><strong style="display: block; font-size: 18px; color: #111827; margin-bottom: 6px">知識ゼロからでも体験できる</strong>自作のWebアプリで、小学生でもスマホから自分でデザインできます。</li>
+        <li style="padding: 24px; border: 1px solid #D1D5DB; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #374151"><strong style="display: block; font-size: 18px; color: #111827; margin-bottom: 6px">仕組みがわかるオリジナル教材</strong>歯車で動くからくりおもちゃ（観覧車・メリーゴーランドなど）を、独自に設計しています。</li>
+        <li style="padding: 24px; border: 1px solid #D1D5DB; border-radius: 12px; font-size: 15px; line-height: 1.8; color: #374151"><strong style="display: block; font-size: 18px; color: #111827; margin-bottom: 6px">新しい技術を、ものづくりの手段に</strong>3Dプリンターを「学ぶ対象」ではなく、自分のアイデアを形にする道具として使います（プログラミング体験も準備中）。</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ============ 01 ABOUT ＋ PROJECT (旧版の構成＋洗練レイアウト) ============ -->
-  <section id="about" class="home-sec white-section">
-    <div class="sec-num">01</div>
-    <div class="sec-body">
-      <h2 class="reveal">About</h2>
-      <div class="sec-text">
-        <p class="reveal" data-i18n="about-p1">はじめまして。CoreShiftは、福岡で活動する学生団体です。</p>
-        <p class="reveal" data-i18n="about-p2">ZEN大学の学生が運営し、ZEN大学3Dモデリング・3Dプリンターサークルと連携しながら、3Dプリンターやプログラミングを「実際に使ってみる」体験を子どもたちに届けています。</p>
+  <section style="padding: 72px 40px; background: #F3F4F6">
+    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center">
+      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965518_0.jpg" alt="体験会の様子" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; display: block">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 28px; font-weight: 900">これまでの活動</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.9; color: #374151">2026年8月、福岡市立高宮公民館の特別企画で講師を担当しました（2時間×2部、親子7組が参加）。子どもたちは、自分でデザインしたネームプレートを3Dプリンターで作り、からくりおもちゃを組み立てました。からくりおもちゃは当日に持ち帰りました。</p>
+        <a href="https://core-shift.jp/coreshift-for-children/event01_takamiya/" style="font-size: 15px; font-weight: 700">活動レポートを見る →</a>
       </div>
+    </div>
+  </section>
 
-      <a href="coreshift-for-children/" class="about-card home-project-box reveal">
-        <div class="about-card-label">PROJECT</div>
-        <div class="about-card-header">
-          <h3>CoreShift for children</h3>
-          <span class="home-project-cta" data-i18n-html="tp-001">詳しく見る <span class="about-card-arrow">→</span></span>
-        </div>
-        <p data-i18n="about-card-desc">子どもたちが現代にある技術を手段として使い、自ら考え、挑戦し、未来を切り拓く力を育てる教育DXプロジェクトです。</p>
-      </a>
-
-      <div class="home-works reveal">
-        <div class="home-works-label" data-i18n="works-label">活動実績</div>
-        <ul class="home-works-list">
-          <li>
-            <span class="home-works-date" data-i18n="works-1-date">2026.08.09</span>
-            <div>
-              <a href="coreshift-for-children/event01_takamiya/" class="home-works-title" data-i18n-html="works-1-title">高宮公民館「3Dプリンターでネームプレートづくり」 <span aria-hidden="true">→</span></a>
-              <p data-i18n="works-1-desc">小学生と保護者が対象。7組・子ども8人が参加。印刷を待つあいだ、保護者向けにAIの使い方講座も行いました。</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="home-org reveal">
-        <div class="home-works-label" data-i18n="org-label">団体概要</div>
-        <dl class="org-list">
-          <div class="org-row">
-            <dt data-i18n="org-name-t">団体名</dt>
-            <dd data-i18n="org-name-v">CoreShift</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-rep-t">代表</dt>
-            <dd data-i18n="org-rep-v">石原 広大</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-loc-t">所在地</dt>
-            <dd data-i18n="org-loc-v">福岡県福岡市を拠点に活動</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-team-t">体制</dt>
-            <dd data-i18n="org-team-v">運営メンバー2名＋大学生ボランティア（福岡県内の大学生・ZEN大学生）</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-act-t">活動内容</dt>
-            <dd data-i18n="org-act-v">子ども向けの3Dプリンター・プログラミング体験会の企画・運営、出張体験会</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-partner-t">連携先</dt>
-            <dd data-i18n="org-partner-v">ZEN大学 3Dモデリング・3Dプリンターサークル</dd>
-          </div>
-          <div class="org-row">
-            <dt data-i18n="org-contact-t">連絡先</dt>
-            <dd data-i18n-html="org-contact-v">coreshift.forch@gmail.com ／ <a href="contact/">お問い合わせフォーム</a></dd>
-          </div>
+  <section id="about" style="padding: 72px 40px">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+      <h2 style="margin: 0; font-size: 28px; font-weight: 900">団体概要</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+        <div style="flex: 0 0 140px; height: 140px; border: 2px dashed #9CA3AF; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #4B5563; font-size: 13px">代表の写真</div>
+        <dl style="flex: 1 1 480px; margin: 0; display: grid; grid-template-columns: 112px 1fr; gap: 10px 16px; font-size: 15px; line-height: 1.7">
+          <dt style="font-weight: 700; color: #4B5563">団体名</dt><dd style="margin: 0">CoreShift</dd>
+          <dt style="font-weight: 700; color: #4B5563">代表</dt><dd style="margin: 0">石原 広大</dd>
+          <dt style="font-weight: 700; color: #4B5563">設立</dt><dd style="margin: 0">2026年6月</dd>
+          <dt style="font-weight: 700; color: #4B5563">拠点</dt><dd style="margin: 0">福岡県福岡市</dd>
+          <dt style="font-weight: 700; color: #4B5563">体制</dt><dd style="margin: 0">運営メンバー2名＋大学生スタッフ（ボランティア）</dd>
+          <dt style="font-weight: 700; color: #4B5563">連携</dt><dd style="margin: 0">ZEN大学 3Dモデリング・3Dプリンターサークル</dd>
+          <dt style="font-weight: 700; color: #4B5563">法人格</dt><dd style="margin: 0">なし（任意団体）<br><span style="font-size: 14px; color: #4B5563">※CoreShiftは、ZEN大学とは独立した団体です。</span></dd>
+          <dt style="font-weight: 700; color: #4B5563">連絡先</dt><dd style="margin: 0"><a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a></dd>
         </dl>
       </div>
     </div>
   </section>
 
-  <!-- ============ 02 TOOLS (3Dプリンター / AI / プログラミング) ============ -->
-  <section id="tools" class="home-sec">
-    <div class="sec-num">02</div>
-    <h2 class="reveal">Tools</h2>
-    <div class="home-tools-grid">
-      <div class="tool-card reveal" data-zoom-card="3dprinter/" style="cursor:pointer">
-        <div class="tool-card-img tool-card-img--canvas">
-          <canvas class="card-3d-canvas" data-model="models/3Dプリンター.glb"></canvas>
-          <img class="lite-still card-still" src="images/printer-still.png" alt="3Dプリンター" loading="lazy">
-        </div>
-        <div class="tool-card-name" data-i18n="tool-3d">3Dプリンター</div>
-      </div>
-      <a href="ai/" class="tool-card reveal">
-        <div class="tool-card-img">
-          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="42" y="42" width="36" height="36" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
-            <line x1="42" y1="52" x2="25" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="62" x2="25" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="42" y1="72" x2="25" y2="72" stroke="#3b82f6" stroke-width="1"/>
-            <line x1="78" y1="52" x2="95" y2="52" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="62" x2="95" y2="62" stroke="#3b82f6" stroke-width="1"/><line x1="78" y1="72" x2="95" y2="72" stroke="#3b82f6" stroke-width="1"/>
-            <line x1="52" y1="42" x2="52" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="42" x2="62" y2="25" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="42" x2="72" y2="25" stroke="#3b82f6" stroke-width="1"/>
-            <line x1="52" y1="78" x2="52" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="62" y1="78" x2="62" y2="95" stroke="#3b82f6" stroke-width="1"/><line x1="72" y1="78" x2="72" y2="95" stroke="#3b82f6" stroke-width="1"/>
-            <circle cx="25" cy="52" r="3" fill="#3b82f6"/><circle cx="25" cy="62" r="3" fill="#3b82f6"/><circle cx="25" cy="72" r="3" fill="#3b82f6"/>
-            <circle cx="95" cy="52" r="3" fill="#3b82f6"/><circle cx="95" cy="62" r="3" fill="#3b82f6"/><circle cx="95" cy="72" r="3" fill="#3b82f6"/>
-            <circle cx="52" cy="25" r="3" fill="#93c5fd"/><circle cx="62" cy="25" r="3" fill="#93c5fd"/><circle cx="72" cy="25" r="3" fill="#93c5fd"/>
-            <circle cx="52" cy="95" r="3" fill="#93c5fd"/><circle cx="62" cy="95" r="3" fill="#93c5fd"/><circle cx="72" cy="95" r="3" fill="#93c5fd"/>
-            <text x="60" y="66" text-anchor="middle" font-size="13" font-weight="700" font-family="monospace" fill="#3b82f6">AI</text>
-          </svg>
-        </div>
-        <div class="tool-card-name">AI <span class="tool-soon" data-i18n="tool-soon">準備中</span></div>
-      </a>
-      <a href="programming/" class="tool-card reveal">
-        <div class="tool-card-img">
-          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="15" y="20" width="90" height="72" rx="4" stroke="#3b82f6" stroke-width="1.5"/>
-            <line x1="15" y1="35" x2="105" y2="35" stroke="#3b82f6" stroke-width="1"/>
-            <circle cx="27" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-            <circle cx="38" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-            <circle cx="49" cy="27" r="3" fill="#3b82f6" fill-opacity="0.4"/>
-            <text x="28" y="57" font-size="18" font-family="monospace" fill="#3b82f6" font-weight="700">&lt;/&gt;</text>
-            <line x1="27" y1="67" x2="80" y2="67" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-            <line x1="27" y1="76" x2="65" y2="76" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-            <line x1="27" y1="85" x2="73" y2="85" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
-          </svg>
-        </div>
-        <div class="tool-card-name" data-i18n="tool-prog">プログラミング</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============ 03 OTHERS (その他の取り組み・ご支援) ============ -->
-  <section id="others" class="home-sec white-section">
-    <div class="sec-num">03</div>
-    <div class="sec-body">
-      <h2 class="reveal">Others</h2>
-      <div class="sec-text">
-        <p class="reveal" data-i18n="tp-002">学生団体CoreShiftの活動を応援・連携していただける企業・団体・個人の皆さまへのご案内です。</p>
-      </div>
-
-      <div class="home-box-grid">
-        <a href="coreshift-for-children/support/" class="about-card home-project-box reveal" style="margin-top:0;">
-          <div class="about-card-label" data-i18n="tp-003">SPONSORSHIP ／ 企業・団体様</div>
-          <div class="about-card-header">
-            <h3 data-i18n="tp-004">企業協賛・継続連携のご案内</h3>
-            <span class="home-project-cta" data-i18n-html="tp-005">詳細を見る <span class="about-card-arrow">→</span></span>
-          </div>
-          <p data-i18n="tp-006">フィラメントや micro:bit などの資材・機材のご提供、体験会の会場、活動資金のご協賛を受け付けています。教育連携のご相談もこちらから。</p>
-        </a>
-
-        <div class="about-card home-project-box home-project-box--soon reveal" style="margin-top:0;">
-          <div class="about-card-label" style="color:#64748b;" data-i18n="tp-007">CROWDFUNDING ／ 個人・支援者様</div>
-          <div class="about-card-header">
-            <h3 data-i18n="tp-008">クラウドファンディング</h3>
-            <span class="home-project-cta home-project-cta--muted" data-i18n="tp-009">準備中</span>
-          </div>
-          <p data-i18n="tp-010">多くの子どもたちに安価で体験を届けるためのクラウドファンディングを準備中です。公開時にSNSでお知らせします。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 04 SNS / Links ============ -->
-  <section id="sns" class="home-sec">
-    <div class="sec-num">04</div>
-    <div class="sec-body">
-      <h2 class="reveal">SNS / Links</h2>
-      <div class="link-row reveal">
-        <a href="https://www.instagram.com/coreshift.for_children?igsh=dGFhYnpsdGNyeHht" target="_blank" rel="noopener" class="link-item">
-          Instagram <span class="link-arrow">↗</span>
-        </a>
-        <a href="https://www.facebook.com/share/1BXkFu2nxp/" target="_blank" rel="noopener" class="link-item">
-          Facebook <span class="link-arrow">↗</span>
-        </a>
-        <!-- 一旦非表示: なまえプレート / BASE Shop
-        <a href="https://coreshiftforch.github.io/nameplate-maker/" target="_blank" rel="noopener" class="link-item">
-          🪪 <span data-i18n="app-link">なまえプレート</span> <span class="link-arrow">↗</span>
-        </a>
-        <a href="https://coreshift.base.shop/" target="_blank" rel="noopener" class="link-item">
-          🛒 BASE Shop <span class="link-arrow">↗</span>
-        </a>
-        -->
-        <div class="link-item link-item--text">
-          <span>Email</span>
-          <span class="link-email">coreshift.forch@gmail.com</span>
-        </div>
-        <a href="contact/" class="link-item">
-          <span data-i18n="contact-link">お問い合わせ</span> <span class="link-arrow">↗</span>
-        </a>
-      </div>
-      <p class="contact-note reveal" data-i18n-html="contact-note">やってほしいイベントのご要望や、ご協力いただける個人・団体・企業の方は、お気軽にお問い合わせください。<br>イベントの感想などは各SNSのDMからお願いします。</p>
-    </div>
-  </section>
-
-  <footer>
-    <span class="footer-logo">CoreShift</span>
-    <span>&copy; 2026 CoreShift</span>
+  <footer style="padding: 40px; border-top: 1px solid #E5E7EB; display: flex; flex-direction: column; gap: 16px; font-size: 14px; color: #4B5563">
+    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-weight: 700"><a href="/for-organizations/">施設・学校の方へ</a><a href="/coreshift-for-children/">保護者の方へ</a><a href="/coreshift-for-children/support/">企業・個人の方へ</a><a href="/contact/">お問い合わせ</a><a href="https://www.instagram.com/coreshift.for_children/">Instagram</a><a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a></nav>
+    <span>© CoreShift</span>
   </footer>
-
-  <div id="printer-wipe"></div>
-  <div id="page-transition">
-    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
-    <div class="pt-strip"></div><div class="pt-strip"></div>
-  </div>
-  <script>
-    if (sessionStorage.getItem('ptStrip') === '1') {
-      document.documentElement.setAttribute('data-pt-init', '');
-    }
-  </script>
-  <script src="i18n.js?v=7"></script>
-  <script type="module" src="main.js?v=2"></script>
-  <script>
-    // ===== セクション単位のなめらかスクロール（for children と同じ仕様）=====
-    (() => {
-      const sections = Array.from(document.querySelectorAll('.home-hero, .home-sec, .home-sec-tools, footer'));
-      let isAnimating = false;
-      let animRafId = null;
-      let unlockTimerId = null;
-      const DURATION = 700;
-
-      function easeOutQuart(t) {
-        return 1 - Math.pow(1 - t, 4);
-      }
-
-      function getCurrentSectionIndex() {
-        const scrollMid = window.scrollY + window.innerHeight * 0.35;
-        let idx = 0;
-        sections.forEach((sec, i) => {
-          if (sec.offsetTop <= scrollMid) idx = i;
-        });
-        return idx;
-      }
-
-      // 画面より高いセクションは、セクション内を先にスクロールしてから次へ進む
-      function stepSection(dir) {
-        const y = window.scrollY, vh = window.innerHeight;
-        const cur = sections[getCurrentSectionIndex()];
-        if (cur) {
-          const top = cur.offsetTop, bottom = top + cur.offsetHeight;
-          if (dir > 0 && bottom - (y + vh) > 4) {
-            return scrollToY(Math.min(bottom - vh, y + vh * 0.85));
-          }
-          if (dir < 0 && y - top > 4) {
-            return scrollToY(Math.max(top, y - vh * 0.85));
-          }
-        }
-        const prev = sections[getCurrentSectionIndex() - 1];
-        if (dir < 0 && prev) {
-          return scrollToY(Math.max(prev.offsetTop, prev.offsetTop + prev.offsetHeight - vh));
-        }
-        scrollToSection(getCurrentSectionIndex() + dir);
-      }
-
-      function scrollToY(y) {
-        const fake = { offsetTop: y };
-        sections.push(fake);
-        scrollToSection(sections.length - 1);
-        sections.pop();
-      }
-
-      function scrollToSection(index, forceInterrupt = false) {
-        if (index < 0 || index >= sections.length) return;
-        if (isAnimating && !forceInterrupt) return;
-
-        if (animRafId) cancelAnimationFrame(animRafId);
-        if (unlockTimerId) clearTimeout(unlockTimerId);
-
-        isAnimating = true;
-
-        const startY = window.scrollY;
-        const targetEl = sections[index];
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const targetY = Math.min(targetEl.offsetTop, maxScroll);
-        const diff = targetY - startY;
-
-        if (Math.abs(diff) < 2) {
-          isAnimating = false;
-          return;
-        }
-
-        const startTime = performance.now();
-
-        function step(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(elapsed / DURATION, 1);
-          const eased = easeOutQuart(progress);
-          window.scrollTo(0, startY + diff * eased);
-
-          if (progress < 1) {
-            animRafId = requestAnimationFrame(step);
-          } else {
-            animRafId = null;
-            unlockTimerId = setTimeout(() => {
-              isAnimating = false;
-              unlockTimerId = null;
-            }, 180);
-          }
-        }
-
-        animRafId = requestAnimationFrame(step);
-      }
-
-      window.addEventListener('wheel', e => {
-        if (window.matchMedia('(max-width: 768px)').matches) return;
-        e.preventDefault();
-        if (isAnimating) return;
-        if (Math.abs(e.deltaY) < 2) return;
-
-        const current = getCurrentSectionIndex();
-        const dir = e.deltaY > 0 ? 1 : -1;
-        stepSection(dir);
-      }, { passive: false });
-
-      window.addEventListener('keydown', e => {
-        if (window.matchMedia('(max-width: 768px)').matches) return;
-        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
-          e.preventDefault();
-          if (isAnimating) return;
-          stepSection(1);
-        } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
-          e.preventDefault();
-          if (isAnimating) return;
-          stepSection(-1);
-        }
-      });
-
-      document.querySelectorAll('#side-nav a[href^="#"]').forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const targetId = link.getAttribute('href').slice(1);
-          const targetIdx = sections.findIndex(sec => sec.id === targetId);
-          if (targetIdx !== -1) scrollToSection(targetIdx, true);
-        });
-      });
-    })();
-
-    // ===== 下スクロール時は上から順に出現 ／ 上スクロール時は去るセクションがフェードアウト =====
-    (() => {
-      const homeSections = Array.from(document.querySelectorAll('.home-sec, .home-sec-tools'));
-
-      homeSections.forEach(sec => {
-        const reveals = Array.from(sec.querySelectorAll('.reveal'));
-        const total = reveals.length;
-        reveals.forEach((el, idx) => {
-          el.style.setProperty('--stagger', `${idx * 0.11}s`);
-          el.style.setProperty('--out-stagger', `${(total - 1 - idx) * 0.06}s`);
-        });
-      });
-
-      let lastY = window.scrollY;
-
-      function updateSectionVisibility() {
-        const y = window.scrollY;
-        const vh = window.innerHeight;
-        const goingUp = y < lastY;
-        lastY = y;
-
-        homeSections.forEach(sec => {
-          const rect = sec.getBoundingClientRect();
-          const reveals = sec.querySelectorAll('.reveal');
-
-          if (rect.top <= vh * 0.75 && rect.bottom > 0) {
-            reveals.forEach(el => {
-              el.classList.remove('fading-out');
-              el.classList.add('visible');
-            });
-          } else if (rect.top <= 0) {
-            reveals.forEach(el => {
-              el.classList.remove('fading-out');
-              el.classList.add('visible');
-            });
-          } else if (rect.top > vh * 0.35 && goingUp) {
-            reveals.forEach(el => {
-              if (el.classList.contains('visible')) {
-                el.classList.remove('visible');
-                el.classList.add('fading-out');
-              }
-            });
-          }
-        });
-      }
-
-      window.addEventListener('scroll', updateSectionVisibility, { passive: true });
-      updateSectionVisibility();
-    })();
-  </script>
+</div>
 </body>
 </html>

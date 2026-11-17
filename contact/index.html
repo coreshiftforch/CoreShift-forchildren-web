@@ -3,119 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — CoreShift</title>
+  <title>お問い合わせ — CoreShift</title>
+  <meta name="description" content="CoreShiftへのお問い合わせ。体験会の開催のご相談、参加についてのご質問、協賛のご相談などを受け付けています。">
+  <meta property="og:title" content="お問い合わせ — CoreShift">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/icon/アイコン03.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="../style.css?v=35">
-  <style>
-    html, body { background: #fff !important; cursor: auto !important; }
-    #cursor { display: none !important; }
-    #header { background: rgba(255,255,255,0.95) !important; border-bottom: 1px solid #e5e5e5; }
-    #header.scrolled { background: rgba(255,255,255,0.95) !important; backdrop-filter: blur(12px); }
-    #header .logo { color: #111 !important; }
-    #side-nav a { color: #444 !important; }
-    .nav-sep { background: #444 !important; }
-    footer { background: #fff !important; border-top: 1px solid #e5e5e5; color: #888 !important; }
-    .footer-logo { color: #111 !important; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=1">
 </head>
-<body class="contact-page">
+<body>
+<div style="font-family: 'Noto Sans JP', system-ui, sans-serif; color: #111827; background: #FFFFFF">
 
-  <header id="header">
-    <a class="logo" href="../index.html" style="color:#111">CoreShift</a>
-    <div class="lang-switch">
-      <span class="lang-btn lang-active">JP</span>
-      <span class="lang-sep-v">/</span>
-      <span class="lang-btn">EN</span>
-    </div>
+  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 40px; border-bottom: 1px solid #E5E7EB">
+    <a href="/" style="font-weight: 900; font-size: 24px; color: #111827; text-decoration: none">CoreShift</a>
+    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; font-weight: 700">
+      <a href="/for-organizations/" style="text-decoration: none">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/" style="text-decoration: none">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/" style="text-decoration: none">企業・個人の方へ</a>
+      <a href="/contact/" style="text-decoration: none; color: #111827; border-bottom: 3px solid #1D4ED8">お問い合わせ</a>
+    </nav>
   </header>
 
-  <nav id="side-nav">
-    <a href="../about/">About</a>
-    <span class="nav-sep"></span>
-    <a href="../about/#events">Event</a>
-    <span class="nav-sep"></span>
-    <a href="../about/#support">Support Us</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#sns">SNS</a>
-  </nav>
-
-  <section class="contact-section">
-    <div class="sec-body">
-      <div class="tool-detail-label">CONTACT</div>
-      <h2 data-i18n="contact-title">お問い合わせ</h2>
-      <div class="contact-org-note">
-        <strong data-i18n="contact-org-t">施設・団体の方へ</strong>
-        <p data-i18n="contact-org-d">出張体験会のご相談もこちらから受け付けています。施設名・対象（学年など）・人数・希望の時期をお書きいただけるとスムーズです。</p>
+  <section style="padding: 64px 40px">
+    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h1 style="margin: 0; font-size: 40px; font-weight: 900">お問い合わせ</h1>
+        <p style="margin: 0; font-size: 14px; color: #4B5563">ご用件を選んで、内容をお書きください。</p>
       </div>
 
-      <form id="contact-form">
-        <div class="form-group">
-          <label for="subject" data-i18n="contact-subject">件名</label>
-          <input type="text" id="subject" name="subject" required placeholder="件名を入力してください" data-i18n-placeholder="contact-subject-ph">
+      <form id="contact-form" style="display: flex; flex-direction: column; gap: 20px">
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+          <legend style="font-size: 15px; font-weight: 700; margin-bottom: 12px">ご用件</legend>
+          <div class="type-grid">
+            <label class="type-opt"><input type="radio" name="type" value="workshop"><span>体験会の開催のご相談</span></label>
+            <label class="type-opt"><input type="radio" name="type" value="join"><span>体験会への参加について</span></label>
+            <label class="type-opt"><input type="radio" name="type" value="sponsor"><span>協賛・物品のご提供</span></label>
+            <label class="type-opt"><input type="radio" name="type" value="other"><span>その他</span></label>
+          </div>
+        </fieldset>
+        <input type="hidden" name="_subject" id="subject" value="【CoreShift】お問い合わせ">
+        <input type="hidden" name="用件" id="type-label" value="">
+
+        <div style="padding: 20px 24px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; font-size: 15px; line-height: 1.8">
+          <strong id="hint-title" style="display: block; color: #1D4ED8; margin-bottom: 4px">ご用件を選んでください</strong><span id="hint">上の4つからご用件を選ぶと、書いていただきたい内容をご案内します。</span>
         </div>
-        <div class="form-group">
-          <label for="email" data-i18n="contact-email">返信用メールアドレス</label>
-          <input type="email" id="email" name="email" required placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label for="message" data-i18n="contact-message">内容</label>
-          <textarea id="message" name="message" required rows="8" placeholder="お問い合わせ内容を入力してください" data-i18n-placeholder="contact-message-ph"></textarea>
-        </div>
-        <button type="submit" class="contact-submit-btn">
-          <span class="btn-text" data-i18n="contact-send">送信</span>
-          <span class="btn-arrow">→</span>
-        </button>
+
+        <label class="field"><span id="name-label">お名前</span>
+          <input type="text" name="name" id="name" required>
+        </label>
+        <label class="field org-only" hidden>ご担当者名
+          <input type="text" name="担当者名">
+        </label>
+        <label class="field">返信用メールアドレス
+          <input type="email" name="email" required placeholder="your@email.com">
+        </label>
+        <label class="field org-only" hidden><span>ご希望の時期<span style="font-weight: 400; color: #4B5563">（任意）</span></span>
+          <input type="text" name="希望の時期" placeholder="例）1月">
+        </label>
+        <label class="field org-only" hidden><span>人数<span style="font-weight: 400; color: #4B5563">（任意）</span></span>
+          <input type="text" name="人数" placeholder="例）小学生8人ほど">
+        </label>
+        <label class="field">お問い合わせ内容
+          <textarea name="message" id="message" rows="6" required></textarea>
+        </label>
+        <p style="margin: 0; font-size: 14px; line-height: 1.8; color: #4B5563">お名前とメールアドレスは、お問い合わせへの返信にだけ使います。</p>
+        <button type="submit" id="send" style="align-self: flex-start; min-height: 52px; padding: 0 40px; background: #1D4ED8; color: #FFFFFF; font-weight: 700; font-size: 16px; border: 0; border-radius: 999px; cursor: pointer; font-family: inherit">送信する</button>
       </form>
 
-      <div id="form-success" class="form-notice form-success-msg" style="display:none">
-        <p data-i18n="contact-success">お問い合わせありがとうございます。返信までしばらくお待ちください。</p>
+      <div id="form-success" role="status" hidden style="padding: 20px 24px; background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 12px; font-size: 15px; line-height: 1.8">
+        <p style="margin: 0">お問い合わせありがとうございます。5日以内に返信します。</p>
       </div>
-      <div id="form-error" class="form-notice form-error-msg" style="display:none">
-        <p data-i18n="contact-error">送信に失敗しました。しばらく後にもう一度お試しください。</p>
+      <div id="form-error" role="alert" hidden style="padding: 20px 24px; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; font-size: 15px; line-height: 1.8">
+        <p style="margin: 0">送信に失敗しました。しばらく後にもう一度お試しいただくか、<a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a> までご連絡ください。</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    <span class="footer-logo">CoreShift</span>
-    <span>&copy; 2026 CoreShift</span>
+  <footer style="padding: 40px; border-top: 1px solid #E5E7EB; display: flex; flex-direction: column; gap: 16px; font-size: 14px; color: #4B5563">
+    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-weight: 700"><a href="/for-organizations/">施設・学校の方へ</a><a href="/coreshift-for-children/">保護者の方へ</a><a href="/coreshift-for-children/support/">企業・個人の方へ</a><a href="/contact/">お問い合わせ</a><a href="https://www.instagram.com/coreshift.for_children/">Instagram</a><a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a></nav>
+    <span>© CoreShift</span>
   </footer>
+</div>
 
-  <script src="../i18n.js?v=7"></script>
-  <script>
-    // ヘッダースクロール
-    window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
+<script>
+(function () {
+  var T = {
+    workshop: { label: '体験会の開催のご相談', title: '施設・学校の方へ', hint: '対象（学年など）や、ご相談の内容をお書きください。ご希望の時期と人数は、決まっていればご記入ください。', name: '施設・学校名', namePh: '例）○○公民館', ph: '例）小学生を対象に、体験会を検討しています。' },
+    join: { label: '体験会への参加について', title: '保護者の方へ', hint: '体験会への参加についてのご質問をお書きください。申し込み方法は、開催ごとにInstagramなどでご案内します。', name: 'お名前', namePh: '', ph: '例）次回の体験会について、小学3年の子どもが参加できるか知りたいです。' },
+    sponsor: { label: '協賛・物品のご提供', title: '企業・個人の方へ', hint: '協賛・物品提供・会場提供など、ご検討の内容をお書きください。', name: '企業・団体名／お名前', namePh: '', ph: '例）フィラメントの提供を検討しています。' },
+    other: { label: 'その他', title: 'その他のお問い合わせ', hint: '取材のご依頼など、その他のお問い合わせはこちらにお書きください。', name: 'お名前', namePh: '', ph: '' }
+  };
+  var form = document.getElementById('contact-form');
+  function pick(k) {
+    var t = T[k]; if (!t) return;
+    document.getElementById('hint-title').textContent = t.title;
+    document.getElementById('hint').textContent = t.hint;
+    document.getElementById('name-label').textContent = t.name;
+    document.getElementById('name').placeholder = t.namePh;
+    document.getElementById('message').placeholder = t.ph;
+    document.getElementById('type-label').value = t.label;
+    document.getElementById('subject').value = '【CoreShift】' + t.label;
+    document.querySelectorAll('.org-only').forEach(function (el) { el.hidden = k !== 'workshop'; });
+  }
+  form.addEventListener('change', function (e) { if (e.target.name === 'type') pick(e.target.value); });
+  var q = new URLSearchParams(location.search).get('type');
+  if (T[q]) { form.querySelector('input[name="type"][value="' + q + '"]').checked = true; pick(q); }
 
-    // フォーム送信
-    document.getElementById('contact-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const btn = this.querySelector('.contact-submit-btn');
-      btn.disabled = true;
-
-      const data = new FormData(this);
-      try {
-        const res = await fetch('https://formspree.io/f/xeewoyew', {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          this.style.display = 'none';
-          document.getElementById('form-success').style.display = 'block';
-        } else {
-          document.getElementById('form-error').style.display = 'block';
-          btn.disabled = false;
-        }
-      } catch {
-        document.getElementById('form-error').style.display = 'block';
-        btn.disabled = false;
-      }
-    });
-  </script>
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('send');
+    btn.disabled = true;
+    document.getElementById('form-error').hidden = true;
+    try {
+      var res = await fetch('https://formspree.io/f/xeewoyew', { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+      if (!res.ok) throw new Error();
+      form.hidden = true;
+      document.getElementById('form-success').hidden = false;
+    } catch (err) {
+      document.getElementById('form-error').hidden = false;
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
