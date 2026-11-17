@@ -6,98 +6,122 @@
   <title>企業・個人の方へ — CoreShift</title>
   <meta name="description" content="子どもたちの体験会を、協賛・ご支援で支えてください。ご支援の使い道と協賛についてご案内します。">
   <meta property="og:title" content="企業・個人の方へ — CoreShift">
-  <meta property="og:description" content="子どもたちの体験会を、協賛・ご支援で支えてください。ご支援の使い道と協賛についてご案内します。">
+  <meta property="og:description" content="子どもたちの体験会を、協賛・ご支援で支えてください。">
   <meta property="og:type" content="website">
   <link rel="icon" href="/icon/アイコン03.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/site.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=2">
 </head>
 <body>
-<div style="font-family: 'Noto Sans JP', system-ui, sans-serif; color: #111827; background: #FFFFFF; ">
 
-  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 40px; border-bottom: 1px solid #E5E7EB">
-    <a href="/" style="font-weight: 900; font-size: 24px; color: #111827; text-decoration: none">CoreShift</a>
-    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; font-weight: 700">
-      <a href="/for-organizations/" style="text-decoration: none">施設・学校の方へ</a>
-      <a href="/coreshift-for-children/" style="text-decoration: none">保護者の方へ</a>
-      <a href="/coreshift-for-children/support/" style="text-decoration: none; color: #111827; border-bottom: 3px solid #1D4ED8">企業・個人の方へ</a>
-      <a href="/contact/" style="text-decoration: none">お問い合わせ</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo">CoreShift</a>
+    <nav class="gnav" aria-label="メインメニュー">
+      <a href="/for-organizations/">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/" aria-current="page">企業・個人の方へ</a>
+      <a href="/contact/">お問い合わせ</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <section style="padding: 72px 40px; background: #F3F4F6">
-    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: center">
-      <div style="display: flex; flex-direction: column; gap: 18px">
-        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: #4B5563">企業・個人の方へ</p>
-        <h1 style="margin: 0; font-size: 34px; line-height: 1.35; font-weight: 900">子どもたちの体験会を、協賛・ご支援で支えてください</h1>
-        <p style="margin: 0; font-size: 16px; line-height: 1.9; color: #374151">CoreShiftは、福岡で活動する学生団体です。ZEN大学の学生が2026年6月に立ち上げました。自作のWebアプリとオリジナル教材を使い、子ども1人600円の参加費で、2026年8月に福岡市立高宮公民館で体験会を初めて開催しました。</p>
-        <div style="display: flex; flex-direction: column; gap: 10px">
-          <a href="/contact/?type=sponsor" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: #1D4ED8; color: #FFFFFF; font-weight: 700; text-decoration: none; border-radius: 999px">企業・団体の方：協賛について相談する →</a>
-          <a href="https://www.instagram.com/coreshift.for_children/" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: #FFFFFF; color: #1D4ED8; border: 2px solid #1D4ED8; font-weight: 700; text-decoration: none; border-radius: 999px">個人の方：Instagramで公開のお知らせを受け取る ↗</a>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">企業・個人の方へ</span>
+        <h1>子どもたちの体験会を、協賛・ご支援で支えてください</h1>
+        <p class="lead">CoreShiftは、福岡で活動する学生団体です。ZEN大学の学生が2026年6月に立ち上げました。自作のWebアプリとオリジナル教材を使い、子ども1人600円の参加費で、2026年8月に福岡市立高宮公民館で体験会を初めて開催しました。</p>
+        <div class="btn-row">
+          <a class="btn" href="/contact/?type=sponsor">企業・団体の方：協賛について相談する <span aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/coreshift.for_children/">個人の方：Instagramで公開のお知らせを受け取る <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965518_0.jpg" alt="体験会の様子" style="width: 100%; height: 320px; object-fit: cover; border-radius: 16px; display: block">
+      <figure class="hero-photo">
+        <img src="/coreshift-for-children/photos/event01_takamiya/S__2965518_0.jpg" width="1477" height="1108" fetchpriority="high" alt="体験会の様子">
+      </figure>
     </div>
   </section>
 
-  <section style="padding: 72px 40px">
-    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center">
-      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" alt="子どもたちが作った作品" style="width: 100%; height: 240px; object-fit: cover; border-radius: 12px; display: block">
-      <div style="display: flex; flex-direction: column; gap: 14px">
-        <h2 style="margin: 0; font-size: 28px; font-weight: 900">これまでとこれから</h2>
-        <p style="margin: 0; font-size: 15px; line-height: 1.9; color: #374151"><b>これまで：</b>2026年8月、福岡市立高宮公民館の特別企画で、親子7組が参加する体験会を開きました（2時間×2部）。</p>
-        <p style="margin: 0; font-size: 15px; line-height: 1.9; color: #374151"><b>これから：</b>次の体験会の開催に向けて準備しています。</p>
+  <section class="sec sec--light">
+    <div class="wrap media">
+      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" loading="lazy" alt="子どもたちが作った作品">
+      <div class="stack">
+        <span class="eyebrow"><b>01</b>Activities</span>
+        <h2>これまでとこれから</h2>
+        <p><b>これまで：</b>2026年8月、福岡市立高宮公民館の特別企画で、親子7組が参加する体験会を開きました（2時間×2部）。</p>
+        <p><b>これから：</b>次の体験会の開催に向けて準備しています。</p>
       </div>
     </div>
   </section>
 
-  <section style="padding: 72px 40px; background: #F3F4F6">
-    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px">
-      <h2 style="margin: 0; font-size: 28px; font-weight: 900">ご支援の使い道</h2>
-      <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 2; color: #374151">
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><b>02</b>Use of funds</span>
+        <h2>ご支援の使い道</h2>
+      </div>
+      <ul class="plain-list">
         <li>3Dプリンターと材料（フィラメント）</li>
         <li>参加費を抑えるための補助</li>
         <li>教材・Webアプリの開発（準備中の、教育用の小さなコンピューター micro:bit を使ったプログラミング体験の教材を含む）</li>
         <li>交通費・広報など団体の運営</li>
       </ul>
-      <p style="margin: 0; padding: 16px 20px; background: #FFFFFF; border: 1px solid #D1D5DB; border-radius: 12px; font-size: 15px; line-height: 1.8">企業・個人を問わず、ご支援いただいた方に、半年に1回、活動報告とご支援の使い道をお届けします。</p>
+      <div class="facts"><p>企業・個人を問わず、ご支援いただいた方に、半年に1回、活動報告とご支援の使い道をお届けします。</p></div>
     </div>
   </section>
 
-  <section style="padding: 72px 40px">
-    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
-      <h2 style="margin: 0; font-size: 28px; font-weight: 900">個人で応援する</h2>
-      <p style="margin: 0; font-size: 15px; line-height: 1.8; color: #374151">個人の方に向けたクラウドファンディングを、今年度中の公開を目標に準備しています。公開は Instagram とこのホームページでお知らせします。</p>
-      <a href="https://www.instagram.com/coreshift.for_children/" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 32px; background: #FFFFFF; color: #1D4ED8; border: 2px solid #1D4ED8; font-weight: 700; text-decoration: none; border-radius: 999px">Instagramで公開のお知らせを受け取る ↗</a>
+  <section class="sec sec--light">
+    <div class="wrap stack">
+      <span class="eyebrow"><b>03</b>For individuals</span>
+      <h2>個人で応援する</h2>
+      <p>個人の方に向けたクラウドファンディングを、今年度中の公開を目標に準備しています。公開は Instagram とこのホームページでお知らせします。</p>
+      <div class="btn-row"><a class="btn btn--ghost" href="https://www.instagram.com/coreshift.for_children/">Instagramで公開のお知らせを受け取る <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 
-  <section style="padding: 72px 40px; background: #F3F4F6">
-    <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px">
-      <h2 style="margin: 0; font-size: 28px; font-weight: 900">協賛について（企業・団体の方）</h2>
-      <dl style="margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 14px 20px; font-size: 15px; line-height: 1.8">
-        <dt style="font-weight: 700; color: #4B5563">協賛のかたち</dt><dd style="margin: 0">資金・物品（フィラメント・micro:bitなど）・会場のご提供など、かたちはご相談ください。</dd>
-        <dt style="font-weight: 700; color: #4B5563">協賛特典</dt><dd style="margin: 0">ホームページへのロゴ掲載とスポンサーとしてのご紹介／貴社・サービスの簡単なご紹介／教育・ものづくりに関わる企業の方には、CoreShiftの活動を生かした連携のご提案</dd>
-        <dt style="font-weight: 700; color: #4B5563">領収書</dt><dd style="margin: 0">発行できます。任意団体（法人格なし）のため、寄付控除の対象にはなりません。</dd>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><b>04</b>Sponsorship</span>
+        <h2>協賛について（企業・団体の方）</h2>
+      </div>
+      <dl class="spec">
+        <dt>協賛のかたち</dt><dd>資金・物品（フィラメント・micro:bitなど）・会場のご提供など、かたちはご相談ください。</dd>
+        <dt>協賛特典</dt><dd>ホームページへのロゴ掲載とスポンサーとしてのご紹介／貴社・サービスの簡単なご紹介／教育・ものづくりに関わる企業の方には、CoreShiftの活動を生かした連携のご提案</dd>
+        <dt>領収書</dt><dd>発行できます。任意団体（法人格なし）のため、寄付控除の対象にはなりません。</dd>
       </dl>
     </div>
   </section>
 
-  <section style="padding: 72px 40px">
-    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; padding: 48px 24px; background: #FFFFFF; border: 2px solid #1D4ED8; border-radius: 16px">
-      <h2 style="margin: 0; font-size: 26px; font-weight: 900">協賛のご相談・資料のご請求</h2>
-      <p style="margin: 0; font-size: 15px; line-height: 1.8; color: #374151">資料のご請求や、オンライン・対面でのご説明も承ります。</p>
-      <a href="/contact/?type=sponsor" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 32px; background: #1D4ED8; color: #FFFFFF; font-weight: 700; text-decoration: none; border-radius: 999px">協賛について相談する →</a>
-      <span style="font-size: 14px; color: #4B5563">メール：<a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a> ／ <a href="/#about">団体概要へ</a></span>
+  <section class="sec sec--light cta">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h2>協賛のご相談・資料のご請求</h2>
+      <p>資料のご請求や、オンライン・対面でのご説明も承ります。</p>
+      <div class="btn-row"><a class="btn" href="/contact/?type=sponsor">協賛について相談する <span aria-hidden="true">→</span></a></div>
+      <p class="muted">メール：<a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a> ／ <a href="/#about">団体概要へ</a></p>
     </div>
   </section>
+</main>
 
-  <footer style="padding: 40px; border-top: 1px solid #E5E7EB; display: flex; flex-direction: column; gap: 16px; font-size: 14px; color: #4B5563">
-    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-weight: 700"><a href="/for-organizations/">施設・学校の方へ</a><a href="/coreshift-for-children/">保護者の方へ</a><a href="/coreshift-for-children/support/">企業・個人の方へ</a><a href="/contact/">お問い合わせ</a><a href="https://www.instagram.com/coreshift.for_children/">Instagram</a><a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a></nav>
-    <span>© CoreShift</span>
-  </footer>
-</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="/" class="logo">CoreShift</a>
+    <nav class="fnav" aria-label="フッターメニュー">
+      <a href="/for-organizations/">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/">企業・個人の方へ</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="https://www.instagram.com/coreshift.for_children/">Instagram ↗</a>
+      <a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a>
+    </nav>
+    <p>© CoreShift</p>
+  </div>
+</footer>
+
 </body>
 </html>

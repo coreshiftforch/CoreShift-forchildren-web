@@ -10,34 +10,37 @@
   <link rel="icon" href="/icon/アイコン03.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/site.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css?v=2">
 </head>
 <body>
-<div style="font-family: 'Noto Sans JP', system-ui, sans-serif; color: #111827; background: #FFFFFF">
 
-  <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 40px; border-bottom: 1px solid #E5E7EB">
-    <a href="/" style="font-weight: 900; font-size: 24px; color: #111827; text-decoration: none">CoreShift</a>
-    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 15px; font-weight: 700">
-      <a href="/for-organizations/" style="text-decoration: none">施設・学校の方へ</a>
-      <a href="/coreshift-for-children/" style="text-decoration: none">保護者の方へ</a>
-      <a href="/coreshift-for-children/support/" style="text-decoration: none">企業・個人の方へ</a>
-      <a href="/contact/" style="text-decoration: none; color: #111827; border-bottom: 3px solid #1D4ED8">お問い合わせ</a>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo">CoreShift</a>
+    <nav class="gnav" aria-label="メインメニュー">
+      <a href="/for-organizations/">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/">企業・個人の方へ</a>
+      <a href="/contact/" aria-current="page">お問い合わせ</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <section style="padding: 64px 40px">
-    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
-      <div style="display: flex; flex-direction: column; gap: 10px">
-        <h1 style="margin: 0; font-size: 40px; font-weight: 900">お問い合わせ</h1>
-        <p style="margin: 0; font-size: 14px; color: #4B5563">ご用件を選んで、内容をお書きください。</p>
+<main>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Contact</span>
+        <h1>お問い合わせ</h1>
+        <p class="muted" style="margin-top: 12px">ご用件を選んで、内容をお書きください。</p>
       </div>
 
-      <form id="contact-form" style="display: flex; flex-direction: column; gap: 20px">
-        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
-          <legend style="font-size: 15px; font-weight: 700; margin-bottom: 12px">ご用件</legend>
+      <form id="contact-form" class="form">
+        <fieldset>
+          <legend>ご用件</legend>
           <div class="type-grid">
-            <label class="type-opt"><input type="radio" name="type" value="workshop"><span>体験会の開催のご相談</span></label>
+            <label class="type-opt"><input type="radio" name="type" value="workshop" required><span>体験会の開催のご相談</span></label>
             <label class="type-opt"><input type="radio" name="type" value="join"><span>体験会への参加について</span></label>
             <label class="type-opt"><input type="radio" name="type" value="sponsor"><span>協賛・物品のご提供</span></label>
             <label class="type-opt"><input type="radio" name="type" value="other"><span>その他</span></label>
@@ -46,46 +49,56 @@
         <input type="hidden" name="_subject" id="subject" value="【CoreShift】お問い合わせ">
         <input type="hidden" name="用件" id="type-label" value="">
 
-        <div style="padding: 20px 24px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; font-size: 15px; line-height: 1.8">
-          <strong id="hint-title" style="display: block; color: #1D4ED8; margin-bottom: 4px">ご用件を選んでください</strong><span id="hint">上の4つからご用件を選ぶと、書いていただきたい内容をご案内します。</span>
+        <div class="hint" aria-live="polite">
+          <strong id="hint-title">ご用件を選んでください</strong><span id="hint">上の4つからご用件を選ぶと、書いていただきたい内容をご案内します。</span>
         </div>
 
         <label class="field"><span id="name-label">お名前</span>
-          <input type="text" name="name" id="name" required>
+          <input type="text" name="name" id="name" required autocomplete="name">
         </label>
         <label class="field org-only" hidden>ご担当者名
           <input type="text" name="担当者名">
         </label>
         <label class="field">返信用メールアドレス
-          <input type="email" name="email" required placeholder="your@email.com">
+          <input type="email" name="email" required placeholder="your@email.com" autocomplete="email">
         </label>
-        <label class="field org-only" hidden><span>ご希望の時期<span style="font-weight: 400; color: #4B5563">（任意）</span></span>
+        <label class="field org-only" hidden><span>ご希望の時期<span class="opt">（任意）</span></span>
           <input type="text" name="希望の時期" placeholder="例）1月">
         </label>
-        <label class="field org-only" hidden><span>人数<span style="font-weight: 400; color: #4B5563">（任意）</span></span>
+        <label class="field org-only" hidden><span>人数<span class="opt">（任意）</span></span>
           <input type="text" name="人数" placeholder="例）小学生8人ほど">
         </label>
         <label class="field">お問い合わせ内容
-          <textarea name="message" id="message" rows="6" required></textarea>
+          <textarea name="message" id="message" rows="7" required></textarea>
         </label>
-        <p style="margin: 0; font-size: 14px; line-height: 1.8; color: #4B5563">お名前とメールアドレスは、お問い合わせへの返信にだけ使います。</p>
-        <button type="submit" id="send" style="align-self: flex-start; min-height: 52px; padding: 0 40px; background: #1D4ED8; color: #FFFFFF; font-weight: 700; font-size: 16px; border: 0; border-radius: 999px; cursor: pointer; font-family: inherit">送信する</button>
+        <p class="muted">お名前とメールアドレスは、お問い合わせへの返信にだけ使います。</p>
+        <button type="submit" id="send" class="btn">送信する <span aria-hidden="true">→</span></button>
       </form>
 
-      <div id="form-success" role="status" hidden style="padding: 20px 24px; background: #F0FDF4; border: 1px solid #86EFAC; border-radius: 12px; font-size: 15px; line-height: 1.8">
-        <p style="margin: 0">お問い合わせありがとうございます。5日以内に返信します。</p>
+      <div id="form-success" class="notice notice--ok" role="status" hidden>
+        <p>お問い合わせありがとうございます。5日以内に返信します。</p>
       </div>
-      <div id="form-error" role="alert" hidden style="padding: 20px 24px; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; font-size: 15px; line-height: 1.8">
-        <p style="margin: 0">送信に失敗しました。しばらく後にもう一度お試しいただくか、<a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a> までご連絡ください。</p>
+      <div id="form-error" class="notice notice--ng" role="alert" hidden style="margin-top: 24px">
+        <p>送信に失敗しました。しばらく後にもう一度お試しいただくか、<a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a> までご連絡ください。</p>
       </div>
     </div>
   </section>
+</main>
 
-  <footer style="padding: 40px; border-top: 1px solid #E5E7EB; display: flex; flex-direction: column; gap: 16px; font-size: 14px; color: #4B5563">
-    <nav style="display: flex; flex-wrap: wrap; gap: 24px; font-weight: 700"><a href="/for-organizations/">施設・学校の方へ</a><a href="/coreshift-for-children/">保護者の方へ</a><a href="/coreshift-for-children/support/">企業・個人の方へ</a><a href="/contact/">お問い合わせ</a><a href="https://www.instagram.com/coreshift.for_children/">Instagram</a><a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a></nav>
-    <span>© CoreShift</span>
-  </footer>
-</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="/" class="logo">CoreShift</a>
+    <nav class="fnav" aria-label="フッターメニュー">
+      <a href="/for-organizations/">施設・学校の方へ</a>
+      <a href="/coreshift-for-children/">保護者の方へ</a>
+      <a href="/coreshift-for-children/support/">企業・個人の方へ</a>
+      <a href="/contact/">お問い合わせ</a>
+      <a href="https://www.instagram.com/coreshift.for_children/">Instagram ↗</a>
+      <a href="mailto:coreshift.forch@gmail.com">coreshift.forch@gmail.com</a>
+    </nav>
+    <p>© CoreShift</p>
+  </div>
+</footer>
 
 <script>
 (function () {
