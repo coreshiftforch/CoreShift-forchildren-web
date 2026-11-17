@@ -301,3 +301,24 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* ============================================================
+   #9 施設・学校向け: 開催の目安をまとまりごとのカードに
+============================================================ */
+.guide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.guide-group { border: 1px solid var(--border); background: var(--surface); padding: 28px 28px 12px; }
+.guide-group h3 { font-size: 1.05rem; padding-bottom: 14px; margin-bottom: 4px; border-bottom: 2px solid var(--accent); }
+.spec--compact { grid-template-columns: 9.5em minmax(0, 1fr); border-top: 0; }
+.spec--compact dt, .spec--compact dd { padding: 12px 0; font-size: 0.95rem; }
+.spec--compact dt { padding-right: 16px; }
+.spec--compact dt:last-of-type, .spec--compact dd:last-of-type { border-bottom: 0; }
+.check-list { list-style: none; padding: 8px 0 16px; }
+.check-list li { position: relative; padding: 8px 0 8px 1.8em; font-size: 0.95rem; }
+.check-list li::before { content: ""; position: absolute; left: 2px; top: 0.95em; width: 12px; height: 7px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+@media (max-width: 768px) {
+  .guide { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .guide-group { padding: 22px 18px 6px; }
+  .spec--compact { grid-template-columns: minmax(0, 1fr); }
+  .spec--compact dt { padding: 12px 0 0; border-bottom: 0; }
+  .spec--compact dd { padding: 2px 0 12px; }
+}
