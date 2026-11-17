@@ -57,7 +57,9 @@ body {
   font-feature-settings: "palt";
 }
 [hidden] { display: none !important; }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
+/* グリッドの子が写真の元の幅に引っぱられて画面からはみ出さないように */
+.hero .wrap > *, .media > *, .about > *, .cards > *, .steps > *, .features > *, .doors > * { min-width: 0; }
 a { color: var(--link); text-underline-offset: 3px; }
 a:hover { color: var(--accent); }
 h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
@@ -120,7 +122,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 
 /* ---------- hero ---------- */
 .hero { padding: 96px 0 104px; background: var(--bg); }
-.hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; }
+.hero .wrap:first-child { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
 .hero-copy > * + * { margin-top: 24px; }
 .hero-copy .lead { color: var(--text); opacity: 0.86; }
 .hero-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -164,7 +166,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .features p { color: var(--muted); font-size: 0.95rem; }
 
 /* ---------- media（写真＋文） ---------- */
-.media { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.media { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
 .media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .theme-sky .media img, .theme-sky .cards img, .theme-sky .steps img { border-radius: 12px; }
 
@@ -183,7 +185,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .steps p::before { content: counter(s); display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 10px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 900; font-size: 0.85rem; vertical-align: 2px; }
 
 /* ---------- spec（目安の表・団体概要） ---------- */
-.spec { display: grid; grid-template-columns: 220px 1fr; border-top: 1px solid var(--border); }
+.spec { display: grid; grid-template-columns: 220px minmax(0, 1fr); border-top: 1px solid var(--border); }
 .spec dt, .spec dd { padding: 18px 0; border-bottom: 1px solid var(--border); }
 .spec dt { font-weight: 700; color: var(--muted); padding-right: 24px; }
 .spec dd { margin: 0; }
@@ -192,7 +194,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .facts p { padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--surface); }
 
 /* ---------- 団体概要 ---------- */
-.about { display: grid; grid-template-columns: 160px 1fr; gap: 48px; align-items: start; }
+.about { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 48px; align-items: start; }
 
 /* ---------- note / placeholder ---------- */
 .note { padding: 24px 28px; border: 1px solid var(--accent); background: var(--surface); }
@@ -260,7 +262,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 @media (max-width: 1300px) {
   :root { --gutter: 32px; }
   .sec { padding: 88px 0; }
-  .hero .wrap { gap: 40px; }
+  .hero .wrap:first-child { gap: 40px; }
   .gnav { gap: 20px; }
   .slots { grid-template-columns: repeat(3, 1fr); }
 }
@@ -272,12 +274,12 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   :root { --gutter: 16px; }
   body { line-height: 1.75; }
   .site-header .wrap { flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding-top: 12px; }
-  .gnav { overflow-x: auto; gap: 20px; padding: 6px 0 10px; font-size: 0.85rem; scrollbar-width: none; }
+  .gnav { min-width: 0; overflow-x: auto; gap: 20px; padding: 6px 0 10px; font-size: 0.85rem; scrollbar-width: none; }
   .gnav::-webkit-scrollbar { display: none; }
   .sec { padding: 64px 0; }
   .sec-head { margin-bottom: 32px; }
   .hero { padding: 40px 0 56px; }
-  .hero .wrap, .media, .about { grid-template-columns: 1fr; gap: 28px; }
+  .hero .wrap:first-child, .media, .about { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .hero-photo { order: -1; }
   .doors, .features, .cards, .steps, .type-grid { grid-template-columns: 1fr; }
   .doors { margin-top: 48px; }
