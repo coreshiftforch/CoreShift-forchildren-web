@@ -362,3 +362,18 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   .next-card { flex-direction: column; gap: 12px; padding: 24px 20px; }
   .next-icon { width: 32px; height: 32px; }
 }
+
+/* ============================================================
+   #11 企業・個人向け: ご支援の使い道をカードに
+============================================================ */
+.funds { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.funds li { padding: 28px 24px; border: 1px solid var(--border); background: var(--surface); display: grid; align-content: start; gap: 10px; }
+.funds svg { color: var(--accent); margin-bottom: 6px; }
+.funds h3 { font-size: 1.02rem; }
+.funds p { color: var(--muted); font-size: 0.86rem; line-height: 1.7; }
+@media (max-width: 1300px) { .funds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) {
+  .funds { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .funds li { grid-template-columns: 36px minmax(0, 1fr); column-gap: 16px; padding: 20px 18px; }
+  .funds svg { grid-row: span 2; margin: 0; }
+}
