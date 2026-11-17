@@ -195,6 +195,8 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 
 /* ---------- 団体概要 ---------- */
 .about { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 48px; align-items: start; }
+/* 代表の写真が届くまで枠を隠している間は1列に */
+.about:has(> .placeholder[hidden]) { grid-template-columns: minmax(0, 1fr); }
 
 /* ---------- note / placeholder ---------- */
 .note { padding: 24px 28px; border: 1px solid var(--accent); background: var(--surface); }
@@ -273,9 +275,12 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 @media (max-width: 768px) {
   :root { --gutter: 16px; }
   body { line-height: 1.75; }
-  .site-header .wrap { flex-direction: column; align-items: stretch; gap: 0; min-height: 0; padding-top: 12px; }
-  .gnav { min-width: 0; overflow-x: auto; gap: 20px; padding: 6px 0 10px; font-size: 0.85rem; scrollbar-width: none; }
-  .gnav::-webkit-scrollbar { display: none; }
+  .site-header { position: static; }
+  .site-header .wrap { flex-direction: column; align-items: stretch; gap: 8px; min-height: 0; padding-top: 14px; padding-bottom: 12px; }
+  /* メニューは2列×2段にして、4つとも最初から見えるように */
+  .gnav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; font-size: 0.88rem; }
+  .gnav a { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .gnav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
   .sec { padding: 64px 0; }
   .sec-head { margin-bottom: 32px; }
   .hero { padding: 40px 0 56px; }
