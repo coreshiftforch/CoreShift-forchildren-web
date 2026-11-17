@@ -13,15 +13,16 @@ nav: contact
         <p class="muted" style="margin-top: 12px">ご用件を選んで、内容をお書きください。</p>
       </div>
 
-      <form id="contact-form" class="form">
-        <fieldset>
-          <legend>ご用件</legend>
+      <form id="contact-form" class="form" novalidate>
+        <fieldset class="field-group" id="type-group">
+          <legend>ご用件 <span class="req">必須</span></legend>
           <div class="type-grid">
             <label class="type-opt"><input type="radio" name="type" value="workshop" required><span>体験会の開催のご相談</span></label>
             <label class="type-opt"><input type="radio" name="type" value="join"><span>体験会への参加について</span></label>
             <label class="type-opt"><input type="radio" name="type" value="sponsor"><span>協賛・物品のご提供</span></label>
             <label class="type-opt"><input type="radio" name="type" value="other"><span>その他</span></label>
           </div>
+          <p class="err" id="err-type" hidden>ご用件を選んでください</p>
         </fieldset>
         <input type="hidden" name="_subject" id="subject" value="【CoreShift】お問い合わせ">
         <input type="hidden" name="用件" id="type-label" value="">
@@ -30,14 +31,16 @@ nav: contact
           <strong id="hint-title">ご用件を選んでください</strong><span id="hint">上の4つからご用件を選ぶと、書いていただきたい内容をご案内します。</span>
         </div>
 
-        <label class="field"><span id="name-label">お名前</span>
-          <input type="text" name="name" id="name" required autocomplete="name">
+        <label class="field"><span><span id="name-label">お名前</span> <span class="req">必須</span></span>
+          <input type="text" name="name" id="name" required autocomplete="name" aria-describedby="err-name">
+          <span class="err" id="err-name" hidden>入力してください</span>
         </label>
         <label class="field org-only" hidden>ご担当者名
           <input type="text" name="担当者名">
         </label>
-        <label class="field">返信用メールアドレス
-          <input type="email" name="email" required placeholder="your@email.com" autocomplete="email">
+        <label class="field"><span>返信用メールアドレス <span class="req">必須</span></span>
+          <input type="email" name="email" id="email" required placeholder="your@email.com" autocomplete="email" aria-describedby="err-email">
+          <span class="err" id="err-email" hidden>入力してください</span>
         </label>
         <label class="field org-only" hidden><span>ご希望の時期<span class="opt">（任意）</span></span>
           <input type="text" name="希望の時期" placeholder="例）1月">
@@ -45,11 +48,12 @@ nav: contact
         <label class="field org-only" hidden><span>人数<span class="opt">（任意）</span></span>
           <input type="text" name="人数" placeholder="例）小学生8人ほど">
         </label>
-        <label class="field">お問い合わせ内容
-          <textarea name="message" id="message" rows="7" required></textarea>
+        <label class="field"><span>お問い合わせ内容 <span class="req">必須</span></span>
+          <textarea name="message" id="message" rows="7" required aria-describedby="err-message"></textarea>
+          <span class="err" id="err-message" hidden>入力してください</span>
         </label>
         <p class="muted">お名前とメールアドレスは、お問い合わせへの返信にだけ使います。</p>
-        <button type="submit" id="send" class="btn">送信する <span aria-hidden="true">→</span></button>
+        <button type="submit" id="send" class="btn"><span id="send-label">送信する</span> <span aria-hidden="true">→</span></button>
       </form>
 
       <div id="form-success" class="notice notice--ok" role="status" hidden>
@@ -82,14 +86,42 @@ nav: contact
     document.getElementById('subject').value = '【CoreShift】' + t.label;
     document.querySelectorAll('.org-only').forEach(function (el) { el.hidden = k !== 'workshop'; });
   }
-  form.addEventListener('change', function (e) { if (e.target.name === 'type') pick(e.target.value); });
+  form.addEventListener('change', function (e) { if (e.target.name === 'type') { pick(e.target.value); setErr('type', ''); } });
+
+  // 入力漏れの表示（ブラウザ標準の吹き出しの代わりに、欄の下に出す）
+  function setErr(id, msg) {
+    var err = document.getElementById('err-' + id);
+    err.textContent = msg; err.hidden = !msg;
+    var box = id === 'type' ? document.getElementById('type-group') : document.getElementById(id);
+    box.classList.toggle('is-invalid', !!msg);
+    if (id !== 'type') box.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function check() {
+    var first = null;
+    var typed = form.querySelector('input[name="type"]:checked');
+    setErr('type', typed ? '' : 'ご用件を選んでください');
+    if (!typed) first = form.querySelector('input[name="type"]');
+    ['name', 'email', 'message'].forEach(function (id) {
+      var el = document.getElementById(id), msg = '';
+      if (!el.value.trim()) msg = '入力してください';
+      else if (id === 'email' && el.validity.typeMismatch) msg = 'メールアドレスの形でご入力ください（例: your@email.com）';
+      setErr(id, msg);
+      if (msg && !first) first = el;
+    });
+    if (first) first.focus();
+    return !first;
+  }
+  ['name', 'email', 'message'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () { if (this.classList.contains('is-invalid')) setErr(id, ''); });
+  });
   var q = new URLSearchParams(location.search).get('type');
   if (T[q]) { form.querySelector('input[name="type"][value="' + q + '"]').checked = true; pick(q); }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
-    var btn = document.getElementById('send');
-    btn.disabled = true;
+    if (!check()) return;
+    var btn = document.getElementById('send'), label = document.getElementById('send-label');
+    btn.disabled = true; btn.setAttribute('aria-busy', 'true'); label.textContent = '送信中…';
     document.getElementById('form-error').hidden = true;
     try {
       var res = await fetch('https://formspree.io/f/xeewoyew', { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
@@ -98,7 +130,7 @@ nav: contact
       document.getElementById('form-success').hidden = false;
     } catch (err) {
       document.getElementById('form-error').hidden = false;
-      btn.disabled = false;
+      btn.disabled = false; btn.removeAttribute('aria-busy'); label.textContent = '送信する';
     }
   });
 })();
