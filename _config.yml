@@ -1,0 +1,5 @@
+# GitHub Pages: リポジトリ内の作業用ファイルをサイトに出さない
+exclude:
+  - docs/
+  - CLAUDE.md
+  - bake_and_export.py
