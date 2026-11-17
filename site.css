@@ -388,3 +388,52 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .field input.is-invalid, .field textarea.is-invalid { border-color: #ef4444; background: rgba(239, 68, 68, 0.06); }
 .field-group.is-invalid .type-opt { border-color: #ef4444; }
 .form .btn[aria-busy="true"] { opacity: 0.7; cursor: progress; }
+
+/* ============================================================
+   #27 活動レポート
+============================================================ */
+.crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; font-weight: 700; color: var(--muted); }
+.crumbs a { color: inherit; }
+.theme-sky .hero .crumbs { color: #23324a; }
+.report-hero h1 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
+.report-meta { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-weight: 700; }
+.report-meta dt { color: var(--accent); }
+.theme-sky .hero .report-meta { color: #23324a; }
+.theme-sky .hero .report-meta dt { color: #0f3f8a; }
+.report-meta dd { margin: 0; }
+.tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li { padding: 2px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.7); color: #23324a; font-size: 0.82rem; font-weight: 700; }
+.report-step + .report-step { margin-top: 72px; }
+.report-step > .badge { display: inline-block; margin-bottom: 12px; }
+.report-step h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.report-step > p { max-width: 50em; color: var(--muted); }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 28px; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.gallery figcaption { margin-top: 10px; font-size: 0.9rem; color: var(--muted); }
+.models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.models img { aspect-ratio: 1 / 1; object-fit: contain; background: #fff; }
+.models .eyebrow { margin-bottom: 4px; }
+@media (max-width: 1300px) { .models { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) {
+  .report-step + .report-step { margin-top: 48px; }
+  .gallery { grid-template-columns: minmax(0, 1fr); }
+  .models { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ============================================================
+   日本語の折り返し
+   見出し・ボタンは <wbr> を入れた言葉の切れ目だけで折り返す（Safari でも効く）。
+   本文は対応ブラウザ（Chrome・Edge）で言葉のまとまりごとに折り返す。
+   見出しを足すときは、言葉の切れ目に <wbr> を入れる。
+============================================================ */
+body { line-break: strict; }
+h1, h2, h3, .btn, .next-body strong, .project-name, .door h3 {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+.nw { white-space: nowrap; }
