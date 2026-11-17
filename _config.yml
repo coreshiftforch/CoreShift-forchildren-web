@@ -1,3 +1,4 @@
+url: "https://core-shift.jp"
 # GitHub Pages: リポジトリ内の作業用ファイルをサイトに出さない
 exclude:
   - docs/
