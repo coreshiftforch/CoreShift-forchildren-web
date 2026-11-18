@@ -1,0 +1,25 @@
+/* プログラミングのページ専用（ヒーローのコード例） */
+.code-block {
+  margin: 0;
+  padding: 32px 36px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  white-space: pre;
+  overflow-x: auto;
+}
+.c-cm  { color: #64748b; }
+.c-kw  { color: #93c5fd; }
+.c-fn  { color: #60a5fa; }
+.c-str { color: #86efac; }
+
+@media (max-width: 768px) {
+  .code-block { padding: 20px 16px; font-size: 0.78rem; }
+}
+
+/* ヒーローの「準備中」バッジに上の余白を効かせる */
+.hero-copy .badge { display: inline-block; }

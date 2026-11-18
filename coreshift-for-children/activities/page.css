@@ -1,0 +1,59 @@
+/* 活動内容ページ（/coreshift-for-children/activities/）専用 */
+
+/* ヒーロー: 3つの活動への目次 */
+.act-index { list-style: none; padding: 0; display: grid; gap: 8px; }
+.act-index a {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 12px 18px; border-radius: 12px; background: rgba(255, 255, 255, 0.75);
+  color: #23324a; font-weight: 700; text-decoration: none;
+  word-break: keep-all; overflow-wrap: anywhere;
+}
+.act-index a:hover { background: #fff; color: #0f3f8a; }
+
+/* 見出し横の「準備中」「開発中」 */
+h2 .badge { display: inline-block; font-size: 0.8rem; vertical-align: 0.35em; }
+
+/* 活動の中のメニュー（ワークショップ・キット） */
+.act-menu + .act-menu { margin-top: 80px; }
+.act-menu > .badge { display: inline-block; margin-bottom: 12px; }
+.act-menu > h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.act-menu > p { max-width: 50em; }
+.act-menu > .steps, .act-menu > .cards, .act-menu > .features, .act-menu > .note, .act-menu > .models { margin-top: 28px; }
+
+h4 { margin: 0; font-size: 1.05rem; line-height: 1.5; font-weight: 900; word-break: keep-all; overflow-wrap: anywhere; text-wrap: balance; }
+
+/* 手順: 見出しと説明文を持たせる */
+.act-steps h4 { margin-bottom: 6px; }
+.act-steps p { font-weight: 400; color: var(--muted); font-size: 0.95rem; }
+.act-steps li:not(:last-child)::after { content: none; }
+
+/* 写真のないカード */
+.act-cards .card-body h3, .act-cards .card-body h4 { margin-bottom: 8px; }
+.act-cards .eyebrow { margin-bottom: 8px; letter-spacing: 0.12em; text-transform: none; }
+
+/* キットの3ステップ */
+.features h4 { margin-bottom: 10px; }
+
+/* Web体験デモの案内 */
+.act-demo { display: grid; gap: 12px; border-radius: 12px; }
+.act-demo strong { word-break: keep-all; overflow-wrap: anywhere; }
+.act-demo p { color: var(--muted); }
+.act-demo .btn-row { margin-top: 8px; }
+.act-demo .btn { word-break: keep-all; overflow-wrap: anywhere; }
+
+/* 開催実績 */
+.act-record { margin-top: 72px; padding: 20px 24px; border-left: 3px solid var(--accent); background: var(--surface); display: grid; gap: 8px; }
+.act-record b { color: var(--accent); }
+
+/* からくりモデル */
+.act-models figcaption { padding: 16px 18px 20px; font-size: 0.92rem; font-weight: 700; }
+.act-models .eyebrow { margin-bottom: 4px; }
+.theme-sky .act-models .card, .theme-sky .act-cards .card { border-radius: 12px; overflow: hidden; }
+
+@media (max-width: 768px) {
+  .act-menu + .act-menu { margin-top: 56px; }
+  .act-record { margin-top: 48px; }
+  .act-demo { padding: 20px 18px; }
+  .act-models { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .act-models figcaption { padding: 12px 12px 14px; font-size: 0.85rem; }
+}
