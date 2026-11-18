@@ -1,143 +1,71 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3Dプリンター — CoreShift</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="../style.css?v=35">
-  <script>
-    // 3Dの軽量モード判定（保存設定 → 視差効果を減らす → WebGL非対応 の順）
-    (function () {
-      var s = null; try { s = localStorage.getItem('coreshift-lite'); } catch (e) {}
-      var lite = s === '1' || (s === null && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-      if (!lite) { try { var c = document.createElement('canvas'); lite = !(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { lite = true; } }
-      if (lite) document.documentElement.classList.add('lite-mode');
-    })();
-  </script>
-  <script type="importmap">
-    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
-  </script>
-</head>
-<body>
-
-  <div id="cursor"></div>
-
-  <header id="header">
-    <a class="logo" href="../index.html">CoreShift</a>
-    <button type="button" class="lite-toggle" aria-pressed="false" title="3D表示の切り替え（軽量モード）">3D</button>
-    <div class="lang-switch">
-      <span class="lang-btn lang-active">JP</span>
-      <span class="lang-sep-v">/</span>
-      <span class="lang-btn">EN</span>
+---
+layout: default
+title: "3Dプリンター — CoreShift"
+description: "アイデアを立体的な形に変える3Dプリンター。子どもたちがデジタルで設計し、実際に触れる物を作る体験です。"
+---
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Technology</span>
+        <h1>3Dプリンター</h1>
+        <p class="lead">アイデアを立体的な形に変える「3Dプリンター」。子どもたちはデジタルで設計し、実際に触れる物を作る体験を通して、ものづくりの楽しさと創造力を育てます。</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="/coreshift-for-children/photos/event01_takamiya/S__2965518_0.jpg" width="1477" height="1108" fetchpriority="high" alt="3Dプリンターが造形する様子をのぞき込む子どもたち">
+      </figure>
     </div>
-  </header>
+  </section>
 
-  <nav id="side-nav">
-    <a href="../index.html#about">About</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#tools">Tools</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#others">Others</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#sns">SNS</a>
-  </nav>
-
-  <!-- スクロール連動アニメーション領域（280vh） -->
-  <div id="printer-scroll">
-    <div class="printer-sticky">
-      <canvas id="printer-canvas" data-model="../models/3Dプリンター.glb"></canvas>
-      <img class="lite-still printer-still" src="../images/printer-still.png" alt="3Dプリンター">
-      <div class="printer-scroll-hint">SCROLL</div>
-
-      <!-- スクロール中：フルテキスト -->
-      <div class="printer-text-overlay">
-        <div class="tool-detail-label">TECHNOLOGY 01</div>
-        <h2 data-i18n="printer-page-title">3Dプリンター</h2>
-        <p data-i18n-html="printer-overlay-p">アイデアを立体的な形に変える「3Dプリンター」。<br>子どもたちはデジタルで設計し、実際に触れる物を作る体験を通してものづくりの楽しさと創造力を育てます。</p>
+  <section class="sec sec--light">
+    <div class="wrap">
+      <div class="sec-head stack">
+        <span class="eyebrow"><b>01</b>Can do</span>
+        <h2>できること</h2>
+        <p class="lead">自分で考えた形を、手に取れるモノにする体験です。</p>
+      </div>
+      <ul class="features">
+        <li><h3>名前入り<wbr>ネームプレート</h3><p>スマホで文字や形を選んでデザインし、自分だけのネームプレートを作ります。</p></li>
+        <li><h3>季節の飾り</h3><p>クリスマスのオーナメントなど、季節に合わせた飾りづくり。</p></li>
+        <li><h3>micro:bit の<wbr>ケース<wbr>（準備中）</h3><p>プログラミングで使う micro:bit を入れるケースを形にします。<a href="/programming/">プログラミングへ</a></p></li>
+      </ul>
+      <div class="facts">
+        <p>対象に合わせて内容を調整します。小学生は用意した型をアレンジ、中高生は自分でデザインするところから取り組みます。</p>
+        <p><strong>使っている機材：</strong>Bambu Lab P1S など</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- スクロール進捗 p=0.7 から表示される固定テキストボックス -->
-  <div class="printer-textbox">
-    <p data-i18n="printer-textbox-p">3Dプリンターは、デジタルデータから立体物を層状に積み重ねて造形する技術です。医療・建築・航空宇宙など幅広い産業で活用され、金属・樹脂・木材など多様な素材に対応しています。従来の製造方法では難しかった複雑な形状も再現でき、実際に機器を操作しながら設計の基礎を学ぶことで、現代のものづくりに欠かせないテクノロジーを「使いこなす力」を育てます。</p>
-  </div>
+  <section class="sec">
+    <div class="wrap media">
+      <img src="/coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" loading="lazy" alt="体験会で子どもたちが作ったネームプレートとからくりおもちゃ">
+      <div class="stack">
+        <span class="eyebrow"><b>02</b>Done</span>
+        <h2>やったこと</h2>
+        <p>2026年8月、福岡市立高宮公民館の特別企画で、3Dプリンターでネームプレートをつくる体験会を開きました。</p>
+        <a class="text-link" href="/coreshift-for-children/event01_takamiya/">活動レポートを見る <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
 
-  <!-- スクロール高さ確保用スペーサー -->
-  <section class="printer-bg-section"></section>
+  <section class="sec">
+    <div class="wrap stack">
+      <span class="eyebrow"><b>03</b>Next</span>
+      <h2>次の予定</h2>
+      <p>次回の開催が決まりしだい、SNSでお知らせします。</p>
+      <a class="text-link" href="https://www.instagram.com/coreshift.for_children/" target="_blank" rel="noopener">Instagram を見る <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-  <!-- ============ できること／やったこと／次の予定 ============ -->
-  <main class="tp-content">
-    <section class="tp-sec">
-      <div class="tp-label">CAN DO</div>
-      <h2 data-i18n="p3-can-title">できること</h2>
-      <p class="tp-lead" data-i18n="p3-can-lead">自分で考えた形を、その日のうちに手に取れるモノにする体験です。</p>
-      <ul class="tp-cards">
-          <li class="tp-card">
-            <h3 data-i18n="p3-can-1-t">名前入りネームプレート</h3>
-            <p data-i18n="p3-can-1-d">スマホで文字や形を選んでデザインし、自分だけのネームプレートを作ります。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="p3-can-2-t">季節の飾り</h3>
-            <p data-i18n="p3-can-2-d">クリスマスのオーナメントなど、季節に合わせた飾りづくり。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="p3-can-3-t">micro:bit のケース</h3>
-            <p data-i18n="p3-can-3-d">プログラミングで使う micro:bit を入れるケースを形にします。</p>
-          </li>
-        </ul>
-      <p class="tp-note" data-i18n="p3-can-note">対象に合わせて内容を調整します。小学生は用意した型をアレンジ、中高生は自分でデザインするところから取り組みます。</p>
-    </section>
-
-    <section class="tp-sec">
-      <div class="tp-label">DONE</div>
-      <h2 data-i18n="p3-done-title">やったこと</h2>
-      <article class="tp-event">
-        <img src="../coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" loading="lazy" data-i18n-alt="p3-done-alt" alt="体験会で子どもたちが作ったネームプレートとからくりおもちゃ">
-        <div class="tp-event-body">
-          <div class="tp-event-date" data-i18n="p3-done-date">2026.08.09 ／ 高宮公民館</div>
-          <h3 data-i18n="p3-done-t">3Dプリンターでネームプレートづくり</h3>
-          <p data-i18n="p3-done-d">小学生と保護者が対象。7組・子ども8人が参加しました。印刷を待つあいだ、保護者向けにAIの使い方講座も行いました。</p>
-          <a href="../coreshift-for-children/event01_takamiya/" class="tp-link" data-i18n-html="p3-done-link">当日の様子を見る <span aria-hidden="true">→</span></a>
-        </div>
-      </article>
-    </section>
-
-    <section class="tp-sec">
-      <div class="tp-label">NEXT</div>
-      <h2 data-i18n="p3-next-title">次の予定</h2>
-      <p class="tp-lead" data-i18n="p3-next-d">次回の開催が決まりしだい、SNSでお知らせします。</p>
-      <a href="https://www.instagram.com/coreshift.for_children?igsh=dGFhYnpsdGNyeHht" target="_blank" rel="noopener" class="tp-link" data-i18n-html="tp-sns">Instagram を見る <span aria-hidden="true">↗</span></a>
-    </section>
-
-    <section class="tp-sec">
-      <div class="tp-label">EQUIPMENT</div>
-      <h2 data-i18n="p3-eq-title">使っている機材</h2>
-      <p class="tp-lead" data-i18n="p3-eq-d">Bambu Lab P1S など</p>
-    </section>
-
-    <section class="tp-sec tp-cta">
-      <div class="tp-label" data-i18n="tp-cta-label">施設・団体の方へ</div>
-      <h2 data-i18n="tp-cta-t">出張体験会のご相談はこちら</h2>
-      <p class="tp-lead" data-i18n="tp-cta-d">公民館・児童館・学校・居場所施設などで、子ども向けの体験会を開いています。内容・人数・時間はご相談ください。</p>
-      <a href="../contact/" class="tp-btn" data-i18n-html="tp-cta-btn">お問い合わせ <span aria-hidden="true">→</span></a>
-    </section>
-  </main>
-
-  <div id="page-transition">
-    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
-    <div class="pt-strip"></div><div class="pt-strip"></div>
-  </div>
-  <script>
-    if (sessionStorage.getItem('ptStrip') === '1') {
-      document.documentElement.setAttribute('data-pt-init', '');
-    }
-  </script>
-  <script src="../i18n.js?v=8"></script>
-  <script type="module" src="../main.js?v=2"></script>
-</body>
-</html>
+  <section class="sec sec--light cta">
+    <div class="wrap">
+      <span class="eyebrow"><span class="nw">施設・学校の方へ</span></span>
+      <h2>体験会の<wbr>開催について</h2>
+      <p>公民館・児童館・学校・居場所施設などで、子ども向けの体験会を開きませんか。<br>開催の目安は、施設・学校向けのページにまとめています。</p>
+      <div class="btn-row">
+        <a class="btn" href="/contact/?type=workshop">体験会の開催について<wbr>相談する <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="/for-organizations/"><span><span class="nw">施設・学校の方へ</span></span> <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>

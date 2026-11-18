@@ -1,0 +1,44 @@
+/* ============================================================
+   からくりおもちゃ（つくる自由研究）ページ専用
+   site.css の部品で足りないところだけをここに書く。
+============================================================ */
+
+/* ヒーローの模型の図: 縦長の図なので切らずに白地に収める */
+.kr-hero .hero-photo img { object-fit: contain; background: #fff; padding: 24px; }
+
+/* ページ内の目次 */
+.kr-toc { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.kr-toc a {
+  display: inline-block; padding: 8px 18px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75); color: #23324a;
+  font-size: 0.9rem; font-weight: 700; text-decoration: none;
+}
+.kr-toc a::after { content: " ↓"; color: #2563eb; }
+.kr-toc a:hover { background: #fff; color: #2563eb; }
+
+/* しくみ: 部品名のラベルと、調べるポイント */
+.features .eyebrow { margin-bottom: 6px; letter-spacing: 0.08em; }
+.kr-note { margin-top: 32px; border-radius: 12px; }
+.kr-note .check-list { padding-bottom: 0; }
+
+/* つくる: 縦長の説明図は切らずに見せる */
+.kr-media { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.kr-media img { aspect-ratio: auto; object-fit: contain; border: 1px solid var(--border); background: #fff; max-height: 560px; width: auto; margin: 0 auto; }
+.kr-media figcaption { margin-top: 10px; font-size: 0.9rem; color: var(--muted); text-align: center; }
+.kr-cards { margin-top: 56px; }
+.kr-cards .card { border-radius: 12px; }
+.kr-cards .badge { display: inline-block; }
+.kr-cards .card-body h3 { margin-bottom: 0; }
+
+/* まとめる: 見出しの列を少しせまく */
+.kr-order dt { color: var(--accent); }
+
+/* 問い合わせ */
+.cta h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+
+@media (max-width: 768px) {
+  .kr-hero .hero-photo img { padding: 16px; }
+  .kr-media { grid-template-columns: minmax(0, 1fr); }
+  .kr-media img { max-height: 480px; }
+  .kr-cards { margin-top: 40px; }
+}

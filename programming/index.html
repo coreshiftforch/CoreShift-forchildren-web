@@ -1,127 +1,79 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プログラミング — CoreShift</title>
-  <meta name="description" content="micro:bit GO を使ったプログラミング体験。ブロックから JavaScript・Python へ、3Dプリンターと組み合わせた作品づくりも。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="icon" href="../icon/アイコン03.png" type="image/png">
-  <link rel="stylesheet" href="../style.css?v=35">
-  <script type="importmap">
-    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
-  </script>
-</head>
-<body>
-
-  <div id="cursor"></div>
-
-  <header id="header">
-    <a class="logo" href="../index.html">CoreShift</a>
-    <div class="lang-switch">
-      <span class="lang-btn lang-active">JP</span>
-      <span class="lang-sep-v">/</span>
-      <span class="lang-btn">EN</span>
-    </div>
-  </header>
-
-  <nav id="side-nav">
-    <a href="../index.html#about">About</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#tools">Tools</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#others">Others</a>
-    <span class="nav-sep"></span>
-    <a href="../index.html#sns">SNS</a>
-  </nav>
-
-  <section class="tool-detail">
-    <div class="tool-detail-canvas-wrap tool-code-visual">
-      <pre class="code-block"><code><span class="c-cm">// Shake dice — micro:bit / MakeCode</span>
+---
+layout: default
+title: "プログラミング（準備中） — CoreShift"
+description: "micro:bit GO を使って、自分で書いたプログラムでモノを動かす体験会を準備しています。"
+extra_css: /programming/page.css
+---
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Technology</span>
+        <h1>プログラミング</h1>
+        <span class="badge">準備中</span>
+        <p class="lead">micro:bit GO を使って、自分で書いたプログラムでモノを動かす体験会を準備しています。ブロックから始めて、慣れたら JavaScript や Python へ。小学生から中高生まで、同じ教材で段階的に学べる内容です。</p>
+      </div>
+      <figure class="hero-photo" aria-label="micro:bit のプログラムの例">
+        <pre class="code-block"><code><span class="c-cm">// Shake dice — micro:bit / MakeCode</span>
 input.<span class="c-fn">onGesture</span>(Gesture.Shake, <span class="c-kw">function</span> () {
   basic.<span class="c-fn">showNumber</span>(<span class="c-fn">randint</span>(1, 6))
 })
 input.<span class="c-fn">onButtonPressed</span>(Button.A, <span class="c-kw">function</span> () {
   basic.<span class="c-fn">showString</span>(<span class="c-str">"CoreShift"</span>)
 })</code></pre>
-    </div>
-    <div class="tool-detail-body">
-      <div class="tool-detail-label">TECHNOLOGY 03</div>
-      <h2 data-i18n="prog-page-title">プログラミング</h2>
-      <p data-i18n="prog-desc">micro:bit GO を使って、自分で書いたプログラムでモノを動かす体験をします。ブロックから始めて、慣れたら JavaScript や Python へ。小学生から中高生まで、同じ教材で段階的に学べます。</p>
+      </figure>
     </div>
   </section>
 
-  <!-- ============ できること／ならでは／自作ツール／次の予定 ============ -->
-  <main class="tp-content">
-    <section class="tp-sec">
-      <div class="tp-label">CAN DO</div>
-      <h2 data-i18n="pg-can-title">できること</h2>
-      <p class="tp-lead" data-i18n="pg-can-lead">教材は micro:bit GO。手のひらサイズのコンピューターで、LED・ボタン・傾きセンサーなどを使ったプログラムを作ります。</p>
-      <ul class="tp-cards">
-          <li class="tp-card">
-            <h3 data-i18n="pg-can-1-t">ブロックから始める</h3>
-            <p data-i18n="pg-can-1-d">MakeCode のブロックを並べるだけで、すぐに動くプログラムが作れます。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="pg-can-2-t">JavaScript・Python へ</h3>
-            <p data-i18n="pg-can-2-d">慣れてきたら、同じプログラムを文字のコードで書いてみます。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="pg-can-3-t">学年に合わせて段階的に</h3>
-            <p data-i18n="pg-can-3-d">小学生から中高生まで、同じ教材でレベルを上げていけます。</p>
-          </li>
-        </ul>
-    </section>
+  <section class="sec sec--light">
+    <div class="wrap">
+      <div class="sec-head stack">
+        <span class="eyebrow"><b>01</b>Can do</span>
+        <h2>できること</h2>
+        <p class="lead">教材は micro:bit GO。手のひらサイズのコンピューターで、LED・ボタン・傾きセンサーなどを使ったプログラムを作ります。</p>
+      </div>
+      <ul class="features">
+        <li><h3>ブロックから始める</h3><p>MakeCode のブロックを並べるだけで、すぐに動くプログラムが作れます。</p></li>
+        <li><h3><span class="nw">JavaScript・Python</span><wbr>へ</h3><p>慣れてきたら、同じプログラムを文字のコードで書いてみます。</p></li>
+        <li><h3>学年に合わせて<wbr>段階的に</h3><p>小学生から中高生まで、同じ教材でレベルを上げていけます。</p></li>
+      </ul>
+    </div>
+  </section>
 
-    <section class="tp-sec">
-      <div class="tp-label">WITH 3D PRINTING</div>
-      <h2 data-i18n="pg-uniq-title">3Dプリンターと組み合わせる</h2>
-      <p class="tp-lead" data-i18n="pg-uniq-lead">CoreShiftならではの取り組みとして、自分で設計したケースや部品と micro:bit を組み合わせた作品づくりを準備しています。</p>
-      <ul class="tp-cards">
-          <li class="tp-card">
-            <h3 data-i18n="pg-uniq-1-t">LEDで名前が流れる名札</h3>
-            <p data-i18n="pg-uniq-1-d">自分で設計したケースに入れて、名前を表示します。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="pg-uniq-2-t">傾けると表情が変わる置物</h3>
-            <p data-i18n="pg-uniq-2-d">傾きセンサーを使って、LEDの顔を切り替えます。</p>
-          </li>
-          <li class="tp-card">
-            <h3 data-i18n="pg-uniq-3-t">振ると数が出るサイコロ</h3>
-            <p data-i18n="pg-uniq-3-d">振ったことを検知して、1〜6の数を表示します。</p>
-          </li>
-        </ul>
-    </section>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head stack">
+        <span class="eyebrow"><b>02</b>With 3D printing</span>
+        <h2>3Dプリンターと<wbr>組み合わせる</h2>
+        <p class="lead">自分で設計したケースや部品と micro:bit を組み合わせた作品づくりを準備しています。</p>
+      </div>
+      <ul class="features">
+        <li><h3>LEDで名前が<wbr>流れる名札</h3><p>自分で設計したケースに入れて、名前を表示します。</p></li>
+        <li><h3>傾けると表情が<wbr>変わる置物</h3><p>傾きセンサーを使って、LEDの顔を切り替えます。</p></li>
+        <li><h3>振ると数が出る<wbr>サイコロ</h3><p>振ったことを検知して、1〜6の数を表示します。</p></li>
+      </ul>
+      <p class="muted" style="margin-top: 28px"><a href="/3dprinter/">3Dプリンターのページへ</a></p>
+    </div>
+  </section>
 
+  <section class="sec sec--light">
+    <div class="wrap stack">
+      <span class="eyebrow"><b>03</b>Next</span>
+      <h2>次の予定</h2>
+      <p>micro:bit を使った体験会を準備中です。開催が決まりしだい、SNSでお知らせします。</p>
+      <a class="text-link" href="https://www.instagram.com/coreshift.for_children/" target="_blank" rel="noopener">Instagram を見る <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
 
-    <section class="tp-sec">
-      <div class="tp-label">NEXT</div>
-      <h2 data-i18n="pg-next-title">次の予定</h2>
-      <p class="tp-lead" data-i18n="pg-next-d">micro:bit を使った体験会を準備中です。開催が決まりしだい、SNSでお知らせします。</p>
-      <a href="https://www.instagram.com/coreshift.for_children?igsh=dGFhYnpsdGNyeHht" target="_blank" rel="noopener" class="tp-link" data-i18n-html="tp-sns">Instagram を見る <span aria-hidden="true">↗</span></a>
-    </section>
-
-    <section class="tp-sec tp-cta">
-      <div class="tp-label" data-i18n="tp-cta-label">施設・団体の方へ</div>
-      <h2 data-i18n="tp-cta-t">出張体験会のご相談はこちら</h2>
-      <p class="tp-lead" data-i18n="tp-cta-d">公民館・児童館・学校・居場所施設などで、子ども向けの体験会を開いています。内容・人数・時間はご相談ください。</p>
-      <a href="../contact/" class="tp-btn" data-i18n-html="tp-cta-btn">お問い合わせ <span aria-hidden="true">→</span></a>
-    </section>
-  </main>
-
-  <div id="page-transition">
-    <div class="pt-strip"></div><div class="pt-strip"></div><div class="pt-strip"></div>
-    <div class="pt-strip"></div><div class="pt-strip"></div>
-  </div>
-  <script>
-    if (sessionStorage.getItem('ptStrip') === '1') {
-      document.documentElement.setAttribute('data-pt-init', '');
-    }
-  </script>
-  <script src="../i18n.js?v=8"></script>
-  <script type="module" src="../main.js?v=2"></script>
-</body>
-</html>
+  <section class="sec cta">
+    <div class="wrap">
+      <span class="eyebrow"><span class="nw">施設・学校の方へ</span></span>
+      <h2>体験会の<wbr>開催について</h2>
+      <p>体験会の内容と開催の目安は、施設・学校向けのページにまとめています。</p>
+      <div class="btn-row">
+        <a class="btn" href="/for-organizations/"><span><span class="nw">施設・学校の方へ</span></span> <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="/contact/?type=workshop">体験会の開催について<wbr>相談する <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
