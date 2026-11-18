@@ -437,3 +437,67 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
   text-wrap: pretty;
 }
 .nw { white-space: nowrap; }
+
+/* ============================================================
+   保護者向けまわり（theme-sky）を旧版のやさしい印象に寄せる
+   空と雲／ポラロイド風の写真／名札風のカード／淡い色の帯／丸いボタン
+============================================================ */
+.theme-sky {
+  --text: #252535;
+  --muted: #4a5568;
+  --gold: #c0922e;
+  --cream: #fffbf2;
+  --mint: #e4f8ee;
+  --peach: #fff2ee;
+}
+.theme-sky .sec { background: #eaf6fd; }
+.theme-sky .sec--light { background: var(--cream); }
+.theme-sky .sec + .sec:not(.sec--light) { border-top: 0; }
+.theme-sky h1, .theme-sky h2, .theme-sky h3 { color: #252535; }
+
+/* 空と雲 */
+.theme-sky .hero { position: relative; overflow: hidden; }
+.theme-sky .hero > .wrap { position: relative; z-index: 1; }
+.theme-sky .hero::before, .theme-sky .hero::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  width: 260px; height: 70px; border-radius: 100px; background: rgba(255, 255, 255, 0.85);
+  box-shadow: 40px -40px 0 10px rgba(255, 255, 255, 0.9), 120px -24px 0 0 rgba(255, 255, 255, 0.85);
+  animation: sky-cloud 60s linear infinite;
+}
+.theme-sky .hero::before { top: 18%; left: -320px; }
+.theme-sky .hero::after { top: 70%; left: -420px; transform: scale(0.6); opacity: 0.7; animation-duration: 90s; animation-delay: -40s; }
+@keyframes sky-cloud { from { translate: 0 0; } to { translate: calc(100vw + 600px) 0; } }
+
+/* ポラロイド風の写真 */
+.theme-sky .hero-photo img {
+  border-radius: 6px; border: 10px solid #fff; border-bottom-width: 34px;
+  box-shadow: 0 18px 36px rgba(35, 50, 74, 0.18); rotate: 2deg;
+}
+.theme-sky .steps img, .theme-sky .gallery img {
+  border-radius: 6px; border: 8px solid #fff; border-bottom-width: 24px;
+  box-shadow: 0 10px 22px rgba(35, 50, 74, 0.12);
+}
+.theme-sky .steps li:nth-child(odd) img, .theme-sky .gallery figure:nth-child(odd) img { rotate: -1.5deg; }
+.theme-sky .steps li:nth-child(even) img, .theme-sky .gallery figure:nth-child(even) img { rotate: 1.5deg; }
+.theme-sky .steps li::before { top: 18px; left: 18px; }
+
+/* 名札風のカード（次回の体験会） */
+.theme-sky .next-card { background: var(--cream); border: 2px solid var(--gold); border-radius: 14px; }
+.theme-sky .next-icon { color: var(--gold); }
+.theme-sky .next-card .badge { background: var(--gold); }
+
+/* 丸いボタンと、やわらかいカード */
+.theme-sky .btn { border-radius: 999px; }
+.theme-sky .card, .theme-sky .features li, .theme-sky .guide-group, .theme-sky .note, .theme-sky .facts p { border-radius: 14px; }
+.theme-sky .card, .theme-sky .features li { background: #fff; border-color: #d7e8f3; }
+.theme-sky .facts p { background: var(--mint); border-left-color: #2f9e6e; }
+.theme-sky .placeholder { border-radius: 14px; }
+
+@media (max-width: 768px) {
+  .theme-sky .hero-photo img { rotate: 0deg; border-width: 8px; border-bottom-width: 24px; }
+  .theme-sky .hero::before, .theme-sky .hero::after { width: 160px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-sky .hero::before, .theme-sky .hero::after { animation: none; left: 8%; }
+  .theme-sky .hero::after { left: 60%; }
+}
