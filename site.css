@@ -508,3 +508,13 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
 .logo small { margin-left: -2px; }
 .site-footer .logo-mark { height: 20px; }
 @media (max-width: 768px) { .logo-mark { height: 20px; } }
+
+/* ============================================================
+   #13 スクロールで現れる動き
+   JS が html に .reveal-on を付けたときだけ隠す（JS なし・動きを減らす設定では最初から表示）
+============================================================ */
+.reveal-on .rv { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; transition-delay: var(--rv-delay, 0s); }
+.reveal-on .rv.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on .rv { opacity: 1; transform: none; transition: none; }
+}

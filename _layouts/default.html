@@ -37,6 +37,34 @@
 
 {% include footer.html %}
 
+<script>
+// #13 スクロールで現れる動き（画面に入った要素を少し下から浮かび上がらせる）
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var sel = [
+    '.sec-head', '.media > *', '.project-card', '.door', '.next-card', '.note', '.facts', '.spec',
+    '.features > li', '.cards > *', '.funds > li', '.guide-group', '.steps > li', '.gallery > figure',
+    '.models > *', '.report-step', '.labeled', '.cta .wrap > *', '.form'
+  ].join(',');
+  var items = Array.prototype.slice.call(document.querySelectorAll('main ' + sel.split(',').join(', main ')));
+  if (!items.length) return;
+  items.forEach(function (el) {
+    el.classList.add('rv');
+    // 同じ並びの中では少しずつずらす
+    var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+    if (el.parentNode.children.length > 1) el.style.setProperty('--rv-delay', Math.min(i, 5) * 0.08 + 's');
+  });
+  document.documentElement.classList.add('reveal-on');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
 <!-- Cloudflare Web Analytics（Cookie を使わないアクセス計測。#33） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c6cc34671ba84165982a038dbe12311e"}'></script><!-- End Cloudflare Web Analytics -->
 
 </body>
