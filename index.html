@@ -12,8 +12,9 @@ google_verification: true
         <h1>福岡の子どもたちに、<br>3Dプリンターなどの<wbr>新しい技術を<wbr>「使ってみる」<wbr>体験を</h1>
         <p class="lead">子どもがスマホでデザインした形を、3Dプリンターで実際の形にします。アプリも教材も自分たちで作りました。代表が18歳で立ち上げた学生団体です。</p>
       </div>
-      <figure class="hero-photo">
-        <img src="/coreshift-for-children/photos/event01_takamiya/S__2965527_0.jpg" width="1477" height="1108" fetchpriority="high" alt="子どもたちが作ったネームプレートとからくりおもちゃ">
+      <figure class="hero-anim">
+        <img id="print-anim" src="/images/print/frame_072.webp" width="720" height="720" fetchpriority="high" alt="3Dプリンターがネームプレートを1層ずつ作る様子">
+        <figcaption>スクロールすると、3Dプリンターがネームプレートを作ります</figcaption>
       </figure>
     </div>
     <div class="wrap">
@@ -89,3 +90,31 @@ google_verification: true
     </div>
   </section>
 </main>
+
+<script>
+// トップの冒頭: スクロールに合わせて、3Dプリンターの連番画像（72コマ）を切り替える
+(function () {
+  var img = document.getElementById('print-anim');
+  if (!img) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // 動きを減らす設定なら完成のコマのまま
+  var N = 72, frames = [], loaded = 0, current = 0;
+  var src = function (i) { return '/images/print/frame_' + String(i).padStart(3, '0') + '.webp'; };
+  for (var i = 1; i <= N; i++) {
+    var im = new Image();
+    im.onload = function () { loaded++; if (loaded === N) update(); };
+    im.src = src(i);
+    frames.push(im);
+  }
+  function update() {
+    // 冒頭の部分を見ているあいだ（ページ上端から画面の高さぶん）で、1コマ目から72コマ目まで進む
+    var range = Math.max(window.innerHeight * 0.9, 400);
+    var p = Math.min(Math.max(window.scrollY / range, 0), 1);
+    var f = Math.round(p * (N - 1)) + 1;
+    if (f !== current && loaded === N) { img.src = frames[f - 1].src; current = f; }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); }
+  }, { passive: true });
+})();
+</script>
