@@ -4,3 +4,4 @@ exclude:
   - docs/
   - CLAUDE.md
   - bake_and_export.py
+  - content/
