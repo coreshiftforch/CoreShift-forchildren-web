@@ -119,7 +119,7 @@
 | D-5 | **使わなくなったファイル**の整理: `style.css`, `main.js`, `i18n.js`, `child.css`, `models/`, `images/printer-still.png`, `bake_and_export.py`。旧ページを消すと使われなくなるものがある | D-1 | リポジトリ全体 |
 | D-6 | **`sitemap.xml`** を、残すページだけにする | D-1 | `sitemap.xml` |
 
-`coreshift-for-children/nameplate-demo/`（体験会当日に使うWebアプリ）は、URLを変えない・触らない。
+`coreshift-for-children/nameplate-demo/`（体験会当日に使うWebアプリ。2026-11 に作り直した）は、URLを変えない。サイトの整理作業では触らない。
 
 ---
 
