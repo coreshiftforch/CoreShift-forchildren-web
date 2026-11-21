@@ -9,7 +9,7 @@
 - site.css: 共通スタイル。ページ専用のスタイルは各ページの page.css（ページ先頭の extra_css で読み込む）
 - index.html（トップ）、for-organizations/（施設・学校向け）、coreshift-for-children/（保護者向け）、coreshift-for-children/support/（企業・個人向け）、contact/（お問い合わせ）
 - 残している旧ページ: about/、3dprinter/、programming/、karakuri/、coreshift-for-children/activities/、coreshift-for-children/event01_takamiya/（活動レポート）
-- ai/ と「CoreShift for children/」は転送用。coreshift-for-children/nameplate-demo/ は体験会で使う独立した Web アプリ（触らない）
+- ai/ と「CoreShift for children/」は転送用。coreshift-for-children/nameplate-demo/ は体験会で使う独立した Web アプリ（なまえプレート。2026-11 に作り直した。Jekyll のレイアウトは使わない。URL は変えない。設定は js/config.js）
 - 作業の進め方・文言の方針は docs/ROADMAP.md、作業は GitHub Issue で管理
 
 ## Responsive Breakpoints
