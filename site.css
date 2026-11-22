@@ -518,3 +518,11 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
 @media (prefers-reduced-motion: reduce) {
   .reveal-on .rv { opacity: 1; transform: none; transition: none; }
 }
+
+/* トップ: 使う技術（3Dプリンター・AI・プログラミングのページへ） */
+.tech-title { margin: 56px 0 16px; font-size: 1.1rem; }
+.doors--3 { grid-template-columns: repeat(3, 1fr); margin-top: 0; }
+.sec--light .door { background: var(--bg); }
+.sec--light .door:hover { background: var(--surface); }
+
+@media (max-width: 768px) { .doors--3 { grid-template-columns: 1fr; margin-top: 0; } .tech-title { margin-top: 40px; } }
