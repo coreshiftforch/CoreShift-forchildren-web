@@ -1,0 +1,11 @@
+/* /3dprinter/ だけで使う: 3Dプリンターの連番画像（スクロールで進む） */
+.print-anim { position: relative; margin: 0; }
+.print-anim::before {
+  content: ""; position: absolute; inset: 6%; z-index: 0; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(59, 130, 246, 0.30), rgba(59, 130, 246, 0) 100%);
+}
+.media .print-anim img { position: relative; z-index: 1; display: block; width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1; object-fit: contain; }
+.print-anim-note { font-size: 0.86rem; color: var(--muted); }
+@media (max-width: 768px) {
+  .media .print-anim img { max-width: 360px; }
+}
