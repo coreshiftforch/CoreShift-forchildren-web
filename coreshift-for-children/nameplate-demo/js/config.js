@@ -7,8 +7,10 @@
      （Apps Script を新しく作り直したときだけ、下の URL を書きかえる）
    ══════════════════════════════════════════════════════════════ */
 window.NAMEPLATE_CONFIG = {
-  /* イベント会場モード（?mode=event）の あいことばを確かめる Apps Script */
-  GATE_URL: 'https://script.google.com/macros/s/AKfycbxZyhmcQmkTiLi7dhWR8VQ09BKn9B5oj58xxXbC54yA7eiamzYZjhviSlDRGuMs_1BLQg/exec',
+  /* イベント会場モード（?mode=event）の あいことばを確かめる Apps Script
+     あいことばは ドライブの「なまえプレート あいことば」シートで管理する
+     （イベントの番号は その日だけ、マスターの番号は いつでも通る） */
+  GATE_URL: 'https://script.google.com/macros/s/AKfycbxxji8yXAjc-9jYjdBDfUsXyOB-S6_9B0arPf6VwRQwU22sOJCEmQ9TNFN4xIU0Ir78/exec',
 
   /* できあがった 3mf を受けとって ドライブに保存する Apps Script */
   SUBMIT_URL: 'https://script.google.com/macros/s/AKfycbwEUGychKUl6O6SDKZNHq2t9r_cANxnLxWOeqLfxHceE84hkUSVXRFuMVREg-WXMXi4/exec',
