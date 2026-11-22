@@ -14,7 +14,7 @@
   --accent: #3b82f6;
   --accent-strong: #2563eb;
   --link: #93c5fd;
-  --head-bg: rgba(6, 6, 6, 0.86);
+  --head-bg: #0a0a0a;
   --font: 'Inter', 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
   --wrap: 1120px;
   --gutter: 40px;
@@ -41,7 +41,7 @@
   --accent: #2563eb;
   --accent-strong: #1d4ed8;
   --link: #1d4ed8;
-  --head-bg: rgba(255, 255, 255, 0.9);
+  --head-bg: #ffffff;
 }
 .theme-sky .sec--light { --bg: #ffffff; --surface: #f3f9fd; --text: #3a3a4a; --muted: #55607a; --border: #d7e8f3; }
 
@@ -71,9 +71,7 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
 /* ---------- header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: var(--head-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--head-bg); /* 後ろをぼかす効果は、スクロールのたびに計算し直して重くなるので使わない */
   border-bottom: 1px solid var(--border);
 }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 68px; }
