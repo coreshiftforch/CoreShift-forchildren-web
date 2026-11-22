@@ -49,12 +49,17 @@
   ].join(',');
   var items = Array.prototype.slice.call(document.querySelectorAll('main ' + sel.split(',').join(', main ')));
   if (!items.length) return;
-  items.forEach(function (el) {
+  var vh = window.innerHeight;
+  items = items.filter(function (el) {
+    // 開いた時点で画面に入っているものは、待たせずにそのまま出す（動かさない）
+    if (el.getBoundingClientRect().top < vh) return false;
     el.classList.add('rv');
     // 同じ並びの中では少しずつずらす
     var i = Array.prototype.indexOf.call(el.parentNode.children, el);
     if (el.parentNode.children.length > 1) el.style.setProperty('--rv-delay', Math.min(i, 5) * 0.08 + 's');
+    return true;
   });
+  if (!items.length) return;
   document.documentElement.classList.add('reveal-on');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
