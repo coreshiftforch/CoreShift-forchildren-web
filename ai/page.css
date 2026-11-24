@@ -15,3 +15,6 @@
 @media (max-width: 768px) {
   .prompt-block { padding: 20px 16px; font-size: 0.9rem; }
 }
+
+/* 「AIを使うプログラム」の入口（1つだけなので1列） */
+.sec-head + .doors { grid-template-columns: minmax(0, 1fr); margin-top: 0; }

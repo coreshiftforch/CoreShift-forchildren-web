@@ -1,0 +1,50 @@
+/* /programs/ 以下（プログラムA・B・C）で共通に使う: 体験の流れ・役割・目安の表 */
+
+/* 体験の流れ（番号つきの縦の手順） */
+.flow { list-style: none; padding: 0; display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); counter-reset: fl; }
+.flow > li { counter-increment: fl; display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 8px 24px; align-items: start; padding: 24px 28px; background: var(--surface); }
+.flow > li::before { content: "0" counter(fl); font-size: 1.6rem; font-weight: 900; line-height: 1.2; color: var(--accent); }
+.flow h3 { margin-bottom: 6px; }
+.flow p { color: var(--muted); font-size: 0.95rem; }
+.flow .time { padding: 2px 12px; border: 1px solid var(--accent); border-radius: 999px; color: var(--accent); font-size: 0.82rem; font-weight: 700; white-space: nowrap; }
+.flow-note { margin-top: 16px; font-size: 0.9rem; color: var(--muted); }
+
+/* 子どもと大学生の役割（2つの枠） */
+.roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+
+/* 概要の数字（対象・人数・時間） */
+.at-a-glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.at-a-glance div { padding: 20px 22px; background: var(--surface); }
+.at-a-glance dt { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+.at-a-glance dd { margin: 0; font-weight: 900; font-size: 1.1rem; }
+.hero-copy .at-a-glance { margin-top: 32px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (max-width: 1300px) {
+  .at-a-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .flow > li { grid-template-columns: minmax(0, 1fr); padding: 20px 18px; }
+  .flow > li::before { font-size: 1.3rem; }
+  .flow .time { justify-self: start; }
+  .roles { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+/* プログラムC のヒーロー: アイデアをAIへのお願いにまとめた例（/ai/page.css と同じ見た目） */
+.prompt-block {
+  margin: 0; padding: 32px 36px;
+  font-family: inherit; font-size: 1rem; line-height: 2;
+  color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  white-space: pre-wrap;
+}
+.prompt-block .p-label { display: block; margin-bottom: 8px; font-size: 0.78rem; letter-spacing: 0.08em; color: var(--accent); }
+@media (max-width: 768px) {
+  .prompt-block { padding: 20px 16px; font-size: 0.9rem; }
+}
+
+/* プログラムA のからくりおもちゃ: スマホでも2列にして、縦に長くなりすぎないように */
+@media (max-width: 768px) {
+  #option .models { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  #option .models .card-body { padding: 14px 12px 16px; }
+  #option .models .card-body p { font-size: 0.85rem; }
+}

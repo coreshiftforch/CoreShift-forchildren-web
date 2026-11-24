@@ -8,7 +8,8 @@
 - _layouts/default.html: <head>・全体の枠。_includes/header.html・footer.html: ヘッダーとフッター
 - site.css: 共通スタイル。ページ専用のスタイルは各ページの page.css（ページ先頭の extra_css で読み込む）
 - index.html（トップ）、for-organizations/（施設・学校向け）、coreshift-for-children/（保護者向け）、coreshift-for-children/support/（企業・個人向け）、contact/（お問い合わせ）
-- 技術ごとのページ: 3dprinter/（プログラムA）、ai/（プログラムC。2026-11-22 に転送から作り直し）、programming/（micro:bit・準備中）。メニューからはつながず、施設・学校向けからリンク
+- 技術ごとのページ: 3dprinter/、ai/、programming/（micro:bit・準備中）。技術そのものの紹介だけを書き、体験の流れ・対象・時間はプログラムのページに書く。メニューからはつながず、トップの「使う技術」からリンク
+- プログラムごとのページ: programs/nameplate/（A ネームプレート作り）、programs/custom/（B ご相談受付）、programs/ideathon/（C アイデアソン×バイブコーディング）。共通のスタイルは programs/programs.css。中身は案内PDFの各プログラムのページに合わせ、費用の数字は書かない。施設・学校向けのカードと技術ページからリンク
 - 残している旧ページ: about/、karakuri/、coreshift-for-children/activities/、coreshift-for-children/event01_takamiya/（活動レポート）
 - files/coreshift-guide.pdf: 一般向けの案内資料（ドライブ 01_団体運営/02_資料/02_PDF集/01_一般向け_YYYY-MM-DD（末尾は最終更新日）の「YYYY-MM-DD_CoreShiftのご案内.pdf」の最新版）。直したら差し替える
 - files/coreshift-price-list.pdf: 一般向けの料金表（別紙。同じフォルダの「YYYY-MM-DD_料金表.pdf」の最新版）。料金を変えたら差し替える
