@@ -1,33 +1,36 @@
 /* ============================================================
    CoreShift 新サイト共通スタイル
-   旧サイトの見た目（黒地・白セクション・青アクセント・英字ラベル・角のないボタン）を引き継ぐ。
-   保護者向けページ（for children）は旧サイトと同じ空色の明るい配色。
+   イメージカラーはロゴの空色（#29abe2）。白と淡い空色のセクションを交互に置き、文字は紺（ロゴの紺に寄せた色）。
+   空色は白い文字や白地の文字には薄すぎる（コントラスト 2.6）ので、ボタン・リンク・小さい文字には深い空色（--accent）を使い、
+   空色そのものは帯・面・バッジ（紺の文字をのせる）に使う。（#70 黒基調をやめる。代表の決定 2026-11-25）
+   保護者向けページ（for children）は、さらにやわらかい空色の配色（theme-sky）。
    ブレークポイント: サイズ3(PC) 1301px〜 / サイズ2 〜1300px / サイズ1(スマホ) 〜768px
 ============================================================ */
 :root {
-  --bg: #060606;
-  --bg2: #0d0d0d;
-  --surface: #111111;
-  --text: #e8e8e8;
-  --muted: #a3a3a3;
-  --border: #262626;
-  --accent: #3b82f6;
-  --accent-strong: #2563eb;
-  --link: #93c5fd;
-  --head-bg: #0a0a0a;
+  --sky: #29abe2;        /* ロゴの空色（面・帯・バッジ用） */
+  --sky-pale: #eef8fd;   /* 淡い空色のセクション */
+  --navy: #1b2a5e;       /* 文字・フッター */
+  --bg: #ffffff;
+  --bg2: #f4fafd;
+  --surface: #f4fafd;
+  --text: #1b2a5e;
+  --muted: #4f5a75;
+  --border: #d6eaf5;
+  --accent: #0a74b0;     /* 深い空色（白地で 5.1、白い文字をのせて 5.1） */
+  --accent-strong: #085d8e;
+  --link: #0a6aa3;
+  --head-bg: #ffffff;
   --font: 'Inter', 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
   --wrap: 1120px;
   --gutter: 40px;
 }
 
-/* 白いセクション（旧サイトの white-section） */
+/* 淡い空色のセクション（白いセクションと交互に置く） */
 .sec--light {
-  --bg: #ffffff;
-  --surface: #f5f5f5;
-  --text: #111111;
-  --muted: #4b5563;
-  --border: #e5e5e5;
-  --link: #1d4ed8;
+  --bg: var(--sky-pale);
+  --bg2: #ffffff;
+  --surface: #ffffff;
+  --border: #cfe6f3;
 }
 
 /* 保護者向け: 空色の明るい配色（旧 child.css） */
@@ -38,9 +41,9 @@
   --text: #3a3a4a;
   --muted: #55607a;
   --border: #c9e1f0;
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
-  --link: #1d4ed8;
+  --accent: #0a74b0;     /* サイト全体と同じ深い空色にそろえる */
+  --accent-strong: #085d8e;
+  --link: #0a6aa3;
   --head-bg: #ffffff;
 }
 .theme-sky .sec--light { --bg: #ffffff; --surface: #f3f9fd; --text: #3a3a4a; --muted: #55607a; --border: #d7e8f3; }
@@ -68,20 +71,31 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
 
 .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 
-/* ---------- header ---------- */
+/* ---------- header（2段: 上=読む方別、下=ジャンル。BBC・Raspberry Pi Foundation などを参考に） ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
   background: var(--head-bg); /* 後ろをぼかす効果は、スクロールのたびに計算し直して重くなるので使わない */
+  border-top: 4px solid var(--sky);
   border-bottom: 1px solid var(--border);
 }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 68px; }
-.logo { font-weight: 900; font-size: 1.35rem; letter-spacing: 0.02em; color: var(--text); text-decoration: none; white-space: nowrap; }
-.logo:hover { color: var(--text); }
+.head-util { background: var(--sky-pale); border-bottom: 1px solid var(--border); }
+.unav { display: flex; justify-content: flex-end; gap: 24px; font-size: 0.8rem; font-weight: 700; }
+.unav a { color: var(--muted); text-decoration: none; padding: 6px 0; white-space: nowrap; }
+.unav a:hover, .unav a[aria-current="page"] { color: var(--accent); }
+.head-main .wrap { display: flex; align-items: center; gap: 32px; min-height: 68px; }
+.logo { font-weight: 900; font-size: 1.35rem; letter-spacing: 0.02em; color: var(--navy); text-decoration: none; white-space: nowrap; }
+.logo:hover { color: var(--navy); }
 .logo small { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-left: 6px; letter-spacing: 0.06em; }
-.gnav { display: flex; gap: 28px; font-size: 0.9rem; font-weight: 700; }
-.gnav a { color: var(--text); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.gnav { display: flex; gap: 28px; margin-left: auto; font-size: 0.92rem; font-weight: 700; }
+.gnav a { color: var(--text); text-decoration: none; padding: 21px 0 19px; border-bottom: 3px solid transparent; white-space: nowrap; }
 .gnav a:hover { color: var(--accent); }
-.gnav a[aria-current="page"] { border-bottom-color: var(--accent); }
+.gnav a[aria-current="page"] { border-bottom-color: var(--sky); }
+.head-cta { padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 0.85rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.head-cta:hover { background: var(--accent-strong); color: #fff; }
+@media (max-width: 1300px) {
+  .head-main .wrap { gap: 20px; }
+  .gnav { gap: 18px; font-size: 0.86rem; }
+}
 
 /* ---------- section ---------- */
 .sec { background: var(--bg); color: var(--text); padding: 112px 0; }
@@ -119,7 +133,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .text-link:hover { text-decoration: underline; }
 
 /* ---------- hero ---------- */
-.hero { padding: 96px 0 104px; background: var(--bg); }
+.hero { padding: 96px 0 104px; background: linear-gradient(180deg, #d6effb 0%, #eaf7fd 55%, #ffffff 100%); }
 .hero .wrap:first-child { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
 .hero-copy > * + * { margin-top: 24px; }
 .hero-copy .lead { color: var(--text); opacity: 0.86; }
@@ -133,10 +147,10 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .project-card {
   display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap;
   margin-top: 16px; padding: 36px 32px;
-  border: 1px solid var(--accent); background: linear-gradient(120deg, rgba(59, 130, 246, 0.16), rgba(59, 130, 246, 0.02));
+  border: 1px solid var(--accent); background: linear-gradient(120deg, rgba(41, 171, 226, 0.18), rgba(41, 171, 226, 0.03));
   color: var(--text); text-decoration: none;
 }
-.project-card:hover { color: var(--text); background: rgba(59, 130, 246, 0.2); }
+.project-card:hover { color: var(--text); background: rgba(41, 171, 226, 0.22); }
 .project-body { flex: 1 1 420px; display: grid; gap: 8px; }
 .project-body .eyebrow { margin-bottom: 0; }
 .project-name { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 900; line-height: 1.3; }
@@ -224,12 +238,9 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .cta .muted { font-size: 0.9rem; }
 
 /* ---------- footer ---------- */
-.site-footer { background: #060606; color: #a3a3a3; border-top: 1px solid #262626; padding: 56px 0 40px; font-size: 0.88rem; }
-.site-footer .wrap > * + * { margin-top: 24px; }
-.site-footer .logo { color: #e8e8e8; }
-.fnav { display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 700; }
-.fnav a { color: #e8e8e8; text-decoration: none; }
-.fnav a:hover { color: #93c5fd; }
+.site-footer { background: var(--navy); color: #c5d3e8; border-top: 4px solid var(--sky); padding: 64px 0 40px; font-size: 0.88rem; }
+.site-footer .wrap > * + * { margin-top: 40px; }
+.site-footer .logo { color: #ffffff; }
 
 /* ---------- contact form ---------- */
 .form { display: grid; gap: 24px; max-width: 760px; }
@@ -249,10 +260,10 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 .field input, .field textarea {
   width: 100%; min-height: 52px; padding: 12px 16px;
   font: inherit; font-weight: 400; color: var(--text);
-  background: var(--bg2); border: 1px solid #3a3a3a;
+  background: #ffffff; border: 1px solid #b9d6e8;
 }
 .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
-.field ::placeholder { color: #6b6b6b; }
+.field ::placeholder { color: #8a94a8; }
 .form .btn { justify-self: start; cursor: pointer; font: inherit; font-weight: 700; }
 .form .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .notice { padding: 20px 24px; border: 1px solid; }
@@ -277,11 +288,15 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   :root { --gutter: 16px; }
   body { line-height: 1.75; }
   .site-header { position: static; }
-  .site-header .wrap { flex-direction: column; align-items: stretch; gap: 8px; min-height: 0; padding-top: 14px; padding-bottom: 12px; }
-  /* メニューは2列×2段にして、4つとも最初から見えるように */
-  .gnav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; font-size: 0.88rem; }
-  .gnav a { padding: 10px 0; border-bottom: 1px solid var(--border); }
-  .gnav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+  /* スマホ: 1段目＝ロゴと相談ボタン、2段目＝ジャンル（横にスクロール）、上の帯＝読む方別（横にスクロール） */
+  .unav, .gnav { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .unav::-webkit-scrollbar, .gnav::-webkit-scrollbar { display: none; }
+  .unav { gap: 18px; }
+  .head-main .wrap { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 12px; }
+  .head-cta { margin-left: auto; padding: 6px 14px; font-size: 0.8rem; }
+  .gnav { order: 3; flex: 1 0 100%; margin: 4px 0 0; gap: 20px; font-size: 0.88rem; }
+  .gnav a { padding: 10px 0 8px; }
+  .fcols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; }
   .sec { padding: 64px 0; }
   .sec-head { margin-bottom: 32px; }
   .hero { padding: 40px 0 56px; }
@@ -383,8 +398,8 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
 /* ============================================================
    #12 お問い合わせ: 必須の札、入力漏れ、送信中
 ============================================================ */
-.req { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: rgba(239, 68, 68, 0.15); color: #fca5a5; font-size: 0.72rem; font-weight: 700; vertical-align: 2px; }
-.err { color: #fca5a5; font-size: 0.88rem; font-weight: 700; }
+.req { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: rgba(239, 68, 68, 0.12); color: #b91c1c; font-size: 0.72rem; font-weight: 700; vertical-align: 2px; }
+.err { color: #b91c1c; font-size: 0.88rem; font-weight: 700; }
 .err::before { content: "！"; margin-right: 4px; }
 .field-group .err { margin-top: 10px; }
 .field input.is-invalid, .field textarea.is-invalid { border-color: #ef4444; background: rgba(239, 68, 68, 0.06); }
@@ -528,3 +543,12 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
 .sec--light .door:hover { background: var(--surface); }
 
 @media (max-width: 768px) { .doors--3 { grid-template-columns: 1fr; margin-top: 0; } .tech-title { margin-top: 40px; } }
+
+/* ---------- footer（見出しつきの4列: 活動内容・CoreShiftについて・ご案内・お問い合わせ） ---------- */
+.fcols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+.fcols nav { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.fcols h2 { font-size: 0.95rem; font-weight: 900; color: #ffffff; margin-bottom: 6px; }
+.fcols h2 span { display: block; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky); margin-bottom: 2px; }
+.fcols a { color: #dbe6f5; text-decoration: none; overflow-wrap: anywhere; }
+.fcols a:hover { color: #ffffff; text-decoration: underline; }
+.fcopy { padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.8rem; }
