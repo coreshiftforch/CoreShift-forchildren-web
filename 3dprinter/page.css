@@ -9,3 +9,6 @@
 @media (max-width: 768px) {
   .media .print-anim img { max-width: 360px; }
 }
+
+/* 「3Dプリンターを使うプログラム」の入口（見出しのすぐ下に置く） */
+.sec-head + .doors { margin-top: 0; }
