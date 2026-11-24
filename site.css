@@ -75,10 +75,10 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
 .site-header {
   position: sticky; top: 0; z-index: 50;
   background: var(--head-bg); /* 後ろをぼかす効果は、スクロールのたびに計算し直して重くなるので使わない */
-  border-top: 4px solid var(--sky);
   border-bottom: 1px solid var(--border);
 }
-.head-util { background: var(--sky-pale); border-bottom: 1px solid var(--border); }
+/* 読む方別の帯はヘッダーの外に置き、スクロールで流れる（上に残るのはジャンルの段だけ。#71） */
+.head-util { background: var(--sky-pale); border-top: 4px solid var(--sky); border-bottom: 1px solid var(--border); }
 .unav { display: flex; justify-content: flex-end; gap: 24px; font-size: 0.8rem; font-weight: 700; }
 .unav a { color: var(--muted); text-decoration: none; padding: 6px 0; white-space: nowrap; }
 .unav a:hover, .unav a[aria-current="page"] { color: var(--accent); }
@@ -90,6 +90,7 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
 .gnav a { color: var(--text); text-decoration: none; padding: 21px 0 19px; border-bottom: 3px solid transparent; white-space: nowrap; }
 .gnav a:hover { color: var(--accent); }
 .gnav a[aria-current="page"] { border-bottom-color: var(--sky); }
+.l-short { display: none; }
 .head-cta { padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 0.85rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .head-cta:hover { background: var(--accent-strong); color: #fff; }
 @media (max-width: 1300px) {
@@ -289,12 +290,15 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   body { line-height: 1.75; }
   .site-header { position: static; }
   /* スマホ: 1段目＝ロゴと相談ボタン、2段目＝ジャンル（横にスクロール）、上の帯＝読む方別（横にスクロール） */
-  .unav, .gnav { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
-  .unav::-webkit-scrollbar, .gnav::-webkit-scrollbar { display: none; }
-  .unav { gap: 18px; }
-  .head-main .wrap { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 12px; }
+  /* スマホ: 横スクロールにせず、短い表記で全部見せる（上の帯は4等分、ジャンルは1行に均等割り） */
+  .l-long { display: none; }
+  .l-short { display: inline; }
+  .unav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; font-size: 0.76rem; }
+  .unav a { padding: 8px 0; text-align: center; }
+  .unav a + a { border-left: 1px solid var(--border); }
+  .head-main .wrap { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 10px; }
   .head-cta { margin-left: auto; padding: 6px 14px; font-size: 0.8rem; }
-  .gnav { order: 3; flex: 1 0 100%; margin: 4px 0 0; gap: 20px; font-size: 0.88rem; }
+  .gnav { order: 3; flex: 1 0 100%; justify-content: space-between; margin: 2px 0 0; gap: 4px; font-size: 0.8rem; letter-spacing: -0.01em; }
   .gnav a { padding: 10px 0 8px; }
   .fcols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; }
   .sec { padding: 64px 0; }
@@ -573,3 +577,67 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
 .hero.is-tech { background: radial-gradient(ellipse at 80% 20%, rgba(41, 171, 226, 0.18), rgba(41, 171, 226, 0) 60%), #060606; }
 .is-tech .eyebrow { color: var(--sky); }
 .is-tech + .sec { border-top: 0; }
+
+/* ============================================================
+   #71 ひとまとまりの内容が1画面に収まるように詰める
+   基準: PC 1440×900（上に残るヘッダー約72px を除いて約830px）。ノートPC 1366×768 もなるべく
+============================================================ */
+.sec { padding: 80px 0; }
+.hero { padding: 64px 0 72px; }
+h1 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.sec-head { margin-bottom: 32px; }
+.stack > * + * { margin-top: 16px; }
+.hero-copy > * + * { margin-top: 20px; }
+.features { gap: 20px; }
+.features li { padding: 24px 24px; }
+.features li::before { font-size: 1.5rem; margin-bottom: 12px; }
+.spec dt, .spec dd { padding: 13px 0; }
+.doors { margin-top: 40px; }
+.door { padding: 24px 24px; }
+.project-card { padding: 24px 28px; }
+.media { gap: 48px; }
+.guide { gap: 20px; }
+.guide-group { padding: 22px 24px 8px; }
+.card-body { padding: 20px 20px 22px; }
+.facts { margin-top: 24px; }
+@media (max-width: 1300px) {
+  .sec { padding: 64px 0; }
+}
+@media (max-width: 768px) {
+  .sec { padding: 52px 0; }
+  .hero { padding: 28px 0 44px; }
+  .sec-head { margin-bottom: 24px; }
+  .doors { margin-top: 32px; }
+}
+/* 施設・学校向け「体験会の内容」: A・B・C を3枚横に並べる（C は写真の代わりにAIへのお願いの例） */
+.cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cards--3 img { aspect-ratio: 16 / 10; }
+.card-prompt {
+  aspect-ratio: 16 / 10; display: flex; flex-direction: column; justify-content: center;
+  padding: 16px 20px; background: #060606; color: #e8e8e8; border-left: 3px solid #3b82f6;
+  font-size: 0.85rem; line-height: 1.9;
+}
+@media (max-width: 1300px) { .cards--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .cards--3 { grid-template-columns: minmax(0, 1fr); } }
+/* トップの冒頭: 入口3つ（施設・学校／保護者＝CoreShift for children／企業・個人）を1段に並べる */
+.entry { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; margin-top: 40px; }
+.entry .doors { margin-top: 0; }
+.entry .project-card { margin-top: 0; flex-direction: column; align-items: flex-start; justify-content: center; gap: 14px; padding: 22px 24px; }
+.entry .project-desc { display: none; } /* 説明は保護者向けページにある。ここは入口だけ */
+.entry .project-card .btn { min-height: 44px; padding: 8px 20px; }
+.cards--3 img, .card-prompt { aspect-ratio: 2 / 1; }
+@media (max-width: 1300px) { .entry { grid-template-columns: minmax(0, 1fr); } .entry .project-desc { display: block; } }
+.entry .project-name { font-size: 1.4rem; }
+.entry .project-body { flex: none; }
+.cards--3 .card-body p { font-size: 0.9rem; }
+.hero { padding: 56px 0 64px; }
+/* 高さの低い画面（ノートPC 1366×768 など）では、さらに余白を詰める */
+@media (min-width: 1301px) and (max-height: 820px) {
+  .sec { padding: 60px 0; }
+  .hero { padding: 40px 0 48px; }
+  .sec-head { margin-bottom: 24px; }
+  .entry { margin-top: 28px; }
+}
+.cards--3 img, .cards--3 .card-prompt { aspect-ratio: 5 / 2; }
+.cards--3 .card-body { padding: 18px 20px 20px; }
