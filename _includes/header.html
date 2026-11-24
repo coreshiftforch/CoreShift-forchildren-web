@@ -1,11 +1,25 @@
-<header class="site-header">
+<div class="head-util">
   <div class="wrap">
-    <a href="/" class="logo"><img class="logo-mark" src="/icon/logo-mark.png" width="160" height="102" alt="">CoreShift{% if page.logo_sub %}<small>{{ page.logo_sub }}</small>{% endif %}</a>
-    <nav class="gnav" aria-label="メインメニュー">
-      <a href="/for-organizations/"{% if page.nav == "orgs" %} aria-current="page"{% endif %}>施設・学校の方へ</a>
-      <a href="/coreshift-for-children/"{% if page.nav == "children" %} aria-current="page"{% endif %}>保護者の方へ</a>
-      <a href="/coreshift-for-children/support/"{% if page.nav == "support" %} aria-current="page"{% endif %}>企業・個人の方へ</a>
+    <nav class="unav" aria-label="読む方別のご案内">
+      <a href="/for-organizations/"{% if page.nav == "orgs" %} aria-current="page"{% endif %}><span class="l-long">施設・学校の方へ</span><span class="l-short">施設・学校</span></a>
+      <a href="/coreshift-for-children/"{% if page.nav == "children" %} aria-current="page"{% endif %}><span class="l-long">保護者の方へ</span><span class="l-short">保護者</span></a>
+      <a href="/coreshift-for-children/support/"{% if page.nav == "support" %} aria-current="page"{% endif %}><span class="l-long">企業・個人の方へ</span><span class="l-short">企業・個人</span></a>
       <a href="/contact/"{% if page.nav == "contact" %} aria-current="page"{% endif %}>お問い合わせ</a>
     </nav>
+  </div>
+</div>
+<header class="site-header">
+  <div class="head-main">
+    <div class="wrap">
+      <a href="/" class="logo"><img class="logo-mark" src="/icon/logo-mark.png" width="160" height="102" alt="">CoreShift{% if page.logo_sub %}<small>{{ page.logo_sub }}</small>{% endif %}</a>
+      <nav class="gnav" aria-label="メインメニュー">
+        <a href="/3dprinter/"{% if page.genre == "3dprinter" %} aria-current="page"{% endif %}>3Dプリンター</a>
+        <a href="/ai/"{% if page.genre == "ai" %} aria-current="page"{% endif %}>AI</a>
+        <a href="/programming/"{% if page.genre == "programming" %} aria-current="page"{% endif %}>プログラミング</a>
+        <a href="/programs/"{% if page.genre == "programs" %} aria-current="page"{% endif %}>プログラム</a>
+        <a href="/#about"><span class="l-long">CoreShiftについて</span><span class="l-short">団体概要</span></a>
+      </nav>
+      <a class="head-cta" href="/contact/?type=workshop">開催のご相談</a>
+    </div>
   </div>
 </header>

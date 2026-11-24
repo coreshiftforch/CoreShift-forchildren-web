@@ -49,6 +49,10 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://core-shift.jp/programs/</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://core-shift.jp/programs/nameplate/</loc>
     <priority>0.7</priority>
   </url>

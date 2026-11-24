@@ -5,16 +5,16 @@
   font-family: 'Courier New', monospace;
   font-size: 0.9rem;
   line-height: 1.9;
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--border);
+  color: #e6eefa;
+  background: var(--navy);   /* コードはエディタ風に紺地 */
+  border: 1px solid var(--navy);
   border-left: 3px solid var(--accent);
   white-space: pre;
   overflow-x: auto;
 }
-.c-cm  { color: #64748b; }
+.c-cm  { color: #9fb0cc; }
 .c-kw  { color: #93c5fd; }
-.c-fn  { color: #60a5fa; }
+.c-fn  { color: #7fd3f5; }
 .c-str { color: #86efac; }
 
 @media (max-width: 768px) {
