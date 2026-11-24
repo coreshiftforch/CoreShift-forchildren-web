@@ -10,8 +10,8 @@
 - index.html（トップ）、for-organizations/（施設・学校向け）、coreshift-for-children/（保護者向け）、coreshift-for-children/support/（企業・個人向け）、contact/（お問い合わせ）
 - 技術ごとのページ: 3dprinter/（プログラムA）、ai/（プログラムC。2026-11-22 に転送から作り直し）、programming/（micro:bit・準備中）。メニューからはつながず、施設・学校向けからリンク
 - 残している旧ページ: about/、karakuri/、coreshift-for-children/activities/、coreshift-for-children/event01_takamiya/（活動レポート）
-- files/coreshift-guide.pdf: 一般向けの案内資料（ドライブ 01_団体運営/05_放課後体験プログラム/02_提出資料 の guide_general 版）。直したら差し替える
-- files/coreshift-price-list.pdf: 一般向けの料金表（別紙。同じフォルダの price-list_general 版）。料金を変えたら差し替える
+- files/coreshift-guide.pdf: 一般向けの案内資料（ドライブ 01_団体運営/02_資料/02_PDF集/01_一般向け の「YYYY-MM-DD_CoreShiftのご案内.pdf」の最新版）。直したら差し替える
+- files/coreshift-price-list.pdf: 一般向けの料金表（別紙。同じフォルダの「YYYY-MM-DD_料金表.pdf」の最新版）。料金を変えたら差し替える
 - 「CoreShift for children/」は転送用。coreshift-for-children/nameplate-demo/ は体験会で使う独立した Web アプリ（なまえプレート。2026-11 に作り直した。Jekyll のレイアウトは使わない。URL は変えない。設定は js/config.js）
 - 作業の進め方・文言の方針は docs/ROADMAP.md、作業は GitHub Issue で管理
 
