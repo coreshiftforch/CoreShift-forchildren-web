@@ -552,3 +552,24 @@ p, li, dd, dt, figcaption, .lead, .project-desc, .project-for {
 .fcols a { color: #dbe6f5; text-decoration: none; overflow-wrap: anywhere; }
 .fcols a:hover { color: #ffffff; text-decoration: underline; }
 .fcopy { padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.8rem; }
+
+/* ============================================================
+   テクノロジーを強調する部分だけ、旧サイトの黒×青にする（.is-tech）
+   使う場所: 技術ページ（3Dプリンター・AI・プログラミング）のヒーローと、3Dプリンターのしくみ
+============================================================ */
+.is-tech {
+  --bg: #060606;
+  --bg2: #0d0d0d;
+  --surface: #111111;
+  --text: #e8e8e8;
+  --muted: #a3a3a3;
+  --border: #262626;
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
+  --link: #93c5fd;
+  background: var(--bg);
+  color: var(--text);
+}
+.hero.is-tech { background: radial-gradient(ellipse at 80% 20%, rgba(41, 171, 226, 0.18), rgba(41, 171, 226, 0) 60%), #060606; }
+.is-tech .eyebrow { color: var(--sky); }
+.is-tech + .sec { border-top: 0; }

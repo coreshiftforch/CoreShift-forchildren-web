@@ -7,7 +7,7 @@
 ## File Structure
 - _layouts/default.html: <head>・全体の枠。_includes/header.html・footer.html: ヘッダーとフッター
 - ヘッダーは2段（上の帯＝読む方別の4つ、下＝ジャンル: 3Dプリンター・AI・プログラミング・プログラム・CoreShiftについて＋「開催のご相談」ボタン）。ジャンルの強調はページ先頭の genre（3dprinter / ai / programming / programs）。フッターは見出しつき4列（活動内容・CoreShiftについて・ご案内・お問い合わせ）
-- 配色: イメージカラーはロゴの空色 #29abe2（--sky）。白地の文字・ボタンには深い空色 --accent（#0a74b0）、文字は紺 --navy。空色そのものは帯・面・紺文字のバッジにだけ使う（白地では薄すぎる）
+- 配色: イメージカラーはロゴの空色 #29abe2（--sky）。白地の文字・ボタンには深い空色 --accent（#0a74b0）、文字は紺 --navy。空色そのものは帯・面・紺文字のバッジにだけ使う（白地では薄すぎる） テクノロジーを強調する部分だけ旧サイトの黒×青（クラス is-tech。技術ページのヒーローと3Dプリンターのしくみ）
 - site.css: 共通スタイル。ページ専用のスタイルは各ページの page.css（ページ先頭の extra_css で読み込む）
 - index.html（トップ）、for-organizations/（施設・学校向け）、coreshift-for-children/（保護者向け）、coreshift-for-children/support/（企業・個人向け）、contact/（お問い合わせ）
 - 技術ごとのページ: 3dprinter/、ai/、programming/（micro:bit・準備中）。技術そのものの紹介だけを書き、体験の流れ・対象・時間はプログラムのページに書く。メニューからはつながず、トップの「使う技術」からリンク
