@@ -79,7 +79,7 @@ google_verification: true
         <span class="eyebrow"><b>02</b>Activities</span>
         <h2>これまでの活動</h2>
       </div>
-      <!-- 活動レポートのカード。新しいものを先頭に足す。4つ目からは「もっと見る」で表示（ボタンは自動で出る） -->
+      <!-- 活動レポートのカード。新しいものを先頭に足す（reports/index.html にも同じカードを足す）。トップに出るのは3つまで。4つ以上で「もっと見る」（→ 活動レポート一覧）が自動で出る -->
       <ul class="rcards" id="rcards">
         <li>
           <a class="rcard" href="/coreshift-for-children/event01_takamiya/">
@@ -93,7 +93,7 @@ google_verification: true
           </a>
         </li>
       </ul>
-      <div class="rcards-more"><button type="button" class="btn btn--ghost" id="rcards-more">もっと見る <span aria-hidden="true">↓</span></button></div>
+      <div class="rcards-more" id="rcards-more"><a class="btn btn--ghost" href="/reports/">もっと見る（活動レポート一覧） <span aria-hidden="true">→</span></a></div>
     </div>
   </section>
 
@@ -121,12 +121,10 @@ google_verification: true
 </main>
 
 <script>
-// これまでの活動: 4つ目以降のレポートは「もっと見る」で表示する
+// これまでの活動: トップには3つまで。4つ以上あるときだけ「もっと見る（活動レポート一覧）」を出す
 (function () {
-  var list = document.getElementById('rcards'), btn = document.getElementById('rcards-more');
-  if (!list || !btn) return;
-  if (list.children.length <= 3) { btn.parentNode.hidden = true; return; }
-  btn.addEventListener('click', function () { list.classList.add('is-all'); btn.parentNode.hidden = true; });
+  var list = document.getElementById('rcards'), more = document.getElementById('rcards-more');
+  if (list && more && list.children.length <= 3) more.hidden = true;
 })();
 </script>
 

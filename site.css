@@ -751,7 +751,7 @@ html.fit-on .sec-sparse .btn-row { justify-content: center; }
 
 /* トップ「これまでの活動」: 活動レポートのカード（サムネイル＋短い文）。3つ並ぶ幅。4つ目からは「もっと見る」 */
 .rcards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.rcards:not(.is-all) > li:nth-child(n+4) { display: none; }
+.rcards:not(.rcards--all) > li:nth-child(n+4) { display: none; } /* トップは3つまで。活動レポート一覧（.rcards--all）は全部 */
 .rcard { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #ffffff; color: var(--text); text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
 .rcard:hover { color: var(--text); border-color: var(--accent); box-shadow: 0 10px 24px rgba(27, 42, 94, 0.10); }
 .rcard img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
