@@ -21,14 +21,12 @@ extra_css: /3dprinter/page.css
 
   <section class="sec is-tech">
     <div class="wrap media">
-      <figure class="print-anim">
-        <img id="print-anim" src="/images/print/frame_001.webp" width="720" height="720" loading="lazy" alt="3Dプリンターが、CoreShift と書かれたネームプレートを下から1層ずつ作る様子">
-      </figure>
+      <!-- 3Dモデル（連番アニメーション）は作り直すまで空白（代表の指示 2026-11-25）。images/print/ の画像と下の script は残してある。戻すときは <img id="print-anim" src="/images/print/frame_001.webp" ...> をこの中に入れる -->
+      <figure class="print-anim print-anim--empty" aria-hidden="true"></figure>
       <div class="stack">
         <span class="eyebrow"><b>01</b>How it works</span>
         <h2>1層ずつ<wbr>積み上げて<wbr>形にする</h2>
         <p>3Dプリンターは、溶かした樹脂を薄く1層ずつ重ねて、データどおりの形を作ります。紙を何枚も重ねて立体を作るのと同じ考え方です。</p>
-        <p class="print-anim-note">スクロールすると、ネームプレートができあがっていきます。</p>
       </div>
     </div>
   </section>
