@@ -14,7 +14,7 @@
 - 技術ごとのページ: 3dprinter/、ai/、programming/（micro:bit・準備中）。技術そのものの紹介だけを書き、体験の流れ・対象・時間はプログラムのページに書く。メニューからはつながず、トップの「使う技術」からリンク
 - プログラムごとのページ: programs/nameplate/（A ネームプレート作り）、programs/custom/（B ご相談受付）、programs/ideathon/（C アイデアソン×バイブコーディング）。共通のスタイルは programs/programs.css。中身は案内PDFの各プログラムのページに合わせ、費用の数字は書かない。施設・学校向けのカードと技術ページからリンク
 - 活動レポート一覧: reports/（カードの一覧）。レポートを足すときは、reports/index.html とトップ index.html の「これまでの活動」（rcards）の両方の先頭にカードを足す。トップは3つまで表示し、4つ以上で「もっと見る」（→ reports/）が出る。保護者向け・企業個人向け・フッターの「活動レポート」は一覧へ、特定の体験会を指す文中のリンクは各レポートへ
-- 残している旧ページ: about/、karakuri/、coreshift-for-children/activities/、coreshift-for-children/event01_takamiya/（活動レポート）
+- 旧ページは転送だけを残す（2026-11-25 代表の判断）: about/ → /#about（団体概要）、coreshift-for-children/activities/ → 保護者向け、karakuri/ → /programs/nameplate/#option（からくりおもちゃ）。「CoreShift for children/」も転送用。活動レポート coreshift-for-children/event01_takamiya/ は残す
 - files/coreshift-guide.pdf: 一般向けの案内資料（ドライブ 01_団体運営/02_資料/02_PDF集/01_一般向け_YYYY-MM-DD（末尾は最終更新日）の「YYYY-MM-DD_CoreShiftのご案内.pdf」の最新版）。直したら差し替える
 - 料金表: サイトに載せない（PDFも置かない・リンクしない・書かない。代表の判断 2026-11-25）。費用は「内容に合わせてお見積もり」とだけ書く。施設向けの材料費だけは案内資料に合わせてレンジ（子ども1人200〜500円）で書く
 - 「CoreShift for children/」は転送用。coreshift-for-children/nameplate-demo/ は体験会で使う独立した Web アプリ（なまえプレート。2026-11 に作り直した。Jekyll のレイアウトは使わない。URL は変えない。設定は js/config.js）
