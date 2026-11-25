@@ -776,3 +776,23 @@ html.fit-on .sec-sparse .btn-row { justify-content: center; }
 .cards--3 .card:hover .card-more span { display: inline-block; transform: translateX(4px); transition: transform 0.2s; }
 .cards--3 .card-link:focus-visible { outline: none; }
 .cards--3 .card:has(.card-link:focus-visible) { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* #104 各ページ最後の「開催のご相談」など（.cta）: 体験会の写真を紺で覆った背景にして、1画面でも間が持つように */
+.sec.cta {
+  --text: #ffffff; --muted: #dbe6f5; --link: #bfe6f7; --border: rgba(255, 255, 255, 0.3);
+  color: var(--text);
+  background: linear-gradient(rgba(27, 42, 94, 0.84), rgba(27, 42, 94, 0.84)), url(/coreshift-for-children/photos/event01_takamiya/S__2965520_0-1200.webp) center / cover no-repeat;
+}
+.sec.cta h2, .theme-sky .sec.cta h2 { color: #ffffff; }
+.sec.cta .eyebrow { color: #7fd3f5; }
+.sec.cta a:not(.btn):not(.door) { color: var(--link); }
+.sec.cta .btn--ghost { color: #ffffff; border-color: #ffffff; }
+.sec.cta .btn--ghost:hover { background: #ffffff; color: var(--navy); }
+.sec.cta .door { --text: #1b2a5e; --muted: #4f5a75; background: #ffffff; color: var(--text); }
+.sec.cta + .site-footer, main:has(> .sec.cta:last-child) + .site-footer { border-top-color: var(--sky); }
+
+/* プログラムのページ: 役割と留意事項を1つのまとまりに */
+.notes-title { margin: 32px 0 4px; font-size: 1.05rem; }
+/* 企業・個人向け: 応援のしかた（個人／企業・団体を左右に） */
+.support-text { padding: 12px 0 16px; font-size: 0.95rem; }
+.guide-group .btn-row { padding-bottom: 20px; }
