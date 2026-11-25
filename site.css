@@ -739,3 +739,12 @@ html.fit-on:not(.fit-measuring) main > section:not(:has(form)) {
   display: flex; flex-direction: column; justify-content: center;
 }
 html.fit-on:not(.fit-measuring) main > section:not(:has(form)) > .wrap { width: 100%; }
+
+/* 中身が少ないまとまり（script が .sec-sparse を付ける）: 幅を狭めて真ん中に寄せ、script が文字と画像を大きくする */
+html.fit-on .sec-sparse > .wrap { max-width: 1040px; }
+html.fit-on .sec-sparse .sec-head,
+html.fit-on .sec-sparse > .wrap.stack,
+html.fit-on .sec-sparse > .wrap > .stack:only-child { text-align: center; }
+html.fit-on .sec-sparse .sec-head .lead,
+html.fit-on .sec-sparse > .wrap.stack .lead { margin-left: auto; margin-right: auto; }
+html.fit-on .sec-sparse .btn-row { justify-content: center; }
