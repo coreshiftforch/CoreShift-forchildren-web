@@ -644,3 +644,9 @@ h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
 /* 施設・学校向けの冒頭: 開催できる場面 */
 .scenes { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .scenes li { padding: 4px 14px; border: 1px solid var(--border); border-radius: 999px; background: #ffffff; color: var(--text); font-size: 0.82rem; font-weight: 700; }
+
+/* ヘッダーのジャンル（3Dプリンター〜CoreShiftについて）を同じ幅にそろえる（PC幅のみ。狭い幅では文字が収まらないため今のまま） */
+@media (min-width: 1301px) {
+  .gnav { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; }
+  .gnav a { text-align: center; padding-left: 14px; padding-right: 14px; }
+}
