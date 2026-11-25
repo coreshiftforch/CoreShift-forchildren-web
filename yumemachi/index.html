@@ -51,21 +51,69 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 // ---------- 建物のデータ（Blenderの座標：1単位=1mm、x=右、y=奥、正面は -y、z=上） ----------
+// 建物を足すときは、ここに1つ足して models/ に GLB を置く。カメラの位置は建物の大きさから自動で決める
 const BUILDINGS = [
-  {
-    id: "A", team: "班A", name: "森のおやすみビル", area: "天神",
-    glb: "./models/A_mori-oyasumi.glb",
-    story: "1階は赤ちゃんの階。ベビーカーのままスロープで入れて、ふかふかのおふとんの出窓で休めるよ。2階はベンチのベランダ、3階は草と青空の階で、天井から雲がぶらさがっているよ。てっぺんのガラスのドームには大きな木があって、晴れの日は天窓がひらいて鳥が顔を出すよ。帰りはらせんのすべり台でシューっと！",
-    home: { cam: [-300, -520, 230], at: [12, -15, 110] },
-    spots: [
-      { name: "赤ちゃんの階", cam: [-150, -260, 70], at: [-10, -62, 25] },
-      { name: "ベンチのベランダ", cam: [90, -250, 120], at: [0, -55, 68] },
-      { name: "草と青空の階", cam: [-60, -230, 150], at: [0, -20, 112] },
-      { name: "ソーラーパネルの階段", cam: [-280, -140, 250], at: [-60, 0, 140] },
-      { name: "ドームと大きな木", cam: [70, -170, 270], at: [0, 0, 185] },
-      { name: "らせんのすべり台", cam: [340, -200, 170], at: [98, -12, 90] },
-    ],
-  },
+ {
+  "id": "A",
+  "team": "班A",
+  "name": "天神ワクワクステーション",
+  "area": "天神",
+  "color": "#ffd66e",
+  "glb": "./models/A.glb",
+  "story": "「天神ワクワクステーション」は、下に行くほどにぎやかで、上に行くほど静かになるビルだよ。1階はお店と屋台がならぶ広場で、まんなかのやぐらでお祭りをして、いろんな国の旗がゆれているよ。2階は子どもをあずける部屋で、ロボットがボールであそんでくれる。そのすぐ上の3階で働くお母さんたちは、出窓から下の子どもが見えるんだ。まんなかの4階はだれでも座れる広場で、その上の庭が音をさえぎるよ。5階は一人ずつ集中して働く部屋、屋上は電車の席みたいなカプセルの小部屋。ビルの横では、ガラスのつつの中を電車の形のエレベーターが線路にそってのぼっていくよ。"
+ },
+ {
+  "id": "B",
+  "team": "班B",
+  "name": "くるくる山笠ステーション",
+  "area": "博多駅",
+  "color": "#e2a8f0",
+  "glb": "./models/B.glb",
+  "story": "博多駅のとなりに、山笠のかざり山みたいなタワーが立ったよ。下はクリーム色、上にいくほどピンク・オレンジ・ミント・むらさき・きいろ・金色になって、雲から花、花から金の星へとどんどんキラキラになるんだ。タワーのまわりには水色のくるくる坂が3回半まきついていて、ゆっくりのぼると、とちゅうの平らな所にベンチと花があって休めるよ。てっぺんには、うちわを高く上げた山笠の人形がいて、そのとなりのピンクの写真のわくで記念写真がとれて、ぼうえんきょうで博多のまちも見られるよ。駅のほうには新幹線の顔みたいなとんがり屋根がのびていて、その下を通れば雨にぬれずにタワーの1階まで行けるし、屋根の下には自転車がずらーっとならんでいるよ。"
+ },
+ {
+  "id": "C",
+  "team": "班C",
+  "name": "はっぱとおはなのドーム",
+  "area": "大濠公園",
+  "color": "#9edc84",
+  "glb": "./models/C.glb",
+  "story": "大濠公園に、大きな葉っぱの屋根をかぶった、どんぐりみたいなガラスのドームができたよ。ドームの中は半分地面にもぐった秘密基地みたいなサッカー場で、雨の日でもボールを思いきりけれるし、かべはふかふかのクッションだから音もボールもとびださないよ。葉っぱの屋根にのぼると、左のはしっこにはあみでかこんだ虫の森（カブトムシ・クワガタ・鳥の巣・スズムシ）、反対がわにはチョウチョが来るお花の道があって、まん中に大きなお花がさいているよ。雨は葉っぱからといを通ってタンクにたまるから、そのお水をじょうろにくんで、みんなが当番でお花に水やりするんだ。門には「お日さま」と「お月さま」がついていて、夕方になったら門をしめて、夜は虫の声だけになるよ。"
+ },
+ {
+  "id": "D",
+  "team": "班D",
+  "name": "ほしかいタワー",
+  "area": "ももち",
+  "color": "#ffb3a7",
+  "glb": "./models/D.glb",
+  "story": "ほしかいタワーは、ももちの海の上に立つ、まき貝の形のタワーです。下は太い柱だけなので、高潮の水が来ても下をすーっとぬけていきます。柱のまわりではカキを育てていて、海の水をきれいにしてくれます。柱からは海へ「つり橋」がのびていて、ふだんはつりができます。台風のときは、入口のゲートをしめます。まん中の部屋は、ふだんはみんなが集まる部屋で、何かあったときは毛布や水がある避難の部屋になります。てっぺんでは貝のやねがパカッとひらいて、ぼうえんきょうで星が見られます。"
+ },
+ {
+  "id": "E",
+  "team": "班E",
+  "name": "ピカピカでんき船のやたい村",
+  "area": "ベイサイド",
+  "color": "#a9c2ff",
+  "glb": "./models/E.glb",
+  "story": "港にとまった、大きなフェリーの形の「でんき船」だよ。1階には、ラーメン・めんたいこ・もつ鍋・とれたてのお魚の屋台がならんでいて、どの屋台にも「たまごなしで作れるメニュー」のしるしのミント色のはたが立っているよ。2階の甲板には大きな丸いテーブルがあって、みんなで同じどんぶりを食べられるんだ。船の帆は風車になってくるくる回り、まわりのブイは波でゆれて電気をつくり、甲板のまわりのすけてる窓も電気をつくるから、海の景色はかくれないよ。岸には生ゴミを「パクッ」と食べて電気にする小さな船がいて、においは高いえんとつから空へ出て、夜は船じゅうの電球がピカピカ光るよ。"
+ },
+ {
+  "id": "F",
+  "team": "班F",
+  "name": "うかぶくじら図書館",
+  "area": "博多湾",
+  "color": "#8fe3e8",
+  "glb": "./models/F.glb",
+  "story": "博多湾にぷかぷかうかぶ、大きなくじらの図書館だよ。くじらのせなかには、まわりがぜんぶ海に見えるガラスの「本の部屋」があって、そのまわりを水のみぞがぐるっとかこんでいるから、とってもしずか。本の部屋から、ピンクのぐるぐるすべり台で、しっぽのほうの「さわれる部屋」へすべりおりられるよ。しっぽの部屋は海のすぐそばで、ロボットやパソコン、大きなゲーム画面があって、みんなでワイワイゲームを作れるんだ。くじらのおなかの中には、ピンクのわくの大きな窓がある赤ちゃんの部屋があって、お店のデッキからベビーカーのスロープでそのまま入れるよ。デッキには、ちょっとだけすわれるゆらゆらブランコのいすもあるよ。しっぽは海にもぐって、前のほうで尾びれがぴょこんと海から出ているよ。夜は、潮ふきのてっぺんのランプが光って海を照らすから、「まだあいてるよ」ってすぐわかるよ。"
+ }
+];
+const VIEWS = [                                  // 見どころボタン：建物の中心から見る向き（Blenderの向き）と、近さ
+  { name: "正面から", dir: [0, -1, 0.25], k: 1.15 },
+  { name: "右から", dir: [1, -0.3, 0.3], k: 1.15 },
+  { name: "うしろから", dir: [-0.4, 1, 0.35], k: 1.2 },
+  { name: "上から", dir: [0.05, -0.35, 1], k: 1.25 },
+  { name: "近くで見る", dir: [-0.5, -1, 0.15], k: 0.55 },
 ];
 
 const b2t = ([x, y, z]) => new THREE.Vector3(x, z, -y);   // Blender → three.js（GLTFは上が +Y）
@@ -114,7 +162,7 @@ const ground = new THREE.Mesh(new THREE.CylinderGeometry(260, 268, 12, 96),
   new THREE.MeshStandardMaterial({ color: 0xf4ead6, roughness: 0.9 }));
 ground.position.y = -6.2; ground.receiveShadow = true; scene.add(ground);
 const area = new THREE.Mesh(new THREE.CylinderGeometry(120, 120, 2, 72),
-  new THREE.MeshStandardMaterial({ color: 0xffd66e, roughness: 0.8 }));
+  new THREE.MeshStandardMaterial({ color: new THREE.Color(B.color || "#ffd66e"), roughness: 0.8 }));
 area.position.y = -1.1; area.receiveShadow = true; scene.add(area);
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -131,15 +179,21 @@ function flyTo(cam, at, ms = 1100) {
   fly = { t0: performance.now(), ms, p0: camera.position.clone(), a0: controls.target.clone(), p1: b2t(cam), a1: b2t(at) };
 }
 function home() { flyTo(B.home.cam, B.home.at); }
+let FIT = { c: [0, 0, 100], r: 160 };            // 建物を読みこんだら、大きさに合わせてなおす
+const view = (dir, k) => {
+  const d = new THREE.Vector3(...dir).normalize(), dist = FIT.r / Math.sin(THREE.MathUtils.degToRad(17)) * k;
+  return { cam: [FIT.c[0] + d.x * dist, FIT.c[1] + d.y * dist, FIT.c[2] + d.z * dist], at: FIT.c };
+};
+B.home = view([-0.55, -1, 0.42], 1.15);
 camera.position.copy(b2t(B.home.cam));
 controls.target.copy(b2t(B.home.at));
 
 // 見どころのボタン
 const spots = document.getElementById("spots");
-B.spots.forEach(s => {
+VIEWS.forEach(s => {
   const bt = document.createElement("button");
   bt.type = "button"; bt.className = "spot"; bt.textContent = s.name;
-  bt.onclick = () => { setSpin(false); flyTo(s.cam, s.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
+  bt.onclick = () => { setSpin(false); const v = view(s.dir, s.k); flyTo(v.cam, v.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
   spots.appendChild(bt);
 });
 const spinBtn = document.getElementById("spin");
@@ -156,6 +210,10 @@ new GLTFLoader().load(B.glb, g => {
     if (m && m.transparent) { m.depthWrite = false; o.castShadow = false; o.renderOrder = 2; m.side = THREE.DoubleSide; }
   });
   scene.add(g.scene);
+  const box = new THREE.Box3().setFromObject(g.scene), c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3());
+  FIT = { c: [c.x, -c.z, c.y], r: sz.length() / 2 };   // three.js → Blenderの向き。r＝建物を包む球の半径
+  B.home = view([-0.55, -1, 0.42], 1.0);
+  home();
   document.getElementById("loading").classList.add("gone");
 }, undefined, () => {
   document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
