@@ -59,3 +59,47 @@
 /* からくりおもちゃの写真を少し低く */
 #option .models img { aspect-ratio: 4 / 3; }
 .flow > li { padding: 18px 24px; }
+
+/* プログラム一覧: 領域ごと（3Dプリンター・AI・プログラミング）に色の枠でまとめ、プログラムを縦に並べる */
+.pgroups { display: grid; gap: 28px; }
+.pgroup { --pc: #29abe2; border: 2px solid var(--pc); border-radius: 16px; padding: 20px 24px 24px; background: #ffffff; }
+.pgroup--3d { --pc: #29abe2; }
+.pgroup--ai { --pc: #ff8a3d; }
+.pgroup--prog { --pc: #2f9e6e; }
+.pgroup-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; font-weight: 700; }
+.pgroup-tag { padding: 4px 16px; border-radius: 999px; background: var(--pc); color: #ffffff; font-size: 0.92rem; }
+.pgroup--ai .pgroup-tag { color: #1b2a5e; }
+.pgroup-head a { text-decoration: none; }
+.pblock { display: grid; grid-template-columns: 56px minmax(0, 1fr) 180px 24px; gap: 20px; align-items: center; padding: 18px 20px; border-radius: 12px; background: var(--surface); color: var(--text); text-decoration: none; transition: background 0.2s; }
+.pblock + .pblock { margin-top: 12px; }
+a.pblock:hover { background: #e3f4fc; color: var(--text); }
+.pblock-id { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--pc); color: #ffffff; font-size: 1.4rem; font-weight: 900; }
+.pgroup--ai .pblock-id { color: #1b2a5e; }
+.pblock-body strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+.pblock-body span { color: var(--muted); font-size: 0.9rem; }
+.pblock-meta { font-size: 0.85rem; font-weight: 700; color: var(--muted); line-height: 1.6; }
+.pblock-arrow { color: var(--accent); font-weight: 900; font-size: 1.2rem; transition: transform 0.2s; }
+a.pblock:hover .pblock-arrow { transform: translateX(4px); }
+.pblock--soon { opacity: 0.85; }
+@media (max-width: 768px) {
+  .pgroup { padding: 16px 14px 16px; }
+  .pblock { grid-template-columns: 40px minmax(0, 1fr) 16px; gap: 12px; padding: 14px; }
+  .pblock-id { width: 38px; height: 38px; font-size: 1.1rem; border-radius: 10px; }
+  .pblock-meta { grid-column: 2; grid-row: 2; }
+  .pblock-arrow { grid-column: 3; grid-row: 1; }
+}
+/* プログラムを1つずつのブロックに見せる（枠の白地と区別する） */
+.pblock { background: var(--sky-pale); border: 1px solid var(--border); }
+a.pblock:hover { background: #dff1fb; border-color: var(--pc); }
+@media (max-width: 768px) { .pblock { align-items: start; } }
+
+/* プログラム一覧の冒頭: 写真を小さくして、上を占めすぎないように */
+.hero--compact { padding: 40px 0 36px; }
+@media (min-width: 769px) { .hero--compact .wrap:first-child { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; } }
+.hero--compact .hero-photo img { aspect-ratio: 16 / 10; max-height: 260px; }
+.sec--tight-top { padding-top: 40px; }
+@media (max-width: 768px) {
+  .hero--compact { padding: 20px 0 28px; }
+  .hero--compact .hero-photo img { max-height: 180px; }
+  .sec--tight-top { padding-top: 28px; }
+}
