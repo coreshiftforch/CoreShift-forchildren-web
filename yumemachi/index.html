@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>夢のまち（試作）｜ CoreShift for children</title>
+  <link rel="icon" href="/icon/アイコン03.png" type="image/png">
+  <link rel="stylesheet" href="./style.css">
+  <!-- 試作のページ（KAKEHASHI「みんなでつくる 福岡・夢のまち」）。メニューからはつながない。
+       建物を足すときは、下の BUILDINGS に1つ足して、models/ に GLB を置く。
+       ライブラリは同梱（外のサーバーからは読まない）。ES Module なので file:// では動かない -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three-0.160.0/three.module.js",
+      "three/addons/": "./vendor/three-0.160.0/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+<header class="bar">
+  <span class="logo">CoreShift <small>for children</small></span>
+  <span class="tag">試作</span>
+</header>
+
+<main class="stage">
+  <div id="view" class="view" aria-label="建物の3Dモデル。ドラッグで回せます"></div>
+  <div id="loading" class="loading"><div class="spin"></div><p>建物をよみこんでいます…</p></div>
+  <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
+
+  <section class="card" id="card">
+    <p class="eyebrow">みんなでつくる 福岡・夢のまち</p>
+    <h1 id="bname"></h1>
+    <p class="area"><span id="area"></span>エリア ／ <span id="team"></span></p>
+    <p class="story" id="story"></p>
+    <h2>ここを見てみよう</h2>
+    <div class="spots" id="spots"></div>
+    <div class="tools">
+      <button id="spin" class="tool on" type="button">くるっと回す</button>
+      <button id="home" class="tool" type="button">ぜんたい</button>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+// ---------- 建物のデータ（Blenderの座標：1単位=1mm、x=右、y=奥、正面は -y、z=上） ----------
+const BUILDINGS = [
+  {
+    id: "A", team: "班A", name: "森のおやすみビル", area: "天神",
+    glb: "./models/A_mori-oyasumi.glb",
+    story: "1階は赤ちゃんの階。ベビーカーのままスロープで入れて、ふかふかのおふとんの出窓で休めるよ。2階はベンチのベランダ、3階は草と青空の階で、天井から雲がぶらさがっているよ。てっぺんのガラスのドームには大きな木があって、晴れの日は天窓がひらいて鳥が顔を出すよ。帰りはらせんのすべり台でシューっと！",
+    home: { cam: [-300, -520, 230], at: [12, -15, 110] },
+    spots: [
+      { name: "赤ちゃんの階", cam: [-150, -260, 70], at: [-10, -62, 25] },
+      { name: "ベンチのベランダ", cam: [90, -250, 120], at: [0, -55, 68] },
+      { name: "草と青空の階", cam: [-60, -230, 150], at: [0, -20, 112] },
+      { name: "ソーラーパネルの階段", cam: [-280, -140, 250], at: [-60, 0, 140] },
+      { name: "ドームと大きな木", cam: [70, -170, 270], at: [0, 0, 185] },
+      { name: "らせんのすべり台", cam: [340, -200, 170], at: [98, -12, 90] },
+    ],
+  },
+];
+
+const b2t = ([x, y, z]) => new THREE.Vector3(x, z, -y);   // Blender → three.js（GLTFは上が +Y）
+const q = new URLSearchParams(location.search);
+const B = BUILDINGS.find(o => o.id === q.get("b")) || BUILDINGS[0];
+
+// ---------- 画面の文字 ----------
+document.getElementById("bname").textContent = B.name;
+document.getElementById("area").textContent = B.area;
+document.getElementById("team").textContent = B.team;
+document.getElementById("story").textContent = B.story;
+document.title = `${B.name}（夢のまち・試作）｜ CoreShift for children`;
+const list = document.getElementById("list");
+if (BUILDINGS.length > 1) {
+  list.innerHTML = "<h2>ほかの建物</h2>" + BUILDINGS.map(o =>
+    `<a class="chip ${o === B ? "on" : ""}" href="?b=${o.id}">${o.team} ${o.name}</a>`).join("");
+}
+
+// ---------- 3D ----------
+const el = document.getElementById("view");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+el.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xdfeefa);
+scene.fog = new THREE.Fog(0xdfeefa, 900, 2200);
+const camera = new THREE.PerspectiveCamera(38, 1, 5, 5000);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cdb8, 1.6));
+const sun = new THREE.DirectionalLight(0xfff3e0, 2.4);
+sun.position.copy(b2t([-260, -320, 520]));
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -260, right: 260, top: 260, bottom: -260, near: 50, far: 1500 });
+sun.shadow.bias = -0.0004;
+scene.add(sun);
+
+// 地面：ジオラマのような、まるい台
+const ground = new THREE.Mesh(new THREE.CylinderGeometry(260, 268, 12, 96),
+  new THREE.MeshStandardMaterial({ color: 0xf4ead6, roughness: 0.9 }));
+ground.position.y = -6.2; ground.receiveShadow = true; scene.add(ground);
+const area = new THREE.Mesh(new THREE.CylinderGeometry(120, 120, 2, 72),
+  new THREE.MeshStandardMaterial({ color: 0xffd66e, roughness: 0.8 }));
+area.position.y = -1.1; area.receiveShadow = true; scene.add(area);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.minDistance = 90;
+controls.maxDistance = 1100;
+controls.maxPolarAngle = Math.PI * 0.49;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.9;
+
+// カメラをなめらかに動かす
+let fly = null;
+function flyTo(cam, at, ms = 1100) {
+  fly = { t0: performance.now(), ms, p0: camera.position.clone(), a0: controls.target.clone(), p1: b2t(cam), a1: b2t(at) };
+}
+function home() { flyTo(B.home.cam, B.home.at); }
+camera.position.copy(b2t(B.home.cam));
+controls.target.copy(b2t(B.home.at));
+
+// 見どころのボタン
+const spots = document.getElementById("spots");
+B.spots.forEach(s => {
+  const bt = document.createElement("button");
+  bt.type = "button"; bt.className = "spot"; bt.textContent = s.name;
+  bt.onclick = () => { setSpin(false); flyTo(s.cam, s.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
+  spots.appendChild(bt);
+});
+const spinBtn = document.getElementById("spin");
+function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
+spinBtn.onclick = () => setSpin(!controls.autoRotate);
+document.getElementById("home").onclick = () => { spots.querySelectorAll(".spot").forEach(x => x.classList.remove("on")); home(); setSpin(true); };
+renderer.domElement.addEventListener("pointerdown", () => { document.getElementById("hint").classList.add("gone"); setSpin(false); fly = null; });
+
+new GLTFLoader().load(B.glb, g => {
+  g.scene.traverse(o => {
+    if (!o.isMesh) return;
+    o.castShadow = true; o.receiveShadow = true;
+    const m = o.material;
+    if (m && m.transparent) { m.depthWrite = false; o.castShadow = false; o.renderOrder = 2; m.side = THREE.DoubleSide; }
+  });
+  scene.add(g.scene);
+  document.getElementById("loading").classList.add("gone");
+}, undefined, () => {
+  document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
+});
+
+function resize() {
+  const w = el.clientWidth, h = el.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize); resize();
+
+renderer.setAnimationLoop(now => {
+  if (fly) {
+    const k = Math.min(1, (now - fly.t0) / fly.ms), e = k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2;
+    camera.position.lerpVectors(fly.p0, fly.p1, e);
+    controls.target.lerpVectors(fly.a0, fly.a1, e);
+    if (k >= 1) fly = null;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

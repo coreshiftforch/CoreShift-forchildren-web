@@ -1,0 +1,38 @@
+/* 夢のまち（試作）：建物を回して見るページ */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:#2b2f3a;background:#dfeefa;overflow:hidden}
+.bar{position:fixed;top:0;left:0;right:0;height:52px;display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);z-index:5}
+.logo{font-weight:900;letter-spacing:.02em}
+.logo small{font-weight:700;color:#3b7a57}
+.tag{font-size:12px;font-weight:700;color:#fff;background:#ee8a7a;border-radius:99px;padding:2px 10px}
+.stage{position:fixed;inset:52px 0 0 0}
+.view{position:absolute;inset:0}
+.view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-weight:700;color:#3d4a6b;transition:opacity .4s}
+.loading.gone,.hint.gone{opacity:0;pointer-events:none}
+.spin{width:34px;height:34px;border:4px solid #fff;border-top-color:#3b7a57;border-radius:50%;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:rgba(43,47,58,.75);color:#fff;font-size:14px;font-weight:700;padding:8px 16px;border-radius:99px;transition:opacity .5s;pointer-events:none}
+
+.card{position:absolute;top:16px;left:16px;width:360px;max-height:calc(100% - 32px);overflow:auto;background:rgba(255,255,255,.92);border-radius:20px;padding:20px 20px 16px;box-shadow:0 8px 24px rgba(40,60,90,.12)}
+.eyebrow{margin:0;font-size:12px;font-weight:700;color:#3b7a57}
+.card h1{margin:4px 0 2px;font-size:28px;font-weight:900;line-height:1.25}
+.area{margin:0 0 10px;font-size:14px;font-weight:700;color:#8a6d1f}
+.story{margin:0 0 14px;font-size:15px;line-height:1.8}
+.card h2{margin:12px 0 8px;font-size:14px;color:#5a6275}
+.spots{display:flex;flex-wrap:wrap;gap:8px}
+.spot,.tool,.chip{font:inherit;font-size:14px;font-weight:700;border:2px solid #cfe3d8;background:#fff;color:#2b2f3a;border-radius:99px;padding:7px 14px;cursor:pointer;text-decoration:none}
+.spot.on,.tool.on,.chip.on{border-color:#3b7a57;background:#e6f4ec}
+.tools{display:flex;gap:8px;margin-top:14px}
+.list{margin-top:6px;display:flex;flex-wrap:wrap;gap:8px}
+.list h2{width:100%}
+
+/* スマホ：説明は下に */
+@media (max-width:768px){
+  .card{top:auto;bottom:0;left:0;right:0;width:auto;max-height:46%;border-radius:20px 20px 0 0;padding:16px}
+  .card h1{font-size:22px}
+  .story{font-size:14px;line-height:1.7}
+  .view{bottom:42%}
+  .hint{bottom:auto;top:12px;white-space:nowrap;font-size:13px}
+}
