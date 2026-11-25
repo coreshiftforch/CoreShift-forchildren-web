@@ -18,6 +18,7 @@
 - files/coreshift-guide.pdf: 一般向けの案内資料（ドライブ 01_団体運営/02_資料/02_PDF集/01_一般向け_YYYY-MM-DD（末尾は最終更新日）の「YYYY-MM-DD_CoreShiftのご案内.pdf」の最新版）。直したら差し替える
 - 料金表: サイトに載せない（PDFも置かない・リンクしない・書かない。代表の判断 2026-11-25）。費用は「内容に合わせてお見積もり」とだけ書く。施設向けの材料費だけは案内資料に合わせてレンジ（子ども1人200〜500円）で書く
 - 「CoreShift for children/」は転送用。coreshift-for-children/nameplate-demo/ は体験会で使う独立した Web アプリ（なまえプレート。2026-11 に作り直した。Jekyll のレイアウトは使わない。URL は変えない。設定は js/config.js）
+- yumemachi/: KAKEHASHI「夢のまち」の建物を回して見る試作ページ（three.js・GLBは yumemachi/models/）。**HPからはリンクしない**。専用QRかURL直打ちでだけ見る。メニュー・ほかのページ・sitemap.xml に載せない。noindex 付き。Jekyll のレイアウトは使わない
 - 作業の進め方・文言の方針は docs/ROADMAP.md、作業は GitHub Issue で管理
 
 ## Responsive Breakpoints
