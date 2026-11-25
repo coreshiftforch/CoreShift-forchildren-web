@@ -694,3 +694,17 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
 .is-tech .crumbs { color: #a3a3a3; }
 .is-tech .crumbs a { color: #e8e8e8; }
 .type-opt small { display: block; font-size: 0.78rem; font-weight: 400; opacity: 0.85; }
+
+/* ============================================================
+   PC幅のスナップスクロール（代表の希望 2026-11-25。#71）
+   スクロールを止めたとき、近くのセクションの頭にそろう。proximity（近いときだけ）なので、
+   画面より長いセクションの途中でも止められ、読めなくなることはない。
+   上に残るヘッダーの高さ（約72px）ぶん、止まる位置を下げる。スマホ・タブレットでは使わない
+============================================================ */
+@media (min-width: 1301px) {
+  html { scroll-snap-type: y proximity; scroll-padding-top: 72px; }
+  main > section { scroll-snap-align: start; }
+  .site-footer { scroll-snap-align: end; }
+  /* お問い合わせ（入力フォーム）は、入力中に動くと困るので使わない */
+  html:has(body.t-contact) { scroll-snap-type: none; }
+}
