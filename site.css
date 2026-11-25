@@ -77,7 +77,7 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
   background: var(--head-bg); /* 後ろをぼかす効果は、スクロールのたびに計算し直して重くなるので使わない */
   border-bottom: 1px solid var(--border);
 }
-/* 読む方別の帯はヘッダーの外に置き、スクロールで流れる（上に残るのはジャンルの段だけ。#71） */
+/* 読む方別の帯もヘッダーの中に置き、常に表示する（代表の希望 2026-11-25） */
 .head-util { background: var(--sky-pale); border-top: 4px solid var(--sky); border-bottom: 1px solid var(--border); }
 .unav { display: flex; justify-content: flex-end; gap: 24px; font-size: 0.8rem; font-weight: 700; }
 .unav a { color: var(--muted); text-decoration: none; padding: 6px 0; white-space: nowrap; }
@@ -126,7 +126,10 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   text-decoration: none; border: 2px solid var(--accent);
   transition: background 0.2s, border-color 0.2s, gap 0.2s;
 }
-.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; gap: 18px; }
+.btn:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; }
+/* ホバーで大きさを変えない（スナップスクロールが位置を合わせ直して、画面がずれるため）。矢印だけ動かす */
+.btn > [aria-hidden="true"] { transition: transform 0.2s; }
+.btn:hover > [aria-hidden="true"] { transform: translateX(5px); }
 .btn--ghost { background: transparent; color: var(--text); border-color: var(--text); }
 .btn--ghost:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -702,7 +705,9 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
    上に残るヘッダーの高さ（約72px）ぶん、止まる位置を下げる。スマホ・タブレットでは使わない
 ============================================================ */
 @media (min-width: 1301px) {
-  html { scroll-snap-type: y proximity; scroll-padding-top: 72px; }
+  html { scroll-snap-type: y proximity; scroll-padding-top: 113px; }
+  /* ページ内リンクの止まる位置も、スナップと同じ（ヘッダーの下）にそろえる */
+  [id] { scroll-margin-top: 0; }
   main > section { scroll-snap-align: start; }
   .site-footer { scroll-snap-align: end; }
   /* お問い合わせ（入力フォーム）は、入力中に動くと困るので使わない */
