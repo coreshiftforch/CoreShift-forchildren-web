@@ -103,3 +103,12 @@ a.pblock:hover { background: #dff1fb; border-color: var(--pc); }
   .hero--compact .hero-photo img { max-height: 180px; }
   .sec--tight-top { padding-top: 28px; }
 }
+
+/* #71 画面の高さに合わせて詰める（PC・高さ600px以上） */
+@media (min-width: 1301px) and (min-height: 600px) {
+  .pgroups { gap: clamp(14px, 2.4vh, 28px); }
+  .pgroup { padding-top: clamp(12px, 2vh, 20px); padding-bottom: clamp(12px, 2vh, 24px); }
+  .pblock { padding-top: clamp(10px, 1.6vh, 18px); padding-bottom: clamp(10px, 1.6vh, 18px); }
+  .pgroup-head { margin-bottom: clamp(8px, 1.4vh, 14px); }
+  .flow > li { padding-top: clamp(12px, 2vh, 22px); padding-bottom: clamp(12px, 2vh, 22px); }
+}

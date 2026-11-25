@@ -712,4 +712,29 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
   html { scroll-padding-top: 113px; }
   [id] { scroll-margin-top: 0; }
 }
+
+/* ============================================================
+   #71 画面の高さに合わせて、ひとまとまりを1画面に収める（PC）
+   1) 余白を画面の高さに合わせて伸び縮みさせる（vh。上限・下限つき）
+   2) それでも入らないまとまりは、_layouts/default.html の script が中身を縮める（最小 85%）
+   下限: 幅 1301px 以上・高さ 600px 以上の画面だけ。これより小さい画面はふだんの流れで表示する
+============================================================ */
+@media (min-width: 1301px) and (min-height: 600px) {
+  .sec { padding-top: clamp(32px, 7vh, 80px); padding-bottom: clamp(32px, 7vh, 80px); }
+  .hero { padding-top: clamp(24px, 5vh, 56px); padding-bottom: clamp(28px, 5.5vh, 64px); }
+  .sec-head { margin-bottom: clamp(18px, 3.2vh, 32px); }
+  /* 見出し・写真・図も、画面の高さに合わせて縮める */
+  h1 { font-size: clamp(1.7rem, min(3.4vw, 5.4vh), 2.7rem); }
+  h2 { font-size: clamp(1.35rem, min(2.6vw, 3.8vh), 2rem); }
+  .hero-copy > * + * { margin-top: clamp(12px, 2.2vh, 20px); }
+  .hero-photo img { max-height: 40vh; object-fit: cover; }
+  .media img { max-height: 56vh; }
+  .process { gap: clamp(28px, 4vh, 48px); }
+  .process figure { padding: clamp(8px, 1.6vh, 16px); margin-bottom: clamp(8px, 1.4vh, 16px); }
+  .process svg { max-height: 26vh; width: auto; margin: 0 auto; }
+  .models img { max-height: 24vh; }
+  .entry { margin-top: clamp(20px, 3.5vh, 40px); }
+  .door { padding-top: clamp(14px, 2.4vh, 24px); padding-bottom: clamp(14px, 2.4vh, 24px); }
+  .project-card { padding-top: clamp(14px, 2.4vh, 24px); padding-bottom: clamp(14px, 2.4vh, 24px); }
+  .features li { padding-top: clamp(16px, 2.6vh, 24px); padding-bottom: clamp(16px, 2.6vh, 24px); }
 }
