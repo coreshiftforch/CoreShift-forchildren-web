@@ -27,7 +27,8 @@
 
 <main class="stage">
   <div id="view" class="view" aria-label="建物の3Dモデル。ドラッグで回せます"></div>
-  <div id="loading" class="loading"><div class="spin"></div><p>建物をよみこんでいます…</p></div>
+  <div id="loading" class="loading"><div class="spin"></div><p id="loadmsg">建物をよみこんでいます…</p></div>
+  <div id="tags" class="tags"></div>
   <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
 
   <section class="card" id="card">
@@ -49,6 +50,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
 // ---------- 建物のデータ（Blenderの座標：1単位=1mm、x=右、y=奥、正面は -y、z=上） ----------
 // 建物を足すときは、ここに1つ足して models/ に GLB を置く。カメラの位置は建物の大きさから自動で決める
@@ -108,6 +111,15 @@ const BUILDINGS = [
   "story": "博多湾にぷかぷかうかぶ、大きなくじらの図書館だよ。くじらのせなかには、まわりがぜんぶ海に見えるガラスの「本の部屋」があって、そのまわりを水のみぞがぐるっとかこんでいるから、とってもしずか。本の部屋から、ピンクのぐるぐるすべり台で、しっぽのほうの「さわれる部屋」へすべりおりられるよ。しっぽの部屋は海のすぐそばで、ロボットやパソコン、大きなゲーム画面があって、みんなでワイワイゲームを作れるんだ。くじらのおなかの中には、ピンクのわくの大きな窓がある赤ちゃんの部屋があって、お店のデッキからベビーカーのスロープでそのまま入れるよ。デッキには、ちょっとだけすわれるゆらゆらブランコのいすもあるよ。しっぽは海にもぐって、前のほうで尾びれがぴょこんと海から出ているよ。夜は、潮ふきのてっぺんのランプが光って海を照らすから、「まだあいてるよ」ってすぐわかるよ。"
  }
 ];
+// まち全体（?b= なし、または ?b=all）：ジオラマに6班の建物をならべたもの。Blenderの単位はm（下の S 倍して表示）
+const CITY = {
+  glb: "./models/city.glb",
+  S: 1000,
+  board: { c: [0.6, 0, 0], r: 1.25 },
+  // 班の建物の中心（c）と大きさ（r）：Blender の座標（m）
+  teams: {"A": {"c": [0.9233, -0.2184, 0.0682], "r": 0.0807, "top": 0.1298}, "B": {"c": [1.4624, -0.1429, 0.0668], "r": 0.1023, "top": 0.1294}, "C": {"c": [0.538, -0.2879, 0.0338], "r": 0.0582, "top": 0.0611}, "D": {"c": [-0.0463, -0.026, 0.0693], "r": 0.1085, "top": 0.135}, "E": {"c": [1.1268, 0.0536, 0.0554], "r": 0.0856, "top": 0.1042}, "F": {"c": [0.311, 0.2646, 0.0339], "r": 0.0603, "top": 0.0684}},
+  areas: [["天神", [0.8077, -0.1193, 0.03]], ["博多駅", [1.3874, -0.0434, 0.03]], ["大濠公園", [0.4235, -0.188, 0.03]], ["ももち", [-0.1566, 0.1028, 0.03]], ["ベイサイド", [1.0321, 0.154, 0.03]], ["博多湾", [0.1962, 0.3673, 0.03]]],
+};
 const VIEWS = [                                  // 見どころボタン：建物の中心から見る向き（Blenderの向き）と、近さ
   { name: "正面から", dir: [0, -1, 0.25], k: 1.15 },
   { name: "右から", dir: [1, -0.3, 0.3], k: 1.15 },
@@ -118,17 +130,22 @@ const VIEWS = [                                  // 見どころボタン：建�
 
 const b2t = ([x, y, z]) => new THREE.Vector3(x, z, -y);   // Blender → three.js（GLTFは上が +Y）
 const q = new URLSearchParams(location.search);
-const B = BUILDINGS.find(o => o.id === q.get("b")) || BUILDINGS[0];
+const IS_CITY = !q.get("b") || q.get("b") === "all";
+const B = IS_CITY ? {
+  id: "all", team: "6つの班", name: "夢のまち（まち全体）", area: "福岡のまち", glb: CITY.glb,
+  story: "6つの班が考えた建物を、福岡のジオラマにならべた「夢のまち」だよ。下のボタンをおすと、その建物の近くまでとんでいくよ。建物の名前をタップすると、その建物だけをくわしく見られるページが開くよ。",
+} : (BUILDINGS.find(o => o.id === q.get("b")) || BUILDINGS[0]);
 
 // ---------- 画面の文字 ----------
 document.getElementById("bname").textContent = B.name;
 document.getElementById("area").textContent = B.area;
 document.getElementById("team").textContent = B.team;
 document.getElementById("story").textContent = B.story;
+if (IS_CITY) document.querySelector(".area").textContent = "6つの班 ／ 6つのエリア";
 document.title = `${B.name}（夢のまち・試作）｜ CoreShift for children`;
 const list = document.getElementById("list");
 if (BUILDINGS.length > 1) {
-  list.innerHTML = "<h2>ほかの建物</h2>" + BUILDINGS.map(o =>
+  list.innerHTML = "<h2>ほかの建物</h2>" + `<a class="chip ${IS_CITY ? "on" : ""}" href="?b=all">まち全体</a>` + BUILDINGS.map(o =>
     `<a class="chip ${o === B ? "on" : ""}" href="?b=${o.id}">${o.team} ${o.name}</a>`).join("");
 }
 
@@ -146,7 +163,8 @@ el.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xdfeefa);
 scene.fog = new THREE.Fog(0xdfeefa, 900, 2200);
-const camera = new THREE.PerspectiveCamera(38, 1, 5, 5000);
+const camera = new THREE.PerspectiveCamera(38, 1, IS_CITY ? 3 : 5, IS_CITY ? 12000 : 5000);
+if (IS_CITY) scene.fog = new THREE.Fog(0xdfeefa, 4500, 11000);
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cdb8, 1.6));
 const sun = new THREE.DirectionalLight(0xfff3e0, 2.4);
@@ -160,18 +178,26 @@ scene.add(sun);
 // 地面：ジオラマのような、まるい台
 const ground = new THREE.Mesh(new THREE.CylinderGeometry(260, 268, 12, 96),
   new THREE.MeshStandardMaterial({ color: 0xf4ead6, roughness: 0.9 }));
-ground.position.y = -6.2; ground.receiveShadow = true; scene.add(ground);
+ground.position.y = -6.2; ground.receiveShadow = true; if (!IS_CITY) scene.add(ground);
 const area = new THREE.Mesh(new THREE.CylinderGeometry(120, 120, 2, 72),
   new THREE.MeshStandardMaterial({ color: new THREE.Color(B.color || "#ffd66e"), roughness: 0.8 }));
-area.position.y = -1.1; area.receiveShadow = true; scene.add(area);
+area.position.y = -1.1; area.receiveShadow = true; if (!IS_CITY) scene.add(area);
+if (IS_CITY) {                                    // まち全体：大きな台の全体に影がとどくように
+  const S = CITY.S, c = b2t(CITY.board.c.map(v => v * S));
+  sun.position.copy(c).add(b2t([-0.5, -0.75, 1]).multiplyScalar(2000));
+  sun.target.position.copy(c); scene.add(sun.target);
+  Object.assign(sun.shadow.camera, { left: -1300, right: 1300, top: 1300, bottom: -1300, near: 100, far: 5000 });
+  sun.shadow.mapSize.set(4096, 4096);
+  sun.shadow.camera.updateProjectionMatrix();
+}
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.minDistance = 90;
-controls.maxDistance = 1100;
+controls.minDistance = IS_CITY ? 25 : 90;
+controls.maxDistance = IS_CITY ? 5000 : 1100;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.9;
+controls.autoRotateSpeed = IS_CITY ? 0.35 : 0.9;
 
 // カメラをなめらかに動かす
 let fly = null;
@@ -180,29 +206,86 @@ function flyTo(cam, at, ms = 1100) {
 }
 function home() { flyTo(B.home.cam, B.home.at); }
 let FIT = { c: [0, 0, 100], r: 160 };            // 建物を読みこんだら、大きさに合わせてなおす
-const view = (dir, k) => {
-  const d = new THREE.Vector3(...dir).normalize(), dist = FIT.r / Math.sin(THREE.MathUtils.degToRad(17)) * k;
-  return { cam: [FIT.c[0] + d.x * dist, FIT.c[1] + d.y * dist, FIT.c[2] + d.z * dist], at: FIT.c };
+const viewOf = (fit, dir, k) => {
+  const d = new THREE.Vector3(...dir).normalize(), dist = fit.r / Math.sin(THREE.MathUtils.degToRad(17)) * k;
+  return { cam: [fit.c[0] + d.x * dist, fit.c[1] + d.y * dist, fit.c[2] + d.z * dist], at: fit.c };
 };
-B.home = view([-0.55, -1, 0.42], 1.15);
+const view = (dir, k) => viewOf(FIT, dir, k);
+const sc = o => ({ c: o.c.map(v => v * CITY.S), r: o.r * CITY.S });   // まち全体：m → 画面の単位
+if (IS_CITY) FIT = sc(CITY.board);
+const wide = () => innerWidth > 768;               // パソコン：左の説明に重ならないよう、少し左を見る（台が右へよる）
+B.home = IS_CITY ? viewOf({ c: [FIT.c[0] - (wide() ? 230 : 0), FIT.c[1] + (wide() ? 0 : 120), FIT.c[2]], r: FIT.r }, [-0.1, -1, 0.95], wide() ? 0.62 : 0.8) : view([-0.55, -1, 0.42], 1.15);
 camera.position.copy(b2t(B.home.cam));
 controls.target.copy(b2t(B.home.at));
 
 // 見どころのボタン
 const spots = document.getElementById("spots");
-VIEWS.forEach(s => {
+const SPOTS = IS_CITY
+  ? BUILDINGS.map(o => ({ name: `${o.team} ${o.name}`, go: () => viewOf(sc(CITY.teams[o.id]), [-0.5, -1, 0.55], 1.0) }))
+  : VIEWS.map(s => ({ name: s.name, go: () => view(s.dir, s.k) }));
+if (IS_CITY) document.querySelector(".card h2").textContent = "建物を見にいこう";
+SPOTS.forEach(s => {
   const bt = document.createElement("button");
   bt.type = "button"; bt.className = "spot"; bt.textContent = s.name;
-  bt.onclick = () => { setSpin(false); const v = view(s.dir, s.k); flyTo(v.cam, v.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
+  bt.onclick = () => { setSpin(false); const v = s.go(); flyTo(v.cam, v.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
   spots.appendChild(bt);
 });
+
+// まち全体：エリアと建物の名前を3Dの上にうかべる（建物の名前はタップでその建物のページへ）
+const TAGS = [];
+if (IS_CITY) {
+  const box = document.getElementById("tags");
+  const add = (html, p, cls, href) => {
+    const e = document.createElement(href ? "a" : "span");
+    e.className = "tag3d " + cls; e.innerHTML = html; if (href) e.href = href;
+    box.appendChild(e); TAGS.push({ e, p: b2t(p.map(v => v * CITY.S)), below: cls === "area3d" });   // エリア名は点の下、建物名は上
+  };
+  CITY.areas.forEach(([n, p]) => add(n, p, "area3d"));
+  BUILDINGS.forEach(o => { const t = CITY.teams[o.id]; add(`<b>${o.team}</b> ${o.name}`, [t.c[0], t.c[1], t.top + 0.012], "team3d", `?b=${o.id}`); });
+}
+const _v = new THREE.Vector3();
+function placeTags() {
+  if (!TAGS.length) return;
+  const w = el.clientWidth, h = el.clientHeight, d = camera.position.distanceTo(controls.target);
+  TAGS.forEach(t => {
+    _v.copy(t.p).project(camera);
+    const vis = _v.z < 1 && Math.abs(_v.x) < 1.1 && Math.abs(_v.y) < 1.1;
+    t.e.style.display = vis ? "" : "none";
+    if (vis) t.e.style.transform = `translate(${(_v.x + 1) / 2 * w}px, ${(1 - _v.y) / 2 * h}px) translate(-50%, ${t.below ? "6px" : "-100%"})`;
+    if (t.e.classList.contains("area3d")) t.e.classList.toggle("far", d < 700);   // 建物に近づいたらエリア名はうすく
+  });
+}
 const spinBtn = document.getElementById("spin");
 function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
 spinBtn.onclick = () => setSpin(!controls.autoRotate);
 document.getElementById("home").onclick = () => { spots.querySelectorAll(".spot").forEach(x => x.classList.remove("on")); home(); setSpin(true); };
 renderer.domElement.addEventListener("pointerdown", () => { document.getElementById("hint").classList.add("gone"); setSpin(false); fly = null; });
 
-new GLTFLoader().load(B.glb, g => {
+const loader = new GLTFLoader();
+if (IS_CITY) loader.setDRACOLoader(new DRACOLoader().setDecoderPath("./vendor/three-0.160.0/addons/libs/draco/gltf/"));
+// 同じ色の部品をまとめて1つにする（まち全体は部品が4000こ近くあるので、まとめないとスマホで重い）
+function mergeByMaterial(root) {
+  root.updateMatrixWorld(true);
+  const groups = new Map(), drop = [];
+  root.traverse(o => {
+    if (!o.isMesh || Array.isArray(o.material)) return;
+    const g = o.geometry.clone().applyMatrix4(o.matrixWorld);
+    for (const k of Object.keys(g.attributes)) if (k !== "position" && k !== "normal") g.deleteAttribute(k);
+    if (!g.attributes.normal) g.computeVertexNormals();
+    if (g.index) { const n = g.toNonIndexed(); g.dispose(); groups.has(o.material) || groups.set(o.material, []); groups.get(o.material).push(n); }
+    else { groups.has(o.material) || groups.set(o.material, []); groups.get(o.material).push(g); }
+    drop.push(o);
+  });
+  drop.forEach(o => o.parent.remove(o));
+  const out = new THREE.Group();
+  groups.forEach((list, m) => {
+    const g = mergeGeometries(list, false); list.forEach(x => x.dispose());
+    if (g) out.add(new THREE.Mesh(g, m));
+  });
+  return out;
+}
+loader.load(B.glb, g => {
+  if (IS_CITY) { const m = mergeByMaterial(g.scene); m.scale.setScalar(CITY.S); g.scene = m; }
   g.scene.traverse(o => {
     if (!o.isMesh) return;
     o.castShadow = true; o.receiveShadow = true;
@@ -210,9 +293,11 @@ new GLTFLoader().load(B.glb, g => {
     if (m && m.transparent) { m.depthWrite = false; o.castShadow = false; o.renderOrder = 2; m.side = THREE.DoubleSide; }
   });
   scene.add(g.scene);
-  const box = new THREE.Box3().setFromObject(g.scene), c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3());
-  FIT = { c: [c.x, -c.z, c.y], r: sz.length() / 2 };   // three.js → Blenderの向き。r＝建物を包む球の半径
-  B.home = view([-0.55, -1, 0.42], 1.0);
+  if (!IS_CITY) {
+    const box = new THREE.Box3().setFromObject(g.scene), c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3());
+    FIT = { c: [c.x, -c.z, c.y], r: sz.length() / 2 };   // three.js → Blenderの向き。r＝建物を包む球の半径
+    B.home = view([-0.55, -1, 0.42], 1.0);
+  }
   home();
   document.getElementById("loading").classList.add("gone");
 }, undefined, () => {
@@ -235,6 +320,7 @@ renderer.setAnimationLoop(now => {
   }
   controls.update();
   renderer.render(scene, camera);
+  placeTags();
 });
 </script>
 </body>

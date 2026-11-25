@@ -28,6 +28,15 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .list{margin-top:6px;display:flex;flex-wrap:wrap;gap:8px}
 .list h2{width:100%}
 
+/* まち全体：3Dの上にうかべる名前 */
+.tags{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag3d{position:absolute;left:0;top:0;white-space:nowrap;font-weight:900;border-radius:10px;transition:opacity .3s}
+.area3d{font-size:13px;color:#fff;background:rgba(43,47,58,.78);padding:3px 9px}
+.area3d.far{opacity:.25}
+.team3d{pointer-events:auto;font-size:13px;color:#2b2f3a;background:#fff;border:2px solid #3b7a57;padding:4px 10px;text-decoration:none;box-shadow:0 3px 10px rgba(40,60,90,.18)}
+.team3d b{color:#3b7a57;margin-right:2px}
+.team3d::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;border:6px solid transparent;border-top-color:#3b7a57;border-bottom:0}
+
 /* スマホ：説明は下に */
 @media (max-width:768px){
   .card{top:auto;bottom:0;left:0;right:0;width:auto;max-height:46%;border-radius:20px 20px 0 0;padding:16px}
@@ -35,4 +44,5 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
   .story{font-size:14px;line-height:1.7}
   .view{bottom:42%}
   .hint{bottom:auto;top:12px;white-space:nowrap;font-size:13px}
+  .tag3d{font-size:11px}
 }
