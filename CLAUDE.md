@@ -2,7 +2,7 @@
 
 ## Tech Stack
 - HTML / CSS（静的サイト。GitHub Pages の Jekyll で組み立てる）
-- 3D素材: models/*.glb と bake_and_export.py（Blender 用）。今のページでは使っていないが、連番画像の3Dアニメーションなどに使う予定があるので残す
+- 3D素材: tools/blender/models/*.glb（3dprinter.glb・nameplate.glb）と tools/blender/bake_and_export.py（Blender 用）。今のページでは使っていないが、連番画像の3Dアニメーションなどに使う予定があるので残す
 
 ## File Structure
 - _layouts/default.html: <head>・全体の枠。_includes/header.html・footer.html: ヘッダーとフッター

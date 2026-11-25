@@ -1,12 +1,12 @@
 """
-3Dプリンター.blend → ベイク → 3Dプリンター.glb
+3Dプリンター.blend → ベイク → models/3dprinter.glb
 Blender 4.3 バックグラウンドモードで実行:
   blender --background "3Dプリンター.blend" --python bake_and_export.py
 """
 import bpy
 import os
 
-OUTPUT_GLB = r"C:\Users\Owner\OneDrive\デスクトップ\CoreShift-forchildren-web\models\3Dプリンター.glb"
+OUTPUT_GLB = r"C:\Users\Owner\OneDrive\デスクトップ\CoreShift-forchildren-web\tools\blender\models\3dprinter.glb"
 TEX_DIR    = r"C:\Users\taco0\OneDrive\デスクトップ\雑\3Dプリンター\3Dprinter_textures"
 BAKE_SIZE  = 1024
 
