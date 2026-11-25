@@ -70,6 +70,40 @@
 })();
 </script>
 
+<script>
+// #71 画面の高さを測り、ひとまとまり（main の各 section）が1画面に入らないときだけ、中身を縮める（最小 85%）
+// 下限: 幅 1301px 以上・高さ 600px 以上の画面だけ。入力フォームのあるまとまりは縮めない
+(function () {
+  var MIN_W = 1301, MIN_H = 600, MIN_ZOOM = 0.85;
+  function fit() {
+    var secs = document.querySelectorAll('main > section');
+    var head = document.querySelector('.site-header');
+    var ok = window.innerWidth >= MIN_W && window.innerHeight >= MIN_H;
+    for (var i = 0; i < secs.length; i++) {
+      var sec = secs[i], wrap = sec.querySelector(':scope > .wrap') ;
+      var wraps = sec.querySelectorAll(':scope > .wrap');
+      for (var k = 0; k < wraps.length; k++) wraps[k].style.zoom = '';
+      if (!ok || sec.querySelector('form')) continue;
+      var headH = head ? head.offsetHeight : 0;
+      // 冒頭（最初のまとまり）はヘッダーと合わせて1画面、ほかはヘッダーの下に1画面
+      var avail = window.innerHeight - headH;
+      var h = sec.offsetHeight;
+      if (h <= avail) continue;
+      var cs = getComputedStyle(sec);
+      var pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+      var z = Math.max(MIN_ZOOM, Math.min(1, (avail - pad - 4) / (h - pad))); // 4px は端数の余裕
+      for (var k2 = 0; k2 < wraps.length; k2++) wraps[k2].style.zoom = z.toFixed(3);
+    }
+  }
+  var t;
+  function later() { clearTimeout(t); t = setTimeout(fit, 120); }
+  window.addEventListener('resize', later);
+  window.addEventListener('load', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
+})();
+</script>
+
 <!-- Cloudflare Web Analytics（Cookie を使わないアクセス計測。#33） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c6cc34671ba84165982a038dbe12311e"}'></script><!-- End Cloudflare Web Analytics -->
 
 </body>

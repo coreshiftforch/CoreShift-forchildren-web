@@ -40,3 +40,15 @@
   .tl-bar b { font-size: 0.75rem; } .tl-bar span { display: none; } .tl-bar li { padding: 8px 2px; }
   .tl-cards { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* #71 画面の高さに合わせて詰める（PC・高さ600px以上） */
+@media (min-width: 1301px) and (min-height: 600px) {
+  .tl-cards > li { padding-top: clamp(12px, 2vh, 20px); padding-bottom: clamp(12px, 2vh, 20px); }
+  .ai-door { margin-top: clamp(16px, 3vh, 40px); }
+  .ai-notes { margin-top: clamp(12px, 2vh, 28px); }
+  .ai-hero svg { max-height: 40vh; }
+}
+
+/* プログラムCへの入口（使う技術のまとまりから分けた、小さいセクション） */
+.sec--slim { padding-top: 0; padding-bottom: 48px; }
+.sec--slim .ai-door { margin-top: 0; }
