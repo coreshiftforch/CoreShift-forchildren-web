@@ -105,6 +105,8 @@
   ].join(',');
   var items = Array.prototype.slice.call(document.querySelectorAll('main ' + sel.split(',').join(', main ')));
   if (!items.length) return;
+  // 技術のページ（3Dプリンター・AI・プログラミング。黒い冒頭 .is-tech）だけは、画面に入るたびに動かす。ほかのページは1回だけ
+  var repeat = !!document.querySelector('.hero.is-tech');
   var vh = window.innerHeight;
   items = items.filter(function (el) {
     // 開いた時点で画面に入っているものは、待たせずにそのまま出す（動かさない）
@@ -119,7 +121,8 @@
   document.documentElement.classList.add('reveal-on');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      if (e.isIntersecting) { e.target.classList.add('is-in'); if (!repeat) io.unobserve(e.target); }
+      else if (repeat) { e.target.classList.remove('is-in'); } // 技術のページは、画面から出たら戻して、入るたびに動かす
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   items.forEach(function (el) { io.observe(el); });
