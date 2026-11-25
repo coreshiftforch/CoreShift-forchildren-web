@@ -700,16 +700,16 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
 
 /* ============================================================
    PC幅のスナップスクロール（代表の希望 2026-11-25。#71）
-   スクロールを止めたとき、近くのセクションの頭にそろう。proximity（近いときだけ）なので、
-   画面より長いセクションの途中でも止められ、読めなくなることはない。
-   上に残るヘッダーの高さ（約72px）ぶん、止まる位置を下げる。スマホ・タブレットでは使わない
+   技術のページ（3Dプリンター・AI・プログラミング。黒い冒頭 .is-tech があるページ）だけで使う。トップなどのLPでは使わない
+   スクロールを止めたとき、近くのセクションの頭にそろう。proximity（近いときだけ）なので、画面より長いセクションの途中でも止められる。
+   上に残るヘッダーの高さ（113px）ぶん、止まる位置を下げる。スマホ・タブレットでは使わない
 ============================================================ */
 @media (min-width: 1301px) {
-  html { scroll-snap-type: y proximity; scroll-padding-top: 113px; }
-  /* ページ内リンクの止まる位置も、スナップと同じ（ヘッダーの下）にそろえる */
+  html:has(.hero.is-tech) { scroll-snap-type: y proximity; scroll-padding-top: 113px; }
+  html:has(.hero.is-tech) main > section { scroll-snap-align: start; }
+  html:has(.hero.is-tech) .site-footer { scroll-snap-align: end; }
+  /* ページ内リンクの止まる位置も、ヘッダーの下にそろえる（全ページ） */
+  html { scroll-padding-top: 113px; }
   [id] { scroll-margin-top: 0; }
-  main > section { scroll-snap-align: start; }
-  .site-footer { scroll-snap-align: end; }
-  /* お問い合わせ（入力フォーム）は、入力中に動くと困るので使わない */
-  html:has(body.t-contact) { scroll-snap-type: none; }
+}
 }
