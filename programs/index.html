@@ -6,12 +6,12 @@ description: "福岡市で開いている、小学生・中学生向けの体験
 extra_css: /programs/programs.css
 ---
 <main>
-  <section class="hero">
+  <section class="hero hero--compact">
     <div class="wrap">
       <div class="hero-copy">
         <span class="eyebrow">Programs</span>
         <h1>プログラム一覧</h1>
-        <p class="lead">いま開催できる体験プログラムは3つです。学年・人数・時間は、会場に合わせて調整します。</p>
+        <p class="lead">3Dプリンター・AI・プログラミングを使って、子どもが自分で考えたものを形にする体験プログラムです。どれも大学生スタッフがそばで手伝うので、はじめての子でも参加できます。学年・人数・時間は、会場に合わせて調整します。</p>
       </div>
       <figure class="hero-photo">
         <img src="/coreshift-for-children/photos/event01_takamiya/S__2965520_0-1200.webp" srcset="/coreshift-for-children/photos/event01_takamiya/S__2965520_0-720.webp 720w, /coreshift-for-children/photos/event01_takamiya/S__2965520_0-1200.webp 1200w" sizes="(max-width: 768px) 100vw, 600px" width="1477" height="1108" fetchpriority="high" alt="大学生スタッフが子どもをサポートする様子">
@@ -19,26 +19,42 @@ extra_css: /programs/programs.css
     </div>
   </section>
 
-  <section class="sec sec--light">
+  <section class="sec sec--light sec--tight-top">
     <div class="wrap">
-      <div class="doors doors--3">
-        <a class="door" href="/programs/nameplate/">
-          <span class="eyebrow">Program A ／ 3Dプリンター</span>
-          <h3>ネームプレート作り <span aria-hidden="true">→</span></h3>
-          <p>スマホのアプリでデザインし、3Dプリンターで形にする。内容が決まったプログラムです。小学生〜中学生／約60分。</p>
-        </a>
-        <a class="door" href="/programs/custom/">
-          <span class="eyebrow">Program B ／ 3Dプリンター</span>
-          <h3>ご相談受付 <span aria-hidden="true">→</span></h3>
-          <p>施設の目的やテーマに合わせて、作るものから一緒に考えるオーダーメイドの体験です。</p>
-        </a>
-        <a class="door" href="/programs/ideathon/">
-          <span class="eyebrow">Program C ／ AI</span>
-          <h3>アイデアソン×<wbr>バイブコーディング <span aria-hidden="true">→</span></h3>
-          <p>大学生とチームでゲームのアイデアを考え、AIで形にして発表します。小学生〜中学生／約90分。</p>
-        </a>
+      <div class="pgroups">
+        <section class="pgroup pgroup--3d" aria-labelledby="pg-3d">
+          <p class="pgroup-head"><span class="pgroup-tag" id="pg-3d">3Dプリンター</span><a href="/3dprinter/">3Dプリンターについて <span aria-hidden="true">→</span></a></p>
+          <a class="pblock" href="/programs/nameplate/">
+            <span class="pblock-id">A</span>
+            <span class="pblock-body"><strong>3Dプリンター体験！ネームプレート作り</strong><span>スマホのアプリでデザインし、3Dプリンターで形にする。内容が決まったプログラムです。</span></span>
+            <span class="pblock-meta">小学生〜中学生<br>約10人／約60分</span>
+            <span class="pblock-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="pblock" href="/programs/custom/">
+            <span class="pblock-id">B</span>
+            <span class="pblock-body"><strong>3Dプリンター体験 ご相談受付</strong><span>施設の目的やテーマに合わせて、作るものから一緒に考えるオーダーメイドの体験です。</span></span>
+            <span class="pblock-meta">対象・人数・時間は<br>会場に合わせて</span>
+            <span class="pblock-arrow" aria-hidden="true">→</span>
+          </a>
+        </section>
+        <section class="pgroup pgroup--ai" aria-labelledby="pg-ai">
+          <p class="pgroup-head"><span class="pgroup-tag" id="pg-ai">AI</span><a href="/ai/">AIについて <span aria-hidden="true">→</span></a></p>
+          <a class="pblock" href="/programs/ideathon/">
+            <span class="pblock-id">C</span>
+            <span class="pblock-body"><strong>アイデアソン×バイブコーディング</strong><span>大学生とチームでゲームのアイデアを考え、AIで形にして発表します。プログラミングの経験は要りません。</span></span>
+            <span class="pblock-meta">小学生〜中学生<br>約15人／約90分</span>
+            <span class="pblock-arrow" aria-hidden="true">→</span>
+          </a>
+        </section>
+        <section class="pgroup pgroup--prog" aria-labelledby="pg-prog">
+          <p class="pgroup-head"><span class="pgroup-tag" id="pg-prog">プログラミング</span><a href="/programming/">プログラミングについて <span aria-hidden="true">→</span></a></p>
+          <div class="pblock pblock--soon">
+            <span class="pblock-id">−</span>
+            <span class="pblock-body"><strong>micro:bit でプログラミング体験</strong><span>自分で書いたプログラムでモノを動かす体験を準備しています。</span></span>
+            <span class="pblock-meta"><span class="badge">準備中</span></span>
+          </div>
+        </section>
       </div>
-      <p class="muted" style="margin-top: 28px">準備中：micro:bit を使ったプログラミングの体験（<a href="/programming/">プログラミングについて</a>）</p>
     </div>
   </section>
 
