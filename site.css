@@ -698,17 +698,9 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
 .is-tech .crumbs a { color: #e8e8e8; }
 .type-opt small { display: block; font-size: 0.78rem; font-weight: 400; opacity: 0.85; }
 
-/* ============================================================
-   PC幅のスナップスクロール（代表の希望 2026-11-25。#71）
-   技術のページ（3Dプリンター・AI・プログラミング。黒い冒頭 .is-tech があるページ）だけで使う。トップなどのLPでは使わない
-   スクロールを止めたとき、近くのセクションの頭にそろう。proximity（近いときだけ）なので、画面より長いセクションの途中でも止められる。
-   上に残るヘッダーの高さ（113px）ぶん、止まる位置を下げる。スマホ・タブレットでは使わない
-============================================================ */
+/* ページ内リンク（例: トップの団体概要）で止まる位置を、上に残るヘッダー（113px）の下にそろえる（PC）
+   スナップスクロールは使わない（代表の判断 2026-11-25） */
 @media (min-width: 1301px) {
-  html:has(.hero.is-tech) { scroll-snap-type: y proximity; scroll-padding-top: 113px; }
-  html:has(.hero.is-tech) main > section { scroll-snap-align: start; }
-  html:has(.hero.is-tech) .site-footer { scroll-snap-align: end; }
-  /* ページ内リンクの止まる位置も、ヘッダーの下にそろえる（全ページ） */
   html { scroll-padding-top: 113px; }
   [id] { scroll-margin-top: 0; }
 }
@@ -747,3 +739,12 @@ html.fit-on:not(.fit-measuring) main > section:not(:has(form)) {
   display: flex; flex-direction: column; justify-content: center;
 }
 html.fit-on:not(.fit-measuring) main > section:not(:has(form)) > .wrap { width: 100%; }
+
+/* 中身が少ないまとまり（script が .sec-sparse を付ける）: 幅を狭めて真ん中に寄せ、script が文字と画像を大きくする */
+html.fit-on .sec-sparse > .wrap { max-width: 1040px; }
+html.fit-on .sec-sparse .sec-head,
+html.fit-on .sec-sparse > .wrap.stack,
+html.fit-on .sec-sparse > .wrap > .stack:only-child { text-align: center; }
+html.fit-on .sec-sparse .sec-head .lead,
+html.fit-on .sec-sparse > .wrap.stack .lead { margin-left: auto; margin-right: auto; }
+html.fit-on .sec-sparse .btn-row { justify-content: center; }
