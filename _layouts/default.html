@@ -76,6 +76,8 @@
 (function () {
   var MIN_W = 1301, MIN_H = 600, MIN_ZOOM = 0.85;
   function fit() {
+    var root = document.documentElement;
+    root.classList.add('fit-measuring'); // 1画面の高さをいったん外して、中身の本当の高さを測る
     var secs = document.querySelectorAll('main > section');
     var head = document.querySelector('.site-header');
     var ok = window.innerWidth >= MIN_W && window.innerHeight >= MIN_H;
@@ -94,6 +96,11 @@
       var z = Math.max(MIN_ZOOM, Math.min(1, (avail - pad - 4) / (h - pad))); // 4px は端数の余裕
       for (var k2 = 0; k2 < wraps.length; k2++) wraps[k2].style.zoom = z.toFixed(3);
     }
+    // 各まとまりを、ちょうど1画面（ヘッダーの下）の高さにする。となりのまとまりが映り込まないように
+    var hh = head ? head.offsetHeight : 0;
+    root.style.setProperty('--avail', (window.innerHeight - hh) + 'px');
+    root.classList.toggle('fit-on', ok);
+    root.classList.remove('fit-measuring');
   }
   var t;
   function later() { clearTimeout(t); t = setTimeout(fit, 120); }

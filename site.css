@@ -738,3 +738,12 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
   .project-card { padding-top: clamp(14px, 2.4vh, 24px); padding-bottom: clamp(14px, 2.4vh, 24px); }
   .features li { padding-top: clamp(16px, 2.6vh, 24px); padding-bottom: clamp(16px, 2.6vh, 24px); }
 }
+
+/* #71 つづき: 各まとまりを、ちょうど1画面（ヘッダーの下）の高さにし、中身を上下の真ん中に置く。
+   となりのまとまりが同じ画面に映り込まないように。--avail は script が測って入れる（画面の高さ − ヘッダー）
+   入力フォームのあるまとまり（お問い合わせ）は対象外 */
+html.fit-on:not(.fit-measuring) main > section:not(:has(form)) {
+  min-height: var(--avail);
+  display: flex; flex-direction: column; justify-content: center;
+}
+html.fit-on:not(.fit-measuring) main > section:not(:has(form)) > .wrap { width: 100%; }
