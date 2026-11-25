@@ -21,7 +21,7 @@
   --link: #0a6aa3;
   --head-bg: #ffffff;
   --font: 'Inter', 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-  --wrap: 1120px;
+  --wrap: 1360px;   /* 本文の最大幅（左右の余白込み）。PCで空白が大きいとの指摘で 1120→1360px（2026-11-25） */
   --gutter: 40px;
 }
 
