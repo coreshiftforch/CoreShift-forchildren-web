@@ -80,7 +80,7 @@ h1, h2, h3, p, ul, ol, dl, figure { margin: 0; }
 /* 読む方別の帯もヘッダーの中に置き、常に表示する（代表の希望 2026-11-25） */
 .head-util { background: var(--sky-pale); border-top: 4px solid var(--sky); border-bottom: 1px solid var(--border); }
 .unav { display: flex; justify-content: flex-end; gap: 24px; font-size: 0.8rem; font-weight: 700; }
-.unav a { color: var(--muted); text-decoration: none; padding: 6px 0; white-space: nowrap; }
+.unav a { color: var(--muted); text-decoration: none; padding: 10px 0; white-space: nowrap; } /* 上の帯は押しやすい高さにする（代表の指摘 2026-11-25） */
 .unav a:hover, .unav a[aria-current="page"] { color: var(--accent); }
 .head-main .wrap { display: flex; align-items: center; gap: 32px; min-height: 68px; }
 .logo { font-weight: 900; font-size: 1.35rem; letter-spacing: 0.02em; color: var(--navy); text-decoration: none; white-space: nowrap; }
@@ -297,7 +297,7 @@ h3 { font-size: 1.15rem; line-height: 1.5; font-weight: 900; }
   .l-long { display: none; }
   .l-short { display: inline; }
   .unav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; font-size: 0.72rem; }
-  .unav a { padding: 8px 0; text-align: center; }
+  .unav a { padding: 12px 0; text-align: center; } /* 指で押せる高さ（約44px）にする */
   .unav a + a { border-left: 1px solid var(--border); }
   .head-main .wrap { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 10px; }
   .head-cta { margin-left: auto; padding: 6px 14px; font-size: 0.8rem; }
