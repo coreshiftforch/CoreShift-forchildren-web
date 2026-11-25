@@ -693,3 +693,4 @@ body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-rad
 .t-ai .crumbs [aria-current="page"] { color: #1b2a5e; }
 .is-tech .crumbs { color: #a3a3a3; }
 .is-tech .crumbs a { color: #e8e8e8; }
+.type-opt small { display: block; font-size: 0.78rem; font-weight: 400; opacity: 0.85; }

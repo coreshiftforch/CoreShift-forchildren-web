@@ -22,7 +22,7 @@ nav: contact
             <label class="type-opt"><input type="radio" name="type" value="workshop" required><span>体験会の開催のご相談</span></label>
             <label class="type-opt"><input type="radio" name="type" value="join"><span>体験会への参加について</span></label>
             <label class="type-opt"><input type="radio" name="type" value="sponsor"><span>協賛・物品のご提供</span></label>
-            <label class="type-opt"><input type="radio" name="type" value="other"><span>その他</span></label>
+            <label class="type-opt"><input type="radio" name="type" value="other"><span>その他<small>（サークル連携・取材など）</small></span></label>
           </div>
           <p class="err" id="err-type" hidden>ご用件を選んでください</p>
         </fieldset>
@@ -74,7 +74,7 @@ nav: contact
     workshop: { label: '体験会の開催のご相談', title: '施設・学校の方へ', hint: '対象（学年など）や、ご相談の内容をお書きください。ご希望の時期と人数は、決まっていればご記入ください。', name: '施設・学校名', namePh: '例）○○公民館', ph: '例）小学生を対象に、体験会を検討しています。' },
     join: { label: '体験会への参加について', title: '保護者の方へ', hint: '体験会への参加についてのご質問をお書きください。申し込み方法は、開催ごとにInstagramなどでご案内します。', name: 'お名前', namePh: '', ph: '例）次回の体験会について、小学3年の子どもが参加できるか知りたいです。' },
     sponsor: { label: '協賛・物品のご提供', title: '企業・個人の方へ', hint: '協賛・物品提供・会場提供など、ご検討の内容をお書きください。', name: '企業・団体名／お名前', namePh: '', ph: '例）フィラメントの提供を検討しています。' },
-    other: { label: 'その他', title: 'その他のお問い合わせ', hint: '取材のご依頼など、その他のお問い合わせはこちらにお書きください。', name: 'お名前', namePh: '', ph: '' }
+    other: { label: 'その他', title: 'その他のお問い合わせ', hint: 'サークル・学生団体との連携、取材のご依頼など、その他のお問い合わせはこちらにお書きください。', name: 'お名前／団体名', namePh: '', ph: '例）大学のサークルで、一緒に体験会を開けないか相談したいです。' }
   };
   var form = document.getElementById('contact-form');
   function pick(k) {
