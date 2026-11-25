@@ -38,40 +38,6 @@
 {% include footer.html %}
 
 <script>
-// #13 スクロールで現れる動き（画面に入った要素を少し下から浮かび上がらせる）
-(function () {
-  if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var sel = [
-    '.sec-head', '.media > *', '.project-card', '.door', '.next-card', '.note', '.facts', '.spec',
-    '.features > li', '.cards > *', '.funds > li', '.guide-group', '.steps > li', '.gallery > figure',
-    '.models > *', '.report-step', '.labeled', '.cta .wrap > *', '.form',
-    '.pgroup', '.pblock', '.rcards > li', '.process > li', '.flow > li', '.tl-cards > li', '.tl-bar', '.at-a-glance'
-  ].join(',');
-  var items = Array.prototype.slice.call(document.querySelectorAll('main ' + sel.split(',').join(', main ')));
-  if (!items.length) return;
-  var vh = window.innerHeight;
-  items = items.filter(function (el) {
-    // 開いた時点で画面に入っているものは、待たせずにそのまま出す（動かさない）
-    if (el.getBoundingClientRect().top < vh) return false;
-    el.classList.add('rv');
-    // 同じ並びの中では少しずつずらす
-    var i = Array.prototype.indexOf.call(el.parentNode.children, el);
-    if (el.parentNode.children.length > 1) el.style.setProperty('--rv-delay', Math.min(i, 5) * 0.08 + 's');
-    return true;
-  });
-  if (!items.length) return;
-  document.documentElement.classList.add('reveal-on');
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-  items.forEach(function (el) { io.observe(el); });
-})();
-</script>
-
-<script>
 // #71 画面の高さを測り、ひとまとまり（main の各 section）が1画面に入らないときだけ、中身を縮める（最小 85%）
 // 下限: 幅 1301px 以上・高さ 600px 以上の画面だけ。入力フォームのあるまとまりは縮めない
 (function () {
@@ -124,6 +90,43 @@
   fit();
 })();
 </script>
+
+<script>
+// #13 スクロールで現れる動き（画面に入った要素を少し下から浮かび上がらせる）
+// 1画面ずつの高さ（#71 の script）が決まってから、どれが最初から見えているかを判定する（そのため #71 の script より後に置く）
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var sel = [
+    '.sec-head', '.media > *', '.project-card', '.door', '.next-card', '.note', '.facts', '.spec',
+    '.features > li', '.cards > *', '.funds > li', '.guide-group', '.steps > li', '.gallery > figure',
+    '.models > *', '.report-step', '.labeled', '.cta .wrap > *', '.form',
+    '.pgroup', '.pblock', '.rcards > li', '.process > li', '.flow > li', '.tl-cards > li', '.tl-bar', '.at-a-glance'
+  ].join(',');
+  var items = Array.prototype.slice.call(document.querySelectorAll('main ' + sel.split(',').join(', main ')));
+  if (!items.length) return;
+  var vh = window.innerHeight;
+  items = items.filter(function (el) {
+    // 開いた時点で画面に入っているものは、待たせずにそのまま出す（動かさない）
+    if (el.getBoundingClientRect().top < vh) return false;
+    el.classList.add('rv');
+    // 同じ並びの中では少しずつずらす
+    var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+    if (el.parentNode.children.length > 1) el.style.setProperty('--rv-delay', Math.min(i, 5) * 0.08 + 's');
+    return true;
+  });
+  if (!items.length) return;
+  document.documentElement.classList.add('reveal-on');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+
 
 <!-- Cloudflare Web Analytics（Cookie を使わないアクセス計測。#33） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c6cc34671ba84165982a038dbe12311e"}'></script><!-- End Cloudflare Web Analytics -->
 
