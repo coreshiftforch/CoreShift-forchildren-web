@@ -49,6 +49,5 @@
   .ai-hero svg { max-height: 40vh; }
 }
 
-/* プログラムCへの入口（使う技術のまとまりから分けた、小さいセクション） */
-.sec--slim { padding-top: 0; padding-bottom: 48px; }
-.sec--slim .ai-door { margin-top: 0; }
+/* プログラムCへの入口（最後のまとまりの上に置く） */
+.cta .ai-door { margin: 0 auto 48px; max-width: 900px; text-align: left; }
