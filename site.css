@@ -748,3 +748,19 @@ html.fit-on .sec-sparse > .wrap > .stack:only-child { text-align: center; }
 html.fit-on .sec-sparse .sec-head .lead,
 html.fit-on .sec-sparse > .wrap.stack .lead { margin-left: auto; margin-right: auto; }
 html.fit-on .sec-sparse .btn-row { justify-content: center; }
+
+/* トップ「これまでの活動」: 活動レポートのカード（サムネイル＋短い文）。3つ並ぶ幅。4つ目からは「もっと見る」 */
+.rcards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rcards:not(.is-all) > li:nth-child(n+4) { display: none; }
+.rcard { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #ffffff; color: var(--text); text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.rcard:hover { color: var(--text); border-color: var(--accent); box-shadow: 0 10px 24px rgba(27, 42, 94, 0.10); }
+.rcard img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.rcard-body { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 20px; flex: 1; }
+.rcard-date { font-size: 0.78rem; font-weight: 700; color: var(--accent); }
+.rcard-body strong { font-size: 1.05rem; line-height: 1.5; }
+.rcard-text { font-size: 0.88rem; color: var(--muted); }
+.rcard-more { margin-top: auto; padding-top: 6px; font-size: 0.88rem; font-weight: 700; color: var(--accent); }
+.rcard:hover .rcard-more span { display: inline-block; transform: translateX(4px); transition: transform 0.2s; }
+.rcards-more { margin-top: 28px; text-align: center; }
+@media (max-width: 1300px) { .rcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .rcards { grid-template-columns: minmax(0, 1fr); } }
