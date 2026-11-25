@@ -14,5 +14,9 @@
 .sec-head + .doors { margin-top: 0; }
 
 /* 3Dモデルを作り直すまでの空白（大きさだけ残す） */
+.print-anim--empty::before { content: none; }
 .print-anim--empty { width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1; }
 @media (max-width: 768px) { .print-anim--empty { max-width: 360px; } }
+
+/* 社会での使われ方: 番号を付けない */
+.features--plain li::before { content: none; }

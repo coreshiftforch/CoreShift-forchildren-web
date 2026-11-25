@@ -642,3 +642,22 @@ h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
   .gnav { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; }
   .gnav a { text-align: center; padding-left: 14px; padding-right: 14px; }
 }
+
+/* ---------- process（文章ではなく図で手順・できることを見せる。3Dプリンター・プログラミングのページ） ---------- */
+.process { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; counter-reset: pr; }
+.process li { counter-increment: pr; position: relative; text-align: center; }
+.process figure { margin: 0 0 16px; padding: 16px; background: #ffffff; border: 1px solid var(--border); border-radius: 16px; }
+.process svg { display: block; width: 100%; height: auto; }
+.process h3::before { content: counter(pr); display: inline-grid; place-items: center; width: 26px; height: 26px; margin-right: 8px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.85rem; vertical-align: 2px; }
+.process p { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
+.process li:not(:last-child)::after {
+  content: ""; position: absolute; top: calc(50% - 40px); right: -32px; width: 16px; height: 16px;
+  border-top: 3px solid var(--sky); border-right: 3px solid var(--sky); transform: rotate(45deg);
+}
+@media (max-width: 768px) {
+  .process { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .process figure { max-width: 320px; margin-left: auto; margin-right: auto; }
+  .process li:not(:last-child)::after { top: auto; bottom: -26px; right: calc(50% - 8px); transform: rotate(135deg); }
+}
+/* 手順ではない並び（できることの例）は、番号と矢印を付けない */
+.process--steps-free h3::before, .process--steps-free li::after { content: none !important; }
