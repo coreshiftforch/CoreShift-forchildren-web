@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="{{ page.extra_css }}?v={{ site.time | date: '%Y%m%d%H%M' }}">
 {%- endif %}
 </head>
-<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+<body class="{{ page.body_class }} {{ page.page_theme }}">
 
 {% include header.html %}
 
