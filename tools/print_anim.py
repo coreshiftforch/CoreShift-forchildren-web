@@ -7,7 +7,7 @@ from mathutils import Vector
 argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
 OUT = argv[0] if argv else '/tmp/print_anim'
 TEST = len(argv) > 1 and argv[1] == 'test'
-MODELS = '/Users/ishi/repos/coreshift/CoreShift-forchildren-web/models'
+MODELS = '/Users/ishi/repos/coreshift/CoreShift-forchildren-web/tools/blender/models'
 FRAMES = 72
 
 os.makedirs(OUT, exist_ok=True)
@@ -19,8 +19,8 @@ def import_glb(path):
     bpy.ops.import_scene.gltf(filepath=path)
     return [o for o in bpy.data.objects if o not in before]
 
-printer = import_glb(f'{MODELS}/3Dプリンター.glb')
-plate_objs = import_glb(f'{MODELS}/ネームプレート.glb')
+printer = import_glb(f'{MODELS}/3dprinter.glb')
+plate_objs = import_glb(f'{MODELS}/nameplate.glb')
 
 # プレートの文字を「CoreShift」に差し替える（元のモデルの「そうた」は使わない）
 PLATE_TEXT = 'CoreShift'
