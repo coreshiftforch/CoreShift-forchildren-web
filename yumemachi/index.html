@@ -50,8 +50,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
-import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 // ---------- 建物のデータ（Blenderの座標：1単位=1mm、x=右、y=奥、正面は -y、z=上） ----------
 // 建物を足すときは、ここに1つ足して models/ に GLB を置く。カメラの位置は建物の大きさから自動で決める
@@ -152,7 +151,9 @@ if (BUILDINGS.length > 1) {
 // ---------- 3D ----------
 const el = document.getElementById("view");
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+// スマホ（画面がせまい・タッチ）は軽くする：画素の細かさと影の細かさをおさえる
+const PHONE = matchMedia("(pointer: coarse)").matches || innerWidth <= 768;
+renderer.setPixelRatio(Math.min(PHONE ? 1.5 : 2, devicePixelRatio));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
@@ -170,7 +171,7 @@ scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cdb8, 1.6));
 const sun = new THREE.DirectionalLight(0xfff3e0, 2.4);
 sun.position.copy(b2t([-260, -320, 520]));
 sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.mapSize.set(PHONE ? 1024 : 2048, PHONE ? 1024 : 2048);
 Object.assign(sun.shadow.camera, { left: -260, right: 260, top: 260, bottom: -260, near: 50, far: 1500 });
 sun.shadow.bias = -0.0004;
 scene.add(sun);
@@ -187,7 +188,7 @@ if (IS_CITY) {                                    // まち全体：大きな台
   sun.position.copy(c).add(b2t([-0.5, -0.75, 1]).multiplyScalar(2000));
   sun.target.position.copy(c); scene.add(sun.target);
   Object.assign(sun.shadow.camera, { left: -1300, right: 1300, top: 1300, bottom: -1300, near: 100, far: 5000 });
-  sun.shadow.mapSize.set(4096, 4096);
+  sun.shadow.mapSize.set(PHONE ? 2048 : 4096, PHONE ? 2048 : 4096);
   sun.shadow.camera.updateProjectionMatrix();
 }
 
@@ -214,7 +215,7 @@ const view = (dir, k) => viewOf(FIT, dir, k);
 const sc = o => ({ c: o.c.map(v => v * CITY.S), r: o.r * CITY.S });   // まち全体：m → 画面の単位
 if (IS_CITY) FIT = sc(CITY.board);
 const wide = () => innerWidth > 768;               // パソコン：左の説明に重ならないよう、少し左を見る（台が右へよる）
-B.home = IS_CITY ? viewOf({ c: [FIT.c[0] - (wide() ? 230 : 0), FIT.c[1] + (wide() ? 0 : 120), FIT.c[2]], r: FIT.r }, [-0.1, -1, 0.95], wide() ? 0.62 : 0.8) : view([-0.55, -1, 0.42], 1.15);
+B.home = IS_CITY ? viewOf({ c: [FIT.c[0] - (wide() ? 230 : 0), FIT.c[1] + (wide() ? 0 : 120), FIT.c[2]], r: FIT.r }, [-0.1, -1, 0.95], wide() ? 0.62 : 0.85) : view([-0.55, -1, 0.42], 1.15);
 camera.position.copy(b2t(B.home.cam));
 controls.target.copy(b2t(B.home.at));
 
@@ -241,7 +242,7 @@ if (IS_CITY) {
     box.appendChild(e); TAGS.push({ e, p: b2t(p.map(v => v * CITY.S)), below: cls === "area3d" });   // エリア名は点の下、建物名は上
   };
   CITY.areas.forEach(([n, p]) => add(n, p, "area3d"));
-  BUILDINGS.forEach(o => { const t = CITY.teams[o.id]; add(`<b>${o.team}</b> ${o.name}`, [t.c[0], t.c[1], t.top + 0.012], "team3d", `?b=${o.id}`); });
+  BUILDINGS.forEach(o => { const t = CITY.teams[o.id]; add(`<b>${o.team}</b><span class="nm"> ${o.name}</span>`, [t.c[0], t.c[1], t.top + 0.012], "team3d", `?b=${o.id}`); });
 }
 const _v = new THREE.Vector3();
 function placeTags() {
@@ -252,7 +253,8 @@ function placeTags() {
     const vis = _v.z < 1 && Math.abs(_v.x) < 1.1 && Math.abs(_v.y) < 1.1;
     t.e.style.display = vis ? "" : "none";
     if (vis) t.e.style.transform = `translate(${(_v.x + 1) / 2 * w}px, ${(1 - _v.y) / 2 * h}px) translate(-50%, ${t.below ? "6px" : "-100%"})`;
-    if (t.e.classList.contains("area3d")) t.e.classList.toggle("far", d < 700);   // 建物に近づいたらエリア名はうすく
+    if (t.e.classList.contains("area3d")) t.e.classList.toggle("far", d < 700);
+    else t.e.classList.toggle("short", PHONE && d > 1100);                        // スマホで遠いときは「班A」だけ   // 建物に近づいたらエリア名はうすく
   });
 }
 const spinBtn = document.getElementById("spin");
@@ -262,30 +264,10 @@ document.getElementById("home").onclick = () => { spots.querySelectorAll(".spot"
 renderer.domElement.addEventListener("pointerdown", () => { document.getElementById("hint").classList.add("gone"); setSpin(false); fly = null; });
 
 const loader = new GLTFLoader();
-if (IS_CITY) loader.setDRACOLoader(new DRACOLoader().setDecoderPath("./vendor/three-0.160.0/addons/libs/draco/gltf/"));
-// 同じ色の部品をまとめて1つにする（まち全体は部品が4000こ近くあるので、まとめないとスマホで重い）
-function mergeByMaterial(root) {
-  root.updateMatrixWorld(true);
-  const groups = new Map(), drop = [];
-  root.traverse(o => {
-    if (!o.isMesh || Array.isArray(o.material)) return;
-    const g = o.geometry.clone().applyMatrix4(o.matrixWorld);
-    for (const k of Object.keys(g.attributes)) if (k !== "position" && k !== "normal") g.deleteAttribute(k);
-    if (!g.attributes.normal) g.computeVertexNormals();
-    if (g.index) { const n = g.toNonIndexed(); g.dispose(); groups.has(o.material) || groups.set(o.material, []); groups.get(o.material).push(n); }
-    else { groups.has(o.material) || groups.set(o.material, []); groups.get(o.material).push(g); }
-    drop.push(o);
-  });
-  drop.forEach(o => o.parent.remove(o));
-  const out = new THREE.Group();
-  groups.forEach((list, m) => {
-    const g = mergeGeometries(list, false); list.forEach(x => x.dispose());
-    if (g) out.add(new THREE.Mesh(g, m));
-  });
-  return out;
-}
+// モデルは meshopt で圧縮し、同じ色の部品は1つにまとめてある（gltf-transform optimize）。読みこみは軽い
+loader.setMeshoptDecoder(MeshoptDecoder);
 loader.load(B.glb, g => {
-  if (IS_CITY) { const m = mergeByMaterial(g.scene); m.scale.setScalar(CITY.S); g.scene = m; }
+  if (IS_CITY) g.scene.scale.setScalar(CITY.S);
   g.scene.traverse(o => {
     if (!o.isMesh) return;
     o.castShadow = true; o.receiveShadow = true;
