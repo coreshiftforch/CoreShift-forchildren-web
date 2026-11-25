@@ -7,6 +7,7 @@
 ## File Structure
 - _layouts/default.html: <head>・全体の枠。_includes/header.html・footer.html: ヘッダーとフッター
 - ヘッダーは2段（上の帯＝読む方別の4つ、下＝ジャンル: 3Dプリンター・AI・プログラミング・プログラム・CoreShiftについて＋「開催のご相談」ボタン）。ジャンルの強調はページ先頭の genre（3dprinter / ai / programming / programs）。フッターは見出しつき4列（活動内容・CoreShiftについて・ご案内・お問い合わせ）
+- ページごとの目印の色: ページ先頭の page_theme（t-3d 空色・t-ai オレンジ・t-prog 緑・t-programs 深い青・t-orgs 藍・t-children 金・t-support コーラル・t-contact）。ヘッダーの下の線・今いるメニュー・冒頭の背景・パンくずの札がその色になる。新しいページには必ず付ける
 - 配色: イメージカラーはロゴの空色 #29abe2（--sky）。白地の文字・ボタンには深い空色 --accent（#0a74b0）、文字は紺 --navy。空色そのものは帯・面・紺文字のバッジにだけ使う（白地では薄すぎる） テクノロジーを強調する部分だけ旧サイトの黒×青（クラス is-tech。技術ページのヒーローと3Dプリンターのしくみ）
 - site.css: 共通スタイル。ページ専用のスタイルは各ページの page.css（ページ先頭の extra_css で読み込む）
 - index.html（トップ）、for-organizations/（施設・学校向け）、coreshift-for-children/（保護者向け）、coreshift-for-children/support/（企業・個人向け）、contact/（お問い合わせ）

@@ -661,3 +661,35 @@ h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
 }
 /* 手順ではない並び（できることの例）は、番号と矢印を付けない */
 .process--steps-free h3::before, .process--steps-free li::after { content: none !important; }
+
+/* ============================================================
+   ページごとの目印の色（どこにいるか分かるように。BBC のジャンル色と同じ考え方）
+   --page: 目印の色（線・面）  --page-ink: 白地の文字用に濃くした色  --page-tint: 冒頭の背景のうすい色
+   ページ先頭の page_theme で決める（_layouts/default.html が body に付ける）
+============================================================ */
+.t-3d       { --page: #29abe2; --page-ink: #0a74b0; --page-tint: #d6effb; }
+.t-ai       { --page: #ff8a3d; --page-ink: #c2410c; --page-tint: #ffe8d6; }
+.t-prog     { --page: #2f9e6e; --page-ink: #1f7a52; --page-tint: #dcf3e8; }
+.t-programs { --page: #0a74b0; --page-ink: #085d8e; --page-tint: #dcecf7; }
+.t-orgs     { --page: #5b5bd6; --page-ink: #4338ca; --page-tint: #e6e6fb; }
+.t-children { --page: #c0922e; --page-ink: #8a6516; --page-tint: #fff3d6; }
+.t-support  { --page: #e8735a; --page-ink: #b5452c; --page-tint: #fde9e4; }
+.t-contact  { --page: #0a74b0; --page-ink: #085d8e; --page-tint: #e3f4fc; }
+
+/* ヘッダーの下の線を目印の色に。今いるメニューも同じ色 */
+body[class*=" t-"] .site-header { border-bottom: 3px solid var(--page); }
+body[class*=" t-"] .gnav a[aria-current="page"] { border-bottom-color: var(--page); color: var(--page-ink); }
+body[class*=" t-"] .unav a[aria-current="page"] { color: var(--page-ink); box-shadow: inset 0 -3px 0 var(--page); }
+
+/* 冒頭の背景: 明るいページは目印の色のうすいグラデーション、技術ページ（黒地）は目印の色の光 */
+body[class*=" t-"]:not(.theme-sky) .hero:not(.is-tech) { background: linear-gradient(180deg, var(--page-tint) 0%, #ffffff 100%); }
+body[class*=" t-"] .hero.is-tech { background: radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--page) 30%, transparent), transparent 60%), #060606; }
+body[class*=" t-"] .hero .eyebrow { color: var(--page-ink); }
+body[class*=" t-"] .hero.is-tech .eyebrow { color: var(--page); }
+
+/* パンくず: 今いるページを目印の色の札で */
+.crumbs { margin-bottom: 4px; }
+body[class*=" t-"] .crumbs [aria-current="page"] { padding: 1px 12px; border-radius: 999px; background: var(--page); color: #ffffff; }
+.t-ai .crumbs [aria-current="page"] { color: #1b2a5e; }
+.is-tech .crumbs { color: #a3a3a3; }
+.is-tech .crumbs a { color: #e8e8e8; }
