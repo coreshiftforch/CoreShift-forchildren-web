@@ -31,6 +31,7 @@
   <div id="loading" class="loading"><div class="spin"></div><p id="loadmsg">建物をよみこんでいます…</p></div>
   <div id="tags" class="tags"></div>
   <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
+  <div class="zoom"><button id="zin" type="button" aria-label="ちかづく">＋</button><button id="zout" type="button" aria-label="はなれる">−</button></div>
 
   <section class="card" id="card">
     <button id="fold" class="fold" type="button" aria-label="説明をたたむ">たたむ</button>
@@ -105,11 +106,11 @@ const el = document.getElementById("view");
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 // スマホ（画面がせまい・タッチ）は軽くする：画素の細かさと影の細かさをおさえる
 const PHONE = matchMedia("(pointer: coarse)").matches || innerWidth <= 768;
-renderer.setPixelRatio(Math.min(PHONE ? 1.5 : 2, devicePixelRatio));
+renderer.setPixelRatio(Math.min(PHONE ? 1.25 : 2, devicePixelRatio));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = !PHONE;               // スマホは影なし（建物を2回描かなくてすむので、ぐっと軽くなる）
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 el.appendChild(renderer.domElement);
 
@@ -147,7 +148,7 @@ if (IS_CITY) {                                    // まち全体：大きな台
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.minDistance = IS_CITY ? 25 : 90;
-controls.maxDistance = IS_CITY ? 9000 : 1100;
+controls.maxDistance = IS_CITY ? 9000 : 2200;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.autoRotate = true;
 controls.autoRotateSpeed = IS_CITY ? 0.35 : 0.9;
@@ -246,6 +247,23 @@ document.addEventListener("click", e => {
   if (id === "all") { if (IS_CITY) home(); else toHub(); } else if (id !== B.id) enter(id);
 });
 hubBtn.onclick = toHub;
+// ズーム：＋／−のボタン（どの端末でも）と、Mac の Safari のピンチ（gesture のイベントで来る）
+function zoomBy(f) {
+  setSpin(false); fly = null;
+  const d = camera.position.clone().sub(controls.target);
+  const len = THREE.MathUtils.clamp(d.length() * f, controls.minDistance, controls.maxDistance);
+  const to = controls.target.clone().add(d.setLength(len));
+  fly = { t0: performance.now(), ms: 350, p0: camera.position.clone(), a0: controls.target.clone(), p1: to, a1: controls.target.clone() };
+}
+document.getElementById("zin").onclick = () => zoomBy(0.7);
+document.getElementById("zout").onclick = () => zoomBy(1.4);
+let gs = 1;
+renderer.domElement.addEventListener("gesturestart", e => { e.preventDefault(); gs = 1; });
+renderer.domElement.addEventListener("gesturechange", e => {
+  e.preventDefault(); const f = gs / e.scale; gs = e.scale; setSpin(false);
+  const d = camera.position.clone().sub(controls.target);
+  camera.position.copy(controls.target).add(d.setLength(THREE.MathUtils.clamp(d.length() * f, controls.minDistance, controls.maxDistance)));
+});
 const spinBtn = document.getElementById("spin");
 function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
 spinBtn.onclick = () => setSpin(!controls.autoRotate);
@@ -273,7 +291,8 @@ loader.load(B.glb, g => {
   home(FROM || !IS_CITY ? 1800 : undefined);
   fadeEl.classList.add("off");
   document.getElementById("loading").classList.add("gone");
-  if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
+  // 発表用の演出はパソコンの発表用の端末だけ（スマホは覚えていても読まない）
+  if (SHOW && !IS_CITY && !PHONE) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
 }, undefined, () => {
   document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
 });
