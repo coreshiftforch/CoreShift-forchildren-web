@@ -33,6 +33,10 @@
     <span class="txt"><b class="badge">まち全体</b><strong>夢のまち（まち全体）</strong><span class="short">6つの班の建物が、福岡のジオラマにならんでいるよ。ぐるっと回して見てみよう。</span></span>
   </a>
   <div class="screens" id="screens"></div>
+  <div class="opsw">
+    <button id="ops" class="opsbtn" type="button"></button>
+    <span class="opsnote">運営デバイス：建物のページで、組み上がり・住人・見どころの書きこみが出ます（パソコンだけ。スマホでは出ません）</span>
+  </div>
 </main>
 
 <script type="module">
@@ -45,6 +49,12 @@ box.innerHTML = BUILDINGS.map(o => `
     <span class="pic"><img src="${o.thumb}" alt="${o.name}" width="640" height="480" loading="lazy"></span>
     <span class="txt"><b class="badge">${o.team}</b><strong>${o.name}</strong><span class="area">${o.area}エリア</span><span class="short">${o.short}</span></span>
   </a>`).join("");
+// 運営デバイスの切りかえ（この端末に覚える）
+const ops = document.getElementById("ops");
+const isOps = () => { try { return localStorage.getItem("yumemachi_show") === "1"; } catch (e) { return false; } };
+const drawOps = () => { const on = isOps(); ops.textContent = on ? "運営デバイス：オン（おすとオフ）" : "運営デバイス：オフ（おすとオン）"; ops.classList.toggle("on", on); };
+ops.onclick = () => { try { isOps() ? localStorage.removeItem("yumemachi_show") : localStorage.setItem("yumemachi_show", "1"); } catch (e) {} drawOps(); };
+drawOps();
 // もどってきた建物の画面を光らせる
 const back = from && (from === "all" ? document.getElementById("city") : box.querySelector(`[data-id="${from}"]`));
 if (back) { back.classList.add("back"); back.scrollIntoView({ block: "center" }); }
