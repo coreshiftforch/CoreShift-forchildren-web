@@ -31,6 +31,7 @@
   <div id="loading" class="loading"><div class="spin"></div><p id="loadmsg">建物をよみこんでいます…</p></div>
   <div id="tags" class="tags"></div>
   <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
+  <div class="zoom"><button id="zin" type="button" aria-label="ちかづく">＋</button><button id="zout" type="button" aria-label="はなれる">−</button></div>
 
   <section class="card" id="card">
     <button id="fold" class="fold" type="button" aria-label="説明をたたむ">たたむ</button>
@@ -147,7 +148,7 @@ if (IS_CITY) {                                    // まち全体：大きな台
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.minDistance = IS_CITY ? 25 : 90;
-controls.maxDistance = IS_CITY ? 9000 : 1100;
+controls.maxDistance = IS_CITY ? 9000 : 2200;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.autoRotate = true;
 controls.autoRotateSpeed = IS_CITY ? 0.35 : 0.9;
@@ -246,6 +247,23 @@ document.addEventListener("click", e => {
   if (id === "all") { if (IS_CITY) home(); else toHub(); } else if (id !== B.id) enter(id);
 });
 hubBtn.onclick = toHub;
+// ズーム：＋／−のボタン（どの端末でも）と、Mac の Safari のピンチ（gesture のイベントで来る）
+function zoomBy(f) {
+  setSpin(false); fly = null;
+  const d = camera.position.clone().sub(controls.target);
+  const len = THREE.MathUtils.clamp(d.length() * f, controls.minDistance, controls.maxDistance);
+  const to = controls.target.clone().add(d.setLength(len));
+  fly = { t0: performance.now(), ms: 350, p0: camera.position.clone(), a0: controls.target.clone(), p1: to, a1: controls.target.clone() };
+}
+document.getElementById("zin").onclick = () => zoomBy(0.7);
+document.getElementById("zout").onclick = () => zoomBy(1.4);
+let gs = 1;
+renderer.domElement.addEventListener("gesturestart", e => { e.preventDefault(); gs = 1; });
+renderer.domElement.addEventListener("gesturechange", e => {
+  e.preventDefault(); const f = gs / e.scale; gs = e.scale; setSpin(false);
+  const d = camera.position.clone().sub(controls.target);
+  camera.position.copy(controls.target).add(d.setLength(THREE.MathUtils.clamp(d.length() * f, controls.minDistance, controls.maxDistance)));
+});
 const spinBtn = document.getElementById("spin");
 function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
 spinBtn.onclick = () => setSpin(!controls.autoRotate);

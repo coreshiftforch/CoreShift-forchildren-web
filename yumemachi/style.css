@@ -103,6 +103,11 @@ body.leaving .screen.go{opacity:1;transform:scale(1.06);z-index:2;box-shadow:0 1
   .screen.big strong{font-size:18px}
 }
 
+/* ズームのボタン */
+.zoom{position:absolute;right:16px;bottom:22px;display:flex;flex-direction:column;gap:8px;z-index:2}
+.zoom button{width:46px;height:46px;border-radius:50%;border:2px solid #cfe3d8;background:rgba(255,255,255,.95);font:inherit;font-size:24px;font-weight:900;color:#2b2f3a;cursor:pointer;box-shadow:0 4px 12px rgba(40,60,90,.15);line-height:1}
+.zoom button:active{background:#e6f4ec}
+
 /* スマホ：説明は下に */
 @media (max-width:768px){
   .card{top:auto;bottom:0;left:0;right:0;width:auto;max-height:46%;border-radius:20px 20px 0 0;padding:16px}
@@ -112,4 +117,5 @@ body.leaving .screen.go{opacity:1;transform:scale(1.06);z-index:2;box-shadow:0 1
   .hint{bottom:auto;top:12px;white-space:nowrap;font-size:13px}
   .tag3d{font-size:11px}
   .fold{display:none}
+  .zoom{bottom:auto;top:calc(58% - 120px)}
 }
