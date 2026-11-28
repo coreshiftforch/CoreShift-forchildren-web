@@ -257,6 +257,27 @@ function zoomBy(f) {
 }
 document.getElementById("zin").onclick = () => zoomBy(0.7);
 document.getElementById("zout").onclick = () => zoomBy(1.4);
+// Google マップと同じ「ダブルタップして、そのまま上下に動かす」ズーム（トラックパッド・マウス・指）
+//  下へ動かすと近づく、上へ動かすとはなれる。動かさずにはなすと、1だん近づく
+let lastUp = { t: 0, x: 0, y: 0 }, dz = null;
+el.addEventListener("pointerdown", e => {
+  const now = performance.now();
+  if (now - lastUp.t < 400 && Math.hypot(e.clientX - lastUp.x, e.clientY - lastUp.y) < 30 && e.isPrimary) {
+    e.stopPropagation(); e.preventDefault();                          // 回す操作には渡さない
+    setSpin(false); fly = null;
+    dz = { y0: e.clientY, d0: camera.position.distanceTo(controls.target), moved: false, id: e.pointerId };
+  }
+}, { capture: true });
+addEventListener("pointermove", e => {
+  if (!dz || e.pointerId !== dz.id) return;
+  const dy = e.clientY - dz.y0; if (Math.abs(dy) > 4) dz.moved = true;
+  const len = THREE.MathUtils.clamp(dz.d0 * Math.exp(-dy * 0.006), controls.minDistance, controls.maxDistance);
+  camera.position.copy(controls.target).add(camera.position.clone().sub(controls.target).setLength(len));
+});
+addEventListener("pointerup", e => {
+  if (dz && e.pointerId === dz.id) { if (!dz.moved) zoomBy(0.6); dz = null; lastUp.t = 0; return; }
+  lastUp = { t: performance.now(), x: e.clientX, y: e.clientY };
+});
 let gs = 1;
 renderer.domElement.addEventListener("gesturestart", e => { e.preventDefault(); gs = 1; });
 renderer.domElement.addEventListener("gesturechange", e => {
