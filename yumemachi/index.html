@@ -32,6 +32,7 @@
   <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
 
   <section class="card" id="card">
+    <button id="fold" class="fold" type="button" aria-label="説明をたたむ">たたむ</button>
     <p class="eyebrow">みんなでつくる 福岡・夢のまち</p>
     <h1 id="bname"></h1>
     <p class="area"><span id="area"></span>エリア ／ <span id="team"></span></p>
@@ -115,8 +116,8 @@ const CITY = {
   glb: "./models/city.glb",
   S: 1000,
   board: { c: [0.6, 0, 0], r: 1.25 },
-  // 班の建物の中心（c）と大きさ（r）：Blender の座標（m）
-  teams: {"A": {"c": [0.9233, -0.2184, 0.0682], "r": 0.0807, "top": 0.1298}, "B": {"c": [1.4624, -0.1429, 0.0668], "r": 0.1023, "top": 0.1294}, "C": {"c": [0.538, -0.2879, 0.0338], "r": 0.0582, "top": 0.0611}, "D": {"c": [-0.0463, -0.026, 0.0693], "r": 0.1085, "top": 0.135}, "E": {"c": [1.1268, 0.0536, 0.0554], "r": 0.0856, "top": 0.1042}, "F": {"c": [0.311, 0.2646, 0.0339], "r": 0.0603, "top": 0.0684}},
+  // 班の建物の中心（c）と大きさ（r）：Blender の座標（m）。建物は刷る物と同じ大きさ（publish_web.py が書く city_teams.json）
+  teams: {"A": {"c": [0.9235, -0.2189, 0.1298], "r": 0.1614, "top": 0.253}, "B": {"c": [1.4216, -0.1436, 0.127], "r": 0.2046, "top": 0.2523}, "C": {"c": [0.5375, -0.2892, 0.0615], "r": 0.1166, "top": 0.1165}, "D": {"c": [-0.0499, -0.0561, 0.1321], "r": 0.2167, "top": 0.2635}, "E": {"c": [1.1065, 0.0519, 0.1048], "r": 0.1719, "top": 0.203}, "F": {"c": [0.3109, 0.2604, 0.0587], "r": 0.1195, "top": 0.1255}},
   areas: [["天神", [0.8077, -0.1193, 0.03]], ["博多駅", [1.3874, -0.0434, 0.03]], ["大濠公園", [0.4235, -0.188, 0.03]], ["ももち", [-0.1566, 0.1028, 0.03]], ["ベイサイド", [1.0321, 0.154, 0.03]], ["博多湾", [0.1962, 0.3673, 0.03]]],
 };
 const VIEWS = [                                  // 見どころボタン：建物の中心から見る向き（Blenderの向き）と、近さ
@@ -129,6 +130,11 @@ const VIEWS = [                                  // 見どころボタン：建�
 
 const b2t = ([x, y, z]) => new THREE.Vector3(x, z, -y);   // Blender → three.js（GLTFは上が +Y）
 const q = new URLSearchParams(location.search);
+// 発表用の端末：?show=1 で開くと、この端末をおぼえる（?show=0 でやめる）。スマホでは演出を読みこまない
+if (q.has("show")) { try { q.get("show") === "0" ? localStorage.removeItem("yumemachi_show") : localStorage.setItem("yumemachi_show", "1"); } catch (e) {} }
+let SHOW = false; try { SHOW = localStorage.getItem("yumemachi_show") === "1"; } catch (e) {}
+const TICK = [];                                    // 演出の毎フレームの処理
+const t2b = v => [v.x, -v.z, v.y];                  // three.js → Blender
 const IS_CITY = !q.get("b") || q.get("b") === "all";
 const B = IS_CITY ? {
   id: "all", team: "6つの班", name: "夢のまち（まち全体）", area: "福岡のまち", glb: CITY.glb,
@@ -164,8 +170,8 @@ el.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xdfeefa);
 scene.fog = new THREE.Fog(0xdfeefa, 900, 2200);
-const camera = new THREE.PerspectiveCamera(38, 1, IS_CITY ? 3 : 5, IS_CITY ? 12000 : 5000);
-if (IS_CITY) scene.fog = new THREE.Fog(0xdfeefa, 4500, 11000);
+const camera = new THREE.PerspectiveCamera(38, 1, IS_CITY ? 3 : 5, IS_CITY ? 20000 : 5000);
+if (IS_CITY) scene.fog = new THREE.Fog(0xdfeefa, 7000, 16000);
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cdb8, 1.6));
 const sun = new THREE.DirectionalLight(0xfff3e0, 2.4);
@@ -195,7 +201,7 @@ if (IS_CITY) {                                    // まち全体：大きな台
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.minDistance = IS_CITY ? 25 : 90;
-controls.maxDistance = IS_CITY ? 5000 : 1100;
+controls.maxDistance = IS_CITY ? 9000 : 1100;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.autoRotate = true;
 controls.autoRotateSpeed = IS_CITY ? 0.35 : 0.9;
@@ -205,7 +211,13 @@ let fly = null;
 function flyTo(cam, at, ms = 1100) {
   fly = { t0: performance.now(), ms, p0: camera.position.clone(), a0: controls.target.clone(), p1: b2t(cam), a1: b2t(at) };
 }
-function home() { flyTo(B.home.cam, B.home.at); }
+function home() { if (IS_CITY) B.home = cityHome(); flyTo(B.home.cam, B.home.at); }
+function cityHome() {                              // 台ぜんたいが、見えている広さ（説明の右）に入るように
+  const pad = wide() && !document.getElementById("card").classList.contains("mini") ? 392 : 0;
+  const asp = Math.max(0.4, (el.clientWidth - pad) / Math.max(1, el.clientHeight));
+  const k = (wide() ? 0.62 : 0.85) * Math.max(1, 1.45 / asp);
+  return viewOf({ c: [FIT.c[0], FIT.c[1] + (wide() ? 0 : 120), FIT.c[2]], r: FIT.r }, [-0.1, -1, 0.95], k);
+}
 let FIT = { c: [0, 0, 100], r: 160 };            // 建物を読みこんだら、大きさに合わせてなおす
 const viewOf = (fit, dir, k) => {
   const d = new THREE.Vector3(...dir).normalize(), dist = fit.r / Math.sin(THREE.MathUtils.degToRad(17)) * k;
@@ -215,7 +227,7 @@ const view = (dir, k) => viewOf(FIT, dir, k);
 const sc = o => ({ c: o.c.map(v => v * CITY.S), r: o.r * CITY.S });   // まち全体：m → 画面の単位
 if (IS_CITY) FIT = sc(CITY.board);
 const wide = () => innerWidth > 768;               // パソコン：左の説明に重ならないよう、少し左を見る（台が右へよる）
-B.home = IS_CITY ? viewOf({ c: [FIT.c[0] - (wide() ? 230 : 0), FIT.c[1] + (wide() ? 0 : 120), FIT.c[2]], r: FIT.r }, [-0.1, -1, 0.95], wide() ? 0.62 : 0.85) : view([-0.55, -1, 0.42], 1.15);
+B.home = IS_CITY ? cityHome() : view([-0.55, -1, 0.42], 1.15);
 camera.position.copy(b2t(B.home.cam));
 controls.target.copy(b2t(B.home.at));
 
@@ -257,6 +269,7 @@ function placeTags() {
     else t.e.classList.toggle("short", PHONE && d > 1100);                        // スマホで遠いときは「班A」だけ   // 建物に近づいたらエリア名はうすく
   });
 }
+document.getElementById("fold").onclick = e => { const c = document.getElementById("card").classList.toggle("mini"); e.target.textContent = c ? "ひらく" : "たたむ"; resize(); };
 const spinBtn = document.getElementById("spin");
 function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
 spinBtn.onclick = () => setSpin(!controls.autoRotate);
@@ -282,6 +295,7 @@ loader.load(B.glb, g => {
   }
   home();
   document.getElementById("loading").classList.add("gone");
+  if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
 }, undefined, () => {
   document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
 });
@@ -289,7 +303,11 @@ loader.load(B.glb, g => {
 function resize() {
   const w = el.clientWidth, h = el.clientHeight;
   renderer.setSize(w, h, false);
-  camera.aspect = w / h; camera.updateProjectionMatrix();
+  camera.aspect = w / h;
+  // パソコンで説明がひらいているときは、画面の中心を説明の右の空いた所にずらす（見たい物が説明にかくれない）
+  const pad = wide() && !document.getElementById("card").classList.contains("mini") ? 392 : 0;
+  if (pad) camera.setViewOffset(w + pad, h, 0, 0, w, h); else camera.clearViewOffset();
+  camera.updateProjectionMatrix();
 }
 addEventListener("resize", resize); resize();
 
@@ -300,6 +318,7 @@ renderer.setAnimationLoop(now => {
     controls.target.lerpVectors(fly.a0, fly.a1, e);
     if (k >= 1) fly = null;
   }
+  TICK.forEach(f => f(now));
   controls.update();
   renderer.render(scene, camera);
   placeTags();
