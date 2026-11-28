@@ -7,22 +7,11 @@ export function start(ctx) {
   const card = document.getElementById("card");
   renderer.localClippingEnabled = true;
 
-  // ---------- グループを集める ----------
-  const groups = [];
-  const loose = [];
-  model.children.forEach(n => (/^g\d\d_/.test(n.name) ? groups : loose).push(n));
-  if (loose.length) { const o = new THREE.Group(); o.name = "g99_そのほか"; loose.forEach(n => o.add(n)); model.add(o); groups.push(o); }
-  groups.sort((a, b) => boxOf(a).min.y - boxOf(b).min.y);          // 下にあるものから
-  function boxOf(o) { return new THREE.Box3().setFromObject(o); }
-  const label = n => n.replace(/^g\d\d_/, "").replace(/^\d+_/, "").replace(/_/g, " ");
+  // ---------- 下から組み上がる（建物まるごと、1まいの面で下から見せていく） ----------
   const all = new THREE.Box3().setFromObject(model);
   const H = all.max.y - all.min.y, R = Math.max(all.max.x - all.min.x, all.max.z - all.min.z) / 2;
-
-  groups.forEach(g => {
-    const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), all.min.y - 1);
-    g.userData.plane = plane; g.userData.box = boxOf(g);
-    g.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = [plane]; o.material.clipShadows = true; } });
-  });
+  const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), all.max.y + 1);
+  model.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = [plane]; o.material.clipShadows = true; } });
 
   // ---------- 光のつぶ ----------
   const N = 1600, pos = new Float32Array(N * 3), vel = new Float32Array(N * 3), life = new Float32Array(N), col = new Float32Array(N * 3);
@@ -51,28 +40,20 @@ export function start(ctx) {
   // ---------- できあがり ----------
   const toast = document.createElement("div"); toast.className = "toast"; el.parentElement.appendChild(toast);
   let build = null;
-  function startBuild() {
-    groups.forEach(g => { g.userData.plane.constant = g.userData.box.min.y - 0.5; g.visible = false; });
-    build = { i: -1, t0: 0 }; setSpin(true); ring.userData.t0 = performance.now();
-  }
-  const STEP = 1100;
+  const DUR = 5500;
+  function startBuild() { plane.constant = all.min.y - 0.5; build = { t0: performance.now() }; setSpin(true); ring.userData.t0 = performance.now(); }
   function tickBuild(now) {
     if (!build) return;
-    if (build.i < 0 || now - build.t0 > STEP) {
-      build.i++; build.t0 = now;
-      if (build.i >= groups.length) {           // ぜんぶできた：花火
-        for (let k = 0; k < 8; k++) emit(all.min.x + Math.random() * (all.max.x - all.min.x), all.max.y, all.min.z + Math.random() * (all.max.z - all.min.z), 60, R * 0.1, 0.12);
-        toast.textContent = `${B.name}、できあがり！`; toast.classList.add("on"); setTimeout(() => toast.classList.remove("on"), 2600);
-        build = null; return;
-      }
-      const g = groups[build.i]; g.visible = true;
-      toast.textContent = label(g.name); toast.classList.add("on");
+    const k = Math.min(1, (now - build.t0) / DUR), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    const y = all.min.y - 0.5 + (H + 1.5) * e;
+    plane.constant = y;
+    const cx = (all.min.x + all.max.x) / 2, cz = (all.min.z + all.max.z) / 2;
+    if (k < 1) emit(cx, y, cz, 14, R * 0.9, 0.03);
+    else {                                       // できあがり：花火
+      for (let i = 0; i < 8; i++) emit(all.min.x + Math.random() * (all.max.x - all.min.x), all.max.y, all.min.z + Math.random() * (all.max.z - all.min.z), 60, R * 0.1, 0.12);
+      toast.textContent = `${B.name}、できあがり！`; toast.classList.add("on"); setTimeout(() => toast.classList.remove("on"), 2600);
+      build = null;
     }
-    const g = groups[build.i], b = g.userData.box, k = Math.min(1, (now - build.t0) / (STEP * 0.85)), e = 1 - Math.pow(1 - k, 3);
-    const y = b.min.y + (b.max.y - b.min.y + 1) * e;
-    g.userData.plane.constant = y;
-    const c = b.getCenter(new THREE.Vector3()), r = Math.max(b.max.x - b.min.x, b.max.z - b.min.z) / 2;
-    if (k < 1) emit(c.x, y, c.z, 10, r, 0.03);
   }
   function tickFx(now, dt) {
     for (let i = 0; i < N; i++) {

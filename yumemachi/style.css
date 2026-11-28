@@ -8,6 +8,9 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .tag{font-size:12px;font-weight:700;color:#fff;background:#ee8a7a;border-radius:99px;padding:2px 10px}
 .stage{position:fixed;inset:52px 0 0 0}
 .view{position:absolute;inset:0}
+.fade{position:absolute;inset:0;background:#dfeefa;opacity:1;pointer-events:none;transition:opacity .45s}
+.fade.off{opacity:0}
+.tool.out{border-color:#3b7a57;background:#3b7a57;color:#fff}
 .view canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-weight:700;color:#3d4a6b;transition:opacity .4s}
 .loading.gone,.hint.gone{opacity:0;pointer-events:none}
@@ -15,6 +18,7 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 @keyframes s{to{transform:rotate(360deg)}}
 .hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:rgba(43,47,58,.75);color:#fff;font-size:14px;font-weight:700;padding:8px 16px;border-radius:99px;transition:opacity .5s;pointer-events:none}
 
+.card:not(.ready){visibility:hidden}
 .card{position:absolute;top:16px;left:16px;width:360px;max-height:calc(100% - 32px);overflow:auto;background:rgba(255,255,255,.92);border-radius:20px;padding:20px 20px 16px;box-shadow:0 8px 24px rgba(40,60,90,.12)}
 .eyebrow{margin:0;font-size:12px;font-weight:700;color:#3b7a57}
 .card h1{margin:4px 0 2px;font-size:28px;font-weight:900;line-height:1.25}
@@ -59,6 +63,41 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .spotform input{flex:1 1 100%;font:inherit;font-size:16px;padding:8px 12px;border:2px solid #3b7a57;border-radius:12px}
 .pin3d{font-size:14px;color:#fff;background:#e26d8f;padding:5px 11px;box-shadow:0 3px 10px rgba(40,60,90,.2)}
 .pin3d::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;border:6px solid transparent;border-top-color:#e26d8f;border-bottom:0}
+
+/* 拠点（index.html）：まち全体と6つの建物の画面 */
+body.hub{overflow:auto;background:#eef5fb}
+.hubmain{max-width:1120px;margin:0 auto;padding:76px 18px 40px}
+.hubtitle{margin:4px 0 6px;font-size:30px;font-weight:900}
+.hublead{margin:0 0 18px;font-size:15px;color:#5a6275}
+.screen{display:flex;flex-direction:column;background:#fff;border-radius:20px;overflow:hidden;text-decoration:none;color:#2b2f3a;box-shadow:0 6px 18px rgba(40,60,90,.10);border:3px solid transparent;transition:transform .35s,box-shadow .35s,opacity .35s}
+.screen:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(40,60,90,.16)}
+.screen .pic{display:block;background:#dfeefa;aspect-ratio:4/3;overflow:hidden}
+.screen img{display:block;width:100%;height:100%;object-fit:cover}
+.screen .txt{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px}
+.screen strong{font-size:18px;font-weight:900;line-height:1.3}
+.screen .area{font-size:13px;font-weight:700;color:#8a6d1f}
+.screen .short{font-size:14px;line-height:1.6;color:#4a5163}
+.badge{align-self:flex-start;font-size:12px;font-weight:900;color:#2b2f3a;background:var(--c,#cfe3d8);border-radius:99px;padding:2px 10px}
+.screen.big{margin-bottom:18px}
+.screen.big .pic{aspect-ratio:2.6/1}
+@media (max-width:560px){.screen.big .pic{aspect-ratio:2/1}}
+.screen.big strong{font-size:22px}
+.screens{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.screen.back{border-color:#3b7a57;animation:backglow 1.6s ease-out 2}
+@keyframes backglow{0%{box-shadow:0 0 0 0 rgba(59,122,87,.55)}100%{box-shadow:0 0 0 18px rgba(59,122,87,0)}}
+body.leaving .screen{opacity:.35}
+body.leaving .screen.go{opacity:1;transform:scale(1.06);z-index:2;box-shadow:0 16px 40px rgba(40,60,90,.25)}
+@media (max-width:900px){.screens{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){
+  .hubmain{padding:66px 12px 28px}
+  .hubtitle{font-size:24px}
+  .screens{gap:10px}
+  .screen .txt{padding:8px 10px 10px}
+  .screen strong{font-size:15px}
+  .screen .short{font-size:12px;line-height:1.5}
+  .screen .area{display:none}
+  .screen.big strong{font-size:18px}
+}
 
 /* スマホ：説明は下に */
 @media (max-width:768px){
