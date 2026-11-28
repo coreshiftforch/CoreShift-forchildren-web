@@ -126,25 +126,86 @@ export function start(ctx) {
     }
     return false;
   }
+  // 入口：正面（three.js の +z）の地面近くから建物に向けて光線を当てた所。なければ正面のまん中
+  const CX = (all.min.x + all.max.x) / 2, CZ = (all.min.z + all.max.z) / 2;
+  const doors = [];
+  [0, -0.25, 0.25, -0.5, 0.5].forEach(f => {
+    ray.set(new THREE.Vector3(CX + f * R, groundY + PH * 0.5, all.max.z + R), new THREE.Vector3(0, 0, -1)); ray.far = R * 4;
+    const h = ray.intersectObjects(solids, false)[0]; if (h) doors.push(h.point.clone().setY(groundY).add(new THREE.Vector3(0, 0, PH * 0.6)));
+  });
+  if (!doors.length) doors.push(new THREE.Vector3(CX, groundY, all.max.z));
+
   const NP = 22;
-  for (let k = 0; k < NP; k++) { const p = makePerson(); if (place(p)) { scene.add(p); people.push(p); p.visible = false; } }
+  for (let k = 0; k < NP; k++) { const p = makePerson(); if (place(p)) { p.userData.st = "walk"; p.userData.s = 1; scene.add(p); people.push(p); p.visible = false; } }
+  function setScale(p, s) { p.userData.s = s; p.scale.setScalar(Math.max(0.001, s)); }
+  function walkTo(p, tx, tz, dt) {                // 目的地へまっすぐ歩く（入口へ向かうとき）
+    const u = p.userData, dx = tx - p.position.x, dz = tz - p.position.z, d = Math.hypot(dx, dz);
+    u.dir = Math.atan2(dx, dz); p.rotation.y = u.dir;
+    const st = Math.min(d, u.sp * 1.2 * dt); p.position.x += dx / (d || 1) * st; p.position.z += dz / (d || 1) * st;
+    return d < PH * 0.5;
+  }
   function tickPeople(now, dt) {
     const showP = !build;
     people.forEach(p => {
-      p.visible = showP; if (!showP) return;
       const u = p.userData, t = now / 1000 + u.ph;
-      if (u.wave > 0) { u.wave -= dt; u.arms[1].rotation.z = 2.6 + Math.sin(t * 10) * 0.4; u.legs.forEach(l => l.rotation.x = 0); return; }
+      if (!showP) { p.visible = false; return; }
+      p.visible = u.st !== "inside";
+      const sw = Math.sin(t * 9) * 0.6, legs = on => { const a = on ? sw : 0; u.legs[0].rotation.x = a; u.legs[1].rotation.x = -a; u.arms[0].rotation.x = -a; u.arms[1].rotation.x = a; };
+      if (u.st === "inside") {                    // 中にいる：しばらくしたら、入口から出るか、上の階にあらわれる
+        if ((u.wait -= dt) > 0) return;
+        if (Math.random() < 0.5 || !place(p, 30) || p.userData.out) {
+          const d = doors[(Math.random() * doors.length) | 0]; p.position.copy(d); u.out = true; u.dir = Math.random() * Math.PI - Math.PI / 2;
+        }
+        u.st = "appear"; setScale(p, 0.01); return;
+      }
+      if (u.st === "appear") { setScale(p, u.s + dt * 2.5); legs(false); if (u.s >= 1) { setScale(p, 1); u.st = "walk"; } return; }
+      if (u.st === "vanish") { setScale(p, u.s - dt * 2.5); if (u.s <= 0.02) { u.st = "inside"; u.wait = 3 + Math.random() * 6; } return; }
+      if (u.st === "goin") {                      // 入口へ歩いていく
+        legs(true); if (walkTo(p, u.door.x, u.door.z, dt)) u.st = "vanish"; return;
+      }
       u.arms[1].rotation.z = 0;
-      if (Math.random() < dt * 0.08) { u.wave = 1.5 + Math.random(); p.lookAt(camera.position.x, p.position.y, camera.position.z); return; }
+      if (u.wave > 0) { u.wave -= dt; u.arms[1].rotation.z = 2.6 + Math.sin(t * 10) * 0.4; legs(false); return; }
+      if (Math.random() < dt * 0.06) { u.wave = 1.5 + Math.random(); p.lookAt(camera.position.x, p.position.y, camera.position.z); return; }
+      if (Math.random() < dt * 0.05) {           // 建物に入る（外の人は入口まで歩く、床の上の人はその場で中へ）
+        if (u.out) { u.door = doors[(Math.random() * doors.length) | 0]; u.st = "goin"; } else u.st = "vanish";
+        return;
+      }
       if (Math.random() < dt * 0.4) u.dir += (Math.random() - .5) * 1.4;
       const nx = p.position.x + Math.sin(u.dir) * u.sp * dt, nz = p.position.z + Math.cos(u.dir) * u.sp * dt;
       let ny = u.out ? (floorAt(nx, nz, all.max.y + 5) > groundY + 1 ? null : groundY) : floorAt(nx, nz, p.position.y + PH * 0.6);
-      const cx = (all.min.x + all.max.x) / 2, cz = (all.min.z + all.max.z) / 2;
-      if (u.out && Math.hypot(nx - cx, nz - cz) > R * 1.4) ny = null;
+      if (u.out && Math.hypot(nx - CX, nz - CZ) > R * 1.4) ny = null;
       if (ny === null || Math.abs(ny - p.position.y) > PH * 0.4) { u.dir += Math.PI * (0.6 + Math.random() * 0.8); return; }
-      p.position.set(nx, ny, nz); p.rotation.y = u.dir;
-      const sw = Math.sin(t * 9) * 0.6; u.legs[0].rotation.x = sw; u.legs[1].rotation.x = -sw; u.arms[0].rotation.x = -sw; u.arms[1].rotation.x = sw;
+      p.position.set(nx, ny, nz); p.rotation.y = u.dir; legs(true);
     });
+  }
+
+  // ---------- 住人カメラ（1人の後ろについていく） ----------
+  let follow = -1;
+  const camBtn = document.createElement("button"); camBtn.type = "button"; camBtn.className = "tool"; camBtn.textContent = "住人カメラ";
+  const nextBtn = document.createElement("button"); nextBtn.type = "button"; nextBtn.className = "tool"; nextBtn.textContent = "つぎの人"; nextBtn.hidden = true;
+  const camPos = new THREE.Vector3(), camAt = new THREE.Vector3();
+  function pick(from) {
+    for (let k = 1; k <= people.length; k++) { const i = (from + k) % people.length; if (people[i].userData.st === "walk" || people[i].userData.st === "goin") return i; }
+    return -1;
+  }
+  function setFollow(i) {
+    follow = i; const on = i >= 0;
+    controls.enabled = !on; setSpin(false);
+    camBtn.textContent = on ? "もどる" : "住人カメラ"; camBtn.classList.toggle("on", on); nextBtn.hidden = !on;
+    if (on) { const p = people[i]; camPos.copy(camera.position); camAt.copy(controls.target); toast.textContent = `住人カメラ：${i + 1}ばんの人`; toast.classList.add("on"); setTimeout(() => toast.classList.remove("on"), 1600); }
+  }
+  camBtn.onclick = () => { if (follow >= 0) { setFollow(-1); ctx.home && ctx.home(); } else setFollow(pick(-1)); };
+  nextBtn.onclick = () => setFollow(pick(follow));
+  function tickFollow(dt) {
+    if (follow < 0 || build) return;
+    const p = people[follow];
+    if (p.userData.st === "inside") { const n = pick(follow); if (n >= 0 && n !== follow) setFollow(n); return; }
+    const d = p.userData.dir, back = new THREE.Vector3(-Math.sin(d), 0, -Math.cos(d));
+    const want = p.position.clone().addScaledVector(back, PH * 5).add(new THREE.Vector3(0, PH * 2.6, 0));
+    const look = p.position.clone().add(new THREE.Vector3(0, PH * 0.8, 0));
+    const k = 1 - Math.pow(0.02, dt);              // なめらかについていく
+    camPos.lerp(want, k); camAt.lerp(look, k);
+    camera.position.copy(camPos); controls.target.copy(camAt); camera.lookAt(camAt);
   }
 
   // ---------- 見どころ（書きこみ） ----------
@@ -198,13 +259,14 @@ export function start(ctx) {
   // ---------- ボタン ----------
   const tools = document.querySelector(".tools");
   const again = document.createElement("button"); again.type = "button"; again.className = "tool"; again.textContent = "できあがりを見る";
-  again.onclick = startBuild; tools.appendChild(again);
+  again.onclick = () => { setFollow(-1); startBuild(); }; tools.appendChild(again);
+  tools.append(camBtn, nextBtn);
   const ex = document.createElement("button"); ex.type = "button"; ex.className = "tool"; ex.textContent = "見どころを書き出す";
   ex.onclick = async () => { const s = JSON.stringify(mine.map(({ name, cam, at, p }) => ({ name, cam, at, p }))); try { await navigator.clipboard.writeText(s); ex.textContent = "コピーしたよ"; } catch (e) { ex.textContent = "コピーできませんでした"; } setTimeout(() => ex.textContent = "見どころを書き出す", 2000); };
   tools.appendChild(ex);
   document.body.classList.add("show");
 
   let last = performance.now();
-  TICK.push(now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; tickBuild(now); tickFx(now, dt); tickPeople(now, dt); tickPins(); });
+  TICK.push(now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; tickBuild(now); tickFx(now, dt); tickPeople(now, dt); tickFollow(dt); tickPins(); });
   startBuild();
 }

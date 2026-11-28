@@ -26,6 +26,7 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .spot.on,.tool.on,.chip.on{border-color:#3b7a57;background:#e6f4ec}
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .tool{white-space:nowrap}
+.tool[hidden]{display:none}
 .list{margin-top:6px;display:flex;flex-wrap:wrap;gap:8px}
 .list h2{width:100%}
 

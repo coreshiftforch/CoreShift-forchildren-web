@@ -295,7 +295,7 @@ loader.load(B.glb, g => {
   }
   home();
   document.getElementById("loading").classList.add("gone");
-  if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b }));
+  if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
 }, undefined, () => {
   document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
 });
