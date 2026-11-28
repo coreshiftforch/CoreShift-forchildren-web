@@ -24,7 +24,8 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .spots{display:flex;flex-wrap:wrap;gap:8px}
 .spot,.tool,.chip{font:inherit;font-size:14px;font-weight:700;border:2px solid #cfe3d8;background:#fff;color:#2b2f3a;border-radius:99px;padding:7px 14px;cursor:pointer;text-decoration:none}
 .spot.on,.tool.on,.chip.on{border-color:#3b7a57;background:#e6f4ec}
-.tools{display:flex;gap:8px;margin-top:14px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tool{white-space:nowrap}
 .list{margin-top:6px;display:flex;flex-wrap:wrap;gap:8px}
 .list h2{width:100%}
 
@@ -38,6 +39,26 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
 .team3d.short .nm{display:none}
 .team3d::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;border:6px solid transparent;border-top-color:#3b7a57;border-bottom:0}
 
+/* 説明をたたむ */
+.fold{position:absolute;top:14px;right:14px;font:inherit;font-size:12px;font-weight:700;border:2px solid #cfe3d8;background:#fff;border-radius:99px;padding:3px 10px;cursor:pointer}
+.card.mini{width:auto;padding-right:90px}
+.card.mini .story,.card.mini h2,.card.mini .spots,.card.mini .list,.card.mini .tools,.card.mini .area,.card.mini .spotform{display:none}
+.card.mini h1{font-size:18px;margin:2px 0 0}
+
+/* 発表用の端末（?show=1） */
+.toast{position:absolute;left:50%;top:18px;transform:translate(-50%,-10px);background:rgba(255,255,255,.95);color:#2b2f3a;font-size:20px;font-weight:900;padding:10px 22px;border-radius:99px;box-shadow:0 6px 20px rgba(40,60,90,.18);opacity:0;transition:.35s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (min-width:769px){.toast{left:calc(50% + 196px)}}
+.spotwrap{display:inline-flex;align-items:center;gap:2px}
+.spotdel{font:inherit;font-size:12px;font-weight:700;border:0;background:none;color:#9aa1b2;cursor:pointer;padding:4px}
+.spot.add{border-style:dashed}
+.spots .note{width:100%;margin:0 0 2px;font-size:13px;color:#8a90a0}
+.spotform{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.spotform[hidden]{display:none}
+.spotform input{flex:1 1 100%;font:inherit;font-size:16px;padding:8px 12px;border:2px solid #3b7a57;border-radius:12px}
+.pin3d{font-size:14px;color:#fff;background:#e26d8f;padding:5px 11px;box-shadow:0 3px 10px rgba(40,60,90,.2)}
+.pin3d::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-6px;border:6px solid transparent;border-top-color:#e26d8f;border-bottom:0}
+
 /* スマホ：説明は下に */
 @media (max-width:768px){
   .card{top:auto;bottom:0;left:0;right:0;width:auto;max-height:46%;border-radius:20px 20px 0 0;padding:16px}
@@ -46,4 +67,5 @@ body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif
   .view{bottom:42%}
   .hint{bottom:auto;top:12px;white-space:nowrap;font-size:13px}
   .tag3d{font-size:11px}
+  .fold{display:none}
 }
