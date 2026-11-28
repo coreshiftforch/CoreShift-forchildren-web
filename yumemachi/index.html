@@ -27,6 +27,7 @@
 
 <main class="stage">
   <div id="view" class="view" aria-label="建物の3Dモデル。ドラッグで回せます"></div>
+  <div id="fade" class="fade"></div>
   <div id="loading" class="loading"><div class="spin"></div><p id="loadmsg">建物をよみこんでいます…</p></div>
   <div id="tags" class="tags"></div>
   <div class="hint" id="hint">ゆびで動かすと、ぐるっと回せるよ</div>
@@ -211,7 +212,23 @@ let fly = null;
 function flyTo(cam, at, ms = 1100) {
   fly = { t0: performance.now(), ms, p0: camera.position.clone(), a0: controls.target.clone(), p1: b2t(cam), a1: b2t(at) };
 }
-function home() { if (IS_CITY) B.home = cityHome(); flyTo(B.home.cam, B.home.at); }
+function home(ms) { if (IS_CITY) B.home = cityHome(); flyTo(B.home.cam, B.home.at, ms); }
+// 建物に「はいる」・まちへ「でる」：カメラが近づく（はなれる）あいだに画面をうすくして、ページを切りかえる
+const fadeEl = document.getElementById("fade");
+let leaving = false;
+function leave(url, v, ms = 1200) {
+  if (leaving) return; leaving = true; setSpin(false);
+  if (v) flyTo(v.cam, v.at, ms);
+  setTimeout(() => fadeEl.classList.remove("off"), v ? ms * 0.6 : 0);
+  setTimeout(() => { location.href = url; }, v ? ms : 350);
+}
+function enter(id) {                             // まち全体 → 建物（その建物にぐっと近づく）
+  if (IS_CITY && CITY.teams[id]) return leave(`?b=${id}`, viewOf(sc(CITY.teams[id]), [-0.5, -1, 0.35], 0.32));
+  leave(`?b=${id}`, IS_CITY ? null : view([0, -1, 0.1], 0.25), 900);
+}
+function exitToCity() {                          // 建物 → まち全体（上へ引いていく）
+  leave(`?b=all&from=${B.id}`, view([-0.3, -1, 1.6], 4.0), 1100);
+}
 function cityHome() {                              // 台ぜんたいが、見えている広さ（説明の右）に入るように
   const pad = wide() && !document.getElementById("card").classList.contains("mini") ? 392 : 0;
   const asp = Math.max(0.4, (el.clientWidth - pad) / Math.max(1, el.clientHeight));
@@ -228,19 +245,27 @@ const sc = o => ({ c: o.c.map(v => v * CITY.S), r: o.r * CITY.S });   // まち�
 if (IS_CITY) FIT = sc(CITY.board);
 const wide = () => innerWidth > 768;               // パソコン：左の説明に重ならないよう、少し左を見る（台が右へよる）
 B.home = IS_CITY ? cityHome() : view([-0.55, -1, 0.42], 1.15);
-camera.position.copy(b2t(B.home.cam));
-controls.target.copy(b2t(B.home.at));
+const FROM = IS_CITY && CITY.teams[q.get("from")] ? q.get("from") : null;
+const START = FROM ? viewOf(sc(CITY.teams[FROM]), [-0.5, -1, 0.35], 0.32) : B.home;
+camera.position.copy(b2t(START.cam));
+controls.target.copy(b2t(START.at));
 
 // 見どころのボタン
 const spots = document.getElementById("spots");
 const SPOTS = IS_CITY
-  ? BUILDINGS.map(o => ({ name: `${o.team} ${o.name}`, go: () => viewOf(sc(CITY.teams[o.id]), [-0.5, -1, 0.55], 1.0) }))
+  ? BUILDINGS.map(o => ({ id: o.id, name: `${o.team} ${o.name}`, go: () => viewOf(sc(CITY.teams[o.id]), [-0.5, -1, 0.55], 1.0) }))
   : VIEWS.map(s => ({ name: s.name, go: () => view(s.dir, s.k) }));
 if (IS_CITY) document.querySelector(".card h2").textContent = "建物を見にいこう";
 SPOTS.forEach(s => {
   const bt = document.createElement("button");
   bt.type = "button"; bt.className = "spot"; bt.textContent = s.name;
-  bt.onclick = () => { setSpin(false); const v = s.go(); flyTo(v.cam, v.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt)); };
+  bt.onclick = () => {
+    if (IS_CITY && bt.classList.contains("on")) return enter(s.id);    // もう一度おすと、建物にはいる
+    setSpin(false); const v = s.go(); flyTo(v.cam, v.at); spots.querySelectorAll(".spot").forEach(x => x.classList.toggle("on", x === bt));
+    if (IS_CITY) bt.textContent = `${s.name}　→ はいる`;
+    spots.querySelectorAll(".spot").forEach(x => { if (x !== bt && x.dataset.n) x.textContent = x.dataset.n; });
+  };
+  bt.dataset.n = s.name;
   spots.appendChild(bt);
 });
 
@@ -270,6 +295,12 @@ function placeTags() {
   });
 }
 document.getElementById("fold").onclick = e => { const c = document.getElementById("card").classList.toggle("mini"); e.target.textContent = c ? "ひらく" : "たたむ"; resize(); };
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[href^='?b=']"); if (!a) return;
+  const id = new URLSearchParams(a.getAttribute("href")).get("b"); e.preventDefault();
+  if (id === "all") { if (IS_CITY) home(); else exitToCity(); } else if (id !== B.id) enter(id);
+});
+if (!IS_CITY) { const ex = document.createElement("button"); ex.type = "button"; ex.className = "tool out"; ex.textContent = "でる（まちへ）"; ex.onclick = exitToCity; document.querySelector(".tools").prepend(ex); }
 const spinBtn = document.getElementById("spin");
 function setSpin(on) { controls.autoRotate = on; spinBtn.classList.toggle("on", on); }
 spinBtn.onclick = () => setSpin(!controls.autoRotate);
@@ -293,7 +324,9 @@ loader.load(B.glb, g => {
     FIT = { c: [c.x, -c.z, c.y], r: sz.length() / 2 };   // three.js → Blenderの向き。r＝建物を包む球の半径
     B.home = view([-0.55, -1, 0.42], 1.0);
   }
-  home();
+  if (!IS_CITY) { const s = view([-0.55, -1, 0.6], 2.4); camera.position.copy(b2t(s.cam)); controls.target.copy(b2t(s.at)); }
+  home(FROM || !IS_CITY ? 1800 : undefined);
+  fadeEl.classList.add("off");
   document.getElementById("loading").classList.add("gone");
   if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
 }, undefined, () => {
