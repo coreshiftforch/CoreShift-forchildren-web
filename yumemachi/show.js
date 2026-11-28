@@ -41,7 +41,11 @@ export function start(ctx) {
   const toast = document.createElement("div"); toast.className = "toast"; el.parentElement.appendChild(toast);
   let build = null;
   const DUR = 5500;
-  function startBuild() { plane.constant = all.min.y - 0.5; build = { t0: performance.now() }; setSpin(true); ring.userData.t0 = performance.now(); }
+  function setClip(on) {                          // 組み上がるあいだだけ切り口を使う（おわったらはずして軽くする）
+    renderer.localClippingEnabled = on;
+    model.traverse(o => { if (o.isMesh) { o.material.clippingPlanes = on ? [plane] : null; o.material.needsUpdate = true; } });
+  }
+  function startBuild() { setClip(true); plane.constant = all.min.y - 0.5; build = { t0: performance.now() }; setSpin(true); ring.userData.t0 = performance.now(); }
   function tickBuild(now) {
     if (!build) return;
     const k = Math.min(1, (now - build.t0) / DUR), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
@@ -51,8 +55,7 @@ export function start(ctx) {
     if (k < 1) emit(cx, y, cz, 14, R * 0.9, 0.03);
     else {                                       // できあがり：花火
       for (let i = 0; i < 8; i++) emit(all.min.x + Math.random() * (all.max.x - all.min.x), all.max.y, all.min.z + Math.random() * (all.max.z - all.min.z), 60, R * 0.1, 0.12);
-      toast.textContent = `${B.name}、できあがり！`; toast.classList.add("on"); setTimeout(() => toast.classList.remove("on"), 2600);
-      build = null;
+      build = null; setClip(false);
     }
   }
   function tickFx(now, dt) {
@@ -75,23 +78,47 @@ export function start(ctx) {
   const ray = new THREE.Raycaster(), DOWN = new THREE.Vector3(0, -1, 0);
   const solids = []; model.traverse(o => { if (o.isMesh && !(o.material.transparent && o.material.opacity < 0.9)) solids.push(o); });
   const groundY = all.min.y;
-  function floorAt(x, z, fromY) {                 // 上から光線を落として、立てる面（上向き）をさがす
-    ray.set(new THREE.Vector3(x, fromY, z), DOWN); ray.far = fromY - groundY + 2;
-    const h = ray.intersectObjects(solids, false).find(h => h.face && h.face.normal.clone().transformDirection(h.object.matrixWorld).y > 0.85);
-    return h ? h.point.y : null;
+  // 床の地図：建物のまわりを40×40マスに分け、マスごとに「立てる床の高さ（何階でも）」と「上に建物があるか」を1回だけ調べる。
+  // 毎フレーム光線を当てると重いので、組み上がりのあいだに少しずつ作り、あとは地図を見るだけにする
+  const G = 40, CX0 = (all.min.x + all.max.x) / 2, CZ0 = (all.min.z + all.max.z) / 2, X0 = CX0 - R * 1.5, Z0 = CZ0 - R * 1.5, CS = R * 3 / G;
+  const levels = new Array(G * G), roof = new Uint8Array(G * G);
+  let gridI = 0, gridReady = false;
+  const _o = new THREE.Vector3(), _n = new THREE.Vector3();
+  function gridStep(budgetMs) {
+    const t0 = performance.now();
+    while (gridI < G * G && performance.now() - t0 < budgetMs) {
+      const i = gridI++, x = X0 + (i % G + 0.5) * CS, z = Z0 + (((i / G) | 0) + 0.5) * CS;
+      ray.set(_o.set(x, all.max.y + 5, z), DOWN); ray.far = H + 10;
+      const ys = [];
+      for (const h of ray.intersectObjects(solids, false)) {
+        if (h.point.y > groundY + 1) roof[i] = 1;
+        if (h.face && _n.copy(h.face.normal).transformDirection(h.object.matrixWorld).y > 0.85 && !ys.some(y => Math.abs(y - h.point.y) < PH * 0.3)) ys.push(h.point.y);
+      }
+      levels[i] = ys.sort((a, b) => b - a);
+    }
+    if (gridI >= G * G && !gridReady) { gridReady = true; spawnPeople(); }
   }
+  function cell(x, z) { const i = Math.floor((x - X0) / CS), j = Math.floor((z - Z0) / CS); return i < 0 || j < 0 || i >= G || j >= G ? -1 : j * G + i; }
+  function floorAt(x, z, fromY) {                 // fromY より下で、いちばん高い床
+    const c = cell(x, z); if (c < 0 || !levels[c]) return null;
+    for (const y of levels[c]) if (y <= fromY + 0.01) return y;
+    return null;
+  }
+  const hasRoof = (x, z) => { const c = cell(x, z); return c >= 0 && roof[c] === 1; };
   const PH = Math.max(7, H * 0.045);              // 人の背の高さ（mm）
   const SKIN = [0xf3d2b5, 0xe0b08a, 0xc68c64], CLOTH = [0xe8afcf, 0xa3d8e1, 0xc2e189, 0xf7d959, 0xae96d4, 0xf99963, 0xffffff];
+  const GEO = { body: new THREE.CapsuleGeometry(PH * 0.17, PH * 0.32, 3, 8), head: new THREE.SphereGeometry(PH * 0.17, 10, 8),
+                leg: new THREE.CapsuleGeometry(PH * 0.06, PH * 0.2, 2, 5), arm: new THREE.CapsuleGeometry(PH * 0.05, PH * 0.22, 2, 5) };
+  const MAT = {}, mat = c => MAT[c] || (MAT[c] = new THREE.MeshLambertMaterial({ color: c }));   // 同じ色は使い回す
   function makePerson() {
     const p = new THREE.Group();
-    const m = c => new THREE.MeshStandardMaterial({ color: c, roughness: .7 });
-    const cloth = m(CLOTH[(Math.random() * CLOTH.length) | 0]);
-    const body = new THREE.Mesh(new THREE.CapsuleGeometry(PH * 0.17, PH * 0.32, 4, 10), cloth); body.position.y = PH * 0.48;
-    const head = new THREE.Mesh(new THREE.SphereGeometry(PH * 0.17, 14, 10), m(SKIN[(Math.random() * 3) | 0])); head.position.y = PH * 0.88;
-    const legs = [-1, 1].map(s => { const l = new THREE.Mesh(new THREE.CapsuleGeometry(PH * 0.06, PH * 0.2, 3, 6), m(0x5b6378)); l.position.set(s * PH * 0.08, PH * 0.16, 0); p.add(l); return l; });
+    const cloth = mat(CLOTH[(Math.random() * CLOTH.length) | 0]);
+    const body = new THREE.Mesh(GEO.body, cloth); body.position.y = PH * 0.48;
+    const head = new THREE.Mesh(GEO.head, mat(SKIN[(Math.random() * 3) | 0])); head.position.y = PH * 0.88;
+    const legs = [-1, 1].map(s => { const l = new THREE.Mesh(GEO.leg, mat(0x5b6378)); l.position.set(s * PH * 0.08, PH * 0.16, 0); p.add(l); return l; });
     const arms = [-1, 1].map(s => { const a = new THREE.Group(); a.position.set(s * PH * 0.22, PH * 0.66, 0);
-      const am = new THREE.Mesh(new THREE.CapsuleGeometry(PH * 0.05, PH * 0.22, 3, 6), cloth); am.position.y = -PH * 0.14; a.add(am); p.add(a); return a; });
-    p.add(body, head); p.traverse(o => { if (o.isMesh) o.castShadow = true; });
+      const am = new THREE.Mesh(GEO.arm, cloth); am.position.y = -PH * 0.14; a.add(am); p.add(a); return a; });
+    p.add(body, head);
     p.userData = { legs, arms, dir: Math.random() * Math.PI * 2, sp: PH * (0.35 + Math.random() * 0.35), wave: 0, ph: Math.random() * 9 };
     return p;
   }
@@ -100,9 +127,10 @@ export function start(ctx) {
       const out = Math.random() < 0.35;              // まわりの広場か、建物の床の上
       const a = Math.random() * Math.PI * 2, rr = out ? R * (0.95 + Math.random() * 0.35) : R * Math.random() * 0.95;
       const x = (all.min.x + all.max.x) / 2 + Math.cos(a) * rr, z = (all.min.z + all.max.z) / 2 + Math.sin(a) * rr;
+      if (cell(x, z) < 0) continue;
       const y = out ? groundY : floorAt(x, z, all.max.y + 5);
-      if (y === null) continue;
-      if (out && floorAt(x, z, all.max.y + 5) > groundY + 1) continue;    // 建物の下には立たない
+      if (y === null || (!out && y < groundY + 1)) continue;
+      if (out && hasRoof(x, z)) continue;          // 建物の下には立たない
       p.position.set(x, y, z); p.userData.out = out; return true;
     }
     return false;
@@ -117,7 +145,7 @@ export function start(ctx) {
   if (!doors.length) doors.push(new THREE.Vector3(CX, groundY, all.max.z));
 
   const NP = 22;
-  for (let k = 0; k < NP; k++) { const p = makePerson(); if (place(p)) { p.userData.st = "walk"; p.userData.s = 1; scene.add(p); people.push(p); p.visible = false; } }
+  function spawnPeople() { for (let k = 0; k < NP; k++) { const p = makePerson(); if (place(p)) { p.userData.st = "walk"; p.userData.s = 1; scene.add(p); people.push(p); p.visible = false; } } }
   function setScale(p, s) { p.userData.s = s; p.scale.setScalar(Math.max(0.001, s)); }
   function walkTo(p, tx, tz, dt) {                // 目的地へまっすぐ歩く（入口へ向かうとき）
     const u = p.userData, dx = tx - p.position.x, dz = tz - p.position.z, d = Math.hypot(dx, dz);
@@ -153,7 +181,7 @@ export function start(ctx) {
       }
       if (Math.random() < dt * 0.4) u.dir += (Math.random() - .5) * 1.4;
       const nx = p.position.x + Math.sin(u.dir) * u.sp * dt, nz = p.position.z + Math.cos(u.dir) * u.sp * dt;
-      let ny = u.out ? (floorAt(nx, nz, all.max.y + 5) > groundY + 1 ? null : groundY) : floorAt(nx, nz, p.position.y + PH * 0.6);
+      let ny = u.out ? (hasRoof(nx, nz) || cell(nx, nz) < 0 ? null : groundY) : floorAt(nx, nz, p.position.y + PH * 0.6);
       if (u.out && Math.hypot(nx - CX, nz - CZ) > R * 1.4) ny = null;
       if (ny === null || Math.abs(ny - p.position.y) > PH * 0.4) { u.dir += Math.PI * (0.6 + Math.random() * 0.8); return; }
       p.position.set(nx, ny, nz); p.rotation.y = u.dir; legs(true);
@@ -248,6 +276,6 @@ export function start(ctx) {
   document.body.classList.add("show");
 
   let last = performance.now();
-  TICK.push(now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; tickBuild(now); tickFx(now, dt); tickPeople(now, dt); tickFollow(dt); tickPins(); });
+  TICK.push(now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; tickBuild(now); tickFx(now, dt); if (!gridReady) gridStep(4); tickPeople(now, dt); tickFollow(dt); tickPins(); });
   startBuild();
 }

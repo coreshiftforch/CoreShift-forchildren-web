@@ -105,11 +105,11 @@ const el = document.getElementById("view");
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 // スマホ（画面がせまい・タッチ）は軽くする：画素の細かさと影の細かさをおさえる
 const PHONE = matchMedia("(pointer: coarse)").matches || innerWidth <= 768;
-renderer.setPixelRatio(Math.min(PHONE ? 1.5 : 2, devicePixelRatio));
+renderer.setPixelRatio(Math.min(PHONE ? 1.25 : 2, devicePixelRatio));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = !PHONE;               // スマホは影なし（建物を2回描かなくてすむので、ぐっと軽くなる）
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 el.appendChild(renderer.domElement);
 
@@ -273,7 +273,8 @@ loader.load(B.glb, g => {
   home(FROM || !IS_CITY ? 1800 : undefined);
   fadeEl.classList.add("off");
   document.getElementById("loading").classList.add("gone");
-  if (SHOW && !IS_CITY) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
+  // 発表用の演出はパソコンの発表用の端末だけ（スマホは覚えていても読まない）
+  if (SHOW && !IS_CITY && !PHONE) import("./show.js").then(m => m.start({ THREE, scene, camera, controls, renderer, model: g.scene, el, B, flyTo, setSpin, TICK, toT: b2t, fromT: t2b, home: () => { setSpin(true); home(); } }));
 }, undefined, () => {
   document.getElementById("loading").innerHTML = "<p>建物をよみこめませんでした。ページを読みこみなおしてください。</p>";
 });
